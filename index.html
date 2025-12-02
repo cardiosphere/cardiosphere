@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cardiosphere.in - Coming Soon</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .text-inter {
+            font-family: 'Inter', sans-serif;
+        }
+        .full-screen-center {
+            min-height: 100vh;
+        }
+        .logo-pulse {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: .75;
+            }
+        }
+    </style>
+</head>
+<body class="text-inter bg-gray-50">
+
+    <div class="full-screen-center flex items-center justify-center p-8 text-center">
+        <div class="max-w-xl mx-auto">
+            
+            <!-- Logo/Icon Area -->
+            <div class="mb-8 logo-pulse">
+                <svg class="w-24 h-24 mx-auto text-blue-600" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+            </div>
+
+            <h1 class="text-6xl font-extrabold text-blue-900 mb-4 tracking-tight sm:text-7xl">
+                Cardiosphere.in
+            </h1>
+            
+            <p class="text-3xl font-medium text-gray-700 mb-6">
+                Expert Healthcare Services Launching Soon.
+            </p>
+
+            <p class="text-lg text-gray-500">
+                We are preparing a specialized platform to serve your cardiac and general medical needs. Please check back shortly for our full range of services and online booking system.
+            </p>
+            
+            <div class="mt-12 p-4 bg-white border border-gray-200 rounded-xl shadow-lg">
+                <p class="text-xl font-bold text-blue-600">Contact Dr. Das's Clinic:</p>
+                <p class="text-2xl text-gray-800 font-semibold mt-1">+91 98765 43210</p>
+                <p class="text-sm text-gray-500 mt-2">For urgent queries or appointments.</p>
+            </div>
+            
+        </div>
+    </div>
+    
+</body>
+</html>
