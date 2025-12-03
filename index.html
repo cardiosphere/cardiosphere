@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cardiosphere.in ( The Way to a Healthy Heart ) - Expert Medical and Cardiac Care (Diagnostics | Clinic | Pharmacy)</title>
+    <!-- Load Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
       /* Custom styles for a clean, professional medical look */
@@ -36,9 +37,14 @@
       #home {
         display: block;
       }
+      .star-icon {
+        /* Star icon SVG for testimonials */
+        fill: currentColor;
+      }
     </style>
   </head>
   <body class="text-inter bg-gray-50">
+    <!-- Appointment Modal (Hidden by Default) -->
     <div
       id="appointment-modal"
       class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60 p-4"
@@ -162,6 +168,7 @@
       </div>
     </div>
 
+    <!-- Header & Navigation -->
     <header class="sticky top-0 bg-white shadow-md z-30">
       <div
         class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center py-4"
@@ -208,6 +215,12 @@
           >
           <a
             href="#"
+            onclick="navigate('facilities')"
+            class="text-gray-600 hover:text-red-600 transition-colors"
+            >Facilities</a
+          >
+          <a
+            href="#"
             onclick="navigate('testimonials')"
             class="text-gray-600 hover:text-red-600 transition-colors"
             >Testimonials</a
@@ -218,7 +231,6 @@
             class="text-gray-600 hover:text-red-600 transition-colors"
             >Location</a
           >
-          
         </nav>
         <button
           onclick="openModal()"
@@ -227,6 +239,7 @@
           Book Appointment
         </button>
 
+        <!-- Mobile Menu Button -->
         <button
           id="mobile-menu-button"
           class="md:hidden text-gray-600 hover:text-red-600"
@@ -250,6 +263,7 @@
       </div>
     </header>
 
+    <!-- Mobile Menu Drawer -->
     <div
       id="mobile-menu"
       class="hidden md:hidden fixed inset-0 bg-white z-40 p-6 shadow-xl pt-20"
@@ -276,6 +290,12 @@
         <a
           href="#"
           class="text-gray-700 hover:text-red-600 border-b pb-2"
+          onclick="navigate('facilities'); toggleMobileMenu();"
+          >Facilities</a
+        >
+        <a
+          href="#"
+          class="text-gray-700 hover:text-red-600 border-b pb-2"
           onclick="navigate('testimonials'); toggleMobileMenu();"
           >Testimonials</a
         >
@@ -295,6 +315,7 @@
     </div>
 
     <main>
+      <!-- 1. HERO SECTION -->
       <section
         id="home"
         class="hero-gradient text-white py-16 md:py-24 shadow-inner"
@@ -302,6 +323,7 @@
         <div
           class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center gap-12"
         >
+          <!-- Hero Text Content -->
           <div class="md:w-1/2 text-center md:text-left">
             <p
               class="text-red-300 text-lg font-medium mb-3 tracking-widest uppercase"
@@ -324,6 +346,7 @@
             </button>
           </div>
 
+          <!-- 3D Heart Logo (Image Container) -->
           <div class="md:w-1/2 flex justify-center">
             <div
               class="w-64 h-64 md:w-80 md:h-80 rounded-full shadow-2xl overflow-hidden border-4 border-white transform hover:scale-105 transition-transform duration-300"
@@ -339,12 +362,14 @@
         </div>
       </section>
 
+      <!-- 2. DOCTORS PROFILE SECTION -->
       <section id="doctors" class="py-16 md:py-24 bg-gray-100">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h3 class="text-3xl font-bold text-center text-red-800 mb-12">
             Our Specialist Team
           </h3>
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+            <!-- Doctor 1: Dr. Tutan Das (Cardiologist) -->
             <div
               class="bg-white rounded-xl p-6 sm:p-8 shadow-medical flex flex-col sm:flex-row items-center gap-6"
             >
@@ -380,6 +405,7 @@
               </div>
             </div>
 
+            <!-- Doctor 2: Dr. Manidipa Majumdar (Cardiologist) -->
             <div
               class="bg-white rounded-xl p-6 sm:p-8 shadow-medical flex flex-col sm:flex-row items-center gap-6"
             >
@@ -417,6 +443,7 @@
               </div>
             </div>
 
+            <!-- Doctor 3: Dr. Swagata Chakraborty (ENT) -->
             <div
               class="bg-white rounded-xl p-6 sm:p-8 shadow-medical flex flex-col sm:flex-row items-center gap-6"
             >
@@ -457,6 +484,7 @@
         </div>
       </section>
 
+      <!-- 3. SERVICES SECTION -->
       <section id="services" class="py-16 md:py-24 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h3 class="text-3xl font-bold text-center text-red-800 mb-12">
@@ -613,56 +641,177 @@
           </div>
       </section>
 
-      <section id="testimonials" class="py-16 md:py-24 bg-red-50">
+      <!-- 4. FACILITIES & EQUIPMENT SECTION (NEW) -->
+      <section id="facilities" class="py-16 md:py-24 bg-gray-100">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h3 class="text-3xl font-bold text-center text-red-800 mb-12">
-            What Our Patients Say
+            State-of-the-Art Facilities & Equipment
           </h3>
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-red-600">
-                <div class="flex text-yellow-500 mb-3">
-                    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01L12 2z"/></svg>
-                    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01L12 2z"/></svg>
-                    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01L12 2z"/></svg>
-                    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01L12 2z"/></svg>
-                    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01L12 2z"/></svg>
+          <p class="text-center text-lg text-gray-600 mb-10 max-w-3xl mx-auto">
+            We use modern diagnostic tools and maintain a comfortable, sterile environment to ensure the highest standard of care.
+          </p>
+
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+            <!-- Facility Item 1: Waiting Area (Using Google Maps URL as a placeholder attempt) -->
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden icon-hover-effect">
+                <img
+                    src="https://lh3.googleusercontent.com/gps-cs-s/AG0ilSwi5dnOX6_DCdFJkhK4qQZRu9LMegCoh6RQBfn7hhqjtPVi-uvNoTByPl5zFdg7e6rPhmEHCctaTH-lY-ayKGA_BBn8LxLNVaPaMcMSeD7B-9S2qvAimduGjwbxBHMbEfjRZIrk4BGRg12M=w600-h400-k-no"
+                    alt="Clinic Waiting Area"
+                    class="w-full h-36 object-cover"
+                    onerror="this.onerror=null; this.src='https://placehold.co/600x400/fecaca/991b1b?text=Waiting+Lounge'"
+                />
+                <div class="p-3 text-center">
+                    <p class="font-semibold text-red-800">Comfortable Patient Lounge</p>
+                    <p class="text-sm text-gray-600">Spacious and welcoming waiting area.</p>
                 </div>
-                <p class="text-gray-700 italic mb-4">"Dr. Das's expertise saved my life. The advanced cardiac care was exceptional, and the entire staff was incredibly supportive during my recovery."</p>
-                <p class="font-semibold text-red-700">- Ranjit K. (5 Stars)</p>
             </div>
 
-            <div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-red-600">
-                <div class="flex text-yellow-500 mb-3">
-                    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01L12 2z"/></svg>
-                    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01L12 2z"/></svg>
-                    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01L12 2z"/></svg>
-                    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01L12 2z"/></svg>
-                    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01L12 2z"/></svg>
+            <!-- Facility Item 2: ECG/TMT Room -->
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden icon-hover-effect">
+                <img
+                    src="https://placehold.co/600x400/fecaca/991b1b?text=ECG+%26+TMT+System"
+                    alt="Treadmill Test Machine"
+                    class="w-full h-36 object-cover"
+                />
+                <div class="p-3 text-center">
+                    <p class="font-semibold text-red-800">Advanced Stress Testing (TMT)</p>
+                    <p class="text-sm text-gray-600">High-precision treadmill testing setup.</p>
                 </div>
-                <p class="text-gray-700 italic mb-4">"The clinic is truly well-equipped and the coordination is excellent. Getting diagnostics like the TMT and Echo done here was seamless and worry-free."</p>
-                <p class="font-semibold text-red-700">- Priya M. (5 Stars)</p>
             </div>
 
-            <div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-red-600">
-                <div class="flex text-yellow-500 mb-3">
-                    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01L12 2z"/></svg>
-                    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01L12 2z"/></svg>
-                    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01L12 2z"/></svg>
-                    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01L12 2z"/></svg>
-                    <svg class="w-5 h-5 fill-current text-gray-300" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01L12 2z"/></svg>
+            <!-- Facility Item 3: Echocardiography Machine -->
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden icon-hover-effect">
+                <img
+                    src="https://placehold.co/600x400/fecaca/991b1b?text=2D+Echo+Machine"
+                    alt="2D Echo Machine"
+                    class="w-full h-36 object-cover"
+                />
+                <div class="p-3 text-center">
+                    <p class="font-semibold text-red-800">High-Resolution 2D Echocardiography</p>
+                    <p class="text-sm text-gray-600">Non-invasive heart structure imaging.</p>
                 </div>
-                <p class="text-gray-700 italic mb-4">"Highly recommend Cardiosphere for chronic disease management like BP and Diabetes. They provide effective, personalized treatment and great support."</p>
-                <p class="font-semibold text-red-700">- Amit S. (4.5 Stars)</p>
+            </div>
+            
+             <!-- Facility Item 4: Consultation Room -->
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden icon-hover-effect">
+                <img
+                    src="https://placehold.co/600x400/fecaca/991b1b?text=Consultation+Room"
+                    alt="Doctor's Consultation Room"
+                    class="w-full h-36 object-cover"
+                />
+                <div class="p-3 text-center">
+                    <p class="font-semibold text-red-800">Private Consultation Suites</p>
+                    <p class="text-sm text-gray-600">Dedicated space for patient-doctor privacy.</p>
+                </div>
             </div>
           </div>
         </div>
       </section>
+
+
+      <!-- 5. TESTIMONIALS SECTION -->
+      <section id="testimonials" class="py-16 md:py-24 bg-red-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h3 class="text-3xl font-bold text-center text-red-800 mb-12">
+            What Our Patients Say (5-Star Reviews)
+          </h3>
+          <!-- Updated Grid to fit 10 reviews (3 columns on desktop) -->
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            
+            <!-- Helper Star SVG -->
+            <script>
+                const starSvg = `<svg class="w-5 h-5 fill-current star-icon" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01L12 2z"/></svg>`;
+                const fiveStars = starSvg.repeat(5);
+            </script>
+
+            <!-- Testimonial 1: Dr. Tutan Das (Interventional) -->
+            <div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-red-600">
+                <div class="flex text-yellow-500 mb-3" data-stars="5">${fiveStars}</div>
+                <p class="text-gray-700 italic mb-4">"Dr. Tutan Das is a phenomenal doctor. The angioplasty procedure was a complete success, and his clear, confident approach put my family at ease. Five stars is not enough!"</p>
+                <p class="font-semibold text-red-700">- Subhash P.</p>
+            </div>
+
+            <!-- Testimonial 2: Dr. Manidipa Majumdar (Diagnostic) -->
+            <div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-red-600">
+                <div class="flex text-yellow-500 mb-3" data-stars="5">${fiveStars}</div>
+                <p class="text-gray-700 italic mb-4">"Dr. Manidipa Majumdar's diagnosis was spot on. She took the time to explain the 2D Echo results and customized my treatment plan perfectly. Truly personalized care."</p>
+                <p class="font-semibold text-red-700">- Anjali S.</p>
+            </div>
+
+            <!-- Testimonial 3: Dr. Swagata Chakraborty (ENT) -->
+            <div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-red-600">
+                <div class="flex text-yellow-500 mb-3" data-stars="5">${fiveStars}</div>
+                <p class="text-gray-700 italic mb-4">"Excellent consultation with Dr. Swagata Chakraborty for my chronic sinusitis. Highly professional, explains every detail, and the treatment was very effective. A great asset to Cardiosphere."</p>
+                <p class="font-semibold text-red-700">- Rakesh V.</p>
+            </div>
+            
+            <!-- Testimonial 4: Dr. Tutan Das (Pacemaker) -->
+            <div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-red-600">
+                <div class="flex text-yellow-500 mb-3" data-stars="5">${fiveStars}</div>
+                <p class="text-gray-700 italic mb-4">"My father received a Pacemaker implant by Dr. Das. The follow-up care and monitoring provided by the team have been flawless. World-class cardiology care in Durgapur."</p>
+                <p class="font-semibold text-red-700">- Gautam H.</p>
+            </div>
+            
+            <!-- Testimonial 5: General Clinic (Staff) -->
+            <div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-red-600">
+                <div class="flex text-yellow-500 mb-3" data-stars="5">${fiveStars}</div>
+                <p class="text-gray-700 italic mb-4">"The staff's behavior and the clinic environment are fantastic. They truly prioritize patient comfort. It makes the entire process of hospital visits much less stressful."</p>
+                <p class="font-semibold text-red-700">- Mrs. Neha K.</p>
+            </div>
+
+            <!-- Testimonial 6: General Clinic (Diagnostics Speed) -->
+            <div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-red-600">
+                <div class="flex text-yellow-500 mb-3" data-stars="5">${fiveStars}</div>
+                <p class="text-gray-700 italic mb-4">"Quick and efficient diagnostic services! I got my Holter monitoring and TMT test results processed very quickly. The clinic is well-equipped with modern machinery."</p>
+                <p class="font-semibold text-red-700">- Bipasha C.</p>
+            </div>
+
+            <!-- Testimonial 7: Dr. Manidipa Majumdar (Chronic Care) -->
+            <div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-red-600">
+                <div class="flex text-yellow-500 mb-3" data-stars="5">${fiveStars}</div>
+                <p class="text-gray-700 italic mb-4">"For my chronic hypertension and diabetes management, Dr. Majumdar has been excellent. Her approach is thorough and she focuses on long-term health, not just quick fixes."</p>
+                <p class="font-semibold text-red-700">- Alok M.</p>
+            </div>
+
+            <!-- Testimonial 8: Dr. Swagata Chakraborty (ENT Surgery) -->
+            <div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-red-600">
+                <div class="flex text-yellow-500 mb-3" data-stars="5">${fiveStars}</div>
+                <p class="text-gray-700 italic mb-4">"Consulted Dr. Chakraborty for a complicated throat issue. Her expertise in Head & Neck Surgery gave me immense confidence. She is truly a specialist in her field."</p>
+                <p class="font-semibold text-red-700">- Tirthankar B.</p>
+            </div>
+
+            <!-- Testimonial 9: General Clinic (Emergency) -->
+            <div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-red-600">
+                <div class="flex text-yellow-500 mb-3" data-stars="5">${fiveStars}</div>
+                <p class="text-gray-700 italic mb-4">"Had to visit for an emergency and the response time and treatment provided by the doctors were fast and highly effective. They provided the right care immediately."</p>
+                <p class="font-semibold text-red-700">- Swarnali R.</p>
+            </div>
+
+            <!-- Testimonial 10: General Clinic (Convenience) -->
+            <div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-red-600">
+                <div class="flex text-yellow-500 mb-3" data-stars="5">${fiveStars}</div>
+                <p class="text-gray-700 italic mb-4">"The Home Sample Collection service is a lifesaver for elderly patients. The phlebotomist was gentle and professional. The whole polyclinic concept is very convenient."</p>
+                <p class="font-semibold text-red-700">- Rajeshwari D.</p>
+            </div>
+
+            <!-- Script to initialize stars for all testimonial cards -->
+            <script>
+                document.querySelectorAll('[data-stars]').forEach(el => {
+                    const stars = el.getAttribute('data-stars');
+                    el.innerHTML = new Array(parseInt(stars)).fill(starSvg).join('');
+                });
+            </script>
+          </div>
+        </div>
+      </section>
       
+      <!-- 6. LOCATION SECTION (Google Map Embed) -->
       <section id="location" class="py-16 md:py-24 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h3 class="text-3xl font-bold text-center text-red-800 mb-12">
                 Find Our Clinic
             </h3>
+            <!-- Responsive Map Embed (using Durgapur address) -->
             <div class="shadow-2xl rounded-xl overflow-hidden">
                 <div style="width: 100%"><iframe width="100%" height="450" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=450&amp;hl=en&amp;q=Cardiosphere+Polyclinic,+2nd+Floor,+Arushi+Complex,+Durgapur+713212&amp;t=&amp;z=15&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe></div>
             </div>
@@ -678,10 +827,12 @@
         </div>
       </section>
 
+      <!-- 7. CONTACT & FOOTER SECTION -->
       <footer id="contact" class="bg-red-900 text-white py-12">
         <div
           class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-10"
         >
+          <!-- Col 1: Clinic Info -->
           <div>
             <h4 class="text-xl font-bold text-red-300 mb-4">
               Cardiosphere Polyclinic
@@ -715,6 +866,7 @@
             </div>
           </div>
 
+          <!-- Col 2: Location & Timings -->
           <div>
             <h4 class="text-xl font-bold text-red-300 mb-4">
               Location & Hours
@@ -760,6 +912,7 @@
             </p>
           </div>
 
+          <!-- Col 3: Quick Links & Contact -->
           <div>
             <h4 class="text-xl font-bold text-red-300 mb-4">Quick Links</h4>
             <ul class="space-y-2 text-sm sm:text-base">
@@ -798,6 +951,7 @@
           </div>
         </div>
         
+        <!-- Mobile CTA Added for better conversion on phones -->
         <div class="mt-8 text-center md:hidden">
             <button
                 onclick="openModal()"
