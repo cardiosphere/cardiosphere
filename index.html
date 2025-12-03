@@ -172,7 +172,7 @@
           <img
             src="https://lh3.googleusercontent.com/p/AF1QipMcFRLHMTS9rS1GLtgiVsKY8ufhIW1fbQf0zCTI=w284-h237-n-k-no-nu"
             alt="Cardiosphere Clinic Logo"
-            class="w-8 h-8 md:w-10 md:h-10 object-contain"
+            class="w-12 h-12 md:w-14 md:h-14 object-contain" 
             onerror="this.onerror=null; this.src='https://placehold.co/80x80/1e40af/ffffff?text=Logo+Error'"
           />
           <h1 class="text-2xl font-extrabold text-blue-900">Cardiosphere</h1>
@@ -1068,9 +1068,6 @@
       const sections = document.querySelectorAll("main > section");
       const mobileMenu = document.getElementById("mobile-menu");
       const mobileMenuButton = document.getElementById("mobile-menu-button");
-
-      // Removed 'navigate' function logic to allow natural page scrolling
-      // Instead, anchor links use default hash scrolling (#section-id)
 
       window.toggleMobileMenu = function () {
         mobileMenu.classList.toggle("hidden");
