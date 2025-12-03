@@ -4,12 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cardiosphere.in ( The Way to a Healthy Heart ) - Expert Medical and Cardiac Care (Diagnostics | Clinic | Pharmacy)</title>
-    <!-- Load Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
       /* Custom styles for a clean, professional medical look */
       .shadow-medical {
-        box-shadow: 0 10px 30px rgba(150, 45, 45, 0.1);
+        box-shadow: 0 10px 30px rgba(45, 100, 150, 0.1);
       }
       .text-inter {
         font-family: "Inter", sans-serif;
@@ -19,15 +18,15 @@
       }
       .icon-hover-effect:hover {
         transform: translateY(-5px);
-        box-shadow: 0 10px 20px rgba(185, 28, 28, 0.2);
+        box-shadow: 0 10px 20px rgba(30, 64, 175, 0.2);
       }
-      /* Gradient for the Hero Section */
+      /* Gradient for the Hero Section: Changed from Red to Deep Blue */
       .hero-gradient {
         background: linear-gradient(
           145deg,
-          #7f1d1d 0%,
-          #dc2626 70%,
-          #991b1b 100%
+          #1e3a8a 0%,
+          #3b82f6 70%,
+          #1e40af 100%
         );
       }
       /* Hide all main content sections initially, only show the home section */
@@ -44,7 +43,6 @@
     </style>
   </head>
   <body class="text-inter bg-gray-50">
-    <!-- Appointment Modal (Hidden by Default) -->
     <div
       id="appointment-modal"
       class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60 p-4"
@@ -56,12 +54,12 @@
       >
         <div class="p-6">
           <div class="flex justify-between items-start">
-            <h2 class="text-2xl font-bold text-red-800">
+            <h2 class="text-2xl font-bold text-blue-800">
               Book Your Consultation
             </h2>
             <button
               onclick="closeModal()"
-              class="text-gray-400 hover:text-red-500 transition-colors"
+              class="text-gray-400 hover:text-blue-500 transition-colors"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -90,7 +88,7 @@
                 id="doctor"
                 name="doctor"
                 required
-                class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-red-500 focus:border-red-500"
+                class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
               >
                 <option value="Dr. Tutan Das">
                   Dr. Tutan Das (Cardiologist)
@@ -112,7 +110,7 @@
                 id="name"
                 name="name"
                 required
-                class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-red-500 focus:border-red-500"
+                class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
               />
             </div>
             <div>
@@ -124,7 +122,7 @@
                 id="phone"
                 name="phone"
                 required
-                class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-red-500 focus:border-red-500"
+                class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
               />
             </div>
             <div>
@@ -136,7 +134,7 @@
                 id="date"
                 name="date"
                 required
-                class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-red-500 focus:border-red-500"
+                class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
               />
             </div>
             <div>
@@ -150,12 +148,12 @@
                 name="reason"
                 rows="2"
                 required
-                class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-red-500 focus:border-red-500"
+                class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
               ></textarea>
             </div>
             <button
               type="submit"
-              class="w-full py-3 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 transition-colors shadow-lg shadow-red-300"
+              class="w-full py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors shadow-lg shadow-blue-300"
             >
               Confirm Appointment
             </button>
@@ -168,7 +166,6 @@
       </div>
     </div>
 
-    <!-- Header & Navigation -->
     <header class="sticky top-0 bg-white shadow-md z-30">
       <div
         class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center py-4"
@@ -177,72 +174,61 @@
           class="flex items-center space-x-2 cursor-pointer"
           onclick="navigate('home')"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="32"
-            height="32"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="#dc2626"
-            stroke-width="2.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <path
-              d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"
-            />
-          </svg>
-          <h1 class="text-2xl font-extrabold text-red-900">Cardiosphere</h1>
+          <img
+            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAA/1BMVEX///8AAAAZGRkaGhoXFxeAgID7+/t9fX35+fkUFBTy8vKCgoL19fW/v78PDw97e3uIiIjr6+sgICAICAjo6OjZ2dnh4eHQ0NBzc3OUlJSzs7MkJCRAQEBRUVFnZ2c4ODhMTEzGxsaenp5ZWVm3t7eVlZU0NDSpqalhYWEsLCw2NjZFRUVXV1dra2udnZ3HlJvbvMHQp6qNCCKuXm3IjZaqY23Afof04ePpztPPrrL68PPMoaiYJz2jSlqRGCqjQFG3ZnasVGW4cXzBhIvIk5foyc+ZIzezcXelXGebQVC4goqaMUjn1tmcK0OSJzOZGDWSMTrjucGOIDfLr7GqSVu4mwPLAAAYu0lEQVR4nO1dCVviyBZNAVmBEJYQCGFHA7I6oCggKI52q2j3zHv//7e8ulXZAbu1ncb5Xs5Md0MglTp1b92tKoFhQoQIESJEiBAhQoQIESJEiBAhQoQIESJEiBAhQoQIESJECB8SSc8bqVWMx7W3nK7FlWIr7TmQTHxMvz4OJlLtl/VUFGHk3vJ6Hs6INev2exXpH9m7D0D6GFXoq3wfERy9rYEiPaufp2/bqJp+/YTfjSOEskQt6xmEOjL+8yYR4iHqICTjPxkiRi375iH6h5ETLanVEYoYx/hN461NDPBJx0YEIaCIBwxl3zhG/ywU0LA2x+SjqNTDvUQn0lubkGBcIuUSKuUZoQ3tKf9ET9+JdBWrGEJppoIymSz0Lvnjk4JIwnnZTAlP6BzK4uY+00yEznUjKK0SohiD97RyRE7FDag5lOm9b5j+KRTw4LdFlLMMIiqvvrnFPj2Pon2sCoWP7eWvAE+hbFNEapl0sGO+tx2zQxroqShawQyPP7KPv4YOYShXUKldUerC+xsS6kqlnUEVOdb+NAyTMFkMhEQDZdFxPpfP5yXu3a1J+PRc/hg31cXz0YD2Wx/W1XeilsUUG2AEQb34Kv7H6Cvqj0/chqr08VBlDB6sTClLfGoS1T62v2+GlEElldFQEJU3xd0ArbLViMaoGRQ7cAiOYxhUZrgm6VH2pNmudCPE2tR/fG6gJWJlIt1Ku3lMCbY5DkzXm1v6WBADr1NvjTULAK8Ke521tDfYkQpklLJZmWg8UDMPH9pAeIUNTNry1hZKe121VC8Wk3s5tkreVo5INI4V/v2G6wMAfcjIeMK03J7FlH0hs5RUeJ5PKcl9Es7FI247LTy95dKhgzdIXHEqoWB/oWttoyN3usU9/LicjvnF43GW5RUzv0cwuWIXN2K0NROdMHHUwQFvNv/P9f/HUIFhFdV01MVd5vL1/B7Ll9DMOObHFmq1AnBkGvU9yprAjQD9LtJr6BgzRO9yPR8FlQRZqHSCo2TVLJSxm+4NtrQqp5lUfIVaRhSj3T5+mWLjprYlyfQA+0K5nDJVbLyqJUTCwIMyJOUV6EZZrWSs+WN4GAqJtKY3lBTw4/vdkhiLRiJixqikMEk8Ixu6lk54ory0YTWSqZAgl7w9qJYmIPwAi3cSwxOmCpl+yeoQl9fqrSOF5XmWBfE1qzExFoni/yKxmNjpFWBKYsPDx4t63ZFmHsypWMUuJwLNwqg1D+vyofaQJTlhplyG5Fe0g5kclhFlx6YwvVJMxNwi0WgEaEZEMVPt9VMstTyplGILHio02VKtnKHOEb2jHvKxELpUqyJRI0ZeOK4wh8nhzhfavW4nKsdiERtR648oih2j3O6nQIPjjt2hwUOsGhVpy9VfSFV+EUkiLSskpaGMNy2XsGZ2j0sZzMRlF0BMFCPRTMfosy5D27XaLdKrHCTd79PYTPeEIVlPRxLxeFPG5PbSsyFGsuW4hyGTlD1NQvKU6x8m3S9Y8XXdibX6XqsHDGN05r0KbF1FP0OnqGzFf3CBQzGkQisjhS/3+wPstzz+LaHE28So/ABRLOYeq3hmG25EHfT75biCevhtC9Q19bvZAUgq0MkzgkFrt9pAKXjq1ILCVmyjAqKSs8Ts2i9ErxibPoZHfWVAZl8OGRz1HweToZhFbUaV2wIjmcdZ5KvEC0q84kpQFNs4hEkWuyjTxy/q+EXMlaKfIVTs5I4pMUJTVBmcvcQOxDCFUBT7imQLB94adRoZz2zyMRQ7VrklYVoJrRSXY64M416GEo2OuhoOvVvYedRwwsH/Pl4uGtCLDmofIRPsackvQoY7YvsZSgBbk+1EneORI8Q23/BGqEUrmtFNdNRGnRp++e4C5a8APKHYzKKSWMGKVCsF15sabCFjUZB35elpQ7Y+zlRYH0OYetFaFCe/sBrVjtle8XdDArdVpRpVLUPqyvo+N3mLYVTM7EwPjrK2DCu8fz2Ux41Fy1XqMGACRA4TmxJjSixdhtSOSv60qcWnSpYIa7aEcl5RaXY0kCmk/DFLjrR6QkaPNH0QZ4GVyc6XsoGQlCKZYkuEQtSxhPWMV1ZqlDKMYYaBeUqDUzFrO/5DJVCe4gzarolpKbZDKWT79IhUy3qnqs0wUkqlgvMsToduOxj8zWjF9hNkNJ41qF+XDeoLiqJ+7DH7WoaKOFZitxg661AgykOusqltS40KoGaabyKqLFsjDGOxDK9g8GKRMaHAmyvC26OCFdeIJ/G4Tw3TwLdesOLd9kGrGAynFlBZr2PdE0yj5OuLVGSbcjRCVDF7DKhIDNfrJri+fHxyXK3aplSssUWfrdQyhokP5Ot6GW1L93fBqa5o1I5oPYQMf/lswPdtjyc6HlsTBzqxSemU82Gb9a8ZS9hPlAmzguMIhd/uL4rZrklUS0VgR3RwjmX/V3RwiDRwE10jqkRjMCRS2wlMYwU2sIQGUYwMg9KmDFWzm33nuvL7AfZcZvOQAFTsNLjn/4qa4qtQnIliiBGbYtrA+QgjFJyYLdZJ8YGpRteS8RkVhKd2npe3fdE/D4GsKWRNJo0M8IwZecsvS2y8LEJxLQpZbtSmqGFbw6UcghHRYJVAdRjHEjJuMs8YmGGDpPyd31+uoR4LFSVU4ppINrbDY67BtqkmQp7vShEPjxt1Yxn24magMgxrToaMmlwJSUXqFuO/gVIAEHhXsSCVagdnGRB4b5Vu6zhusyebV1FxWuGp3kQLfFADoZRewpOx0alivwiLF4cIvSUstWz5BDbAZOn6ghE0dznF8oiWOkaokH0SxN6Q31qsgraRcYIbho1DPSzD7pv3WH0AGsQdk9RXPiEKu/WVAdv3cImKMRCWn2BEbLLb+4tIRFMlE7BLgoqD5IcJYmtKULgltc1YnjED6qbx/Im3ICN36oyAjYynPhwrFfiABiZNJi/bAb1IIpvjw5SFqYtwipsmTusC9gDCGsIwav0lHzcKyFdBjXXZYkADecRTBXGbL9R2Wk90jK0C9gCoH/gGzhFxfuGUTLHTkGUvvyjYmeCOmT72O1zD2/bhlvIbdoaITpJk2MsBY4NtDRbiK2VvscvHA+uNiTJRiFbVbjtzyLWZXJGk4Bldooul2WAeoIMQo57CsK9EHI2UCqmgCFVQTFllJJNMwc6+ZfPfBSmvmWR7Voo45qDbShex14/ZtGLBErjYiwdnIVMn63WQRxrI1PKHcBNbqOCgMY0dmLgjeqzzODj1ic1L8IQPGlIS8cYM2I6b/DzbL01sCnQUNXbFx8KAL5R2rUDFoEDT54MBm7UdN4pa2JAd+o6EltIv949w9iuUxEQblXYyZPIK2xa3+BEzinU0vl1jIgxLqAIBL5OrH+GLKAfaoGjtCJbjqoIabdSFeVjHBiIglXoq3t2iSBaBDZ4P1Ng4nNsDw2wXtQdI0VjLnP725JBCgP16sIgvllEmgyBtxZamGLQ2nMmnqltail3jcYoPBmMa5kJWlXGLUdTDE5usVDUPtfFLjWKGnTJdcM9C1bvM1bfXidJKPHUsbkmwU+CLwa032NnXyYZEuuMfxcpwd0r0cPtNSME0UzZIFEmiK+jeVofy8XihE6AodwqsEvyiGoNSCIkGoTnRaJI7qA65TZjGbWLGCk4rVMW2Zo0aZz0Uo9EYVtFCfHsnsUIV3SpRylazB91+ydmmgKCWpp3LbHlpjeVTzlITdhSikWK3CUoROkzpmrdV9qC7LxnBE31XsN+okoW/bbVSFTZVpkkTuIkav4MgUfoSMgQm59kRrRxuP42FZM/uS5Ks/IEUd6zY5hU+3iaaGhNLbZ7fmoMMXVRrk2WYpN1m7zPcN5NQTSWuJBuwVVjLInAhsBUtH+hb7ohnU7A3MWYUWH4QCKeTeWuTXBPJGmzMbSRxo6Z6cAF6UcBuAusZCKKE+9+XA1KSTJ6N9w2jwrK8GZipeVieykHRIAU6XjjUguHrSONUAHtDMoXIDQrtwBe4JNZUlo3zSj1gPLg2nELyL/yqbgbXBw4PTkqnBZzYRQZREALIEEK6rfJRrgGbMRtbCV+DuBiy8ptCmYEsqkwinf6Fe28+Fgld6XdL0R7fKCBRJvtpmwJHdoduWRNOa5jblU+ymNzhSBRYQ7KMCg2+Fy11+4r+Ge7oNqOOYSfrpV3io3NQRd3SUwxhh2CIExVzxOEbTkMEmUMnUBh56uTLtVLWoZnDJicLNdSfut+lDhLMYmeTwy3Q8cp2amXyqn3QLdAWjBLKFTxRr/ZqctcMsE8mgrj+VpMP5ZRnSXRo+ZElTMWir8Em8hX3rKE11UFmAWqpIjGqeqe+/QwiWSet0N3wlBnZJIOFa1inBHigt3IFWxxtItgUSlJC9TEVmABvU9kDrogG5oUgug5bSjNNB5+C3HnqQizv9Mqqom2PULGoD7QoR+B5zoZMhAFl3mlA/zHVR1XAa4j/V/fiQPRD/kNKZfA1VtYSIalDSbVMVPtphQYUiVUSwVMddFBlox6iXZ/QUyL7DHmyHwn6k8/kcmXJSAUX1JuxbdBjuWODkeOQy7Bio2YqgvmQ19DmqpK9Age1onQxhZpmhrRU08mAIYAgKHinB/rXPY1hegWoeKYoCdy+hCN1f0EBZsgIRcI11RN27Sfc8QK2n14B9ROZhNwi9DknveraBkVJLmlHxjAR99W9FIeWmThnhBAT8fNZzWrTb+qw6mqR2UPa4Dph+ZXRMdo/4TAep59ROUI2hia+FY+oKjc+Q925DJVUW2ahV4mzBoCVGWHbBOWMBOu7LNGC3RbZP6gKSVc4q4/Sx0qUnip9TVfMFtAWjBYEK8XI+OwL2p1vF4Q+nV7fPKnyGaHQntLKvo816HzQuKZMb+HxFQTCgUSQnQbP79Z7/tE/oCh1w+olraGCnE2zoq9GVYh9DhVgisUa36Emeil219VkS3z3gtBQsC8ttu5im23H01jwkw2DFnnkFHvWBTlLaJ+dHkNace0LzDaNqe4KBJxMS7Pv3s4YxoEMB95xqn+ipQj8FS/nkDt2SXlPoY+YSSYUWtcWOVbb/DLWK90DDVjJ6Uu4bJG00ajI8c07Xm3DLcBmsa1bu9ntV7GSMAz/74p0gK52drrVbu4qjG8eeKBp5eBag1D2mK6v/PjiFeUpQ45IpLES52YS/U0lO8/vBzxnFvIZE03uva0U1sVpG+kmV49RWJYoV01S9D6TJ9j5JReYtkOpHKbLtNFNIQijQd4ufko7Z9bRkAeppmS5/tO8REp8fUk5V1RxTz2I+PkfH4VAgW2fIx/9adh4UkbLlyDnl35Hx/hy4nZH0vie4hAgRIkSIECFChAgRIsS/Bdws8cGZDZeYbZcpZrPD5E8Xw/P11fh2eDfz9OXOfT0dTobDyWR4Z3dvht8BhhtPI/jtzPPu/PpmfTnceq4znZ+Pb9aT+QVpYg4tDi+tL8zmbmMb3DI+zF2Sa/z5J/7iHenFn3BJby+GVj8mE0/Pt7EZr84uN9PNfHw/d4+Orl0JCOd/fDmdn98834ysI3/+8XU+n5w9LG5GzvWulkOnyev/Pt5NpxePV0+3NkduvjobTfFlrtbk/fz+ab4ePz2v6ReGywe7l4n1H49w8c3iZTgnGE+ggfVyfYl78TS+sL44/3Z1Sj4fPnmGOghu+PzF+jhxO3SPrxee4Z//AdyF0WphNX5KDmCpPH07tzt2/rfN/6/VmS2ax29X1imjxSOtS03P6SisruDv85cz0sDd4sxR4Pnykpy8erAqWbNTMggvcNGE24vp4ot1xugVhn/S8aJnuDKcrr576M7/oG9Ol7c2Q+vTzdfl2KJ4/mIxPL13m2QmyxW5unD1ZLHm6NemT1dASVgvyVUvnj0M/7AYfnfEShjSb2LpP1qdvD+zT9k/vf+6/+KxB+5qwunZ9xv3nc1ws1gn/AyZ2fjlnPMxvFh99a5KPH4jQzC7v/L3YrOgBy6Xj/DvxeLM6ciQMhRchoyX4fT5gQsy3IvZ6mm667gwvju7v3DeOgyfz6QAQ2bz8G3kZchd/+2eyJD5Cf2dvjz4TavN8G65FnYznO1juFoJP83wdDnZefzimpm/3G4xHC3PmSBDPGvGgofh3f2jX1iXyxvc0dni+9x32Gb4FzVQu2XoK6zaDP962dbSvVh/u9h5/HaO58mzM4IWw9nNwp5qHobTB2qULIbz5am/relqCTPxdvk08lK3GM7WT6QL3nkYZDjzMZzd2CbNYbjfV8xuHnYq6QxG/frl0mG4nAjYQ44Xthu8DJkxVdNzQl+4eQjatfVyRKgsX8Yjty+bZ7Cl0/MFHZCL5/HMQsLR0odpAg5MEhbDIfTi7Jt97enyTIDPN497GU6fxjvpj8Bl4Qlij+p8uRpfj5/WTt99DCdUzyhD3K1gk7d07BOnq5f7q4k9pJvFaj7BgYalRBffF2djC1f3FsPF+Pp6PL55shi+rMZnuBeO2k1fVuuz67Pr1X5l3dyPdy4hrNfYjU4WC5vRfPl4cfW3Z6R8DC/p7LQYLh6C67tzOxSYXZ69LJ+syAczHD4OL+xBvFjcbCxMb5f/oQy/40AE//9oy/Bxc/PiMRzT5dcpjiGmo1dkuFrt0tLp1RAwXtpKCR7/4v7ZnbM+hqc+GT5tWefJ0lF34WL9fTkma/dUSx1cLHbMQ2uwLCnAPLxzh51oqfViL0NpfL8rGJjTuGp0fyPYDDGH4b2r0j6G5/feeXh1P2L8WC+95mz0dE+0f7O48RoeL8O5w9CnYXOIaSYvYzdCWf7Ylp5/G24fTIxpHxOr73cehrMbN/D0MuT+ez9zGWIBuF6GYHbjl+roO3lvewuXodNzh+Fq2x/iXjhe52cY3r3sUNPNyjHPEw9Dr4Z4Gd59pyK3GN59f/Y3ebf0O0juisSVrzAc7mFI4tK7hRNm/wxD4evyduugE4BfLKxLWP5w6MSgHobYSV54GXLXdlhgXeJs4Z8J3M3zDxjukyFhiKf119nPM2Q2TwuPg56SCPK/9rThzpZUX+eWr/1q66nLkLu1j1kMmYunhWNZoF90InDOXJxdPcCOdSvy9jDcnocOQ27mMpw5FtAT0+y6MccCf9/v586n5zDaI9cCzF/WXoZYA1cXfobTtZNI2AxxnrRwjc38/pY0J0zSzpEv3A6GT+vt3MKxNBeXLkNs1S099TD8a785ZUZX918uSCent2BZubUnh1rQmMdmiAVC9fQUDnCzi8nTw6XdMYchM3q4p46d26yf5nQAuOvxlERpp4uv5DOcH3oZjhbjbW9hy3B2TRlawzpf0pxy4zDcjF+7kSE9fF5c3w4ntzdPcOJf966OTVcv5wIEXH/bqj98up5B0v9yM7ld3yxuLp2ZgsNTJy2c3i6u1rd/TtZP584cHK2v1pPb25sHq7Ix9PpXhpu4Nm82vv8yI6S/n09uzzFuwKNi7byiVxOGNO+eLFbk4/P18+r1WzVmm+Hj4/l8IwGby0s3QN5cXl7iLk7pP7TzozuOHDi9vNukPQnRBT7mbsObjR4xRt7CE5cezR+HdmQq4a/fuZ/iy15eeFraQBOXLqbQmf/YveBIL2aez0f/1o1yIUKECBEiRIgQIf5vwaUlCKgTAsMl4Akfgp2j0UViiLXhRcLNOqV0moTcae/9L25QLdFThUQiuAaUTsMveHICeWv9Y19KEGAZOeEpRUlpslaVpv/+AvJ6Gx7V0dKYvAk3+aj2fVdFlWkxKdyVBXf4DlTG+mFKTh8MdIERTL0xcDokOc/n5IoCo6sMo+sauUNNh7PS8ND5hKkoSYbRGoyU4pjcESfZN0oV8+RXgbUjjRypw4ZjbmA20nBTLq//4p18HNOzWoUL5t1nAOgtoZqDJwO14AbsfMr9CGgzxTrDJJ193FrPTti4Bu2i9YM6XNskDIk8W3DPhaYwAjwwRKnrthIoaaaOv5a0homFm+C4JEPvZx+8slj4kyA3QiQVfYAvkGftn/phpH49ZcIPVOsKHDILzoWoYAW44d4WYqNo8+d4U4dnJZo8eUpNUocneVkMdcKwqTeAYaLm3GPCFnV4OF+y3QBxaXoBmm2kSOvCu37FfQfDuiapIENTcnLLVFwtNEBPdLjZV3OfEwsME/ArY4kji2HebFVshsW01AKGLfJ8Hb0ODy/xMYwn8uShLwPnPktFlVrAsCiRwU7CzyVwLYVw+wiGZdKsyqRBhiaTsCnqRaaJJxSefu2cjyGZYEWT42y1ArUsqDZD+tQrMwk2J20SVU4rEvz0gW5pqdSEbzZchjmqpUdgexINrEkw3XOkSeED7mgg45vUmJwOT0HSkvaMymlMkiPzCpshRnVnKDw3n+HMZNJ5BDsYEOtzzhQIw6Su4Y/VPBY0PDK6DnOT/NygqjMJIpeWY0HMHPl1QHWgJQUmp5IuCaaUh/alD5Dhe8GFd1OECBEiRIgQIUKECBEiRIgQIESJEiBAhQoQIESJEiBAhQoQIf4P8T+SqaNx7/0rcAAAAABJRU5ErkJggg=="
+            alt="Cardiosphere Custom Logo"
+            class="w-8 h-8 md:w-10 md:h-10 object-contain"
+          />
+          <h1 class="text-2xl font-extrabold text-blue-900">Cardiosphere</h1>
         </div>
         <nav class="hidden md:flex space-x-8 font-medium">
           <a
             href="#"
             onclick="navigate('home')"
-            class="text-gray-600 hover:text-red-600 transition-colors"
+            class="text-gray-600 hover:text-blue-600 transition-colors"
             >Home</a
           >
           <a
             href="#"
             onclick="navigate('doctors')"
-            class="text-gray-600 hover:text-red-600 transition-colors"
+            class="text-gray-600 hover:text-blue-600 transition-colors"
             >Our Doctors</a
           >
           <a
             href="#"
             onclick="navigate('services')"
-            class="text-gray-600 hover:text-red-600 transition-colors"
+            class="text-gray-600 hover:text-blue-600 transition-colors"
             >Services</a
           >
           <a
             href="#"
             onclick="navigate('facilities')"
-            class="text-gray-600 hover:text-red-600 transition-colors"
+            class="text-gray-600 hover:text-blue-600 transition-colors"
             >Facilities</a
           >
           <a
             href="#"
             onclick="navigate('testimonials')"
-            class="text-gray-600 hover:text-red-600 transition-colors"
+            class="text-gray-600 hover:text-blue-600 transition-colors"
             >Testimonials</a
           >
           <a
             href="#"
             onclick="navigate('location')"
-            class="text-gray-600 hover:text-red-600 transition-colors"
+            class="text-gray-600 hover:text-blue-600 transition-colors"
             >Location</a
           >
         </nav>
         <button
           onclick="openModal()"
-          class="hidden md:inline-flex px-6 py-2 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 transition-colors shadow-lg shadow-red-300"
+          class="hidden md:inline-flex px-6 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors shadow-lg shadow-blue-300"
         >
           Book Appointment
         </button>
 
-        <!-- Mobile Menu Button -->
         <button
           id="mobile-menu-button"
-          class="md:hidden text-gray-600 hover:text-red-600"
+          class="md:hidden text-gray-600 hover:text-blue-600"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -263,7 +249,6 @@
       </div>
     </header>
 
-    <!-- Mobile Menu Drawer -->
     <div
       id="mobile-menu"
       class="hidden md:hidden fixed inset-0 bg-white z-40 p-6 shadow-xl pt-20"
@@ -271,43 +256,43 @@
       <nav class="flex flex-col space-y-4 font-semibold">
         <a
           href="#"
-          class="text-gray-700 hover:text-red-600 border-b pb-2"
+          class="text-gray-700 hover:text-blue-600 border-b pb-2"
           onclick="navigate('home'); toggleMobileMenu();"
           >Home</a
         >
         <a
           href="#"
-          class="text-gray-700 hover:text-red-600 border-b pb-2"
+          class="text-gray-700 hover:text-blue-600 border-b pb-2"
           onclick="navigate('doctors'); toggleMobileMenu();"
           >Our Doctors</a
         >
         <a
           href="#"
-          class="text-gray-700 hover:text-red-600 border-b pb-2"
+          class="text-gray-700 hover:text-blue-600 border-b pb-2"
           onclick="navigate('services'); toggleMobileMenu();"
           >Services</a
         >
         <a
           href="#"
-          class="text-gray-700 hover:text-red-600 border-b pb-2"
+          class="text-gray-700 hover:text-blue-600 border-b pb-2"
           onclick="navigate('facilities'); toggleMobileMenu();"
           >Facilities</a
         >
         <a
           href="#"
-          class="text-gray-700 hover:text-red-600 border-b pb-2"
+          class="text-gray-700 hover:text-blue-600 border-b pb-2"
           onclick="navigate('testimonials'); toggleMobileMenu();"
           >Testimonials</a
         >
         <a
           href="#"
-          class="text-gray-700 hover:text-red-600 border-b pb-2"
+          class="text-gray-700 hover:text-blue-600 border-b pb-2"
           onclick="navigate('location'); toggleMobileMenu();"
           >Location</a
         >
         <button
           onclick="openModal(); toggleMobileMenu();"
-          class="mt-4 w-full py-3 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 transition-colors"
+          class="mt-4 w-full py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors"
         >
           Book Appointment
         </button>
@@ -315,7 +300,6 @@
     </div>
 
     <main>
-      <!-- 1. HERO SECTION -->
       <section
         id="home"
         class="hero-gradient text-white py-16 md:py-24 shadow-inner"
@@ -323,10 +307,9 @@
         <div
           class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center gap-12"
         >
-          <!-- Hero Text Content -->
           <div class="md:w-1/2 text-center md:text-left">
             <p
-              class="text-red-300 text-lg font-medium mb-3 tracking-widest uppercase"
+              class="text-blue-300 text-lg font-medium mb-3 tracking-widest uppercase"
             >
               Cardiosphere Polyclinic
             </p>
@@ -335,18 +318,17 @@
             >
               Leading the Future <br class="hidden sm:inline" />of Cardiac Care
             </h2>
-            <p class="mt-6 text-xl text-red-100">
+            <p class="mt-6 text-xl text-blue-100">
               Innovative treatments, expert consultation, and advanced diagnostics from dedicated Cardiologists.
             </p>
             <button
               onclick="openModal()"
-              class="mt-8 px-8 py-4 text-lg bg-white text-red-700 font-bold rounded-xl hover:bg-gray-100 transition-all shadow-2xl hover:shadow-red-400"
+              class="mt-8 px-8 py-4 text-lg bg-white text-blue-700 font-bold rounded-xl hover:bg-gray-100 transition-all shadow-2xl hover:shadow-blue-400"
             >
               Schedule Your Visit
             </button>
           </div>
 
-          <!-- 3D Heart Logo (Image Container) -->
           <div class="md:w-1/2 flex justify-center">
             <div
               class="w-64 h-64 md:w-80 md:h-80 rounded-full shadow-2xl overflow-hidden border-4 border-white transform hover:scale-105 transition-transform duration-300"
@@ -355,37 +337,35 @@
                 src="https://cdn3d.iconscout.com/3d/premium/thumb/heart-check-up-3d-icon-png-download-7526210.png?f=webp"
                 alt="3D Heart Check-up and Cardiology Logo"
                 class="w-full h-full object-cover"
-                onerror="this.onerror=null; this.src='https://placehold.co/800x800/991b1b/ffffff?text=CARDIO+LOGO'"
+                onerror="this.onerror=null; this.src='https://placehold.co/800x800/1e40af/ffffff?text=CARDIO+LOGO'"
               />
             </div>
           </div>
         </div>
       </section>
 
-      <!-- 2. DOCTORS PROFILE SECTION -->
       <section id="doctors" class="py-16 md:py-24 bg-gray-100">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h3 class="text-3xl font-bold text-center text-red-800 mb-12">
+          <h3 class="text-3xl font-bold text-center text-blue-800 mb-12">
             Our Specialist Team
           </h3>
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-            <!-- Doctor 1: Dr. Tutan Das (Cardiologist) -->
             <div
               class="bg-white rounded-xl p-6 sm:p-8 shadow-medical flex flex-col sm:flex-row items-center gap-6"
             >
               <div
-                class="w-32 h-32 flex-shrink-0 rounded-full border-4 border-red-600 overflow-hidden"
+                class="w-32 h-32 flex-shrink-0 rounded-full border-4 border-blue-600 overflow-hidden"
               >
                 <img
                   src="https://content.jdmagicbox.com/comp/durgapur/h9/9999px343.x343.240206131748.s7h9/catalogue/dr-tutan-das-benachity-durgapur-cardiac-resynchronization-therapy-treatment-services-xnmrmoazhb.jpg"
                   alt="Photo of Dr. Tutan Das"
                   class="w-full h-full object-cover"
-                  onerror="this.onerror=null; this.src='https://placehold.co/300x300/b91c1c/ffffff?text=TD'"
+                  onerror="this.onerror=null; this.src='https://placehold.co/300x300/1e40af/ffffff?text=TD'"
                 />
               </div>
               <div class="text-center sm:text-left">
                 <h4 class="text-2xl font-bold text-gray-900">Dr. Tutan Das</h4>
-                <p class="text-lg font-semibold text-red-600 mb-2">
+                <p class="text-lg font-semibold text-blue-600 mb-2">
                   Interventional Cardiologist
                 </p>
                 <p class="text-sm text-gray-500">
@@ -398,32 +378,31 @@
                 </p>
                 <button
                   onclick="openModal()"
-                  class="mt-4 px-4 py-2 text-sm bg-red-600 text-white font-medium rounded-lg hover:bg-red-700"
+                  class="mt-4 px-4 py-2 text-sm bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700"
                 >
                   Book Appointment
                 </button>
               </div>
             </div>
 
-            <!-- Doctor 2: Dr. Manidipa Majumdar (Cardiologist) -->
             <div
               class="bg-white rounded-xl p-6 sm:p-8 shadow-medical flex flex-col sm:flex-row items-center gap-6"
             >
               <div
-                class="w-32 h-32 flex-shrink-0 rounded-full border-4 border-red-600 overflow-hidden"
+                class="w-32 h-32 flex-shrink-0 rounded-full border-4 border-blue-600 overflow-hidden"
               >
                 <img
                   src="https://hlghospital.com/wp-content/uploads/2025/04/dr.-manidipa.jpg"
                   alt="Photo of Dr. Manidipa Majumdar"
                   class="w-full h-full object-cover"
-                  onerror="this.onerror=null; this.src='https://placehold.co/300x300/b91c1c/ffffff?text=TD'"
+                  onerror="this.onerror=null; this.src='https://placehold.co/300x300/1e40af/ffffff?text=TD'"
                 />
               </div>
               <div class="text-center sm:text-left">
                 <h4 class="text-2xl font-bold text-gray-900">
                   Dr. Manidipa Majumdar
                 </h4>
-                <p class="text-lg font-semibold text-red-600 mb-2">
+                <p class="text-lg font-semibold text-blue-600 mb-2">
                   Interventional Cardiologist
                 </p>
                 <p class="text-sm text-gray-500">
@@ -436,32 +415,31 @@
                 </p>
                 <button
                   onclick="openModal()"
-                  class="mt-4 px-4 py-2 text-sm bg-red-600 text-white font-medium rounded-lg hover:bg-red-700"
+                  class="mt-4 px-4 py-2 text-sm bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700"
                 >
                   Book Appointment
                 </button>
               </div>
             </div>
 
-            <!-- Doctor 3: Dr. Swagata Chakraborty (ENT) -->
             <div
               class="bg-white rounded-xl p-6 sm:p-8 shadow-medical flex flex-col sm:flex-row items-center gap-6"
             >
               <div
-                class="w-32 h-32 flex-shrink-0 rounded-full border-4 border-red-600 overflow-hidden"
+                class="w-32 h-32 flex-shrink-0 rounded-full border-4 border-blue-600 overflow-hidden"
               >
                 <img
                   src="https://scontent.fshl1-1.fna.fbcdn.net/v/t39.30808-6/472047397_8228199303948009_231805050605885210_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=106&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=0kRn9Rw9aAkQ7kNvwFMtk9r&_nc_oc=AdnL5_BEkThwJGDSFs6ngImiVzhV8H3YpQnRH2vV_xzupae5fASyB7U9gGzosZUWwqE&_nc_zt=23&_nc_ht=scontent.fshl1-1.fna&_nc_gid=HMo2sXcWZViWhlPJfTXXPQ&oh=00_AfleQp9OX5q0gkKLE36Tq-WtyXQHzyNPaoVWM67kw4F9_A&oe=6935A9A3"
                   alt="Photo of Dr. Swagata Chakraborty"
                   class="w-full h-full object-cover"
-                  onerror="this.onerror=null; this.src='https://placehold.co/300x300/1c31b9/ffffff?text=SC'"
+                  onerror="this.onerror=null; this.src='https://placehold.co/300x300/1e40af/ffffff?text=SC'"
                 />
               </div>
               <div class="text-center sm:text-left">
                 <h4 class="text-2xl font-bold text-gray-900">
                   Dr. Swagata Chakraborty
                 </h4>
-                <p class="text-lg font-semibold text-red-600 mb-2">
+                <p class="text-lg font-semibold text-blue-600 mb-2">
                   ENT and Head & Neck Surgeon
                 </p>
                 <p class="text-sm text-gray-500">
@@ -474,7 +452,7 @@
                 </p>
                 <button
                   onclick="openModal()"
-                  class="mt-4 px-4 py-2 text-sm bg-red-600 text-white font-medium rounded-lg hover:bg-red-700"
+                  class="mt-4 px-4 py-2 text-sm bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700"
                 >
                   Book Appointment
                 </button>
@@ -484,19 +462,18 @@
         </div>
       </section>
 
-      <!-- 3. SERVICES SECTION -->
       <section id="services" class="py-16 md:py-24 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h3 class="text-3xl font-bold text-center text-red-800 mb-12">
+          <h3 class="text-3xl font-bold text-center text-blue-800 mb-12">
             Detailed Services Offered
           </h3>
 
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             <div
-              class="p-6 rounded-xl bg-red-50 shadow-sm border-l-4 border-red-600 icon-hover-effect"
+              class="p-6 rounded-xl bg-blue-50 shadow-sm border-l-4 border-blue-600 icon-hover-effect"
             >
               <h4
-                class="text-xl font-bold text-red-800 mb-2 flex items-center gap-2"
+                class="text-xl font-bold text-blue-800 mb-2 flex items-center gap-2"
               >
                 <svg
                   class="w-6 h-6"
@@ -526,10 +503,10 @@
             </div>
 
             <div
-              class="p-6 rounded-xl bg-red-50 shadow-sm border-l-4 border-red-600 icon-hover-effect"
+              class="p-6 rounded-xl bg-blue-50 shadow-sm border-l-4 border-blue-600 icon-hover-effect"
             >
               <h4
-                class="text-xl font-bold text-red-800 mb-2 flex items-center gap-2"
+                class="text-xl font-bold text-blue-800 mb-2 flex items-center gap-2"
               >
                 <svg
                   class="w-6 h-6"
@@ -560,10 +537,10 @@
             </div>
 
             <div
-              class="p-6 rounded-xl bg-red-50 shadow-sm border-l-4 border-red-600 icon-hover-effect"
+              class="p-6 rounded-xl bg-blue-50 shadow-sm border-l-4 border-blue-600 icon-hover-effect"
             >
               <h4
-                class="text-xl font-bold text-red-800 mb-2 flex items-center gap-2"
+                class="text-xl font-bold text-blue-800 mb-2 flex items-center gap-2"
               >
                 <svg
                   class="w-6 h-6"
@@ -597,10 +574,10 @@
             </div>
 
             <div
-              class="p-6 rounded-xl bg-red-50 shadow-sm border-l-4 border-red-600 icon-hover-effect"
+              class="p-6 rounded-xl bg-blue-50 shadow-sm border-l-4 border-blue-600 icon-hover-effect"
             >
               <h4
-                class="text-xl font-bold text-red-800 mb-2 flex items-center gap-2"
+                class="text-xl font-bold text-blue-800 mb-2 flex items-center gap-2"
               >
                 <svg
                   class="w-6 h-6"
@@ -634,17 +611,16 @@
           <div class="mt-10 text-center">
             <button
               onclick="openModal()"
-              class="px-8 py-4 text-lg bg-red-600 text-white font-semibold rounded-xl hover:bg-red-700 transition-colors shadow-lg"
+              class="px-8 py-4 text-lg bg-blue-600 text-white font-semibold rounded-xl hover:bg-blue-700 transition-colors shadow-lg"
             >
               Book an Appointment Today
             </button>
           </div>
       </section>
 
-      <!-- 4. FACILITIES & EQUIPMENT SECTION (NEW) -->
       <section id="facilities" class="py-16 md:py-24 bg-gray-100">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h3 class="text-3xl font-bold text-center text-red-800 mb-12">
+          <h3 class="text-3xl font-bold text-center text-blue-800 mb-12">
             State-of-the-Art Facilities & Equipment
           </h3>
           <p class="text-center text-lg text-gray-600 mb-10 max-w-3xl mx-auto">
@@ -652,55 +628,51 @@
           </p>
 
           <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-            <!-- Facility Item 1: Waiting Area (Using Google Maps URL as a placeholder attempt) -->
             <div class="bg-white rounded-xl shadow-lg overflow-hidden icon-hover-effect">
                 <img
                     src="https://lh3.googleusercontent.com/gps-cs-s/AG0ilSwi5dnOX6_DCdFJkhK4qQZRu9LMegCoh6RQBfn7hhqjtPVi-uvNoTByPl5zFdg7e6rPhmEHCctaTH-lY-ayKGA_BBn8LxLNVaPaMcMSeD7B-9S2qvAimduGjwbxBHMbEfjRZIrk4BGRg12M=w600-h400-k-no"
                     alt="Clinic Waiting Area"
                     class="w-full h-36 object-cover"
-                    onerror="this.onerror=null; this.src='https://placehold.co/600x400/fecaca/991b1b?text=Waiting+Lounge'"
+                    onerror="this.onerror=null; this.src='https://placehold.co/600x400/93c5fd/1e40af?text=Waiting+Lounge'"
                 />
                 <div class="p-3 text-center">
-                    <p class="font-semibold text-red-800">Comfortable Patient Lounge</p>
+                    <p class="font-semibold text-blue-800">Comfortable Patient Lounge</p>
                     <p class="text-sm text-gray-600">Spacious and welcoming waiting area.</p>
                 </div>
             </div>
 
-            <!-- Facility Item 2: ECG/TMT Room -->
             <div class="bg-white rounded-xl shadow-lg overflow-hidden icon-hover-effect">
                 <img
-                    src="https://placehold.co/600x400/fecaca/991b1b?text=ECG+%26+TMT+System"
+                    src="https://placehold.co/600x400/93c5fd/1e40af?text=ECG+%26+TMT+System"
                     alt="Treadmill Test Machine"
                     class="w-full h-36 object-cover"
                 />
                 <div class="p-3 text-center">
-                    <p class="font-semibold text-red-800">Advanced Stress Testing (TMT)</p>
+                    <p class="font-semibold text-blue-800">Advanced Stress Testing (TMT)</p>
                     <p class="text-sm text-gray-600">High-precision treadmill testing setup.</p>
                 </div>
             </div>
 
-            <!-- Facility Item 3: Echocardiography Machine -->
             <div class="bg-white rounded-xl shadow-lg overflow-hidden icon-hover-effect">
                 <img
-                    src="https://placehold.co/600x400/fecaca/991b1b?text=2D+Echo+Machine"
+                    src="https://placehold.co/600x400/93c5fd/1e40af?text=2D+Echo+Machine"
                     alt="2D Echo Machine"
                     class="w-full h-36 object-cover"
                 />
                 <div class="p-3 text-center">
-                    <p class="font-semibold text-red-800">High-Resolution 2D Echocardiography</p>
+                    <p class="font-semibold text-blue-800">High-Resolution 2D Echocardiography</p>
                     <p class="text-sm text-gray-600">Non-invasive heart structure imaging.</p>
                 </div>
             </div>
             
-             <!-- Facility Item 4: Consultation Room -->
-            <div class="bg-white rounded-xl shadow-lg overflow-hidden icon-hover-effect">
+             <div class="bg-white rounded-xl shadow-lg overflow-hidden icon-hover-effect">
                 <img
-                    src="https://placehold.co/600x400/fecaca/991b1b?text=Consultation+Room"
+                    src="https://placehold.co/600x400/93c5fd/1e40af?text=Consultation+Room"
                     alt="Doctor's Consultation Room"
                     class="w-full h-36 object-cover"
                 />
                 <div class="p-3 text-center">
-                    <p class="font-semibold text-red-800">Private Consultation Suites</p>
+                    <p class="font-semibold text-blue-800">Private Consultation Suites</p>
                     <p class="text-sm text-gray-600">Dedicated space for patient-doctor privacy.</p>
                 </div>
             </div>
@@ -709,92 +681,78 @@
       </section>
 
 
-      <!-- 5. TESTIMONIALS SECTION -->
-      <section id="testimonials" class="py-16 md:py-24 bg-red-50">
+      <section id="testimonials" class="py-16 md:py-24 bg-blue-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h3 class="text-3xl font-bold text-center text-red-800 mb-12">
+          <h3 class="text-3xl font-bold text-center text-blue-800 mb-12">
             What Our Patients Say (5-Star Reviews)
           </h3>
-          <!-- Updated Grid to fit 10 reviews (3 columns on desktop) -->
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             
-            <!-- Helper Star SVG -->
             <script>
                 const starSvg = `<svg class="w-5 h-5 fill-current star-icon" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01L12 2z"/></svg>`;
                 const fiveStars = starSvg.repeat(5);
             </script>
 
-            <!-- Testimonial 1: Dr. Tutan Das (Interventional) -->
-            <div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-red-600">
+            <div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-blue-600">
                 <div class="flex text-yellow-500 mb-3" data-stars="5">${fiveStars}</div>
                 <p class="text-gray-700 italic mb-4">"Dr. Tutan Das is a phenomenal doctor. The angioplasty procedure was a complete success, and his clear, confident approach put my family at ease. Five stars is not enough!"</p>
-                <p class="font-semibold text-red-700">- Subhash P.</p>
+                <p class="font-semibold text-blue-700">- Subhash P.</p>
             </div>
 
-            <!-- Testimonial 2: Dr. Manidipa Majumdar (Diagnostic) -->
-            <div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-red-600">
+            <div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-blue-600">
                 <div class="flex text-yellow-500 mb-3" data-stars="5">${fiveStars}</div>
                 <p class="text-gray-700 italic mb-4">"Dr. Manidipa Majumdar's diagnosis was spot on. She took the time to explain the 2D Echo results and customized my treatment plan perfectly. Truly personalized care."</p>
-                <p class="font-semibold text-red-700">- Anjali S.</p>
+                <p class="font-semibold text-blue-700">- Anjali S.</p>
             </div>
 
-            <!-- Testimonial 3: Dr. Swagata Chakraborty (ENT) -->
-            <div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-red-600">
+            <div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-blue-600">
                 <div class="flex text-yellow-500 mb-3" data-stars="5">${fiveStars}</div>
                 <p class="text-gray-700 italic mb-4">"Excellent consultation with Dr. Swagata Chakraborty for my chronic sinusitis. Highly professional, explains every detail, and the treatment was very effective. A great asset to Cardiosphere."</p>
-                <p class="font-semibold text-red-700">- Rakesh V.</p>
+                <p class="font-semibold text-blue-700">- Rakesh V.</p>
             </div>
             
-            <!-- Testimonial 4: Dr. Tutan Das (Pacemaker) -->
-            <div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-red-600">
+            <div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-blue-600">
                 <div class="flex text-yellow-500 mb-3" data-stars="5">${fiveStars}</div>
                 <p class="text-gray-700 italic mb-4">"My father received a Pacemaker implant by Dr. Das. The follow-up care and monitoring provided by the team have been flawless. World-class cardiology care in Durgapur."</p>
-                <p class="font-semibold text-red-700">- Gautam H.</p>
+                <p class="font-semibold text-blue-700">- Gautam H.</p>
             </div>
             
-            <!-- Testimonial 5: General Clinic (Staff) -->
-            <div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-red-600">
+            <div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-blue-600">
                 <div class="flex text-yellow-500 mb-3" data-stars="5">${fiveStars}</div>
                 <p class="text-gray-700 italic mb-4">"The staff's behavior and the clinic environment are fantastic. They truly prioritize patient comfort. It makes the entire process of hospital visits much less stressful."</p>
-                <p class="font-semibold text-red-700">- Mrs. Neha K.</p>
+                <p class="font-semibold text-blue-700">- Mrs. Neha K.</p>
             </div>
 
-            <!-- Testimonial 6: General Clinic (Diagnostics Speed) -->
-            <div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-red-600">
+            <div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-blue-600">
                 <div class="flex text-yellow-500 mb-3" data-stars="5">${fiveStars}</div>
                 <p class="text-gray-700 italic mb-4">"Quick and efficient diagnostic services! I got my Holter monitoring and TMT test results processed very quickly. The clinic is well-equipped with modern machinery."</p>
-                <p class="font-semibold text-red-700">- Bipasha C.</p>
+                <p class="font-semibold text-blue-700">- Bipasha C.</p>
             </div>
 
-            <!-- Testimonial 7: Dr. Manidipa Majumdar (Chronic Care) -->
-            <div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-red-600">
+            <div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-blue-600">
                 <div class="flex text-yellow-500 mb-3" data-stars="5">${fiveStars}</div>
                 <p class="text-gray-700 italic mb-4">"For my chronic hypertension and diabetes management, Dr. Majumdar has been excellent. Her approach is thorough and she focuses on long-term health, not just quick fixes."</p>
-                <p class="font-semibold text-red-700">- Alok M.</p>
+                <p class="font-semibold text-blue-700">- Alok M.</p>
             </div>
 
-            <!-- Testimonial 8: Dr. Swagata Chakraborty (ENT Surgery) -->
-            <div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-red-600">
+            <div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-blue-600">
                 <div class="flex text-yellow-500 mb-3" data-stars="5">${fiveStars}</div>
                 <p class="text-gray-700 italic mb-4">"Consulted Dr. Chakraborty for a complicated throat issue. Her expertise in Head & Neck Surgery gave me immense confidence. She is truly a specialist in her field."</p>
-                <p class="font-semibold text-red-700">- Tirthankar B.</p>
+                <p class="font-semibold text-blue-700">- Tirthankar B.</p>
             </div>
 
-            <!-- Testimonial 9: General Clinic (Emergency) -->
-            <div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-red-600">
+            <div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-blue-600">
                 <div class="flex text-yellow-500 mb-3" data-stars="5">${fiveStars}</div>
                 <p class="text-gray-700 italic mb-4">"Had to visit for an emergency and the response time and treatment provided by the doctors were fast and highly effective. They provided the right care immediately."</p>
-                <p class="font-semibold text-red-700">- Swarnali R.</p>
+                <p class="font-semibold text-blue-700">- Swarnali R.</p>
             </div>
 
-            <!-- Testimonial 10: General Clinic (Convenience) -->
-            <div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-red-600">
+            <div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-blue-600">
                 <div class="flex text-yellow-500 mb-3" data-stars="5">${fiveStars}</div>
                 <p class="text-gray-700 italic mb-4">"The Home Sample Collection service is a lifesaver for elderly patients. The phlebotomist was gentle and professional. The whole polyclinic concept is very convenient."</p>
-                <p class="font-semibold text-red-700">- Rajeshwari D.</p>
+                <p class="font-semibold text-blue-700">- Rajeshwari D.</p>
             </div>
 
-            <!-- Script to initialize stars for all testimonial cards -->
             <script>
                 document.querySelectorAll('[data-stars]').forEach(el => {
                     const stars = el.getAttribute('data-stars');
@@ -805,21 +763,19 @@
         </div>
       </section>
       
-      <!-- 6. LOCATION SECTION (Google Map Embed) -->
       <section id="location" class="py-16 md:py-24 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h3 class="text-3xl font-bold text-center text-red-800 mb-12">
+            <h3 class="text-3xl font-bold text-center text-blue-800 mb-12">
                 Find Our Clinic
             </h3>
-            <!-- Responsive Map Embed (using Durgapur address) -->
             <div class="shadow-2xl rounded-xl overflow-hidden">
-                <div style="width: 100%"><iframe width="100%" height="450" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=450&amp;hl=en&amp;q=Cardiosphere+Polyclinic,+2nd+Floor,+Arushi+Complex,+Durgapur+713212&amp;t=&amp;z=15&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe></div>
+                <div style="width: 100%"><iframe width="100%" height="450" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&height=450&hl=en&q=Cardiosphere+Polyclinic,+2nd+Floor,+Arushi+Complex,+Durgapur+713212&t=&z=15&ie=UTF8&iwloc=B&output=embed"></iframe></div>
             </div>
             <div class="text-center mt-6">
                 <a 
                     href="https://maps.app.goo.gl/YourMapLinkHere"
                     target="_blank"
-                    class="inline-block px-6 py-3 text-lg bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 transition-colors shadow-lg"
+                    class="inline-block px-6 py-3 text-lg bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors shadow-lg"
                 >
                     Get Directions on Google Maps
                 </a>
@@ -827,17 +783,15 @@
         </div>
       </section>
 
-      <!-- 7. CONTACT & FOOTER SECTION -->
-      <footer id="contact" class="bg-red-900 text-white py-12">
+      <footer id="contact" class="bg-blue-900 text-white py-12">
         <div
           class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-10"
         >
-          <!-- Col 1: Clinic Info -->
           <div>
-            <h4 class="text-xl font-bold text-red-300 mb-4">
+            <h4 class="text-xl font-bold text-blue-300 mb-4">
               Cardiosphere Polyclinic
             </h4>
-            <p class="text-red-200 text-sm sm:text-base">
+            <p class="text-blue-200 text-sm sm:text-base">
               Integrated medical care provided by experts in Cardiology, ENT, and
               General Medicine.
             </p>
@@ -866,12 +820,11 @@
             </div>
           </div>
 
-          <!-- Col 2: Location & Timings -->
           <div>
-            <h4 class="text-xl font-bold text-red-300 mb-4">
+            <h4 class="text-xl font-bold text-blue-300 mb-4">
               Location & Hours
             </h4>
-            <p class="text-red-200 flex items-start space-x-2 mb-2 text-sm sm:text-base">
+            <p class="text-blue-200 flex items-start space-x-2 mb-2 text-sm sm:text-base">
               <svg
                 class="w-5 h-5 flex-shrink-0 mt-1"
                 xmlns="http://www.w3.org/2000/svg"
@@ -892,7 +845,7 @@
                 Muchipara, Durgapur - 713212.</span
               >
             </p>
-            <p class="text-red-200 flex items-center space-x-2 text-sm sm:text-base">
+            <p class="text-blue-200 flex items-center space-x-2 text-sm sm:text-base">
               <svg
                 class="w-5 h-5 flex-shrink-0"
                 xmlns="http://www.w3.org/2000/svg"
@@ -912,15 +865,14 @@
             </p>
           </div>
 
-          <!-- Col 3: Quick Links & Contact -->
           <div>
-            <h4 class="text-xl font-bold text-red-300 mb-4">Quick Links</h4>
+            <h4 class="text-xl font-bold text-blue-300 mb-4">Quick Links</h4>
             <ul class="space-y-2 text-sm sm:text-base">
               <li>
                 <a
                   href="#"
                   onclick="navigate('doctors')"
-                  class="text-red-200 hover:text-white transition-colors"
+                  class="text-blue-200 hover:text-white transition-colors"
                   >Our Doctors</a
                 >
               </li>
@@ -928,14 +880,14 @@
                 <a
                   href="#"
                   onclick="navigate('services')"
-                  class="text-red-200 hover:text-white transition-colors"
+                  class="text-blue-200 hover:text-white transition-colors"
                   >Treatments</a
                 >
               </li>
               <li>
                 <a
                   href="mailto:info@cardiosphere.in"
-                  class="text-red-200 hover:text-white transition-colors"
+                  class="text-blue-200 hover:text-white transition-colors"
                   >info@cardiosphere.in</a
                 >
               </li>
@@ -943,7 +895,7 @@
                 <a
                   href="#"
                   onclick="navigate('location')"
-                  class="text-red-200 hover:text-white transition-colors"
+                  class="text-blue-200 hover:text-white transition-colors"
                   >Get Directions</a
                 >
               </li>
@@ -951,18 +903,17 @@
           </div>
         </div>
         
-        <!-- Mobile CTA Added for better conversion on phones -->
         <div class="mt-8 text-center md:hidden">
             <button
                 onclick="openModal()"
-                class="w-full max-w-xs py-3 text-lg bg-yellow-400 text-red-900 font-bold rounded-xl hover:bg-yellow-500 transition-colors shadow-xl"
+                class="w-full max-w-xs py-3 text-lg bg-yellow-400 text-blue-900 font-bold rounded-xl hover:bg-yellow-500 transition-colors shadow-xl"
             >
                 Book Your Appointment Now
             </button>
         </div>
 
-        <div class="mt-8 pt-6 border-t border-red-800 text-center">
-          <p class="text-sm text-red-400">
+        <div class="mt-8 pt-6 border-t border-blue-800 text-center">
+          <p class="text-sm text-blue-400">
             © 2025 Cardiosphere Polyclinic. All rights reserved.
           </p>
         </div>
@@ -1062,7 +1013,7 @@
         const reason = document.getElementById("reason").value;
 
         submissionMessage.classList.remove("hidden");
-        submissionMessage.classList.remove("text-red-600", "text-green-600");
+        submissionMessage.classList.remove("text-red-600", "text-green-600"); // REMOVE RED CLASS
         submissionMessage.textContent =
           "Processing your appointment request...";
 
@@ -1089,7 +1040,7 @@
           )}&body=${encodeURIComponent(body)}`;
 
           submissionMessage.textContent = `🚨 IMPORTANT: Please check your browser/device for a new email draft and click "Send" to finalize your appointment request to ${TARGET_EMAIL}. We will call you soon on ${phone} for confirmation.`;
-          submissionMessage.classList.add("text-red-600");
+          submissionMessage.classList.add("text-blue-600"); // USE BLUE CLASS
 
           // Open the user's email client with pre-filled details
           window.open(mailtoLink, "_blank");
@@ -1122,7 +1073,7 @@
           console.error("Error submitting appointment:", error);
           submissionMessage.textContent =
             "Failed to book appointment. Please try again or call us directly.";
-          submissionMessage.classList.add("text-red-600");
+          submissionMessage.classList.add("text-blue-600"); // USE BLUE CLASS
         }
       });
 
