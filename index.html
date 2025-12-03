@@ -35,22 +35,6 @@
         /* Star icon SVG for testimonials */
         fill: currentColor;
       }
-      /* Custom style for the rotated image block */
-      .rotated-image-block {
-          height: 10rem; /* h-40 */
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          overflow: hidden;
-          background-color: #f0f0f0; /* Add a light background for visibility of object-contain padding */
-      }
-      .rotated-image-block img {
-          width: 100%;
-          height: 100%;
-          object-fit: contain; /* To ensure the full picture fits */
-          transform-origin: center center;
-          transition: transform 0.3s ease;
-      }
     </style>
   </head>
   <body class="text-inter bg-gray-50">
@@ -649,7 +633,7 @@
                 <img
                     src="https://lh3.googleusercontent.com/p/AF1QipNejE19n4Mu5dMV2HX2Dsrq-4ose9BA6aiXw1lf=w284-h203-n-k-no-nu"
                     alt="Clinic Waiting Area"
-                    class="w-full h-40 object-cover"
+                    class="w-full h-48 object-cover"
                     onerror="this.onerror=null; this.src='https://placehold.co/600x400/93c5fd/1e40af?text=Waiting+Lounge'"
                 />
                 <div class="p-3 text-center">
@@ -658,15 +642,13 @@
                 </div>
             </div>
 
-            <div class="bg-white rounded-xl shadow-lg icon-hover-effect">
-                <div class="rotated-image-block">
-                    <img
-                        src="https://lh3.googleusercontent.com/p/AF1QipP3wds5xxxo_t_2YQcKTf82AFbw6lsr-eZdqhyI=w284-h473-n-k-no-nu"
-                        alt="Clinic Staff and Team"
-                        style="transform: rotate(-90deg);"
-                        onerror="this.onerror=null; this.src='https://placehold.co/600x400/93c5fd/1e40af?text=Our+Friendly+Team+Rotated'"
-                    />
-                </div>
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden icon-hover-effect">
+                <img
+                    src="https://lh3.googleusercontent.com/p/AF1QipP3wds5xxxo_t_2YQcKTf82AFbw6lsr-eZdqhyI=w284-h473-n-k-no-nu"
+                    alt="Clinic Staff and Team"
+                    class="w-full h-48 object-contain"
+                    onerror="this.onerror=null; this.src='https://placehold.co/600x400/93c5fd/1e40af?text=Our+Friendly+Team'"
+                />
                 <div class="p-3 text-center">
                     <p class="font-semibold text-blue-800">Our Dedicated Team Members</p>
                     <p class="text-sm text-gray-600">Professional and caring medical staff.</p>
@@ -677,7 +659,7 @@
                 <img
                     src="https://lh3.googleusercontent.com/p/AF1QipOfb0T5m44bq0BvpGQaegJMXDBf7Yqzyka5EWka=w284-h284-n-k-no-nu"
                     alt="Clinic Entrance"
-                    class="w-full h-40 object-cover"
+                    class="w-full h-48 object-cover"
                     onerror="this.onerror=null; this.src='https://placehold.co/600x400/93c5fd/1e40af?text=Modern+Entrance'"
                 />
                 <div class="p-3 text-center">
@@ -686,7 +668,7 @@
                 </div>
             </div>
             
-            </div>
+          </div>
         </div>
       </section>
 
