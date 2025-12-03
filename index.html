@@ -35,6 +35,22 @@
         /* Star icon SVG for testimonials */
         fill: currentColor;
       }
+      /* Custom style for the rotated image block */
+      .rotated-image-block {
+          height: 10rem; /* h-40 */
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          overflow: hidden;
+          background-color: #f0f0f0; /* Add a light background for visibility of object-contain padding */
+      }
+      .rotated-image-block img {
+          width: 100%;
+          height: 100%;
+          object-fit: contain; /* To ensure the full picture fits */
+          transform-origin: center center;
+          transition: transform 0.3s ease;
+      }
     </style>
   </head>
   <body class="text-inter bg-gray-50">
@@ -283,7 +299,7 @@
           >Location</a
         >
         <a
-          href="https://wa.me/919002450077?text=Hello%2C%20I%20would%20like%20to%20schedule%20an%20appointment.%20Please%20share%20the%20available%20dates."
+          href="https://wa.me/919002450077?text=Hello%2C%20I%20would%20like%20to%20schedule%20an%20appointment."
           target="_blank"
           class="mt-4 w-full py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-colors text-center"
         >
@@ -642,13 +658,15 @@
                 </div>
             </div>
 
-            <div class="bg-white rounded-xl shadow-lg overflow-hidden icon-hover-effect">
-                <img
-                    src="https://lh3.googleusercontent.com/p/AF1QipP3wds5xxxo_t_2YQcKTf82AFbw6lsr-eZdqhyI=w284-h473-n-k-no-nu"
-                    alt="Clinic Staff and Team"
-                    class="w-full h-40 object-cover"
-                    onerror="this.onerror=null; this.src='https://placehold.co/600x400/93c5fd/1e40af?text=Our+Friendly+Team'"
-                />
+            <div class="bg-white rounded-xl shadow-lg icon-hover-effect">
+                <div class="rotated-image-block">
+                    <img
+                        src="https://lh3.googleusercontent.com/p/AF1QipP3wds5xxxo_t_2YQcKTf82AFbw6lsr-eZdqhyI=w284-h473-n-k-no-nu"
+                        alt="Clinic Staff and Team"
+                        style="transform: rotate(-90deg);"
+                        onerror="this.onerror=null; this.src='https://placehold.co/600x400/93c5fd/1e40af?text=Our+Friendly+Team+Rotated'"
+                    />
+                </div>
                 <div class="p-3 text-center">
                     <p class="font-semibold text-blue-800">Our Dedicated Team Members</p>
                     <p class="text-sm text-gray-600">Professional and caring medical staff.</p>
@@ -667,7 +685,8 @@
                     <p class="text-sm text-gray-600">Easy access for all patients.</p>
                 </div>
             </div>
-          </div>
+            
+            </div>
         </div>
       </section>
 
