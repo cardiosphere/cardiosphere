@@ -624,15 +624,16 @@
             State-of-the-Art Facilities & Equipment
           </h3>
           <p class="text-center text-lg text-gray-600 mb-10 max-w-3xl mx-auto">
-            We use modern diagnostic tools and maintain a comfortable, sterile environment to ensure the highest standard of care.
+            We use modern tools and maintain a comfortable, sterile environment to ensure the highest standard of care.
           </p>
 
-          <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            
             <div class="bg-white rounded-xl shadow-lg overflow-hidden icon-hover-effect">
                 <img
                     src="https://lh3.googleusercontent.com/p/AF1QipNejE19n4Mu5dMV2HX2Dsrq-4ose9BA6aiXw1lf=w284-h203-n-k-no-nu"
                     alt="Clinic Waiting Area"
-                    class="w-full h-40 object-contain"
+                    class="w-full h-40 object-cover"
                     onerror="this.onerror=null; this.src='https://placehold.co/600x400/93c5fd/1e40af?text=Waiting+Lounge'"
                 />
                 <div class="p-3 text-center">
@@ -645,7 +646,7 @@
                 <img
                     src="https://lh3.googleusercontent.com/p/AF1QipP3wds5xxxo_t_2YQcKTf82AFbw6lsr-eZdqhyI=w284-h473-n-k-no-nu"
                     alt="Clinic Staff and Team"
-                    class="w-full h-40 object-contain"
+                    class="w-full h-40 object-cover"
                     onerror="this.onerror=null; this.src='https://placehold.co/600x400/93c5fd/1e40af?text=Our+Friendly+Team'"
                 />
                 <div class="p-3 text-center">
@@ -658,24 +659,12 @@
                 <img
                     src="https://lh3.googleusercontent.com/p/AF1QipOfb0T5m44bq0BvpGQaegJMXDBf7Yqzyka5EWka=w284-h284-n-k-no-nu"
                     alt="Clinic Entrance"
-                    class="w-full h-40 object-contain"
+                    class="w-full h-40 object-cover"
                     onerror="this.onerror=null; this.src='https://placehold.co/600x400/93c5fd/1e40af?text=Modern+Entrance'"
                 />
                 <div class="p-3 text-center">
                     <p class="font-semibold text-blue-800">Clean & Accessible Entrance</p>
                     <p class="text-sm text-gray-600">Easy access for all patients.</p>
-                </div>
-            </div>
-            
-            <div class="bg-white rounded-xl shadow-lg overflow-hidden icon-hover-effect">
-                <img
-                    src="https://placehold.co/600x400/93c5fd/1e40af?text=Consultation+Room"
-                    alt="Doctor's Consultation Room"
-                    class="w-full h-40 object-contain"
-                />
-                <div class="p-3 text-center">
-                    <p class="font-semibold text-blue-800">Private Consultation Suites</p>
-                    <p class="text-sm text-gray-600">Dedicated space for patient-doctor privacy.</p>
                 </div>
             </div>
           </div>
@@ -1018,11 +1007,6 @@
         submissionMessage.classList.add("text-green-600"); 
         submissionMessage.textContent = `✅ Please send the pre-filled message on WhatsApp to confirm your appointment. We will contact you soon!`;
         
-        // Optionally reset form and close modal after a delay, 
-        // but keep the message visible long enough for the user to read the instruction.
-        // form.reset(); 
-        // setTimeout(() => closeModal(), 5000); 
-
       });
 
       // --- NAVIGATION LOGIC ---
