@@ -20,7 +20,7 @@
         transform: translateY(-5px);
         box-shadow: 0 10px 20px rgba(30, 64, 175, 0.2);
       }
-      /* Gradient for the Hero Section: Changed from Red to Deep Blue */
+      /* Gradient for the Hero Section: Deep Blue */
       .hero-gradient {
         background: linear-gradient(
           145deg,
@@ -29,31 +29,20 @@
           #1e40af 100%
         );
       }
-      /* Removed single-page navigation logic here to make all sections visible 
-      */
       .star-icon {
         /* Star icon SVG for testimonials */
         fill: currentColor;
       }
-      /* Custom style for image blocks to ensure h-48 and proper fit */
-      .rotated-image-block {
-          height: 12rem; /* h-48 */
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          overflow: hidden;
-          background-color: #f0f0f0; /* Add a light background for visibility of object-contain padding */
-      }
-      .rotated-image-block img {
+      /* Ensure image containers use appropriate scaling */
+      .facility-image-container img {
           width: 100%;
           height: 100%;
-          object-fit: contain; /* To ensure the full picture fits */
-          transform-origin: center center;
-          transition: transform 0.3s ease;
+          object-fit: cover; /* Use cover for facility images for a clean look */
       }
     </style>
   </head>
   <body class="text-inter bg-gray-50">
+    <!-- Appointment Modal (Hidden by default) -->
     <div
       id="appointment-modal"
       class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-60 p-4"
@@ -178,6 +167,7 @@
       </div>
     </div>
 
+    <!-- Header & Navigation -->
     <header class="sticky top-0 bg-white shadow-md z-30">
       <div
         class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center py-4"
@@ -234,6 +224,7 @@
           Book via WhatsApp
         </a>
 
+        <!-- Mobile Menu Button -->
         <button
           id="mobile-menu-button"
           class="md:hidden text-gray-600 hover:text-blue-600"
@@ -257,6 +248,7 @@
       </div>
     </header>
 
+    <!-- Mobile Menu Overlay -->
     <div
       id="mobile-menu"
       class="hidden md:hidden fixed inset-0 bg-white z-40 p-6 shadow-xl pt-20"
@@ -309,6 +301,7 @@
     </div>
 
     <main>
+      <!-- Hero Section -->
       <section
         id="home"
         class="hero-gradient text-white py-16 md:py-24 shadow-inner"
@@ -325,19 +318,18 @@
             <h2
               class="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight text-white drop-shadow-md"
             >
-              Leading the Future <br class="hidden sm:inline" />of Cardiac Care
+              Leading the Future of Cardiac Care
             </h2>
             <p class="mt-6 text-xl text-blue-100">
               Innovative treatments, expert consultation, and advanced diagnostics from dedicated Cardiologists.
             </p>
-            <a
-              href="https://wa.me/919002450077?text=Hello%2C%20I%20would%20like%20to%20schedule%20an%20appointment.%20Please%20share%20the%20available%20dates."
-              target="_blank"
+            <button
+              onclick="openModal()"
               class="mt-8 px-8 py-4 text-lg bg-white text-green-700 font-bold rounded-xl hover:bg-gray-100 transition-all shadow-2xl hover:shadow-green-400 inline-flex items-center space-x-2"
             >
                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="#00a823" stroke="#00a823" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-whatsapp"><path d="M22 16.92v3a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-3"></path><path d="m6 16-4 4"></path><path d="m18 16 4 4"></path><path d="M12 12V2"></path><path d="M6.5 6.5l5.5-5.5 5.5 5.5"></path></svg>
-              Schedule Your Visit via WhatsApp
-            </a>
+              Schedule Your Visit Now
+            </button>
           </div>
 
           <div class="md:w-1/2 flex justify-center">
@@ -355,12 +347,15 @@
         </div>
       </section>
 
+      <!-- Doctors Section -->
       <section id="doctors" class="py-16 md:py-24 bg-gray-100">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h3 class="text-3xl font-bold text-center text-blue-800 mb-12">
             Our Specialist Team
           </h3>
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+          <!-- Responsive Grid for Doctors: 1 column on mobile, 2 columns on small screens, 3 on large -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+            <!-- Doctor 1: Dr. Tutan Das (Cardiologist) -->
             <div
               class="bg-white rounded-xl p-6 sm:p-8 shadow-medical flex flex-col sm:flex-row items-center gap-6"
             >
@@ -397,6 +392,7 @@
               </div>
             </div>
 
+            <!-- Doctor 2: Dr. Manidipa Majumdar (Cardiologist) -->
             <div
               class="bg-white rounded-xl p-6 sm:p-8 shadow-medical flex flex-col sm:flex-row items-center gap-6"
             >
@@ -407,7 +403,7 @@
                   src="https://hlghospital.com/wp-content/uploads/2025/04/dr.-manidipa.jpg"
                   alt="Photo of Dr. Manidipa Majumdar"
                   class="w-full h-full object-cover"
-                  onerror="this.onerror=null; this.src='https://placehold.co/300x300/1e40af/ffffff?text=TD'"
+                  onerror="this.onerror=null; this.src='https://placehold.co/300x300/1e40af/ffffff?text=MM'"
                 />
               </div>
               <div class="text-center sm:text-left">
@@ -435,6 +431,7 @@
               </div>
             </div>
 
+            <!-- Doctor 3: Dr. Swagata Chakraborty (ENT) -->
             <div
               class="bg-white rounded-xl p-6 sm:p-8 shadow-medical flex flex-col sm:flex-row items-center gap-6"
             >
@@ -476,12 +473,14 @@
         </div>
       </section>
 
+      <!-- Services Section -->
       <section id="services" class="py-16 md:py-24 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h3 class="text-3xl font-bold text-center text-blue-800 mb-12">
             Detailed Services Offered
           </h3>
 
+          <!-- Responsive Grid for Services: 1 column on mobile, 2 columns on small screens, 4 on large -->
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             <div
               class="p-6 rounded-xl bg-blue-50 shadow-sm border-l-4 border-blue-600 icon-hover-effect"
@@ -489,6 +488,7 @@
               <h4
                 class="text-xl font-bold text-blue-800 mb-2 flex items-center gap-2"
               >
+                <!-- Heart Icon -->
                 <svg
                   class="w-6 h-6"
                   xmlns="http://www.w3.org/2000/svg"
@@ -522,6 +522,7 @@
               <h4
                 class="text-xl font-bold text-blue-800 mb-2 flex items-center gap-2"
               >
+                <!-- Thumbs Up/Handshake Icon (Placeholder for Diagnostic) -->
                 <svg
                   class="w-6 h-6"
                   xmlns="http://www.w3.org/2000/svg"
@@ -556,6 +557,7 @@
               <h4
                 class="text-xl font-bold text-blue-800 mb-2 flex items-center gap-2"
               >
+                <!-- Thermometer/Monitor Icon (Placeholder for Management) -->
                 <svg
                   class="w-6 h-6"
                   xmlns="http://www.w3.org/2000/svg"
@@ -593,6 +595,7 @@
               <h4
                 class="text-xl font-bold text-blue-800 mb-2 flex items-center gap-2"
               >
+                <!-- Home Icon -->
                 <svg
                   class="w-6 h-6"
                   xmlns="http://www.w3.org/2000/svg"
@@ -632,8 +635,10 @@
               Book an Appointment Today via WhatsApp
             </a>
           </div>
+        </div>
       </section>
 
+      <!-- Facilities Section -->
       <section id="facilities" class="py-16 md:py-24 bg-gray-100">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h3 class="text-3xl font-bold text-center text-blue-800 mb-12">
@@ -643,15 +648,17 @@
             We use modern tools and maintain a comfortable, sterile environment to ensure the highest standard of care.
           </p>
 
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+          <!-- Responsive Grid for Facilities: 1 column on mobile, 2 columns on small/medium, 3 on large -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
             
             <div class="bg-white rounded-xl shadow-lg overflow-hidden icon-hover-effect">
-                <img
-                    src="https://lh3.googleusercontent.com/p/AF1QipNejE19n4Mu5dMV2HX2Dsrq-4ose9BA6aiXw1lf=w284-h203-n-k-no-nu"
-                    alt="Clinic Waiting Area"
-                    class="w-full h-48 object-cover"
-                    onerror="this.onerror=null; this.src='https://placehold.co/600x400/93c5fd/1e40af?text=Waiting+Lounge'"
-                />
+                <div class="facility-image-container h-48">
+                    <img
+                        src="https://lh3.googleusercontent.com/p/AF1QipNejE19n4Mu5dMV2HX2Dsrq-4ose9BA6aiXw1lf=w284-h203-n-k-no-nu"
+                        alt="Clinic Waiting Area"
+                        onerror="this.onerror=null; this.src='https://placehold.co/600x400/93c5fd/1e40af?text=Waiting+Lounge'"
+                    />
+                </div>
                 <div class="p-3 text-center">
                     <p class="font-semibold text-blue-800">Comfortable Patient Lounge</p>
                     <p class="text-sm text-gray-600">Spacious and welcoming waiting area.</p>
@@ -659,12 +666,13 @@
             </div>
 
             <div class="bg-white rounded-xl shadow-lg overflow-hidden icon-hover-effect">
-                <img
-                    src="https://lh3.googleusercontent.com/geougc-cs/AMBA38viQ0vUVHBQTdDstTZ-8TxizP1DtqzFNJLgDdlhZ93cHHXWrBbUaYsFZ5se3s0CSdAG_I3AUN0oqImvDE4AP6cZNUEokEo3_UHC4Qej6xprkEMABXr0P7q4MX40hjicGhLrusIsz6lSnbrq=s188-p-k-rw" 
-                    alt="Clinic Staff and Team"
-                    class="w-full h-48 object-contain" 
-                    onerror="this.onerror=null; this.src='https://placehold.co/600x400/93c5fd/1e40af?text=Our+Friendly+Team+New'"
-                />
+                <div class="facility-image-container h-48">
+                    <img
+                        src="https://lh3.googleusercontent.com/geougc-cs/AMBA38viQ0vUVHBQTdDstTZ-8TxizP1DtqzFNJLgDdlhZ93cHHXWrBbUaYsFZ5se3s0CSdAG_I3AUN0oqImvDE4AP6cZNUEokEo3_UHC4Qej6xprkEMABXr0P7q4MX40hjicGhLrusIsz6lSnbrq=s188-p-k-rw" 
+                        alt="Clinic Staff and Team"
+                        onerror="this.onerror=null; this.src='https://placehold.co/600x400/93c5fd/1e40af?text=Our+Friendly+Team'"
+                    />
+                </div>
                 <div class="p-3 text-center">
                     <p class="font-semibold text-blue-800">Our Dedicated Team Members</p>
                     <p class="text-sm text-gray-600">Professional and caring medical staff.</p>
@@ -672,12 +680,13 @@
             </div>
 
             <div class="bg-white rounded-xl shadow-lg overflow-hidden icon-hover-effect">
-                <img
-                    src="https://lh3.googleusercontent.com/p/AF1QipOfb0T5m44bq0BvpGQaegJMXDBf7Yqzyka5EWka=w284-h284-n-k-no-nu"
-                    alt="Clinic Entrance"
-                    class="w-full h-48 object-contain"
-                    onerror="this.onerror=null; this.src='https://placehold.co/600x400/93c5fd/1e40af?text=Modern+Entrance'"
-                />
+                <div class="facility-image-container h-48">
+                    <img
+                        src="https://lh3.googleusercontent.com/p/AF1QipOfb0T5m44bq0BvpGQaegJMXDBf7Yqzyka5EWka=w284-h284-n-k-no-nu"
+                        alt="Clinic Entrance"
+                        onerror="this.onerror=null; this.src='https://placehold.co/600x400/93c5fd/1e40af?text=Modern+Entrance'"
+                    />
+                </div>
                 <div class="p-3 text-center">
                     <p class="font-semibold text-blue-800">Clean & Accessible Entrance</p>
                     <p class="text-sm text-gray-600">Easy access for all patients.</p>
@@ -689,13 +698,16 @@
       </section>
 
 
+      <!-- Testimonials Section -->
       <section id="testimonials" class="py-16 md:py-24 bg-blue-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h3 class="text-3xl font-bold text-center text-blue-800 mb-12">
             What Our Patients Say (5-Star Reviews)
           </h3>
+          <!-- Responsive Grid for Testimonials: 1 column on mobile, 2 columns on medium, 3 on large -->
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             
+            <!-- JavaScript to generate star icons -->
             <script>
                 const starSvg = `<svg class="w-5 h-5 fill-current star-icon" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01L12 2z"/></svg>`;
                 const fiveStars = starSvg.repeat(5);
@@ -761,7 +773,9 @@
                 <p class="font-semibold text-blue-700">- Rajeshwari D.</p>
             </div>
 
+
             <script>
+                // Re-runs the star injection script to ensure all testimonials have stars
                 document.querySelectorAll('[data-stars]').forEach(el => {
                     const stars = el.getAttribute('data-stars');
                     el.innerHTML = new Array(parseInt(stars)).fill(starSvg).join('');
@@ -771,17 +785,19 @@
         </div>
       </section>
       
+      <!-- Location Section -->
       <section id="location" class="py-16 md:py-24 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h3 class="text-3xl font-bold text-center text-blue-800 mb-12">
             Find Our Clinic
           </h3>
           <div class="shadow-2xl rounded-xl overflow-hidden">
+            <!-- Google Maps Embed: Ensure width is 100% for responsiveness -->
             <div style="width: 100%"><iframe width="100%" height="450" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&height=450&hl=en&q=Cardiosphere+Polyclinic,+2nd+Floor,+Arushi+Complex,+Durgapur+713212&t=&z=15&ie=UTF8&iwloc=B&output=embed"></iframe></div>
           </div>
           <div class="text-center mt-6">
             <a 
-              href="https://share.google/8WKO5jGaVYxB4R4BS"
+              href="https://maps.app.goo.gl/p9NAkf72j4qbS1pU6"
               target="_blank"
               class="inline-block px-6 py-3 text-lg bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors shadow-lg"
             >
@@ -791,10 +807,12 @@
         </div>
       </section>
 
+      <!-- Footer Section -->
       <footer id="contact" class="bg-blue-900 text-white py-12">
         <div
           class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-10"
         >
+          <!-- Footer Column 1: Clinic Info -->
           <div>
             <h4 class="text-xl font-bold text-blue-300 mb-4">
               Cardiosphere Polyclinic
@@ -804,6 +822,7 @@
               General Medicine.
             </p>
             <div class="flex items-center space-x-2 mt-4">
+              <!-- Phone Icon -->
               <svg
                 class="w-5 h-5 flex-shrink-0 text-yellow-400"
                 xmlns="http://www.w3.org/2000/svg"
@@ -828,11 +847,13 @@
             </div>
           </div>
 
+          <!-- Footer Column 2: Location & Hours -->
           <div>
             <h4 class="text-xl font-bold text-blue-300 mb-4">
               Location & Hours
             </h4>
             <p class="text-blue-200 flex items-start space-x-2 mb-2 text-sm sm:text-base">
+              <!-- Location Icon -->
               <svg
                 class="w-5 h-5 flex-shrink-0 mt-1"
                 xmlns="http://www.w3.org/2000/svg"
@@ -848,12 +869,13 @@
                 <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
                 <circle cx="12" cy="10" r="3" />
               </svg>
-              <span
-                >2nd Floor, Arushi Complex, Near SBI E Corner, Yuri Gagrin Path,
-                Muchipara, Durgapur - 713212.</span
-              >
+              <span>
+                2nd Floor, Arushi Complex, Near SBI E Corner, Yuri Gagrin Path,
+                Muchipara, Durgapur - 713212.
+              </span>
             </p>
             <p class="text-blue-200 flex items-center space-x-2 text-sm sm:text-base">
+              <!-- Clock Icon -->
               <svg
                 class="w-5 h-5 flex-shrink-0"
                 xmlns="http://www.w3.org/2000/svg"
@@ -873,6 +895,7 @@
             </p>
           </div>
 
+          <!-- Footer Column 3: Quick Links -->
           <div>
             <h4 class="text-xl font-bold text-blue-300 mb-4">Quick Links</h4>
             <ul class="space-y-2 text-sm sm:text-base">
@@ -908,18 +931,19 @@
           </div>
         </div>
         
-        <div class="mt-8 text-center md:hidden">
-            <a
-                href="https://wa.me/919002450077?text=Hello%2C%20I%20would%20like%20to%20schedule%20an%20appointment."
-                target="_blank"
+        <!-- Mobile Appointment Button (Footer) -->
+        <div class="mt-8 text-center md:hidden px-4">
+            <button
+                onclick="openModal()"
                 class="w-full max-w-xs py-3 text-lg bg-green-600 text-white font-bold rounded-xl hover:bg-green-700 transition-colors shadow-xl inline-flex items-center justify-center space-x-2"
             >
              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="white" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-whatsapp"><path d="M22 16.92v3a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-3"></path><path d="m6 16-4 4"></path><path d="m18 16 4 4"></path><path d="M12 12V2"></path><path d="M6.5 6.5l5.5-5.5 5.5 5.5"></path></svg>
                 Book Your Appointment Now
-            </a>
+            </button>
         </div>
 
-        <div class="mt-8 pt-6 border-t border-blue-800 text-center">
+        <!-- Copyright -->
+        <div class="mt-8 pt-6 border-t border-blue-800 text-center px-4">
           <p class="text-sm text-blue-400">
             © 2025 Cardiosphere Polyclinic. All rights reserved.
           </p>
@@ -929,7 +953,7 @@
 
     <script type="module">
       // --- FIREBASE SETUP ---
-      // (Firebase initialization code remains unchanged for reference)
+      // This is included for canvas environment compatibility, even if not strictly used for all form submissions.
       import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
       import {
         getAuth,
@@ -938,17 +962,12 @@
       } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
       import {
         getFirestore,
-        collection,
-        doc,
-        setDoc,
-        serverTimestamp,
         setLogLevel,
       } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
       const appId = typeof __app_id !== "undefined" ? __app_id : "default-app-id";
       const firebaseConfig = typeof __firebase_config !== "undefined" ? JSON.parse(__firebase_config) : null;
       const initialAuthToken = typeof __initial_auth_token !== "undefined" ? __initial_auth_token : null;
-      const TARGET_EMAIL = "info.cardiosphere@gmail.com";
       const WHATSAPP_NUMBER = "919002450077"; // Number without plus sign
 
       let app;
@@ -989,13 +1008,17 @@
         submissionMessage.classList.add("hidden");
         submissionMessage.textContent = "";
         form.reset();
+        // Prevent body scrolling when modal is open
+        document.body.style.overflow = 'hidden';
       };
 
       window.closeModal = function (event) {
         if (event && event.target === modal) {
           modal.classList.add("hidden");
+          document.body.style.overflow = '';
         } else if (!event) {
           modal.classList.add("hidden");
+          document.body.style.overflow = '';
         }
       };
 
@@ -1013,26 +1036,26 @@
         
         const whatsappLink = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(whatsappBody)}`;
 
-        // 2. Open WhatsApp link
+        // 2. Open WhatsApp link (This automatically handles the submission request)
         window.open(whatsappLink, "_blank");
 
-        // 3. Handle Firebase/Form Submission (Optional: Keep for tracking)
-        // Note: For simplicity and focus on WhatsApp, we skip showing Firestore success/fail message,
-        // but the Firestore logic can be executed silently in the background if desired.
-
-        submissionMessage.classList.remove("hidden");
+        // 3. Update Submission Message
+        submissionMessage.classList.remove("hidden", "text-red-600");
         submissionMessage.classList.add("text-green-600"); 
         submissionMessage.textContent = `✅ Please send the pre-filled message on WhatsApp to confirm your appointment. We will contact you soon!`;
         
+        // Optionally, you can close the modal after a short delay
+        // setTimeout(() => closeModal(), 3000); 
       });
 
       // --- NAVIGATION LOGIC ---
-      const sections = document.querySelectorAll("main > section");
       const mobileMenu = document.getElementById("mobile-menu");
       const mobileMenuButton = document.getElementById("mobile-menu-button");
 
       window.toggleMobileMenu = function () {
         mobileMenu.classList.toggle("hidden");
+        // Toggle body scroll for mobile menu
+        document.body.style.overflow = mobileMenu.classList.contains('hidden') ? '' : 'hidden';
       };
 
       mobileMenuButton.addEventListener("click", window.toggleMobileMenu);
