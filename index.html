@@ -92,6 +92,9 @@
                 <option value="Dr. Manidipa Majumdar">
                   Dr. Manidipa Majumdar (Cardiologist)
                 </option>
+                <option value="Dr. Swagata Chakraborty">
+                  Dr. Swagata Chakraborty (ENT & Head/Neck Surgeon)
+                </option>
               </select>
             </div>
             <div>
@@ -205,10 +208,17 @@
           >
           <a
             href="#"
-            onclick="navigate('contact')"
+            onclick="navigate('testimonials')"
             class="text-gray-600 hover:text-red-600 transition-colors"
-            >Contact</a
+            >Testimonials</a
           >
+          <a
+            href="#"
+            onclick="navigate('location')"
+            class="text-gray-600 hover:text-red-600 transition-colors"
+            >Location</a
+          >
+          
         </nav>
         <button
           onclick="openModal()"
@@ -266,8 +276,14 @@
         <a
           href="#"
           class="text-gray-700 hover:text-red-600 border-b pb-2"
-          onclick="navigate('contact'); toggleMobileMenu();"
-          >Contact</a
+          onclick="navigate('testimonials'); toggleMobileMenu();"
+          >Testimonials</a
+        >
+        <a
+          href="#"
+          class="text-gray-700 hover:text-red-600 border-b pb-2"
+          onclick="navigate('location'); toggleMobileMenu();"
+          >Location</a
         >
         <button
           onclick="openModal(); toggleMobileMenu();"
@@ -322,12 +338,13 @@
           </div>
         </div>
       </section>
+
       <section id="doctors" class="py-16 md:py-24 bg-gray-100">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h3 class="text-3xl font-bold text-center text-red-800 mb-12">
             Our Specialist Team
           </h3>
-          <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
             <div
               class="bg-white rounded-xl p-6 sm:p-8 shadow-medical flex flex-col sm:flex-row items-center gap-6"
             >
@@ -399,6 +416,43 @@
                 </button>
               </div>
             </div>
+
+            <div
+              class="bg-white rounded-xl p-6 sm:p-8 shadow-medical flex flex-col sm:flex-row items-center gap-6"
+            >
+              <div
+                class="w-32 h-32 flex-shrink-0 rounded-full border-4 border-red-600 overflow-hidden"
+              >
+                <img
+                  src="https://scontent.fshl1-1.fna.fbcdn.net/v/t39.30808-6/472047397_8228199303948009_231805050605885210_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=106&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=0kRn9Rw9aAkQ7kNvwFMtk9r&_nc_oc=AdnL5_BEkThwJGDSFs6ngImiVzhV8H3YpQnRH2vV_xzupae5fASyB7U9gGzosZUWwqE&_nc_zt=23&_nc_ht=scontent.fshl1-1.fna&_nc_gid=HMo2sXcWZViWhlPJfTXXPQ&oh=00_AfleQp9OX5q0gkKLE36Tq-WtyXQHzyNPaoVWM67kw4F9_A&oe=6935A9A3"
+                  alt="Photo of Dr. Swagata Chakraborty"
+                  class="w-full h-full object-cover"
+                  onerror="this.onerror=null; this.src='https://placehold.co/300x300/1c31b9/ffffff?text=SC'"
+                />
+              </div>
+              <div class="text-center sm:text-left">
+                <h4 class="text-2xl font-bold text-gray-900">
+                  Dr. Swagata Chakraborty
+                </h4>
+                <p class="text-lg font-semibold text-red-600 mb-2">
+                  ENT and Head & Neck Surgeon
+                </p>
+                <p class="text-sm text-gray-500">
+                  MBBS, MS (ENT and Head & Neck Surgery) - RIIMS, Imphal
+                </p>
+                <p class="mt-3 text-gray-700 text-sm sm:text-base">
+                  Expertise in treating conditions of the Ear, Nose, and Throat,
+                  including sinusitis, tonsillitis, hearing loss, and complex
+                  head/neck surgical procedures.
+                </p>
+                <button
+                  onclick="openModal()"
+                  class="mt-4 px-4 py-2 text-sm bg-red-600 text-white font-medium rounded-lg hover:bg-red-700"
+                >
+                  Book Appointment
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -408,6 +462,7 @@
           <h3 class="text-3xl font-bold text-center text-red-800 mb-12">
             Detailed Services Offered
           </h3>
+
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             <div
               class="p-6 rounded-xl bg-red-50 shadow-sm border-l-4 border-red-600 icon-hover-effect"
@@ -558,6 +613,71 @@
           </div>
       </section>
 
+      <section id="testimonials" class="py-16 md:py-24 bg-red-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h3 class="text-3xl font-bold text-center text-red-800 mb-12">
+            What Our Patients Say
+          </h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-red-600">
+                <div class="flex text-yellow-500 mb-3">
+                    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01L12 2z"/></svg>
+                    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01L12 2z"/></svg>
+                    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01L12 2z"/></svg>
+                    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01L12 2z"/></svg>
+                    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01L12 2z"/></svg>
+                </div>
+                <p class="text-gray-700 italic mb-4">"Dr. Das's expertise saved my life. The advanced cardiac care was exceptional, and the entire staff was incredibly supportive during my recovery."</p>
+                <p class="font-semibold text-red-700">- Ranjit K. (5 Stars)</p>
+            </div>
+
+            <div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-red-600">
+                <div class="flex text-yellow-500 mb-3">
+                    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01L12 2z"/></svg>
+                    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01L12 2z"/></svg>
+                    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01L12 2z"/></svg>
+                    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01L12 2z"/></svg>
+                    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01L12 2z"/></svg>
+                </div>
+                <p class="text-gray-700 italic mb-4">"The clinic is truly well-equipped and the coordination is excellent. Getting diagnostics like the TMT and Echo done here was seamless and worry-free."</p>
+                <p class="font-semibold text-red-700">- Priya M. (5 Stars)</p>
+            </div>
+
+            <div class="bg-white p-6 rounded-xl shadow-lg border-t-4 border-red-600">
+                <div class="flex text-yellow-500 mb-3">
+                    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01L12 2z"/></svg>
+                    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01L12 2z"/></svg>
+                    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01L12 2z"/></svg>
+                    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01L12 2z"/></svg>
+                    <svg class="w-5 h-5 fill-current text-gray-300" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14l-5-4.87 6.91-1.01L12 2z"/></svg>
+                </div>
+                <p class="text-gray-700 italic mb-4">"Highly recommend Cardiosphere for chronic disease management like BP and Diabetes. They provide effective, personalized treatment and great support."</p>
+                <p class="font-semibold text-red-700">- Amit S. (4.5 Stars)</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <section id="location" class="py-16 md:py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h3 class="text-3xl font-bold text-center text-red-800 mb-12">
+                Find Our Clinic
+            </h3>
+            <div class="shadow-2xl rounded-xl overflow-hidden">
+                <div style="width: 100%"><iframe width="100%" height="450" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=450&amp;hl=en&amp;q=Cardiosphere+Polyclinic,+2nd+Floor,+Arushi+Complex,+Durgapur+713212&amp;t=&amp;z=15&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe></div>
+            </div>
+            <div class="text-center mt-6">
+                <a 
+                    href="https://maps.app.goo.gl/YourMapLinkHere"
+                    target="_blank"
+                    class="inline-block px-6 py-3 text-lg bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 transition-colors shadow-lg"
+                >
+                    Get Directions on Google Maps
+                </a>
+            </div>
+        </div>
+      </section>
+
       <footer id="contact" class="bg-red-900 text-white py-12">
         <div
           class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-10"
@@ -567,7 +687,7 @@
               Cardiosphere Polyclinic
             </h4>
             <p class="text-red-200 text-sm sm:text-base">
-              Integrated medical care provided by experts in Cardiology and
+              Integrated medical care provided by experts in Cardiology, ENT, and
               General Medicine.
             </p>
             <div class="flex items-center space-x-2 mt-4">
@@ -668,8 +788,8 @@
               </li>
               <li>
                 <a
-                  href="https://maps.app.goo.gl/YourMapLinkHere"
-                  target="_blank"
+                  href="#"
+                  onclick="navigate('location')"
                   class="text-red-200 hover:text-white transition-colors"
                   >Get Directions</a
                 >
