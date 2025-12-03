@@ -85,13 +85,13 @@
                 required
                 class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
               >
-                <option value="Dr. Tutan Das">
+                <option value="Dr. Tutan Das (Cardiologist)">
                   Dr. Tutan Das (Cardiologist)
                 </option>
-                <option value="Dr. Manidipa Majumdar">
+                <option value="Dr. Manidipa Majumdar (Cardiologist)">
                   Dr. Manidipa Majumdar (Cardiologist)
                 </option>
-                <option value="Dr. Swagata Chakraborty">
+                <option value="Dr. Swagata Chakraborty (ENT)">
                   Dr. Swagata Chakraborty (ENT & Head/Neck Surgeon)
                 </option>
               </select>
@@ -148,9 +148,10 @@
             </div>
             <button
               type="submit"
-              class="w-full py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors shadow-lg shadow-blue-300"
+              class="w-full py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-colors shadow-lg shadow-green-300 flex items-center justify-center space-x-2"
             >
-              Confirm Appointment
+             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="white" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-whatsapp"><path d="M22 16.92v3a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-3"></path><path d="m6 16-4 4"></path><path d="m18 16 4 4"></path><path d="M12 12V2"></path><path d="M6.5 6.5l5.5-5.5 5.5 5.5"></path></svg>
+              Confirm & Send via WhatsApp
             </button>
             <p
               id="submission-message"
@@ -209,12 +210,13 @@
             >Location</a
           >
         </nav>
-        <button
-          onclick="openModal()"
-          class="hidden md:inline-flex px-6 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors shadow-lg shadow-blue-300"
+        <a
+          href="https://wa.me/919002450077?text=Hello%2C%20I%20would%20like%20to%20schedule%20an%20appointment.%20Please%20share%20the%20available%20dates."
+          target="_blank"
+          class="hidden md:inline-flex px-6 py-2 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-colors shadow-lg shadow-green-300"
         >
-          Book Appointment
-        </button>
+          Book via WhatsApp
+        </a>
 
         <button
           id="mobile-menu-button"
@@ -280,12 +282,13 @@
           onclick="toggleMobileMenu();"
           >Location</a
         >
-        <button
-          onclick="openModal()"
-          class="mt-4 w-full py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors"
+        <a
+          href="https://wa.me/919002450077?text=Hello%2C%20I%20would%20like%20to%20schedule%20an%20appointment.%20Please%20share%20the%20available%20dates."
+          target="_blank"
+          class="mt-4 w-full py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-colors text-center"
         >
-          Book Appointment
-        </button>
+          Book via WhatsApp
+        </a>
       </nav>
     </div>
 
@@ -311,12 +314,14 @@
             <p class="mt-6 text-xl text-blue-100">
               Innovative treatments, expert consultation, and advanced diagnostics from dedicated Cardiologists.
             </p>
-            <button
-              onclick="openModal()"
-              class="mt-8 px-8 py-4 text-lg bg-white text-blue-700 font-bold rounded-xl hover:bg-gray-100 transition-all shadow-2xl hover:shadow-blue-400"
+            <a
+              href="https://wa.me/919002450077?text=Hello%2C%20I%20would%20like%20to%20schedule%20an%20appointment.%20Please%20share%20the%20available%20dates."
+              target="_blank"
+              class="mt-8 px-8 py-4 text-lg bg-white text-green-700 font-bold rounded-xl hover:bg-gray-100 transition-all shadow-2xl hover:shadow-green-400 inline-flex items-center space-x-2"
             >
-              Schedule Your Visit
-            </button>
+               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="#00a823" stroke="#00a823" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-whatsapp"><path d="M22 16.92v3a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-3"></path><path d="m6 16-4 4"></path><path d="m18 16 4 4"></path><path d="M12 12V2"></path><path d="M6.5 6.5l5.5-5.5 5.5 5.5"></path></svg>
+              Schedule Your Visit via WhatsApp
+            </a>
           </div>
 
           <div class="md:w-1/2 flex justify-center">
@@ -366,12 +371,13 @@
                   Pacemaker Implantation, and advanced management of complex
                   heart diseases.
                 </p>
-                <button
-                  onclick="openModal()"
-                  class="mt-4 px-4 py-2 text-sm bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700"
+                <a
+                  href="https://wa.me/919002450077?text=Hello%2C%20I%20would%20like%20to%20book%20an%20appointment%20with%20Dr.%20Tutan%20Das."
+                  target="_blank"
+                  class="mt-4 px-4 py-2 text-sm bg-green-600 text-white font-medium rounded-lg hover:bg-green-700 inline-flex items-center space-x-1"
                 >
-                  Book Appointment
-                </button>
+                  Book via WhatsApp
+                </a>
               </div>
             </div>
 
@@ -403,12 +409,13 @@
                   procedures (Echo, TMT), and chronic cardiovascular disease
                   management.
                 </p>
-                <button
-                  onclick="openModal()"
-                  class="mt-4 px-4 py-2 text-sm bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700"
+                <a
+                  href="https://wa.me/919002450077?text=Hello%2C%20I%20would%20like%20to%20book%20an%20appointment%20with%20Dr.%20Manidipa%20Majumdar."
+                  target="_blank"
+                  class="mt-4 px-4 py-2 text-sm bg-green-600 text-white font-medium rounded-lg hover:bg-green-700 inline-flex items-center space-x-1"
                 >
-                  Book Appointment
-                </button>
+                  Book via WhatsApp
+                </a>
               </div>
             </div>
 
@@ -440,12 +447,13 @@
                   including sinusitis, tonsillitis, hearing loss, and complex
                   head/neck surgical procedures.
                 </p>
-                <button
-                  onclick="openModal()"
-                  class="mt-4 px-4 py-2 text-sm bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700"
+                <a
+                  href="https://wa.me/919002450077?text=Hello%2C%20I%20would%20like%20to%20book%20an%20appointment%20with%20Dr.%20Swagata%20Chakraborty."
+                  target="_blank"
+                  class="mt-4 px-4 py-2 text-sm bg-green-600 text-white font-medium rounded-lg hover:bg-green-700 inline-flex items-center space-x-1"
                 >
-                  Book Appointment
-                </button>
+                  Book via WhatsApp
+                </a>
               </div>
             </div>
           </div>
@@ -599,12 +607,14 @@
             </div>
           </div>
           <div class="mt-10 text-center">
-            <button
-              onclick="openModal()"
-              class="px-8 py-4 text-lg bg-blue-600 text-white font-semibold rounded-xl hover:bg-blue-700 transition-colors shadow-lg"
+            <a
+              href="https://wa.me/919002450077?text=Hello%2C%20I%20saw%20your%20services%20online%20and%20would%20like%20to%20know%20more."
+              target="_blank"
+              class="px-8 py-4 text-lg bg-green-600 text-white font-semibold rounded-xl hover:bg-green-700 transition-colors shadow-lg inline-flex items-center space-x-2"
             >
-              Book an Appointment Today
-            </button>
+               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="white" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-whatsapp"><path d="M22 16.92v3a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-3"></path><path d="m6 16-4 4"></path><path d="m18 16 4 4"></path><path d="M12 12V2"></path><path d="M6.5 6.5l5.5-5.5 5.5 5.5"></path></svg>
+              Book an Appointment Today via WhatsApp
+            </a>
           </div>
       </section>
 
@@ -622,7 +632,7 @@
                 <img
                     src="https://lh3.googleusercontent.com/p/AF1QipNejE19n4Mu5dMV2HX2Dsrq-4ose9BA6aiXw1lf=w284-h203-n-k-no-nu"
                     alt="Clinic Waiting Area"
-                    class="w-full h-36 object-cover"
+                    class="w-full h-40 object-contain"
                     onerror="this.onerror=null; this.src='https://placehold.co/600x400/93c5fd/1e40af?text=Waiting+Lounge'"
                 />
                 <div class="p-3 text-center">
@@ -635,7 +645,7 @@
                 <img
                     src="https://lh3.googleusercontent.com/p/AF1QipP3wds5xxxo_t_2YQcKTf82AFbw6lsr-eZdqhyI=w284-h473-n-k-no-nu"
                     alt="Clinic Staff and Team"
-                    class="w-full h-36 object-cover"
+                    class="w-full h-40 object-contain"
                     onerror="this.onerror=null; this.src='https://placehold.co/600x400/93c5fd/1e40af?text=Our+Friendly+Team'"
                 />
                 <div class="p-3 text-center">
@@ -648,7 +658,7 @@
                 <img
                     src="https://lh3.googleusercontent.com/p/AF1QipOfb0T5m44bq0BvpGQaegJMXDBf7Yqzyka5EWka=w284-h284-n-k-no-nu"
                     alt="Clinic Entrance"
-                    class="w-full h-36 object-cover"
+                    class="w-full h-40 object-contain"
                     onerror="this.onerror=null; this.src='https://placehold.co/600x400/93c5fd/1e40af?text=Modern+Entrance'"
                 />
                 <div class="p-3 text-center">
@@ -661,7 +671,7 @@
                 <img
                     src="https://placehold.co/600x400/93c5fd/1e40af?text=Consultation+Room"
                     alt="Doctor's Consultation Room"
-                    class="w-full h-36 object-cover"
+                    class="w-full h-40 object-contain"
                 />
                 <div class="p-3 text-center">
                     <p class="font-semibold text-blue-800">Private Consultation Suites</p>
@@ -893,12 +903,14 @@
         </div>
         
         <div class="mt-8 text-center md:hidden">
-            <button
-                onclick="openModal()"
-                class="w-full max-w-xs py-3 text-lg bg-yellow-400 text-blue-900 font-bold rounded-xl hover:bg-yellow-500 transition-colors shadow-xl"
+            <a
+                href="https://wa.me/919002450077?text=Hello%2C%20I%20would%20like%20to%20schedule%20an%20appointment."
+                target="_blank"
+                class="w-full max-w-xs py-3 text-lg bg-green-600 text-white font-bold rounded-xl hover:bg-green-700 transition-colors shadow-xl inline-flex items-center justify-center space-x-2"
             >
+             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="white" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-whatsapp"><path d="M22 16.92v3a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-3"></path><path d="m6 16-4 4"></path><path d="m18 16 4 4"></path><path d="M12 12V2"></path><path d="M6.5 6.5l5.5-5.5 5.5 5.5"></path></svg>
                 Book Your Appointment Now
-            </button>
+            </a>
         </div>
 
         <div class="mt-8 pt-6 border-t border-blue-800 text-center">
@@ -911,6 +923,7 @@
 
     <script type="module">
       // --- FIREBASE SETUP ---
+      // (Firebase initialization code remains unchanged for reference)
       import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
       import {
         getAuth,
@@ -926,20 +939,11 @@
         setLogLevel,
       } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-      // IMPORTANT: Global variables are provided by the Canvas environment.
-      const appId =
-        typeof __app_id !== "undefined" ? __app_id : "default-app-id";
-      const firebaseConfig =
-        typeof __firebase_config !== "undefined"
-          ? JSON.parse(__firebase_config)
-          : null;
-      const initialAuthToken =
-        typeof __initial_auth_token !== "undefined"
-          ? __initial_auth_token
-          : null;
-
-      // Define the target email address
+      const appId = typeof __app_id !== "undefined" ? __app_id : "default-app-id";
+      const firebaseConfig = typeof __firebase_config !== "undefined" ? JSON.parse(__firebase_config) : null;
+      const initialAuthToken = typeof __initial_auth_token !== "undefined" ? __initial_auth_token : null;
       const TARGET_EMAIL = "info.cardiosphere@gmail.com";
+      const WHATSAPP_NUMBER = "919002450077"; // Number without plus sign
 
       let app;
       let db;
@@ -959,20 +963,17 @@
           db = getFirestore(app);
           auth = getAuth(app);
 
-          // Sign in using the custom token or anonymously
           if (initialAuthToken) {
             await signInWithCustomToken(auth, initialAuthToken);
-            console.log("Firebase signed in with custom token.");
           } else {
             await signInAnonymously(auth);
-            console.log("Firebase signed in anonymously.");
           }
         } catch (error) {
           console.error("Error initializing Firebase or signing in:", error);
         }
       }
 
-      // --- APPOINTMENT MODAL LOGIC ---
+      // --- APPOINTMENT MODAL & WHATSAPP LOGIC ---
       const modal = document.getElementById("appointment-modal");
       const form = document.getElementById("appointment-form");
       const submissionMessage = document.getElementById("submission-message");
@@ -1001,69 +1002,27 @@
         const date = document.getElementById("date").value;
         const reason = document.getElementById("reason").value;
 
+        // 1. Prepare WhatsApp Message
+        const whatsappBody = `New Appointment Request:\n\n*Name:* ${name}\n*Phone:* ${phone}\n*Doctor:* ${doctor}\n*Date:* ${date}\n*Reason:* ${reason}`;
+        
+        const whatsappLink = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(whatsappBody)}`;
+
+        // 2. Open WhatsApp link
+        window.open(whatsappLink, "_blank");
+
+        // 3. Handle Firebase/Form Submission (Optional: Keep for tracking)
+        // Note: For simplicity and focus on WhatsApp, we skip showing Firestore success/fail message,
+        // but the Firestore logic can be executed silently in the background if desired.
+
         submissionMessage.classList.remove("hidden");
-        submissionMessage.classList.remove("text-red-600", "text-green-600"); 
-        submissionMessage.textContent =
-          "Processing your appointment request...";
+        submissionMessage.classList.add("text-green-600"); 
+        submissionMessage.textContent = `✅ Please send the pre-filled message on WhatsApp to confirm your appointment. We will contact you soon!`;
+        
+        // Optionally reset form and close modal after a delay, 
+        // but keep the message visible long enough for the user to read the instruction.
+        // form.reset(); 
+        // setTimeout(() => closeModal(), 5000); 
 
-        const appointmentData = {
-          doctor: doctor,
-          patientName: name,
-          phoneNumber: phone,
-          preferredDate: date,
-          reasonForVisit: reason,
-          status: "PENDING",
-          timestamp: serverTimestamp(),
-        };
-
-        if (!db || !auth.currentUser) {
-          // Fallback / Non-Firebase logic: Open mailto link
-          console.warn(
-            "Firestore not available or user not authenticated. Attempting to open mailto link."
-          );
-
-          const subject = `New Appointment Request for ${doctor} at Cardiosphere`;
-          const body = `Doctor: ${doctor}\nPatient Name: ${name}\nPhone: ${phone}\nDate: ${date}\nReason: ${reason}\n\n[Please ensure you send this email to confirm your request. You may be contacted by phone for confirmation.]`;
-          const mailtoLink = `mailto:${TARGET_EMAIL}?subject=${encodeURIComponent(
-            subject
-          )}&body=${encodeURIComponent(body)}`;
-
-          submissionMessage.textContent = `🚨 IMPORTANT: Please check your browser/device for a new email draft and click "Send" to finalize your appointment request to ${TARGET_EMAIL}. We will call you soon on ${phone} for confirmation.`;
-          submissionMessage.classList.add("text-blue-600"); 
-
-          // Open the user's email client with pre-filled details
-          window.open(mailtoLink, "_blank");
-
-          setTimeout(() => closeModal(), 7000);
-          return;
-        }
-
-        const userId = auth.currentUser.uid;
-        appointmentData.userId = userId;
-
-        const newDocRef = doc(
-          collection(db, `artifacts/${appId}/public/data/appointments`)
-        );
-
-        try {
-          await setDoc(newDocRef, appointmentData);
-
-          // --- Confirmation and Email Notice ---
-          submissionMessage.textContent = `Success! Your appointment for ${doctor} on ${date} has been submitted. The details have been forwarded to the clinic at ${TARGET_EMAIL}. We will call you soon to confirm the exact time.`;
-
-          console.log(
-            `[FIRESTORE LOGGED] Appointment ID: ${newDocRef.id}. Details forwarded to ${TARGET_EMAIL}.`
-          );
-
-          submissionMessage.classList.add("text-green-600"); // Use green for success messages
-          form.reset();
-          setTimeout(() => closeModal(), 5000);
-        } catch (error) {
-          console.error("Error submitting appointment:", error);
-          submissionMessage.textContent =
-            "Failed to book appointment. Please try again or call us directly.";
-          submissionMessage.classList.add("text-blue-600"); 
-        }
       });
 
       // --- NAVIGATION LOGIC ---
@@ -1080,8 +1039,6 @@
       // --- INITIALIZATION ---
       window.onload = function () {
         initializeFirebase();
-
-        // Removed initial navigate('home') call to allow all sections to be visible
       };
     </script>
   </body>
