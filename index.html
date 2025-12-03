@@ -35,6 +35,22 @@
         /* Star icon SVG for testimonials */
         fill: currentColor;
       }
+      /* Custom style for image blocks to ensure h-48 and proper fit */
+      .rotated-image-block {
+          height: 12rem; /* h-48 */
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          overflow: hidden;
+          background-color: #f0f0f0; /* Add a light background for visibility of object-contain padding */
+      }
+      .rotated-image-block img {
+          width: 100%;
+          height: 100%;
+          object-fit: contain; /* To ensure the full picture fits */
+          transform-origin: center center;
+          transition: transform 0.3s ease;
+      }
     </style>
   </head>
   <body class="text-inter bg-gray-50">
@@ -644,10 +660,10 @@
 
             <div class="bg-white rounded-xl shadow-lg overflow-hidden icon-hover-effect">
                 <img
-                    src="https://lh3.googleusercontent.com/p/AF1QipP3wds5xxxo_t_2YQcKTf82AFbw6lsr-eZdqhyI=w284-h473-n-k-no-nu"
+                    src="http://googleusercontent.com/profile/picture/7"
                     alt="Clinic Staff and Team"
                     class="w-full h-48 object-contain"
-                    onerror="this.onerror=null; this.src='https://placehold.co/600x400/93c5fd/1e40af?text=Our+Friendly+Team'"
+                    onerror="this.onerror=null; this.src='https://placehold.co/600x400/93c5fd/1e40af?text=Our+Friendly+Team+New'"
                 />
                 <div class="p-3 text-center">
                     <p class="font-semibold text-blue-800">Our Dedicated Team Members</p>
@@ -659,7 +675,7 @@
                 <img
                     src="https://lh3.googleusercontent.com/p/AF1QipOfb0T5m44bq0BvpGQaegJMXDBf7Yqzyka5EWka=w284-h284-n-k-no-nu"
                     alt="Clinic Entrance"
-                    class="w-full h-48 object-cover"
+                    class="w-full h-48 object-contain"
                     onerror="this.onerror=null; this.src='https://placehold.co/600x400/93c5fd/1e40af?text=Modern+Entrance'"
                 />
                 <div class="p-3 text-center">
@@ -757,21 +773,21 @@
       
       <section id="location" class="py-16 md:py-24 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h3 class="text-3xl font-bold text-center text-blue-800 mb-12">
-                Find Our Clinic
-            </h3>
-            <div class="shadow-2xl rounded-xl overflow-hidden">
-                <div style="width: 100%"><iframe width="100%" height="450" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&height=450&hl=en&q=Cardiosphere+Polyclinic,+2nd+Floor,+Arushi+Complex,+Durgapur+713212&t=&z=15&ie=UTF8&iwloc=B&output=embed"></iframe></div>
-            </div>
-            <div class="text-center mt-6">
-                <a 
-                    href="https://maps.app.goo.gl/YourMapLinkHere"
-                    target="_blank"
-                    class="inline-block px-6 py-3 text-lg bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors shadow-lg"
-                >
-                    Get Directions on Google Maps
-                </a>
-            </div>
+          <h3 class="text-3xl font-bold text-center text-blue-800 mb-12">
+            Find Our Clinic
+          </h3>
+          <div class="shadow-2xl rounded-xl overflow-hidden">
+            <div style="width: 100%"><iframe width="100%" height="450" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&height=450&hl=en&q=Cardiosphere+Polyclinic,+2nd+Floor,+Arushi+Complex,+Durgapur+713212&t=&z=15&ie=UTF8&iwloc=B&output=embed"></iframe></div>
+          </div>
+          <div class="text-center mt-6">
+            <a 
+              href="https://maps.app.goo.gl/YourMapLinkHere"
+              target="_blank"
+              class="inline-block px-6 py-3 text-lg bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors shadow-lg"
+            >
+              Get Directions on Google Maps
+            </a>
+          </div>
         </div>
       </section>
 
