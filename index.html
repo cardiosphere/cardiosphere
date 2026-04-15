@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cardiosphere | Advanced Heart & Medical Care</title>
-    <meta name="Description" content="Cardiosphere - Expert Cardiac Care by Dr. Tutan Das & Team. Specialized in Interventional Cardiology and Diagnostics.">
+    <title>Cardiosphere | Expert Medical & Cardiac Care</title>
+    <meta name="Description" content="Cardiosphere - Expert Medical and Cardiac Care (Diagnostics | Clinic | Pharmacy). Leading the Future of Cardiac Care in Durgapur.">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
@@ -12,253 +12,272 @@
         body { font-family: 'Plus Jakarta Sans', sans-serif; }
         
         .glass {
-            background: rgba(255, 255, 255, 0.8);
+            background: rgba(255, 255, 255, 0.9);
             backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.3);
         }
 
         .hero-mesh {
-            background-color: #1e3a8a;
-            background-image: 
-                radial-gradient(at 0% 0%, hsla(210,100%,23%,1) 0, transparent 50%), 
-                radial-gradient(at 50% 0%, hsla(220,100%,44%,1) 0, transparent 50%), 
-                radial-gradient(at 100% 0%, hsla(190,100%,30%,1) 0, transparent 50%);
+            background: linear-gradient(145deg, #0f172a 0%, #1e40af 70%, #1e3a8a 100%);
         }
 
         .card-hover {
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
         .card-hover:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
         }
 
-        .bento-item {
-            @apply bg-white p-8 rounded-3xl border border-gray-100 shadow-sm card-hover;
+        .facility-img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
         }
+        .group:hover .facility-img { transform: scale(1.05); }
 
-        /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #f1f1f1; }
-        ::-webkit-scrollbar-thumb { background: #3b82f6; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb { background: #1e40af; border-radius: 10px; }
     </style>
 </head>
 
-<body class="bg-slate-50 text-slate-900">
+<body class="bg-gray-50 text-slate-900">
 
-    <div id="appointment-modal" class="hidden fixed inset-0 z-[100] flex items-center justify-center bg-blue-900/40 backdrop-blur-sm p-4">
+    <div id="appointment-modal" class="hidden fixed inset-0 z-[100] flex items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4">
         <div class="bg-white rounded-3xl shadow-2xl w-full max-w-lg overflow-hidden transform transition-all animate-in zoom-in duration-300">
-            <div class="bg-blue-600 p-6 text-white flex justify-between items-center">
-                <h2 class="text-xl font-bold">Secure Your Consultation</h2>
+            <div class="bg-blue-700 p-6 text-white flex justify-between items-center">
+                <div>
+                    <h2 class="text-xl font-bold">Book Consultation</h2>
+                    <p class="text-blue-100 text-xs">Directly via WhatsApp</p>
+                </div>
                 <button onclick="closeModal()" class="hover:rotate-90 transition-transform">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
                 </button>
             </div>
             <form id="appointment-form" class="p-8 space-y-4">
-                <div class="grid grid-cols-1 gap-4">
-                    <label class="block text-sm font-semibold text-slate-700">Select Specialist</label>
-                    <select id="doctor" class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 focus:ring-2 focus:ring-blue-500 outline-none">
-                        <option>Dr. Tutan Das (Cardiologist)</option>
-                        <option>Dr. Manidipa Majumdar (Cardiologist)</option>
-                        <option>Dr. Swagata Chakraborty (ENT)</option>
-                    </select>
-                    <input type="text" id="name" placeholder="Full Name" required class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 outline-none focus:ring-2 focus:ring-blue-500">
-                    <input type="tel" id="phone" placeholder="WhatsApp Number" required class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 outline-none focus:ring-2 focus:ring-blue-500">
-                    <input type="date" id="date" required class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 outline-none focus:ring-2 focus:ring-blue-500">
-                    <textarea id="reason" placeholder="Briefly describe your concern..." rows="3" class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 outline-none focus:ring-2 focus:ring-blue-500"></textarea>
-                </div>
-                <button type="submit" class="w-full py-4 bg-green-600 text-white font-bold rounded-xl hover:bg-green-700 shadow-lg shadow-green-200 flex items-center justify-center gap-2">
-                    Confirm via WhatsApp
+                <select id="doctor" class="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 focus:ring-2 focus:ring-blue-600 outline-none">
+                    <option>Dr. Tutan Das (Cardiologist)</option>
+                    <option>Dr. Manidipa Majumdar (Cardiologist)</option>
+                    <option>Dr. Swagata Chakraborty (ENT)</option>
+                </select>
+                <input type="text" id="name" placeholder="Full Name" required class="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 outline-none focus:ring-2 focus:ring-blue-600">
+                <input type="tel" id="phone" placeholder="Phone Number" required class="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 outline-none focus:ring-2 focus:ring-blue-600">
+                <input type="date" id="date" required class="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 outline-none focus:ring-2 focus:ring-blue-600">
+                <textarea id="reason" placeholder="Reason for visit..." rows="2" class="w-full px-4 py-3 rounded-xl bg-gray-50 border border-gray-200 outline-none focus:ring-2 focus:ring-blue-600"></textarea>
+                <button type="submit" class="w-full py-4 bg-green-600 text-white font-bold rounded-xl hover:bg-green-700 shadow-lg flex items-center justify-center gap-2">
+                    Confirm & Send via WhatsApp
                 </button>
-                <p id="submission-message" class="text-center text-xs text-slate-500 mt-2"></p>
             </form>
         </div>
     </div>
 
     <header class="fixed top-0 w-full z-50 transition-all duration-300" id="main-header">
-        <div class="max-w-7xl mx-auto px-6 py-4">
+        <div class="max-w-7xl mx-auto px-4 py-4">
             <nav class="glass rounded-2xl px-6 py-3 flex justify-between items-center shadow-lg">
-                <div class="flex items-center gap-3 group cursor-pointer" onclick="window.scrollTo(0,0)">
-                    <div class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold text-xl shadow-blue-200 shadow-lg group-hover:scale-110 transition-transform">C</div>
+                <div class="flex items-center gap-2 group cursor-pointer" onclick="window.scrollTo(0,0)">
+                    <img src="https://lh3.googleusercontent.com/p/AF1QipMcFRLHMTS9rS1GLtgiVsKY8ufhIW1fbQf0zCTI=w284-h237-n-k-no-nu" alt="Logo" class="w-10 h-10 object-contain">
                     <span class="text-xl font-extrabold tracking-tight text-blue-900">Cardiosphere</span>
                 </div>
                 
-                <div class="hidden md:flex items-center gap-8 text-sm font-bold text-slate-600 uppercase tracking-widest">
-                    <a href="#home" class="hover:text-blue-600 transition-colors">Home</a>
-                    <a href="#doctors" class="hover:text-blue-600 transition-colors">Doctors</a>
-                    <a href="#services" class="hover:text-blue-600 transition-colors">Services</a>
-                    <a href="#location" class="hover:text-blue-600 transition-colors">Find Us</a>
+                <div class="hidden md:flex items-center gap-8 text-xs font-bold text-slate-600 uppercase tracking-widest">
+                    <a href="#home" class="hover:text-blue-700 transition-colors">Home</a>
+                    <a href="#doctors" class="hover:text-blue-700 transition-colors">Doctors</a>
+                    <a href="#services" class="hover:text-blue-700 transition-colors">Services</a>
+                    <a href="#facilities" class="hover:text-blue-700 transition-colors">Facilities</a>
                 </div>
 
-                <button onclick="openModal()" class="bg-blue-600 text-white px-6 py-2.5 rounded-full font-bold text-sm shadow-lg shadow-blue-200 hover:bg-blue-700 transition-all">
-                    Book Now
+                <button onclick="openModal()" class="bg-green-600 text-white px-6 py-2 rounded-full font-bold text-sm shadow-md hover:bg-green-700 transition-all">
+                    Book Appointment
                 </button>
             </nav>
         </div>
     </header>
 
-    <section id="home" class="hero-mesh min-h-screen flex items-center pt-20">
+    <section id="home" class="hero-mesh min-h-[90vh] flex items-center pt-20">
         <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
-            <div class="text-white space-y-8 animate-in slide-in-from-left duration-700">
-                <span class="bg-blue-500/30 text-blue-100 px-4 py-2 rounded-full text-xs font-bold uppercase tracking-[0.2em]">The Heart of Excellence</span>
-                <h1 class="text-5xl md:text-7xl font-extrabold leading-[1.1]">Precision Care for your <span class="text-blue-300">Healthy Heart.</span></h1>
-                <p class="text-lg text-blue-100/80 leading-relaxed max-w-lg">
-                    Durgapur's premier polyclinic providing advanced interventional cardiology, non-invasive diagnostics, and expert ENT consultation.
-                </p>
-                <div class="flex flex-wrap gap-4 pt-4">
-                    <button onclick="openModal()" class="px-8 py-4 bg-white text-blue-900 font-bold rounded-2xl hover:bg-blue-50 shadow-xl transition-all flex items-center gap-2">
-                        Get Started
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
-                    </button>
-                </div>
+            <div class="text-white space-y-6">
+                <p class="text-blue-300 font-bold tracking-[0.3em] uppercase text-sm">Cardiosphere Polyclinic</p>
+                <h1 class="text-5xl md:text-7xl font-black leading-tight">Leading the Future of <span class="text-blue-400">Cardiac Care.</span></h1>
+                <p class="text-lg text-blue-100/80 leading-relaxed max-w-lg">Expert consultation, advanced diagnostics, and personalized treatments from Durgapur's dedicated heart specialists.</p>
+                <button onclick="openModal()" class="px-8 py-4 bg-white text-blue-900 font-bold rounded-2xl hover:bg-blue-50 transition-all shadow-xl">
+                    Schedule Your Visit Now
+                </button>
             </div>
-            <div class="relative hidden md:block">
-                <div class="absolute -inset-4 bg-blue-400/20 blur-3xl rounded-full"></div>
-                <img src="https://cdn3d.iconscout.com/3d/premium/thumb/heart-check-up-3d-icon-png-download-7526210.png" alt="Medical 3D" class="relative w-full max-w-md mx-auto animate-bounce-slow">
+            <div class="hidden md:block">
+                <img src="https://cdn3d.iconscout.com/3d/premium/thumb/heart-check-up-3d-icon-png-download-7526210.png" class="w-full max-w-md mx-auto drop-shadow-2xl">
             </div>
         </div>
     </section>
 
-    <section id="doctors" class="py-24 px-6 bg-white">
+    <section id="doctors" class="py-24 bg-white px-6">
         <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-16 space-y-4">
-                <h2 class="text-4xl font-black text-slate-900">World-Class Specialists</h2>
-                <div class="h-1.5 w-20 bg-blue-600 mx-auto rounded-full"></div>
-            </div>
-            
+            <h2 class="text-3xl font-black text-center text-blue-900 mb-16">Our Specialist Team</h2>
             <div class="grid md:grid-cols-3 gap-8">
-                <div class="bento-item group">
-                    <div class="relative w-32 h-32 mx-auto mb-6">
-                        <div class="absolute inset-0 bg-blue-600 rounded-2xl rotate-6 group-hover:rotate-12 transition-transform"></div>
-                        <img src="https://content.jdmagicbox.com/comp/durgapur/h9/9999px343.x343.240206131748.s7h9/catalogue/dr-tutan-das-benachity-durgapur-cardiac-resynchronization-therapy-treatment-services-xnmrmoazhb.jpg" class="relative w-full h-full object-cover rounded-2xl border-2 border-white" alt="Dr. Tutan Das">
-                    </div>
-                    <h3 class="text-2xl font-bold text-center">Dr. Tutan Das</h3>
-                    <p class="text-blue-600 font-bold text-sm text-center mb-4">Interventional Cardiologist</p>
-                    <p class="text-slate-500 text-sm leading-relaxed text-center">DM Cardiology (AIIMS). Expert in Complex Angioplasty and Leadless Pacemakers.</p>
+                <div class="bg-gray-50 p-8 rounded-3xl border border-gray-100 card-hover text-center">
+                    <img src="https://content.jdmagicbox.com/comp/durgapur/h9/9999px343.x343.240206131748.s7h9/catalogue/dr-tutan-das-benachity-durgapur-cardiac-resynchronization-therapy-treatment-services-xnmrmoazhb.jpg" class="w-32 h-32 rounded-2xl mx-auto object-cover border-4 border-white shadow-lg mb-6">
+                    <h3 class="text-xl font-bold">Dr. Tutan Das</h3>
+                    <p class="text-blue-600 font-bold text-sm mb-4">Interventional Cardiologist</p>
+                    <p class="text-gray-500 text-xs leading-relaxed">DM Cardiology (AIIMS). Expert in Complex Angioplasty & Cardiac Devices.</p>
                 </div>
-                <div class="bento-item group">
-                    <div class="relative w-32 h-32 mx-auto mb-6">
-                        <div class="absolute inset-0 bg-pink-500 rounded-2xl -rotate-6 group-hover:-rotate-12 transition-transform"></div>
-                        <img src="https://hlghospital.com/wp-content/uploads/2025/04/dr.-manidipa.jpg" class="relative w-full h-full object-cover rounded-2xl border-2 border-white" alt="Dr. Manidipa">
-                    </div>
-                    <h3 class="text-2xl font-bold text-center">Dr. Manidipa Majumdar</h3>
-                    <p class="text-pink-600 font-bold text-sm text-center mb-4">Interventional Cardiologist</p>
-                    <p class="text-slate-500 text-sm leading-relaxed text-center">Expert in Cardiac Diagnostics, 2D Echo, and Chronic Condition Management.</p>
+                <div class="bg-gray-50 p-8 rounded-3xl border border-gray-100 card-hover text-center">
+                    <img src="https://hlghospital.com/wp-content/uploads/2025/04/dr.-manidipa.jpg" class="w-32 h-32 rounded-2xl mx-auto object-cover border-4 border-white shadow-lg mb-6">
+                    <h3 class="text-xl font-bold">Dr. Manidipa Majumdar</h3>
+                    <p class="text-blue-600 font-bold text-sm mb-4">Interventional Cardiologist</p>
+                    <p class="text-gray-500 text-xs leading-relaxed">Specialist in Cardiac Diagnostics & Chronic Condition Management.</p>
                 </div>
-                <div class="bento-item group">
-                    <div class="relative w-32 h-32 mx-auto mb-6">
-                        <div class="absolute inset-0 bg-emerald-500 rounded-2xl rotate-3 group-hover:rotate-6 transition-transform"></div>
-                        <img src="https://scontent.fgau1-6.fna.fbcdn.net/v/t39.30808-6/472047397_8228199303948009_231805050605885210_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=106&ccb=1-7&_nc_sid=1d70fc&_nc_ohc=NL28GYeIuigQ7kNvwGYy0Ls&_nc_oc=AdrTZ8Roml76vlh1PT5UO7s5D86TNQ9mKdDwYgyiNaHRj62LFqlfGU8ybr-lCO-S-LygOfHi71rNiaAudFgl0BbH&_nc_zt=23&_nc_ht=scontent.fgau1-6.fna&_nc_gid=9hd38UotHNkzTn6SayZfAg&_nc_ss=7a389&oh=00_Af38ROKfU2uoeJfBtWygsceTgH4zxnukfsc_TR2_LZWewg&oe=69E571A3" class="relative w-full h-full object-cover rounded-2xl border-2 border-white" alt="Dr. Swagata">
-                    </div>
-                    <h3 class="text-2xl font-bold text-center">Dr. Swagata Chakraborty</h3>
-                    <p class="text-emerald-600 font-bold text-sm text-center mb-4">ENT & Head/Neck Surgeon</p>
-                    <p class="text-slate-500 text-sm leading-relaxed text-center">MBBS, MS (ENT). Specialist in Sinusitis, Tonsillitis, and complex Head/Neck surgeries.</p>
+                <div class="bg-gray-50 p-8 rounded-3xl border border-gray-100 card-hover text-center">
+                    <img src="https://scontent.fgau1-6.fna.fbcdn.net/v/t39.30808-6/472047397_8228199303948009_231805050605885210_n.jpg?stp=cp6_dst-jpg_tt6&_nc_cat=106&ccb=1-7&_nc_sid=1d70fc&_nc_ohc=NL28GYeIuigQ7kNvwGYy0Ls&_nc_oc=AdrTZ8Roml76vlh1PT5UO7s5D86TNQ9mKdDwYgyiNaHRj62LFqlfGU8ybr-lCO-S-LygOfHi71rNiaAudFgl0BbH&_nc_zt=23&_nc_ht=scontent.fgau1-6.fna&_nc_gid=9hd38UotHNkzTn6SayZfAg&_nc_ss=7a389&oh=00_Af38ROKfU2uoeJfBtWygsceTgH4zxnukfsc_TR2_LZWewg&oe=69E571A3" class="w-32 h-32 rounded-2xl mx-auto object-cover border-4 border-white shadow-lg mb-6">
+                    <h3 class="text-xl font-bold">Dr. Swagata Chakraborty</h3>
+                    <p class="text-blue-600 font-bold text-sm mb-4">ENT & Head/Neck Surgeon</p>
+                    <p class="text-gray-500 text-xs leading-relaxed">Ex-Senior Resident AIIMS. Expertise in complex ENT surgical procedures.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="services" class="py-24 px-6 bg-slate-100">
+    <section id="services" class="py-24 bg-slate-900 text-white px-6">
         <div class="max-w-7xl mx-auto">
-            <h2 class="text-4xl font-black text-center mb-16">Comprehensive Services</h2>
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-                <div class="md:col-span-2 bento-item bg-gradient-to-br from-blue-600 to-blue-800 text-white">
-                    <div class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center mb-6">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg>
-                    </div>
-                    <h3 class="text-2xl font-bold mb-4">Advanced Cardiology</h3>
-                    <p class="text-blue-100/80 text-sm">Angioplasty, Pacemaker implantation, TAVI, and leadless interventions using AIIMS-standard protocols.</p>
+            <h2 class="text-3xl font-bold text-center mb-16">Detailed Services</h2>
+            <div class="grid md:grid-cols-4 gap-6">
+                <div class="bg-white/5 p-6 rounded-2xl border border-white/10">
+                    <h4 class="font-bold text-blue-400 mb-4">Cardiac Care</h4>
+                    <ul class="text-sm space-y-2 text-gray-400">
+                        <li>• Angioplasty & Stenting</li>
+                        <li>• Pacemaker Implantation</li>
+                        <li>• Valvular Management</li>
+                    </ul>
                 </div>
-                <div class="bento-item">
-                    <h3 class="font-bold text-lg mb-2 text-blue-800">2D Echo</h3>
-                    <p class="text-slate-500 text-xs">High-definition heart imaging and valve assessment.</p>
+                <div class="bg-white/5 p-6 rounded-2xl border border-white/10">
+                    <h4 class="font-bold text-blue-400 mb-4">Diagnostics</h4>
+                    <ul class="text-sm space-y-2 text-gray-400">
+                        <li>• 2D Echocardiography</li>
+                        <li>• TMT / Stress Test</li>
+                        <li>• Holter Monitoring</li>
+                    </ul>
                 </div>
-                <div class="bento-item">
-                    <h3 class="font-bold text-lg mb-2 text-blue-800">Holter/ECG</h3>
-                    <p class="text-slate-500 text-xs">Continuous heart rhythm monitoring for arrhythmias.</p>
+                <div class="bg-white/5 p-6 rounded-2xl border border-white/10">
+                    <h4 class="font-bold text-blue-400 mb-4">Management</h4>
+                    <ul class="text-sm space-y-2 text-gray-400">
+                        <li>• Diabetes & Hypertension</li>
+                        <li>• Thyroid Disorders</li>
+                        <li>• Infectious Diseases</li>
+                    </ul>
                 </div>
-                <div class="bento-item">
-                    <h3 class="font-bold text-lg mb-2 text-blue-800">Diabetes Care</h3>
-                    <p class="text-slate-500 text-xs">Integrated management for endocrine disorders.</p>
-                </div>
-                <div class="md:col-span-2 bento-item">
-                    <div class="flex items-center gap-4">
-                        <div class="w-10 h-10 bg-green-100 text-green-600 rounded-full flex items-center justify-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-                        </div>
-                        <div>
-                            <h3 class="font-bold text-xl">Home Collection</h3>
-                            <p class="text-slate-500 text-sm">Professional phlebotomists visiting your home for blood samples.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="bento-item">
-                    <h3 class="font-bold text-lg mb-2 text-blue-800">Pharmacy</h3>
-                    <p class="text-slate-500 text-xs">Fully stocked in-house pharmacy.</p>
+                <div class="bg-white/5 p-6 rounded-2xl border border-white/10">
+                    <h4 class="font-bold text-blue-400 mb-4">Support</h4>
+                    <ul class="text-sm space-y-2 text-gray-400">
+                        <li>• Home Sample Collection</li>
+                        <li>• In-House Pharmacy</li>
+                        <li>• Vaccination Services</li>
+                    </ul>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="location" class="py-24 px-6 bg-white">
+    <section id="facilities" class="py-24 bg-gray-50 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-black text-blue-900">State-of-the-Art Facilities</h2>
+                <p class="text-gray-500 mt-2">Modern equipment in a comfortable, sterile environment.</p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="group bg-white rounded-3xl overflow-hidden shadow-sm card-hover">
+                    <img src="https://lh3.googleusercontent.com/p/AF1QipNejE19n4Mu5dMV2HX2Dsrq-4ose9BA6aiXw1lf=w284-h203-n-k-no-nu" class="facility-img" alt="Lounge">
+                    <div class="p-6">
+                        <h4 class="font-bold text-blue-800">Comfortable Patient Lounge</h4>
+                        <p class="text-gray-500 text-sm">Spacious and welcoming waiting area.</p>
+                    </div>
+                </div>
+                <div class="group bg-white rounded-3xl overflow-hidden shadow-sm card-hover">
+                    <img src="https://lh3.googleusercontent.com/geougc-cs/AMBA38viQ0vUVHBQTdDstTZ-8TxizP1DtqzFNJLgDdlhZ93cHHXWrBbUaYsFZ5se3s0CSdAG_I3AUN0oqImvDE4AP6cZNUEokEo3_UHC4Qej6xprkEMABXr0P7q4MX40hjicGhLrusIsz6lSnbrq=s188-p-k-rw" class="facility-img" alt="Team">
+                    <div class="p-6">
+                        <h4 class="font-bold text-blue-800">Dedicated Medical Team</h4>
+                        <p class="text-gray-500 text-sm">Professional and caring medical staff.</p>
+                    </div>
+                </div>
+                <div class="group bg-white rounded-3xl overflow-hidden shadow-sm card-hover">
+                    <img src="https://lh3.googleusercontent.com/p/AF1QipOfb0T5m44bq0BvpGQaegJMXDBf7Yqzyka5EWka=w284-h284-n-k-no-nu" class="facility-img" alt="Entrance">
+                    <div class="p-6">
+                        <h4 class="font-bold text-blue-800">Accessible Entrance</h4>
+                        <p class="text-gray-500 text-sm">Clean and easy access for all patients.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="testimonials" class="py-24 bg-blue-50 px-6">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-3xl font-black text-center text-blue-900 mb-16">Patient Experiences</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-3xl shadow-sm border-t-4 border-blue-600">
+                    <div class="flex text-yellow-400 mb-4">★★★★★</div>
+                    <p class="text-gray-600 italic text-sm mb-4">"Dr. Tutan Das is phenomenal. The angioplasty was a success and his confident approach put us at ease."</p>
+                    <p class="font-bold text-blue-900">- Subhash P.</p>
+                </div>
+                <div class="bg-white p-8 rounded-3xl shadow-sm border-t-4 border-blue-600">
+                    <div class="flex text-yellow-400 mb-4">★★★★★</div>
+                    <p class="text-gray-600 italic text-sm mb-4">"Dr. Manidipa's diagnosis was spot on. She explained the 2D Echo results clearly. Truly personalized care."</p>
+                    <p class="font-bold text-blue-900">- Anjali S.</p>
+                </div>
+                <div class="bg-white p-8 rounded-3xl shadow-sm border-t-4 border-blue-600">
+                    <div class="flex text-yellow-400 mb-4">★★★★★</div>
+                    <p class="text-gray-600 italic text-sm mb-4">"Excellent consultation with Dr. Swagata for chronic sinusitis. Highly professional and effective."</p>
+                    <p class="font-bold text-blue-900">- Rakesh V.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="location" class="py-24 bg-white px-6">
         <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
             <div class="space-y-6">
-                <h2 class="text-4xl font-black">Visit Our Polyclinic</h2>
+                <h2 class="text-3xl font-black text-blue-900">Find Us</h2>
                 <div class="space-y-4">
-                    <div class="flex gap-4">
-                        <div class="w-10 h-10 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center shrink-0">📍</div>
-                        <p class="text-slate-600">2nd Floor, Arushi Complex, Yuri Gagrin Path, Muchipara, Durgapur - 713212</p>
-                    </div>
-                    <div class="flex gap-4">
-                        <div class="w-10 h-10 bg-green-100 text-green-600 rounded-full flex items-center justify-center shrink-0">📞</div>
-                        <p class="text-slate-600 font-bold">+91 90024 50077</p>
-                    </div>
+                    <p class="flex items-start gap-3 text-gray-600">
+                        <span class="text-blue-600 font-bold">📍</span> 
+                        2nd Floor, Arushi Complex, Yuri Gagrin Path, Muchipara, Durgapur - 713212.
+                    </p>
+                    <p class="flex items-center gap-3 text-gray-600">
+                        <span class="text-blue-600 font-bold">📞</span> 
+                        Emergency: +91 90024 50077
+                    </p>
+                    <p class="flex items-center gap-3 text-gray-600">
+                        <span class="text-blue-600 font-bold">⏰</span> 
+                        Mon - Sat: 9:00 AM - 5:00 PM
+                    </p>
                 </div>
-                <a href="https://maps.app.goo.gl/YourMapLink" target="_blank" class="inline-block bg-slate-900 text-white px-8 py-3 rounded-xl font-bold hover:bg-slate-800 transition-all">Get Directions</a>
+                <a href="https://maps.app.goo.gl/p9NAkf72j4qbS1pU6" target="_blank" class="inline-block bg-blue-700 text-white px-8 py-3 rounded-xl font-bold hover:bg-blue-800 transition-all">Get Directions</a>
             </div>
-            <div class="rounded-3xl overflow-hidden shadow-2xl h-80 bg-slate-200">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3657.6534!2d87.29!3d23.54!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjPCsDMyJzI0LjAiTiA4N8KwMTcnMjQuMCJF!5e0!3m2!1sen!2sin!4v1710000000000" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            <div class="rounded-3xl overflow-hidden shadow-2xl h-80 bg-gray-200">
+                <iframe src="https://maps.google.com/maps?width=100%25&height=450&hl=en&q=Cardiosphere+Polyclinic,+2nd+Floor,+Arushi+Complex,+Durgapur+713212&t=&z=15&ie=UTF8&iwloc=B&output=embed" width="100%" height="100%" style="border:0;" loading="lazy"></iframe>
             </div>
         </div>
     </section>
 
-    <footer class="bg-slate-900 text-slate-400 py-12 px-6">
-        <div class="max-w-7xl mx-auto text-center space-y-4">
-            <p class="text-white font-bold text-xl">Cardiosphere</p>
-            <p class="text-sm">© 2026 Cardiosphere Polyclinic. Leading the future of cardiac care.</p>
+    <footer class="bg-slate-900 text-slate-500 py-12 px-6 text-center">
+        <div class="max-w-7xl mx-auto space-y-4">
+            <p class="text-white font-extrabold text-xl tracking-tight">Cardiosphere</p>
+            <p class="text-sm">© 2026 Cardiosphere Polyclinic. All rights reserved.</p>
         </div>
     </footer>
 
     <script>
-        // Modal Logic
         const modal = document.getElementById("appointment-modal");
         const form = document.getElementById("appointment-form");
-        const header = document.getElementById("main-header");
 
         window.openModal = () => {
             modal.classList.remove("hidden");
-            document.body.classList.add("overflow-hidden");
+            document.body.style.overflow = 'hidden';
         };
 
         window.closeModal = () => {
             modal.classList.add("hidden");
-            document.body.classList.remove("overflow-hidden");
+            document.body.style.overflow = '';
         };
 
-        // Close on outside click
-        window.onclick = (e) => { if (e.target === modal) closeModal(); };
-
-        // Scroll Effect for Header
-        window.onscroll = () => {
-            if (window.scrollY > 50) {
-                header.querySelector('nav').classList.add('py-1', 'shadow-xl');
-            } else {
-                header.querySelector('nav').classList.remove('py-1', 'shadow-xl');
-            }
-        };
-
-        // WhatsApp Submission
         form.addEventListener("submit", (e) => {
             e.preventDefault();
             const doctor = document.getElementById("doctor").value;
@@ -267,12 +286,16 @@
             const date = document.getElementById("date").value;
             const reason = document.getElementById("reason").value;
 
-            const message = `*New Appointment Request*%0A%0A*Patient:* ${name}%0A*Phone:* ${phone}%0A*Specialist:* ${doctor}%0A*Date:* ${date}%0A*Reason:* ${reason}`;
-            window.open(`https://wa.me/919002450077?text=${message}`, "_blank");
-            
-            document.getElementById("submission-message").textContent = "Redirecting to WhatsApp...";
-            setTimeout(closeModal, 2000);
+            const text = `*New Appointment Request*%0A%0A*Patient:* ${name}%0A*Phone:* ${phone}%0A*Specialist:* ${doctor}%0A*Date:* ${date}%0A*Reason:* ${reason}`;
+            window.open(`https://wa.me/919002450077?text=${text}`, "_blank");
+            closeModal();
         });
+
+        window.onscroll = () => {
+            const header = document.getElementById("main-header");
+            if (window.scrollY > 50) header.querySelector('nav').classList.add('py-1', 'shadow-2xl');
+            else header.querySelector('nav').classList.remove('py-1', 'shadow-2xl');
+        };
     </script>
 </body>
 </html>
