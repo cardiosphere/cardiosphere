@@ -89,8 +89,11 @@
                             alt="Cardiosphere Multi-Speciality Clinic Logo"
                             referrerpolicy="no-referrer"
                             class="w-full h-full object-contain"
-                            onerror="this.src='https://placehold.co/80x80/0B1F3A/FFFFFF?text=CS'"
+                            onerror="this.classList.add('hidden'); this.nextElementSibling.classList.remove('hidden');"
                         />
+                        <svg class="hidden w-6 h-6 text-medical" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                        </svg>
                     </div>
                     <div>
                         <span class="block text-base sm:text-lg font-extrabold tracking-tight text-navy leading-none group-hover:text-medical transition-colors">Cardiosphere</span>
@@ -103,10 +106,10 @@
                     <button data-nav="home" onclick="navigate('home')" class="main-nav-link px-2.5 xl:px-3 py-2 rounded-xl text-[13px] xl:text-sm font-semibold text-slate-600 hover:text-navy hover:bg-slate-100 transition-colors">Home</button>
                     <button data-nav="specialists" onclick="navigate('specialists')" class="main-nav-link px-2.5 xl:px-3 py-2 rounded-xl text-[13px] xl:text-sm font-semibold text-slate-600 hover:text-navy hover:bg-slate-100 transition-colors">Specialists</button>
                     <button data-nav="cardiology" onclick="navigate('cardiology')" class="main-nav-link px-2.5 xl:px-3 py-2 rounded-xl text-[13px] xl:text-sm font-semibold text-slate-600 hover:text-navy hover:bg-slate-100 transition-colors">Cardiology</button>
-                    <button data-nav="ent" onclick="navigate('ent')" class="main-nav-link px-2.5 xl:px-3 py-2 rounded-xl text-[13px] xl:text-sm font-semibold text-slate-600 hover:text-navy hover:bg-slate-100 transition-colors">ENT Care</button>
+                    <button data-nav="ent" onclick="navigate('ent')" class="main-nav-link px-2.5 xl:px-3 py-2 rounded-xl text-[13px] xl:text-sm font-semibold text-slate-600 hover:text-navy hover:bg-slate-100 transition-colors">ENT</button>
                     <button data-nav="diagnostics" onclick="navigate('diagnostics')" class="main-nav-link px-2.5 xl:px-3 py-2 rounded-xl text-[13px] xl:text-sm font-semibold text-slate-600 hover:text-navy hover:bg-slate-100 transition-colors">Diagnostics</button>
-                    <button data-nav="facilities" onclick="navigate('facilities')" class="main-nav-link px-2.5 xl:px-3 py-2 rounded-xl text-[13px] xl:text-sm font-semibold text-slate-600 hover:text-navy hover:bg-slate-100 transition-colors">Facilities</button>
                     <button data-nav="gallery" onclick="navigate('gallery')" class="main-nav-link px-2.5 xl:px-3 py-2 rounded-xl text-[13px] xl:text-sm font-semibold text-slate-600 hover:text-navy hover:bg-slate-100 transition-colors">Gallery</button>
+                    <button data-nav="facilities" onclick="navigate('facilities')" class="main-nav-link px-2.5 xl:px-3 py-2 rounded-xl text-[13px] xl:text-sm font-semibold text-slate-600 hover:text-navy hover:bg-slate-100 transition-colors">Facilities & Visit</button>
                 </nav>
 
                 <!-- Primary CTAs & Mobile Menu Trigger -->
@@ -140,7 +143,10 @@
         <div class="fixed right-0 top-0 bottom-0 w-full max-w-xs bg-white shadow-2xl border-l border-slate-200 flex flex-col">
             <div class="p-5 border-b border-slate-200 flex items-center justify-between">
                 <div class="flex items-center gap-2.5">
-                    <img src="https://lh3.googleusercontent.com/p/AF1QipMcFRLHMTS9rS1GLtgiVsKY8ufhIW1fbQf0zCTI=w284-h237-n-k-no-nu" alt="Cardiosphere" referrerpolicy="no-referrer" class="w-8 h-8 object-contain" onerror="this.src='https://placehold.co/64x64/0B1F3A/FFFFFF?text=CS'" />
+                    <div class="w-8 h-8 rounded-lg bg-slate-50 border border-slate-200 p-1 flex items-center justify-center shrink-0">
+                        <img src="https://lh3.googleusercontent.com/p/AF1QipMcFRLHMTS9rS1GLtgiVsKY8ufhIW1fbQf0zCTI=w284-h237-n-k-no-nu" alt="Cardiosphere" referrerpolicy="no-referrer" class="w-full h-full object-contain" onerror="this.classList.add('hidden'); this.nextElementSibling.classList.remove('hidden');" />
+                        <svg class="hidden w-5 h-5 text-medical" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                    </div>
                     <div>
                         <span class="block font-extrabold text-navy text-base leading-none">Cardiosphere</span>
                         <span class="block text-[10px] font-semibold text-slate-500 mt-0.5">Multi-Speciality Clinic</span>
@@ -159,10 +165,10 @@
                         <button data-mobile-nav="home" onclick="navigate('home'); toggleMobileMenu(false)" class="mobile-nav-link w-full text-left px-3.5 py-2.5 rounded-xl text-sm font-semibold text-slate-700 hover:bg-slate-100 transition-colors">Home</button>
                         <button data-mobile-nav="specialists" onclick="navigate('specialists'); toggleMobileMenu(false)" class="mobile-nav-link w-full text-left px-3.5 py-2.5 rounded-xl text-sm font-semibold text-slate-700 hover:bg-slate-100 transition-colors">Specialists</button>
                         <button data-mobile-nav="cardiology" onclick="navigate('cardiology'); toggleMobileMenu(false)" class="mobile-nav-link w-full text-left px-3.5 py-2.5 rounded-xl text-sm font-semibold text-slate-700 hover:bg-slate-100 transition-colors">Cardiology</button>
-                        <button data-mobile-nav="ent" onclick="navigate('ent'); toggleMobileMenu(false)" class="mobile-nav-link w-full text-left px-3.5 py-2.5 rounded-xl text-sm font-semibold text-slate-700 hover:bg-slate-100 transition-colors">ENT Care</button>
-                        <button data-mobile-nav="diagnostics" onclick="navigate('diagnostics'); toggleMobileMenu(false)" class="mobile-nav-link w-full text-left px-3.5 py-2.5 rounded-xl text-sm font-semibold text-slate-700 hover:bg-slate-100 transition-colors">Diagnostics & Pharmacy</button>
-                        <button data-mobile-nav="facilities" onclick="navigate('facilities'); toggleMobileMenu(false)" class="mobile-nav-link w-full text-left px-3.5 py-2.5 rounded-xl text-sm font-semibold text-slate-700 hover:bg-slate-100 transition-colors">Facilities & Visit Us</button>
-                        <button data-mobile-nav="gallery" onclick="navigate('gallery'); toggleMobileMenu(false)" class="mobile-nav-link w-full text-left px-3.5 py-2.5 rounded-xl text-sm font-semibold text-slate-700 hover:bg-slate-100 transition-colors">Clinic Gallery</button>
+                        <button data-mobile-nav="ent" onclick="navigate('ent'); toggleMobileMenu(false)" class="mobile-nav-link w-full text-left px-3.5 py-2.5 rounded-xl text-sm font-semibold text-slate-700 hover:bg-slate-100 transition-colors">ENT</button>
+                        <button data-mobile-nav="diagnostics" onclick="navigate('diagnostics'); toggleMobileMenu(false)" class="mobile-nav-link w-full text-left px-3.5 py-2.5 rounded-xl text-sm font-semibold text-slate-700 hover:bg-slate-100 transition-colors">Diagnostics</button>
+                        <button data-mobile-nav="gallery" onclick="navigate('gallery'); toggleMobileMenu(false)" class="mobile-nav-link w-full text-left px-3.5 py-2.5 rounded-xl text-sm font-semibold text-slate-700 hover:bg-slate-100 transition-colors">Gallery</button>
+                        <button data-mobile-nav="facilities" onclick="navigate('facilities'); toggleMobileMenu(false)" class="mobile-nav-link w-full text-left px-3.5 py-2.5 rounded-xl text-sm font-semibold text-slate-700 hover:bg-slate-100 transition-colors">Facilities & Visit</button>
                         <button data-mobile-nav="book" onclick="navigate('book'); toggleMobileMenu(false)" class="mobile-nav-link w-full text-left px-3.5 py-2.5 rounded-xl text-sm font-semibold text-slate-700 hover:bg-slate-100 transition-colors">Book Appointment</button>
                     </div>
                 </div>
@@ -204,7 +210,8 @@
                 <div class="space-y-4">
                     <div class="flex items-center gap-3">
                         <div class="w-10 h-10 rounded-xl bg-white p-1.5 flex items-center justify-center shrink-0">
-                            <img src="https://lh3.googleusercontent.com/p/AF1QipMcFRLHMTS9rS1GLtgiVsKY8ufhIW1fbQf0zCTI=w284-h237-n-k-no-nu" alt="Cardiosphere Logo" referrerpolicy="no-referrer" class="w-full h-full object-contain" onerror="this.src='https://placehold.co/80x80/0B1F3A/FFFFFF?text=CS'" />
+                            <img src="https://lh3.googleusercontent.com/p/AF1QipMcFRLHMTS9rS1GLtgiVsKY8ufhIW1fbQf0zCTI=w284-h237-n-k-no-nu" alt="Cardiosphere Logo" referrerpolicy="no-referrer" class="w-full h-full object-contain" onerror="this.classList.add('hidden'); this.nextElementSibling.classList.remove('hidden');" />
+                            <svg class="hidden w-6 h-6 text-medical" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
                         </div>
                         <div>
                             <p class="text-white font-extrabold text-lg leading-none">Cardiosphere</p>
@@ -222,8 +229,8 @@
                     <h3 class="text-white font-bold text-xs uppercase tracking-wider mb-4">Departments</h3>
                     <ul class="space-y-2.5 text-sm">
                         <li><button onclick="navigate('cardiology')" class="hover:text-white transition-colors text-slate-300">Cardiology</button></li>
-                        <li><button onclick="navigate('ent')" class="hover:text-white transition-colors text-slate-300">ENT Care</button></li>
-                        <li><button onclick="navigate('diagnostics')" class="hover:text-white transition-colors text-slate-300">Diagnostics & Pharmacy</button></li>
+                        <li><button onclick="navigate('ent')" class="hover:text-white transition-colors text-slate-300">ENT</button></li>
+                        <li><button onclick="navigate('diagnostics')" class="hover:text-white transition-colors text-slate-300">Diagnostics</button></li>
                     </ul>
                 </div>
 
@@ -233,8 +240,8 @@
                     <ul class="space-y-2.5 text-sm">
                         <li><button onclick="navigate('home')" class="hover:text-white transition-colors text-slate-300">Home</button></li>
                         <li><button onclick="navigate('specialists')" class="hover:text-white transition-colors text-slate-300">Specialists</button></li>
-                        <li><button onclick="navigate('facilities')" class="hover:text-white transition-colors text-slate-300">Facilities & Visit Us</button></li>
-                        <li><button onclick="navigate('gallery')" class="hover:text-white transition-colors text-slate-300">Clinic Gallery</button></li>
+                        <li><button onclick="navigate('gallery')" class="hover:text-white transition-colors text-slate-300">Gallery</button></li>
+                        <li><button onclick="navigate('facilities')" class="hover:text-white transition-colors text-slate-300">Facilities & Visit</button></li>
                         <li><button onclick="navigate('book')" class="hover:text-white transition-colors text-slate-300">Book Appointment</button></li>
                     </ul>
                 </div>
@@ -264,8 +271,12 @@
                 <p>© 2026 Cardiosphere Multi-Speciality Clinic. All rights reserved.</p>
                 <div class="flex flex-wrap items-center gap-5">
                     <button onclick="navigate('specialists')" class="hover:text-white transition-colors">Specialists</button>
-                    <button onclick="navigate('gallery')" class="hover:text-white transition-colors">Clinic Gallery</button>
+                    <button onclick="navigate('gallery')" class="hover:text-white transition-colors">Gallery</button>
                     <button onclick="navigate('book')" class="hover:text-white transition-colors">Book Appointment</button>
+                    <button onclick="handleFooterStaffAdmin()" class="inline-flex items-center gap-1.5 text-slate-400 hover:text-emerald-300 transition-colors" title="Staff Admin Login">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                        <span>Staff Admin</span>
+                    </button>
                 </div>
             </div>
         </div>
@@ -274,51 +285,51 @@
     <!-- ===================================================================== -->
     <!-- QUICK APPOINTMENT BOOKING MODAL                                       -->
     <!-- ===================================================================== -->
-    <div id="booking-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-navy/60 backdrop-blur-sm">
+    <div id="booking-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-navy/65 backdrop-blur-sm">
         <div class="bg-white rounded-3xl border border-slate-200 shadow-2xl w-full max-w-lg max-h-[92vh] overflow-y-auto">
-            <div class="px-6 py-5 border-b border-slate-200 flex items-center justify-between sticky top-0 bg-white z-10 rounded-t-3xl">
+            <div class="bg-navy px-6 py-5 text-white flex items-center justify-between sticky top-0 z-10 rounded-t-3xl">
                 <div>
-                    <span class="text-[11px] font-bold uppercase tracking-wider text-clinical-teal">Quick Appointment Request</span>
-                    <h2 class="text-lg font-extrabold text-navy">Book Consultation</h2>
+                    <span class="block text-[10px] font-bold uppercase tracking-wider text-teal-300">Direct WhatsApp Scheduling</span>
+                    <h2 class="text-lg font-extrabold leading-snug">Quick Appointment Booking</h2>
                 </div>
-                <button onclick="closeBookingModal()" class="p-2 rounded-xl text-slate-400 hover:text-navy hover:bg-slate-100 transition-colors" aria-label="Close Modal">
+                <button onclick="closeBookingModal()" class="p-2 rounded-xl text-slate-300 hover:text-white hover:bg-white/10 transition-colors" aria-label="Close Booking Modal">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M18 6 6 18M6 6l12 12"/></svg>
                 </button>
             </div>
 
-            <!-- Live Selected Doctor Photo Preview -->
-            <div id="modal-doctor-preview" class="mx-6 mt-5 p-3.5 rounded-2xl bg-slate-50 border border-slate-200 flex items-center gap-3.5"></div>
-
             <form id="modal-booking-form" class="p-6 space-y-4">
                 <div>
-                    <label for="modal-doctor" class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1.5">Specialist / Service</label>
+                    <label for="modal-doctor" class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1.5">Select Specialist or Service</label>
                     <select id="modal-doctor" onchange="updateModalDoctorPreview()" class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-sm font-semibold text-navy focus:outline-none focus:ring-2 focus:ring-medical">
                         <option value="dr-tutan-das">Dr. Tutan Das — Interventional Cardiologist</option>
                         <option value="dr-manidipa-majumdar">Dr. Manidipa Majumdar — Interventional Cardiologist</option>
-                        <option value="dr-swagata-chakraborty">Dr. Swagata Chakraborty — ENT & Head/Neck Surgeon</option>
-                        <option value="diagnostics">Diagnostics, Lab & Home Sample Collection</option>
+                        <option value="dr-swagata-chakraborty">Dr. Swagata Chakraborty — ENT &amp; Head/Neck Surgeon</option>
+                        <option value="diagnostics">Diagnostics, Pathology &amp; Home Sample Collection</option>
                     </select>
                 </div>
 
+                <!-- Selected Specialist Preview Card -->
+                <div id="modal-doctor-preview" class="p-3 rounded-2xl bg-slate-50 border border-slate-200 flex items-center gap-3"></div>
+
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                     <div>
-                        <label for="modal-name" class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1.5">Patient Name</label>
-                        <input type="text" id="modal-name" required placeholder="Full name" class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-medical" />
+                        <label for="modal-name" class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1.5">Patient Full Name *</label>
+                        <input type="text" id="modal-name" required placeholder="e.g. Subhash Pal" class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-medical" />
                     </div>
                     <div>
-                        <label for="modal-phone" class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1.5">Phone Number</label>
+                        <label for="modal-phone" class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1.5">Phone Number *</label>
                         <input type="tel" id="modal-phone" required placeholder="+91 98XXX XXXXX" class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-medical" />
                     </div>
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                     <div>
-                        <label for="modal-date" class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1.5">Preferred Date</label>
-                        <input type="date" id="modal-date" required class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-medical" />
+                        <label for="modal-date" class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1.5">Preferred Date *</label>
+                        <input type="date" id="modal-date" required class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-sm font-semibold text-navy focus:outline-none focus:ring-2 focus:ring-medical" />
                     </div>
                     <div>
-                        <label for="modal-slot" class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1.5">Time Slot</label>
-                        <select id="modal-slot" class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-medical">
+                        <label for="modal-slot" class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1.5">Preferred Time Slot</label>
+                        <select id="modal-slot" class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-sm font-semibold text-navy focus:outline-none focus:ring-2 focus:ring-medical">
                             <option value="Morning — 9:30 AM">Morning — 9:30 AM</option>
                             <option value="Morning — 11:00 AM">Morning — 11:00 AM</option>
                             <option value="Afternoon — 12:30 PM">Afternoon — 12:30 PM</option>
@@ -330,17 +341,16 @@
 
                 <div>
                     <label for="modal-reason" class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1.5">Reason for Visit (Optional)</label>
-                    <textarea id="modal-reason" rows="2" placeholder="Briefly describe symptoms or diagnostic test needed..." class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-medical"></textarea>
+                    <textarea id="modal-reason" rows="2" placeholder="Symptoms, follow-up, 2D Echo, sinus consultation..." class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-medical"></textarea>
                 </div>
 
-                <div id="modal-confirmation" class="hidden p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-900 text-sm space-y-1"></div>
+                <div id="modal-confirmation" class="hidden p-3.5 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-900 space-y-1"></div>
 
-                <div class="pt-1 flex flex-col sm:flex-row gap-2.5">
-                    <button type="submit" class="flex-1 inline-flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white py-3 px-4 rounded-xl text-sm font-bold transition-colors shadow-sm">
-                        <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
-                        Confirm & Send via WhatsApp
+                <div class="pt-1 flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5">
+                    <button type="submit" class="flex-1 py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-bold shadow-sm transition-colors">
+                        Confirm &amp; Send via WhatsApp
                     </button>
-                    <button type="button" onclick="openFullBookingFromModal()" class="px-4 py-3 rounded-xl border border-slate-200 text-slate-700 hover:bg-slate-50 text-sm font-semibold transition-colors">
+                    <button type="button" onclick="openFullBookingFromModal()" class="py-3 px-4 rounded-xl border border-slate-200 hover:bg-slate-50 text-navy text-xs font-bold transition-colors">
                         Full Booking Page
                     </button>
                 </div>
@@ -349,21 +359,21 @@
     </div>
 
     <!-- ===================================================================== -->
-    <!-- GALLERY UPLOAD / EDIT PHOTO MODAL                                     -->
+    <!-- GALLERY UPLOAD / EDIT PHOTO MODAL (Admin Guarded)                     -->
     <!-- ===================================================================== -->
     <div id="gallery-editor-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-navy/65 backdrop-blur-sm">
         <div class="bg-white rounded-3xl border border-slate-200 shadow-2xl w-full max-w-2xl max-h-[92vh] overflow-y-auto">
             <div class="px-6 py-5 border-b border-slate-200 flex items-center justify-between sticky top-0 bg-white z-10 rounded-t-3xl">
                 <div>
-                    <span class="text-[11px] font-bold uppercase tracking-wider text-clinical-teal">Clinic Photo Manager</span>
-                    <h2 id="gallery-modal-heading" class="text-lg font-extrabold text-navy">Upload / Add Photo</h2>
+                    <span class="text-[11px] font-bold uppercase tracking-wider text-clinical-teal">Authenticated Gallery Manager</span>
+                    <h2 id="gallery-modal-heading" class="text-lg font-extrabold text-navy">Add / Upload Photo</h2>
                 </div>
                 <button onclick="closeGalleryModal()" class="p-2 rounded-xl text-slate-400 hover:text-navy hover:bg-slate-100 transition-colors" aria-label="Close Gallery Modal">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M18 6 6 18M6 6l12 12"/></svg>
                 </button>
             </div>
 
-            <form id="gallery-editor-form" onsubmit="handleGalleryFormSubmit(event)" class="p-6 space-y-5">
+            <form id="gallery-editor-form" onsubmit="handleGalleryEditorSubmit(event)" class="p-6 space-y-5">
                 <input type="hidden" id="gallery-edit-id" value="" />
 
                 <!-- Input Source Tabs -->
@@ -372,7 +382,7 @@
                         Upload from Device
                     </button>
                     <button type="button" id="gallery-tab-link" onclick="switchGalleryInputTab('link')" class="flex-1 py-2.5 px-3 rounded-lg text-xs sm:text-sm font-bold transition-all text-slate-600 hover:text-navy">
-                        Paste Google Drive / Image Link
+                        Google Drive / Direct Image URL
                     </button>
                 </div>
 
@@ -391,12 +401,12 @@
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
                         </div>
                         <p class="text-sm font-bold text-navy">Click to choose a photo or drag & drop here</p>
-                        <p class="text-xs text-slate-500 mt-1">Supports JPG, PNG, WebP, AVIF • Automatically resized & compressed for smooth saving</p>
+                        <p class="text-xs text-slate-500 mt-1">Supports JPG, PNG, WebP, AVIF • Auto-resized (max 1200px) & JPEG compressed</p>
                         <p id="gallery-upload-status" class="text-xs font-semibold text-clinical-teal mt-2 hidden"></p>
                     </div>
                 </div>
 
-                <!-- Tab B: Paste Google Drive / Image Link -->
+                <!-- Tab B: Google Drive / Direct Image URL -->
                 <div id="gallery-panel-link" class="hidden space-y-2.5">
                     <label for="gallery-url-input" class="block text-xs font-bold uppercase tracking-wider text-slate-500">Google Drive Share Link or Direct Image URL</label>
                     <div class="flex flex-col sm:flex-row gap-2">
@@ -414,8 +424,8 @@
                     <div class="flex items-start gap-2 p-3 rounded-xl bg-amber-50 border border-amber-200 text-xs text-amber-900">
                         <svg class="w-4 h-4 text-amber-600 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
                         <div>
-                            <p class="font-semibold">Tip: Make sure Drive sharing is set to "Anyone with the link – Viewer".</p>
-                            <p id="gallery-drive-detect-msg" class="text-amber-800 mt-0.5">Google Drive links are automatically converted into high-resolution direct images with automatic fallback.</p>
+                            <p class="font-semibold">Tip: Set Google Drive sharing to "Anyone with the link – Viewer".</p>
+                            <p id="gallery-drive-detect-msg" class="text-amber-800 mt-0.5">Drive links automatically convert into high-resolution thumbnails with lh3.googleusercontent.com fallback.</p>
                         </div>
                     </div>
                 </div>
@@ -492,7 +502,7 @@
     </div>
 
     <!-- ===================================================================== -->
-    <!-- GALLERY PUBLISH / EXPORT / BACKUP MODAL                               -->
+    <!-- GALLERY PUBLISH / BACKUP MODAL (Admin Guarded)                        -->
     <!-- ===================================================================== -->
     <div id="gallery-export-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-navy/65 backdrop-blur-sm">
         <div class="bg-white rounded-3xl border border-slate-200 shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto">
@@ -509,7 +519,7 @@
             <div class="p-6 space-y-6">
                 <div class="p-4 rounded-2xl bg-medical-soft border border-blue-200 text-xs text-navy leading-relaxed space-y-1">
                     <p class="font-bold">How permanent publishing works:</p>
-                    <p class="text-slate-700">Photos you add in your browser are saved automatically on this device. To make new photos permanently visible to all clinic visitors on your hosted website, copy the code snippet below and replace the <code class="px-1.5 py-0.5 bg-white rounded border border-blue-200 font-mono text-[11px]">INITIAL_GALLERY_PHOTOS</code> block near the top of <code class="px-1.5 py-0.5 bg-white rounded border border-blue-200 font-mono text-[11px]">index.html</code>.</p>
+                    <p class="text-slate-700">Photos added here save immediately in this browser. To make them permanently visible for all visitors on your live website, copy the code snippet below and replace the <code class="px-1.5 py-0.5 bg-white rounded border border-blue-200 font-mono text-[11px]">INITIAL_GALLERY_PHOTOS</code> block near the top of <code class="px-1.5 py-0.5 bg-white rounded border border-blue-200 font-mono text-[11px]">index.html</code>.</p>
                 </div>
 
                 <!-- Code Snippet Box -->
@@ -523,15 +533,15 @@
                     <textarea id="gallery-export-code" readonly rows="8" class="w-full p-3.5 rounded-2xl bg-slate-900 text-emerald-300 font-mono text-xs leading-relaxed border border-slate-700 focus:outline-none"></textarea>
                 </div>
 
-                <!-- Backup / Restore / Reset Actions -->
+                <!-- Backup / Import / Reset Actions -->
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2 border-t border-slate-200">
                     <button type="button" onclick="downloadGalleryBackup()" class="px-4 py-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-navy text-xs font-bold transition-colors text-center">
                         Download Backup (.json)
                     </button>
 
                     <label class="px-4 py-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-navy text-xs font-bold transition-colors text-center cursor-pointer">
-                        <span>Restore Backup (.json)</span>
-                        <input type="file" id="gallery-restore-input" accept="application/json,.json" class="hidden" onchange="handleRestoreGalleryBackup(event)" />
+                        <span>Import Backup (.json)</span>
+                        <input type="file" id="gallery-restore-input" accept="application/json,.json" class="hidden" onchange="importGalleryJson(event)" />
                     </label>
 
                     <button type="button" id="gallery-reset-btn" onclick="requestResetGallery()" class="px-4 py-3 rounded-xl bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 text-xs font-bold transition-colors text-center">
@@ -539,15 +549,195 @@
                     </button>
                 </div>
 
-                <!-- Inline Reset Confirmation (No alert/confirm) -->
+                <!-- Inline Reset Confirmation -->
                 <div id="gallery-reset-confirm" class="hidden p-4 rounded-2xl bg-rose-50 border border-rose-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                     <p class="text-xs font-semibold text-rose-900">Restore the original 6 clinic photos and remove custom uploads from this browser?</p>
                     <div class="flex items-center gap-2 shrink-0">
                         <button type="button" onclick="cancelResetGallery()" class="px-3 py-1.5 rounded-lg bg-white border border-rose-200 text-xs font-bold text-slate-700 hover:bg-slate-50">Cancel</button>
-                        <button type="button" onclick="confirmResetGallery()" class="px-3 py-1.5 rounded-lg bg-rose-600 text-white text-xs font-bold hover:bg-rose-700">Yes, Reset</button>
+                        <button type="button" onclick="resetGalleryToDefaults()" class="px-3 py-1.5 rounded-lg bg-rose-600 text-white text-xs font-bold hover:bg-rose-700">Yes, Reset</button>
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <!-- ===================================================================== -->
+    <!-- DELETE PHOTO CONFIRMATION MODAL (Admin Guarded)                       -->
+    <!-- ===================================================================== -->
+    <div id="gallery-delete-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-navy/65 backdrop-blur-sm">
+        <div class="bg-white rounded-3xl border border-slate-200 shadow-2xl w-full max-w-md overflow-hidden">
+            <div class="p-6 space-y-4">
+                <div class="flex items-start gap-3.5">
+                    <div class="w-11 h-11 rounded-2xl bg-rose-50 border border-rose-200 text-rose-600 flex items-center justify-center shrink-0">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>
+                    </div>
+                    <div>
+                        <h2 class="text-lg font-extrabold text-navy">Delete Gallery Photo?</h2>
+                        <p class="text-xs text-slate-600 mt-1">This removes the photo from the Clinic Gallery on this browser. You can also export an updated gallery snippet afterward.</p>
+                    </div>
+                </div>
+
+                <div id="gallery-delete-preview" class="p-3 rounded-2xl bg-slate-50 border border-slate-200 flex items-center gap-3"></div>
+
+                <div class="flex items-center justify-end gap-2.5 pt-2">
+                    <button type="button" onclick="closeDeletePhotoModal()" class="px-4 py-2.5 rounded-xl border border-slate-200 text-slate-700 hover:bg-slate-50 text-xs sm:text-sm font-bold transition-colors">
+                        Cancel
+                    </button>
+                    <button type="button" onclick="confirmDeletePhoto()" class="px-5 py-2.5 rounded-xl bg-rose-600 hover:bg-rose-700 text-white text-xs sm:text-sm font-bold shadow-sm transition-colors">
+                        Yes, Delete Photo
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===================================================================== -->
+    <!-- ADMIN LOGIN MODAL (SHA-256 Auth + Brute-Force Protection)             -->
+    <!-- ===================================================================== -->
+    <div id="admin-login-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-navy/70 backdrop-blur-sm">
+        <div class="bg-white rounded-3xl border border-slate-200 shadow-2xl w-full max-w-md overflow-hidden">
+            <div class="bg-navy px-6 py-5 text-white flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-white/10 border border-white/15 text-emerald-300 flex items-center justify-center shrink-0">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                    </div>
+                    <div>
+                        <span class="block text-[10px] font-bold uppercase tracking-wider text-teal-300">Clinic Staff Authentication</span>
+                        <h2 class="text-base font-extrabold leading-snug">Gallery Admin Login</h2>
+                    </div>
+                </div>
+                <button onclick="closeAdminLoginModal()" class="p-2 rounded-xl text-slate-300 hover:text-white hover:bg-white/10 transition-colors" aria-label="Close Login Modal">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M18 6 6 18M6 6l12 12"/></svg>
+                </button>
+            </div>
+
+            <form id="admin-login-form" onsubmit="handleAdminLoginSubmit(event)" class="p-6 space-y-4">
+                <p class="text-xs text-slate-600 leading-relaxed">
+                    Sign in with authorized clinic staff credentials to upload, edit captions, delete, or backup Clinic Gallery photos.
+                </p>
+
+                <div>
+                    <label for="admin-login-username" class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1.5">Username</label>
+                    <input
+                        type="text"
+                        id="admin-login-username"
+                        autocomplete="username"
+                        required
+                        placeholder="Enter admin username"
+                        class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-sm font-semibold text-navy focus:outline-none focus:ring-2 focus:ring-medical"
+                    />
+                </div>
+
+                <div>
+                    <label for="admin-login-password" class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1.5">Password</label>
+                    <div class="relative">
+                        <input
+                            type="password"
+                            id="admin-login-password"
+                            autocomplete="current-password"
+                            required
+                            placeholder="Enter admin password"
+                            class="w-full pl-3.5 pr-11 py-2.5 rounded-xl bg-white border border-slate-200 text-sm font-semibold text-navy focus:outline-none focus:ring-2 focus:ring-medical"
+                        />
+                        <button
+                            type="button"
+                            onclick="togglePasswordVisibility('admin-login-password', this)"
+                            class="absolute right-2.5 top-1/2 -translate-y-1/2 p-1.5 rounded-lg text-slate-400 hover:text-navy hover:bg-slate-100 transition-colors"
+                            aria-label="Toggle Password Visibility"
+                        >
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Error & Brute-Force Lockout Banner -->
+                <div id="admin-login-error" class="hidden p-3.5 rounded-xl bg-rose-50 border border-rose-200 text-xs font-semibold text-rose-800 leading-relaxed"></div>
+
+                <button type="submit" id="admin-login-submit" class="w-full py-3 px-4 rounded-xl bg-navy hover:bg-navy-light text-white text-sm font-bold shadow-sm transition-colors flex items-center justify-center gap-2">
+                    <svg class="w-4 h-4 text-emerald-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 9.9-1"/></svg>
+                    <span>Unlock Gallery Manager</span>
+                </button>
+
+                <div class="pt-2 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500">
+                    <span>Session auto-locks after 20 min inactivity</span>
+                    <span>Tab-only session</span>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ===================================================================== -->
+    <!-- ADMIN SECURITY SETTINGS / CHANGE PASSWORD MODAL (Admin Guarded)       -->
+    <!-- ===================================================================== -->
+    <div id="admin-security-modal" class="hidden fixed inset-0 z-50 flex items-center justify-center p-4 bg-navy/70 backdrop-blur-sm">
+        <div class="bg-white rounded-3xl border border-slate-200 shadow-2xl w-full max-w-xl max-h-[92vh] overflow-y-auto">
+            <div class="px-6 py-5 border-b border-slate-200 flex items-center justify-between sticky top-0 bg-white z-10 rounded-t-3xl">
+                <div>
+                    <span class="text-[11px] font-bold uppercase tracking-wider text-emerald-700">Admin Security Settings</span>
+                    <h2 class="text-lg font-extrabold text-navy">Change Username & Password</h2>
+                </div>
+                <button onclick="closeSecurityModal()" class="p-2 rounded-xl text-slate-400 hover:text-navy hover:bg-slate-100 transition-colors" aria-label="Close Security Modal">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M18 6 6 18M6 6l12 12"/></svg>
+                </button>
+            </div>
+
+            <form id="admin-security-form" onsubmit="handleUpdateCredentials(event)" class="p-6 space-y-4">
+                <div>
+                    <label for="sec-current-password" class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1.5">Current Password *</label>
+                    <div class="relative">
+                        <input type="password" id="sec-current-password" required placeholder="Verify current password" class="w-full pl-3.5 pr-11 py-2.5 rounded-xl bg-white border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-medical" />
+                        <button type="button" onclick="togglePasswordVisibility('sec-current-password', this)" class="absolute right-2.5 top-1/2 -translate-y-1/2 p-1.5 rounded-lg text-slate-400 hover:text-navy hover:bg-slate-100" aria-label="Toggle Current Password Visibility">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                        </button>
+                    </div>
+                </div>
+
+                <div>
+                    <label for="sec-new-username" class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1.5">New Admin Username *</label>
+                    <input type="text" id="sec-new-username" required minlength="3" placeholder="e.g. admin" class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-sm font-semibold text-navy focus:outline-none focus:ring-2 focus:ring-medical" />
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                    <div>
+                        <label for="sec-new-password" class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1.5">New Password *</label>
+                        <div class="relative">
+                            <input type="password" id="sec-new-password" required minlength="6" placeholder="Min. 6 characters" class="w-full pl-3.5 pr-10 py-2.5 rounded-xl bg-white border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-medical" />
+                            <button type="button" onclick="togglePasswordVisibility('sec-new-password', this)" class="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 rounded-lg text-slate-400 hover:text-navy" aria-label="Toggle New Password Visibility">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                            </button>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="sec-confirm-password" class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1.5">Confirm New Password *</label>
+                        <input type="password" id="sec-confirm-password" required minlength="6" placeholder="Re-enter new password" class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-medical" />
+                    </div>
+                </div>
+
+                <div id="sec-feedback-msg" class="hidden p-3.5 rounded-xl text-xs font-semibold"></div>
+
+                <div class="flex flex-col sm:flex-row justify-end gap-2.5 pt-1">
+                    <button type="button" onclick="closeSecurityModal()" class="px-4 py-2.5 rounded-xl border border-slate-200 text-slate-700 hover:bg-slate-50 text-xs sm:text-sm font-semibold">
+                        Close
+                    </button>
+                    <button type="submit" class="px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs sm:text-sm font-bold shadow-sm transition-colors">
+                        Save New SHA-256 Credentials
+                    </button>
+                </div>
+
+                <!-- Permanent ADMIN_CONFIG Generator Output -->
+                <div id="admin-config-export-box" class="hidden pt-4 border-t border-slate-200 space-y-2.5">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                        <div>
+                            <p class="text-xs font-extrabold text-navy">Permanent Hosting Update (No Plaintext Password)</p>
+                            <p class="text-[11px] text-slate-500">Paste this into <code class="font-mono bg-slate-100 px-1 rounded">index.html</code> to apply your new SHA-256 hash across all devices.</p>
+                        </div>
+                        <button type="button" onclick="copyPermanentAdminConfig()" class="px-3.5 py-2 rounded-xl bg-navy hover:bg-navy-light text-white text-xs font-bold shrink-0 transition-colors">
+                            Copy Permanent ADMIN_CONFIG Code
+                        </button>
+                    </div>
+                    <textarea id="admin-config-code-output" readonly rows="5" class="w-full p-3.5 rounded-2xl bg-slate-900 text-emerald-300 font-mono text-xs leading-relaxed border border-slate-700 focus:outline-none"></textarea>
+                </div>
+            </form>
         </div>
     </div>
 
@@ -575,7 +765,6 @@
             <div class="w-full h-full flex items-center justify-center px-12 sm:px-16">
                 <img
                     id="lightbox-img"
-                    src=""
                     alt=""
                     referrerpolicy="no-referrer"
                     data-fallback-src=""
@@ -611,43 +800,58 @@
     <!-- ===================================================================== -->
     <script>
         /* ===================================================================== */
+        /* EDITABLE ADMIN AUTH CONFIGURATION (Pure-JS SHA-256 Protected)         */
+        /* ===================================================================== */
+        const ADMIN_CONFIG = {
+            username: 'admin',
+            passwordHash: '', // Leave empty to verify against defaultPassword, OR paste generated SHA-256 hex hash here
+            defaultPassword: 'Cardio@2026', // Set to '' once passwordHash is populated
+        };
+
+        const ADMIN_AUTH_OVERRIDE_KEY = 'cardiosphere_admin_auth_v1';
+        const ADMIN_SESSION_KEY = 'cardiosphere_admin_session_v1';
+        const ADMIN_INACTIVITY_MS = 20 * 60 * 1000; // 20-minute inactivity auto-lock
+        const ADMIN_MAX_FAILED_ATTEMPTS = 5;
+        const ADMIN_LOCKOUT_MS = 30 * 1000; // 30-second brute-force lockout
+
+        /* ===================================================================== */
         /* INITIAL CLINIC GALLERY PHOTOS (Easy to replace for permanent hosting) */
         /* ===================================================================== */
         const INITIAL_GALLERY_PHOTOS = [
             {
                 id: 'gal-medical-team',
                 title: 'Dedicated Medical Team',
-                caption: 'Our dedicated medical and clinical care team at Cardiosphere Multi-Speciality Clinic, Durgapur.',
+                caption: 'Professional and caring medical staff at Cardiosphere Multi-Speciality Clinic, Durgapur.',
                 category: 'Medical Team',
                 date: '2026-04-10',
                 fit: 'contain',
-                src: 'https://drive.google.com/thumbnail?id=1jUHZ99Tut7JKqwoSYoiGGDh8Y9-DYpor&sz=w1600',
-                fallbackSrc: 'https://lh3.googleusercontent.com/d/1jUHZ99Tut7JKqwoSYoiGGDh8Y9-DYpor=w1600',
+                src: 'https://drive.google.com/thumbnail?id=1jUHZ99Tut7JKqwoSYoiGGDh8Y9-DYpor&sz=w1200',
+                fallbackSrc: 'https://lh3.googleusercontent.com/d/1jUHZ99Tut7JKqwoSYoiGGDh8Y9-DYpor=w1200',
             },
             {
                 id: 'gal-accessible-entrance',
-                title: 'Accessible Clinic Entrance',
-                caption: 'Clean, welcoming, and easily accessible clinic entrance at Arushi Complex, Muchipara.',
+                title: 'Accessible Entrance',
+                caption: 'Clean and easy access for all patients at Arushi Complex, Muchipara.',
                 category: 'Facilities',
                 date: '2026-04-10',
                 fit: 'contain',
-                src: 'https://drive.google.com/thumbnail?id=15fygfgdgwEEvL-2lgu78Bqb-ltXIOyS-&sz=w1600',
-                fallbackSrc: 'https://lh3.googleusercontent.com/d/15fygfgdgwEEvL-2lgu78Bqb-ltXIOyS-=w1600',
+                src: 'https://drive.google.com/thumbnail?id=15fygfgdgwEEvL-2lgu78Bqb-ltXIOyS-&sz=w1200',
+                fallbackSrc: 'https://lh3.googleusercontent.com/d/15fygfgdgwEEvL-2lgu78Bqb-ltXIOyS-=w1200',
             },
             {
                 id: 'gal-patient-lounge',
                 title: 'Comfortable Patient Lounge',
-                caption: 'Spacious and comfortable waiting lounge designed for patients and families.',
+                caption: 'Spacious and welcoming waiting area designed for patients and families.',
                 category: 'Facilities',
                 date: '2026-03-18',
                 fit: 'contain',
-                src: 'https://lh3.googleusercontent.com/p/AF1QipNejE19n4Mu5dMV2HX2Dsrq-4ose9BA6aiXw1lf=w284-h203-n-k-no-nu',
-                fallbackSrc: '',
+                src: 'https://lh3.googleusercontent.com/p/AF1QipNejE19n4Mu5dMV2HX2Dsrq-4ose9BA6aiXw1lf=w1000',
+                fallbackSrc: 'https://lh3.googleusercontent.com/p/AF1QipNejE19n4Mu5dMV2HX2Dsrq-4ose9BA6aiXw1lf=w284-h203-n-k-no-nu',
             },
             {
                 id: 'gal-dr-tutan',
                 title: 'Dr. Tutan Das — Interventional Cardiology',
-                caption: 'Dr. Tutan Das, DM Cardiology (AIIMS) — Leading interventional cardiac care.',
+                caption: 'Dr. Tutan Das, DM Cardiology (AIIMS) — Expert in Complex Angioplasty & Cardiac Devices.',
                 category: 'Specialists',
                 date: '2026-03-12',
                 fit: 'contain',
@@ -657,7 +861,7 @@
             {
                 id: 'gal-dr-manidipa',
                 title: 'Dr. Manidipa Majumdar — Cardiac Diagnostics',
-                caption: 'Dr. Manidipa Majumdar — Specialist in cardiac diagnostics and preventive heart care.',
+                caption: 'Dr. Manidipa Majumdar — Specialist in Cardiac Diagnostics & Chronic Condition Management.',
                 category: 'Specialists',
                 date: '2026-03-12',
                 fit: 'contain',
@@ -666,8 +870,8 @@
             },
             {
                 id: 'gal-dr-swagata',
-                title: 'Dr. Swagata Chakraborty — ENT & Head/Neck Care',
-                caption: 'Dr. Swagata Chakraborty, Ex-Senior Resident (AIIMS) — Comprehensive ENT & head/neck surgical care.',
+                title: 'Dr. Swagata Chakraborty — ENT & Head/Neck Surgery',
+                caption: 'Dr. Swagata Chakraborty, Ex-Senior Resident AIIMS — Expertise in complex ENT surgical procedures.',
                 category: 'Specialists',
                 date: '2026-03-12',
                 fit: 'contain',
@@ -824,12 +1028,23 @@
             ],
             facilities: [
                 {
+                    id: 'fac-patient-lounge',
+                    title: 'Comfortable Patient Lounge',
+                    category: 'Patient Comfort',
+                    description: 'Spacious and welcoming waiting area.',
+                    src: 'https://lh3.googleusercontent.com/p/AF1QipNejE19n4Mu5dMV2HX2Dsrq-4ose9BA6aiXw1lf=w1000',
+                    fallbackSrc: 'https://lh3.googleusercontent.com/p/AF1QipNejE19n4Mu5dMV2HX2Dsrq-4ose9BA6aiXw1lf=w284-h203-n-k-no-nu',
+                    placeholder: 'https://placehold.co/1200x750/E2E8F0/0B1F3A?text=Comfortable+Patient+Lounge',
+                    date: 'Cardiosphere Clinic',
+                    fit: 'contain',
+                },
+                {
                     id: 'fac-medical-team',
                     title: 'Dedicated Medical Team',
                     category: 'Clinical Care Staff',
-                    description: 'Our dedicated medical, nursing, diagnostic, and support team working together for attentive, punctual patient care.',
-                    src: 'https://drive.google.com/thumbnail?id=1jUHZ99Tut7JKqwoSYoiGGDh8Y9-DYpor&sz=w1600',
-                    fallbackSrc: 'https://lh3.googleusercontent.com/d/1jUHZ99Tut7JKqwoSYoiGGDh8Y9-DYpor=w1600',
+                    description: 'Professional and caring medical staff.',
+                    src: 'https://drive.google.com/thumbnail?id=1jUHZ99Tut7JKqwoSYoiGGDh8Y9-DYpor&sz=w1200',
+                    fallbackSrc: 'https://lh3.googleusercontent.com/d/1jUHZ99Tut7JKqwoSYoiGGDh8Y9-DYpor=w1200',
                     placeholder: 'https://placehold.co/1200x750/E2E8F0/0B1F3A?text=Dedicated+Medical+Team',
                     date: 'Cardiosphere Clinic',
                     fit: 'contain',
@@ -838,22 +1053,11 @@
                     id: 'fac-accessible-entrance',
                     title: 'Accessible Entrance',
                     category: 'Convenient Access',
-                    description: 'Clean, well-marked, and easily accessible clinic entrance located on the 2nd Floor of Arushi Complex, Muchipara.',
-                    src: 'https://drive.google.com/thumbnail?id=15fygfgdgwEEvL-2lgu78Bqb-ltXIOyS-&sz=w1600',
-                    fallbackSrc: 'https://lh3.googleusercontent.com/d/15fygfgdgwEEvL-2lgu78Bqb-ltXIOyS-=w1600',
+                    description: 'Clean and easy access for all patients.',
+                    src: 'https://drive.google.com/thumbnail?id=15fygfgdgwEEvL-2lgu78Bqb-ltXIOyS-&sz=w1200',
+                    fallbackSrc: 'https://lh3.googleusercontent.com/d/15fygfgdgwEEvL-2lgu78Bqb-ltXIOyS-=w1200',
                     placeholder: 'https://placehold.co/1200x750/E2E8F0/0B1F3A?text=Accessible+Entrance',
                     date: 'Arushi Complex, Muchipara',
-                    fit: 'contain',
-                },
-                {
-                    id: 'fac-patient-lounge',
-                    title: 'Comfortable Patient Lounge',
-                    category: 'Patient Comfort',
-                    description: 'Spacious, hygienic, and calm waiting lounge designed for relaxed pre-consultation comfort for patients and families.',
-                    src: 'https://lh3.googleusercontent.com/p/AF1QipNejE19n4Mu5dMV2HX2Dsrq-4ose9BA6aiXw1lf=w284-h203-n-k-no-nu',
-                    fallbackSrc: '',
-                    placeholder: 'https://placehold.co/1200x750/E2E8F0/0B1F3A?text=Comfortable+Patient+Lounge',
-                    date: 'Cardiosphere Clinic',
                     fit: 'contain',
                 },
             ],
@@ -877,7 +1081,7 @@
         };
 
         /**
-         * Global UI state for specialist filtering, booking, gallery, and lightbox.
+         * Global UI state for specialist filtering, booking, gallery, admin auth, and lightbox.
          */
         const APP_STATE = {
             doctorFilter: 'All',
@@ -886,19 +1090,28 @@
             galleryPhotos: [],
             galleryCategory: 'All',
             manageGalleryMode: false,
-            pendingDeleteId: null,
+            pendingDeletePhotoId: null,
             editorTab: 'device',
             editorDraftSrc: '',
             editorDraftFallback: '',
             lightboxItems: [],
             lightboxIndex: 0,
+            adminFailedAttempts: 0,
+            adminLockoutUntil: 0,
+            adminLockoutInterval: null,
+            adminInactivityInterval: null,
+            lastTouchTime: 0,
         };
 
         /* ===================================================================== */
         /* UTILITY HELPERS (Escaping, Toast, Clipboard, Drive Link Parser)       */
         /* ===================================================================== */
+
+        /**
+         * Safely escapes HTML special characters to prevent markup injection.
+         */
         function escapeHtml(str) {
-            return String(str || '')
+            return String(str ?? '')
                 .replace(/&/g, '&amp;')
                 .replace(/</g, '&lt;')
                 .replace(/>/g, '&gt;')
@@ -906,266 +1119,690 @@
                 .replace(/'/g, '&#39;');
         }
 
-        function getTodayISO() {
-            const now = new Date();
-            const local = new Date(now.getTime() - now.getTimezoneOffset() * 60000);
-            return local.toISOString().split('T')[0];
+        /**
+         * Displays a floating toast notification at the bottom-right corner.
+         */
+        function showToast(message, type = 'navy') {
+            const container = document.getElementById('toast-container');
+            if (!container) return;
+
+            const palette = {
+                success: 'bg-emerald-700 text-white border-emerald-500/40',
+                error: 'bg-rose-700 text-white border-rose-500/40',
+                navy: 'bg-navy text-white border-white/15',
+            };
+
+            const toast = document.createElement('div');
+            toast.className = `pointer-events-auto max-w-sm px-4 py-3 rounded-2xl border shadow-xl text-xs sm:text-sm font-semibold flex items-center gap-2.5 transition-all duration-300 opacity-0 translate-y-2 ${palette[type] || palette.navy}`;
+            toast.textContent = message;
+            container.appendChild(toast);
+
+            requestAnimationFrame(() => {
+                toast.classList.remove('opacity-0', 'translate-y-2');
+                toast.classList.add('opacity-100', 'translate-y-0');
+            });
+
+            setTimeout(() => {
+                toast.classList.remove('opacity-100', 'translate-y-0');
+                toast.classList.add('opacity-0', 'translate-y-2');
+                setTimeout(() => toast.remove(), 300);
+            }, 3400);
         }
 
+        /**
+         * Copies text reliably inside iframes using a temporary textarea + execCommand('copy').
+         */
+        function copyToClipboard(text, successMsg = 'Copied to clipboard!') {
+            try {
+                const ta = document.createElement('textarea');
+                ta.value = String(text || '');
+                ta.setAttribute('readonly', '');
+                ta.style.position = 'fixed';
+                ta.style.opacity = '0';
+                ta.style.left = '-9999px';
+                document.body.appendChild(ta);
+                ta.select();
+                ta.setSelectionRange(0, ta.value.length);
+                const copied = document.execCommand('copy');
+                document.body.removeChild(ta);
+
+                if (copied) {
+                    showToast(successMsg, 'success');
+                } else {
+                    showToast('Could not copy automatically. Please copy manually.', 'error');
+                }
+            } catch (err) {
+                console.error('Copy to clipboard error:', err);
+                showToast('Could not copy automatically. Please copy manually.', 'error');
+            }
+        }
+
+        /**
+         * Returns today's local date in YYYY-MM-DD format.
+         */
+        function getTodayISO() {
+            const d = new Date();
+            const yyyy = d.getFullYear();
+            const mm = String(d.getMonth() + 1).padStart(2, '0');
+            const dd = String(d.getDate()).padStart(2, '0');
+            return `${yyyy}-${mm}-${dd}`;
+        }
+
+        /**
+         * Formats an ISO date string (YYYY-MM-DD) into a readable clinical display label.
+         */
         function formatDisplayDate(dateStr) {
             if (!dateStr) return '';
             if (!/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) return dateStr;
-            try {
-                const [y, m, d] = dateStr.split('-').map(Number);
-                const dt = new Date(y, m - 1, d);
-                return dt.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
-            } catch {
-                return dateStr;
-            }
-        }
-
-        function getDoctorById(id) {
-            return CLINIC_DATA.doctors.find((d) => d.id === id) || CLINIC_DATA.doctors[0];
+            const [y, m, d] = dateStr.split('-').map(Number);
+            const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+            return `${d} ${months[(m || 1) - 1] || ''} ${y}`;
         }
 
         /**
-         * Parses any Google Drive share URL and converts it into a high-resolution
-         * thumbnail URL + lh3.googleusercontent.com fallback URL.
+         * Detects Google Drive share links and converts them to high-resolution thumbnail URLs
+         * with an automatic lh3.googleusercontent.com fallback.
          */
         function parseImageLinkInput(rawUrl) {
-            const trimmed = (rawUrl || '').trim();
-            if (!trimmed) {
-                return { src: '', fallbackSrc: '', isDrive: false, fileId: '' };
+            const trimmed = String(rawUrl || '').trim();
+            if (!trimmed) return { src: '', fallbackSrc: '', isDrive: false, fileId: '' };
+
+            const patterns = [
+                /drive\.google\.com\/file\/d\/([a-zA-Z0-9_-]+)/,
+                /drive\.google\.com\/open\?id=([a-zA-Z0-9_-]+)/,
+                /drive\.google\.com\/uc\?.*id=([a-zA-Z0-9_-]+)/,
+                /drive\.google\.com\/thumbnail\?.*id=([a-zA-Z0-9_-]+)/,
+                /lh3\.googleusercontent\.com\/d\/([a-zA-Z0-9_-]+)/,
+            ];
+
+            for (const regex of patterns) {
+                const match = trimmed.match(regex);
+                if (match && match[1]) {
+                    const fileId = match[1];
+                    return {
+                        src: `https://drive.google.com/thumbnail?id=${fileId}&sz=w1200`,
+                        fallbackSrc: `https://lh3.googleusercontent.com/d/${fileId}=w1200`,
+                        isDrive: true,
+                        fileId,
+                    };
+                }
             }
 
-            // Detect standard Google Drive file links (/file/d/ID, ?id=ID, /uc?id=ID, /thumbnail?id=ID)
-            const driveMatch =
-                trimmed.match(/drive\.google\.com\/file\/d\/([a-zA-Z0-9_-]+)/i) ||
-                trimmed.match(/drive\.google\.com\/(?:open|uc|thumbnail)\?[^#]*\bid=([a-zA-Z0-9_-]+)/i) ||
-                trimmed.match(/lh3\.googleusercontent\.com\/d\/([a-zA-Z0-9_-]+)/i);
-
-            if (driveMatch && driveMatch[1]) {
-                const fileId = driveMatch[1];
-                return {
-                    src: `https://drive.google.com/thumbnail?id=${fileId}&sz=w1600`,
-                    fallbackSrc: `https://lh3.googleusercontent.com/d/${fileId}=w1600`,
-                    isDrive: true,
-                    fileId,
-                };
-            }
-
-            return {
-                src: trimmed,
-                fallbackSrc: '',
-                isDrive: false,
-                fileId: '',
-            };
+            return { src: trimmed, fallbackSrc: '', isDrive: false, fileId: '' };
         }
 
         /**
-         * Non-blocking toast notification helper (never uses alert/confirm).
+         * Retrieves a specialist object by ID, defaulting to the first specialist.
          */
-        function showToast(message, tone = 'navy') {
-            try {
-                const container = document.getElementById('toast-container');
-                const toast = document.createElement('div');
-                const bgClass =
-                    tone === 'success'
-                        ? 'bg-emerald-700 text-white'
-                        : tone === 'error'
-                        ? 'bg-rose-700 text-white'
-                        : 'bg-navy text-white';
-
-                toast.className = `${bgClass} pointer-events-auto px-4 py-3 rounded-xl shadow-lg border border-white/10 text-sm font-medium flex items-center gap-2.5 max-w-sm transition-all duration-300`;
-                toast.innerHTML = `
-                    <svg class="w-4 h-4 shrink-0 ${tone === 'error' ? 'text-rose-200' : 'text-emerald-300'}" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="${tone === 'error' ? 'M12 8v4m0 4h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z' : 'M20 6 9 17l-5-5'}"/></svg>
-                    <span>${escapeHtml(message)}</span>
-                `;
-                container.appendChild(toast);
-                setTimeout(() => {
-                    toast.classList.add('opacity-0', 'translate-y-2');
-                    setTimeout(() => toast.remove(), 300);
-                }, 3400);
-            } catch (err) {
-                console.error('Toast error:', err);
-            }
+        function getDoctorById(doctorId) {
+            return CLINIC_DATA.doctors.find((d) => d.id === doctorId) || CLINIC_DATA.doctors[0];
         }
 
         /**
-         * Iframe-safe clipboard copy helper using document.execCommand('copy').
-         */
-        function copyToClipboard(text, successLabel = 'Copied to clipboard') {
-            try {
-                const textarea = document.createElement('textarea');
-                textarea.value = text;
-                textarea.style.position = 'fixed';
-                textarea.style.opacity = '0';
-                document.body.appendChild(textarea);
-                textarea.focus();
-                textarea.select();
-                document.execCommand('copy');
-                document.body.removeChild(textarea);
-                showToast(successLabel, 'success');
-            } catch (err) {
-                console.error('Clipboard copy error:', err);
-                showToast('Unable to copy automatically.', 'error');
-            }
-        }
-
-        /* ===================================================================== */
-        /* ROBUST IMAGE FALLBACK HANDLERS                                        */
-        /* ===================================================================== */
-
-        /**
-         * Chained error fallback handler for specialist portrait images:
-         * Step 0 -> Primary image URL
-         * Step 1 -> Secondary Google Drive fallback URL
-         * Final  -> Clean styled clinical initials badge (TD / MM / SC)
+         * Chained error fallback for specialist portraits:
+         * Step 0 -> secondary fallback photo URL; Step 1 -> reveal clean clinical initials badge.
          */
         function handleDoctorImgError(img) {
-            try {
-                const step = parseInt(img.getAttribute('data-fallback-step') || '0', 10);
-                const fallbackSrc = img.getAttribute('data-fallback-src');
+            if (!img) return;
+            const step = Number(img.getAttribute('data-fallback-step') || '0');
+            const fallbackSrc = img.getAttribute('data-fallback-src') || '';
 
-                if (step === 0 && fallbackSrc) {
-                    img.setAttribute('data-fallback-step', '1');
-                    img.src = fallbackSrc;
-                    return;
-                }
+            if (step === 0 && fallbackSrc && img.src !== fallbackSrc) {
+                img.setAttribute('data-fallback-step', '1');
+                img.src = fallbackSrc;
+                return;
+            }
 
-                img.classList.add('hidden');
-                const badge = img.parentElement && img.parentElement.querySelector('[data-avatar-fallback="true"]');
-                if (badge) {
-                    badge.classList.remove('hidden');
-                    badge.classList.add('flex');
-                }
-            } catch (err) {
-                console.error('Doctor image fallback error:', err);
+            img.onerror = null;
+            img.classList.add('hidden');
+            if (img.nextElementSibling) {
+                img.nextElementSibling.classList.remove('hidden');
             }
         }
 
         /**
-         * Chained error fallback handler for Facility, Gallery & Lightbox images:
-         * Step 0 -> Primary image URL
-         * Step 1 -> Secondary fallback URL (e.g. lh3.googleusercontent.com)
-         * Step 2 -> Clean clinical placeholder URL
+         * Renders a specialist portrait with object-cover object-top framing and chained fallbacks.
          */
-        function handleMediaImgError(img) {
-            try {
-                const step = parseInt(img.getAttribute('data-fallback-step') || '0', 10);
-                const fallbackSrc = img.getAttribute('data-fallback-src') || '';
-                const placeholder = img.getAttribute('data-placeholder') || 'https://placehold.co/1200x750/E2E8F0/0B1F3A?text=Cardiosphere+Clinic';
-
-                if (step === 0 && fallbackSrc) {
-                    img.setAttribute('data-fallback-step', '1');
-                    img.src = fallbackSrc;
-                    return;
-                }
-
-                if (step < 2 && placeholder && img.src !== placeholder) {
-                    img.setAttribute('data-fallback-step', '2');
-                    img.src = placeholder;
-                }
-            } catch (err) {
-                console.error('Media image fallback error:', err);
-            }
-        }
-
-        /**
-         * Renders a specialist portrait with object-cover object-top framing and initials fallback.
-         */
-        function renderDoctorAvatar(doc, sizeClasses = 'w-24 h-24', roundedClasses = 'rounded-2xl', initialsSize = 'text-xl') {
+        function renderDoctorAvatar(doc, sizeClass = 'w-20 h-20', radiusClass = 'rounded-2xl', textSizeClass = 'text-xl') {
             return `
-                <div class="relative ${sizeClasses} ${roundedClasses} overflow-hidden border border-slate-200 bg-slate-100 shrink-0 flex items-center justify-center">
-                    <div class="hidden w-full h-full items-center justify-center font-extrabold tracking-tight ${doc.avatarBg} ${doc.avatarText} ${initialsSize}" data-avatar-fallback="true" aria-label="${escapeHtml(doc.name)}">
-                        ${escapeHtml(doc.initials)}
-                    </div>
+                <div class="relative ${sizeClass} ${radiusClass} overflow-hidden shrink-0 border border-slate-200 bg-slate-100 shadow-sm">
                     <img
                         src="${escapeHtml(doc.photo)}"
-                        alt="${escapeHtml(doc.name)} — ${escapeHtml(doc.role)}"
+                        alt="${escapeHtml(doc.name)}"
                         referrerpolicy="no-referrer"
                         data-fallback-src="${escapeHtml(doc.fallbackPhoto || '')}"
                         data-fallback-step="0"
                         onerror="handleDoctorImgError(this)"
                         class="w-full h-full object-cover object-top"
                     />
+                    <div class="hidden w-full h-full ${doc.avatarBg} ${doc.avatarText} flex items-center justify-center font-extrabold ${textSizeClass}">
+                        ${escapeHtml(doc.initials)}
+                    </div>
                 </div>
             `;
         }
 
         /**
-         * Renders a zero-crop Fit-in-Frame media container (aspect-[16/10]) using a
-         * blurred ambient background copy behind a sharp foreground object-contain image
-         * (or object-cover if fit === 'cover').
+         * Chained error fallback for facility, gallery, and lightbox media images:
+         * Step 0 -> secondary Google Drive fallback URL; Step 1 -> placeholder image (or hide ambient backdrop).
          */
-        function renderFramedPhoto(item, extraContainerClasses = '') {
-            const fitMode = item.fit === 'cover' ? 'cover' : 'contain';
-            const placeholder = item.placeholder || `https://placehold.co/1200x750/E2E8F0/0B1F3A?text=${encodeURIComponent(item.title || 'Clinic Photo')}`;
+        function handleMediaImgError(img) {
+            if (!img) return;
+            // Ignore unloaded placeholder tags that have no src set yet (e.g., closed lightbox)
+            if (!img.getAttribute('src')) return;
 
-            if (fitMode === 'cover') {
+            const step = Number(img.getAttribute('data-fallback-step') || '0');
+            const fallbackSrc = img.getAttribute('data-fallback-src') || '';
+            const placeholder = img.getAttribute('data-placeholder') || 'https://placehold.co/1200x750/E2E8F0/0B1F3A?text=Cardiosphere+Clinic';
+
+            if (step === 0 && fallbackSrc && img.src !== fallbackSrc) {
+                img.setAttribute('data-fallback-step', '1');
+                img.src = fallbackSrc;
+                return;
+            }
+
+            img.setAttribute('data-fallback-step', '2');
+            img.onerror = null;
+
+            if (img.getAttribute('data-is-bg') === 'true') {
+                img.classList.add('hidden');
+            } else {
+                img.src = placeholder;
+            }
+        }
+
+        /**
+         * Renders an uncropped full-frame photo card (ambient blurred backdrop + crisp object-contain)
+         * or a full-bleed object-cover frame when photo.fit === 'cover'.
+         */
+        function renderFramedPhoto(photo, heightClass = 'aspect-[16/10]') {
+            const placeholder = photo.placeholder || `https://placehold.co/1200x750/E2E8F0/0B1F3A?text=${encodeURIComponent(photo.title || 'Cardiosphere Clinic')}`;
+            const isCover = photo.fit === 'cover';
+
+            if (isCover) {
                 return `
-                    <div class="relative aspect-[16/10] w-full overflow-hidden bg-slate-100 ${extraContainerClasses}">
+                    <div class="relative ${heightClass} w-full overflow-hidden bg-slate-900/5">
                         <img
-                            src="${escapeHtml(item.src)}"
-                            alt="${escapeHtml(item.title)}"
+                            src="${escapeHtml(photo.src)}"
+                            alt="${escapeHtml(photo.title || 'Clinic Photo')}"
                             referrerpolicy="no-referrer"
-                            data-fallback-src="${escapeHtml(item.fallbackSrc || '')}"
+                            data-fallback-src="${escapeHtml(photo.fallbackSrc || '')}"
                             data-placeholder="${escapeHtml(placeholder)}"
                             data-fallback-step="0"
                             onerror="handleMediaImgError(this)"
-                            class="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500"
+                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                         />
                     </div>
                 `;
             }
 
             return `
-                <div class="relative aspect-[16/10] w-full overflow-hidden bg-slate-900/5 ${extraContainerClasses}">
-                    <!-- Ambient blurred backdrop so side/top framing feels cohesive with zero harsh white bars -->
+                <div class="relative ${heightClass} w-full overflow-hidden bg-slate-100 flex items-center justify-center">
                     <img
-                        src="${escapeHtml(item.src)}"
+                        src="${escapeHtml(photo.src)}"
                         alt=""
                         aria-hidden="true"
                         referrerpolicy="no-referrer"
-                        data-fallback-src="${escapeHtml(item.fallbackSrc || '')}"
-                        data-placeholder="${escapeHtml(placeholder)}"
+                        data-is-bg="true"
+                        data-fallback-src="${escapeHtml(photo.fallbackSrc || '')}"
                         data-fallback-step="0"
                         onerror="handleMediaImgError(this)"
                         class="absolute inset-0 w-full h-full object-cover opacity-30 blur-xl scale-110 pointer-events-none select-none"
                     />
-                    <!-- Sharp foreground photo: 100% visible edge-to-edge with ZERO cropping -->
                     <img
-                        src="${escapeHtml(item.src)}"
-                        alt="${escapeHtml(item.title)}"
+                        src="${escapeHtml(photo.src)}"
+                        alt="${escapeHtml(photo.title || 'Clinic Photo')}"
                         referrerpolicy="no-referrer"
-                        data-fallback-src="${escapeHtml(item.fallbackSrc || '')}"
+                        data-fallback-src="${escapeHtml(photo.fallbackSrc || '')}"
                         data-placeholder="${escapeHtml(placeholder)}"
                         data-fallback-step="0"
                         onerror="handleMediaImgError(this)"
-                        class="relative z-10 w-full h-full object-contain group-hover:scale-[1.02] transition-transform duration-500"
+                        class="relative z-10 w-full h-full object-contain transition-transform duration-500 group-hover:scale-[1.02]"
                     />
                 </div>
             `;
         }
 
         /**
-         * Renders clean human-readable breadcrumbs at the top of sub-pages.
+         * Renders accessible human-readable breadcrumb navigation for sub-pages.
          */
         function renderBreadcrumbs(items) {
             return `
-                <nav class="flex flex-wrap items-center gap-2 text-xs font-semibold text-slate-500 mb-5" aria-label="Breadcrumb">
-                    ${items.map((item, idx) => {
-                        const isLast = idx === items.length - 1;
-                        if (isLast) {
-                            return `<span class="text-navy font-bold">${escapeHtml(item.label)}</span>`;
-                        }
-                        return `
-                            <button onclick="navigate('${item.route}')" class="hover:text-medical transition-colors">${escapeHtml(item.label)}</button>
-                            <span class="text-slate-300">/</span>
-                        `;
-                    }).join('')}
+                <nav aria-label="Breadcrumb" class="mb-5">
+                    <ol class="flex flex-wrap items-center gap-1.5 text-xs font-semibold text-slate-500">
+                        ${items.map((item, idx) => {
+                            const isLast = idx === items.length - 1;
+                            return `
+                                <li class="inline-flex items-center gap-1.5">
+                                    ${idx > 0 ? '<span class="text-slate-300">/</span>' : ''}
+                                    ${item.route && !isLast
+                                        ? `<button onclick="navigate('${escapeHtml(item.route)}')" class="hover:text-medical transition-colors">${escapeHtml(item.label)}</button>`
+                                        : `<span class="text-navy font-bold">${escapeHtml(item.label)}</span>`
+                                    }
+                                </li>
+                            `;
+                        }).join('')}
+                    </ol>
                 </nav>
             `;
+        }
+
+        /* ===================================================================== */
+        /* PURE-JS SHA-256 & ADMIN AUTHENTICATION ENGINE                         */
+        /* Works reliably across https://, localhost, and file:// protocols      */
+        /* ===================================================================== */
+
+        /**
+         * Converts a UTF-8 string into an array of unsigned byte values (0–255).
+         */
+        function utf8ToBytes(str) {
+            const bytes = [];
+            for (let i = 0; i < str.length; i++) {
+                let code = str.charCodeAt(i);
+                if (code < 0x80) {
+                    bytes.push(code);
+                } else if (code < 0x800) {
+                    bytes.push(0xc0 | (code >> 6), 0x80 | (code & 0x3f));
+                } else if (code >= 0xd800 && code <= 0xdbff && i + 1 < str.length) {
+                    const next = str.charCodeAt(++i);
+                    const cp = 0x10000 + (((code & 0x3ff) << 10) | (next & 0x3ff));
+                    bytes.push(
+                        0xf0 | (cp >> 18),
+                        0x80 | ((cp >> 12) & 0x3f),
+                        0x80 | ((cp >> 6) & 0x3f),
+                        0x80 | (cp & 0x3f)
+                    );
+                } else {
+                    bytes.push(
+                        0xe0 | (code >> 12),
+                        0x80 | ((code >> 6) & 0x3f),
+                        0x80 | (code & 0x3f)
+                    );
+                }
+            }
+            return bytes;
+        }
+
+        /**
+         * FIPS 180-4 Pure-JavaScript SHA-256 implementation returning lowercase hex digest.
+         */
+        function sha256(message) {
+            const K = [
+                0x428a2f98, 0x71374491, 0xb5c0fbcf, 0xe9b5dba5, 0x3956c25b, 0x59f111f1, 0x923f82a4, 0xab1c5ed5,
+                0xd807aa98, 0x12835b01, 0x243185be, 0x550c7dc3, 0x72be5d74, 0x80deb1fe, 0x9bdc06a7, 0xc19bf174,
+                0xe49b69c1, 0xefbe4786, 0x0fc19dc6, 0x240ca1cc, 0x2de92c6f, 0x4a7484aa, 0x5cb0a9dc, 0x76f988da,
+                0x983e5152, 0xa831c66d, 0xb00327c8, 0xbf597fc7, 0xc6e00bf3, 0xd5a79147, 0x06ca6351, 0x14292967,
+                0x27b70a85, 0x2e1b2138, 0x4d2c6dfc, 0x53380d13, 0x650a7354, 0x766a0abb, 0x81c2c92e, 0x92722c85,
+                0xa2bfe8a1, 0xa81a664b, 0xc24b8b70, 0xc76c51a3, 0xd192e819, 0xd6990624, 0xf40e3585, 0x106aa070,
+                0x19a4c116, 0x1e376c08, 0x2748774c, 0x34b0bcb5, 0x391c0cb3, 0x4ed8aa4a, 0x5b9cca4f, 0x682e6ff3,
+                0x748f82ee, 0x78a5636f, 0x84c87814, 0x8cc70208, 0x90befffa, 0xa4506ceb, 0xbef9a3f7, 0xc67178f2,
+            ];
+
+            let h0 = 0x6a09e667;
+            let h1 = 0xbb67ae85;
+            let h2 = 0x3c6ef372;
+            let h3 = 0xa54ff53a;
+            let h4 = 0x510e527f;
+            let h5 = 0x9b05688c;
+            let h6 = 0x1f83d9ab;
+            let h7 = 0x5be0cd19;
+
+            const rotr = (x, n) => (x >>> n) | (x << (32 - n));
+            const bytes = utf8ToBytes(String(message || ''));
+            const bitLen = bytes.length * 8;
+
+            bytes.push(0x80);
+            while (bytes.length % 64 !== 56) {
+                bytes.push(0x00);
+            }
+
+            const bitLenHi = Math.floor(bitLen / 0x100000000);
+            const bitLenLo = bitLen >>> 0;
+            bytes.push(
+                (bitLenHi >>> 24) & 0xff, (bitLenHi >>> 16) & 0xff, (bitLenHi >>> 8) & 0xff, bitLenHi & 0xff,
+                (bitLenLo >>> 24) & 0xff, (bitLenLo >>> 16) & 0xff, (bitLenLo >>> 8) & 0xff, bitLenLo & 0xff
+            );
+
+            const W = new Array(64);
+            for (let offset = 0; offset < bytes.length; offset += 64) {
+                for (let i = 0; i < 16; i++) {
+                    const j = offset + i * 4;
+                    W[i] = ((bytes[j] << 24) | (bytes[j + 1] << 16) | (bytes[j + 2] << 8) | bytes[j + 3]) >>> 0;
+                }
+                for (let i = 16; i < 64; i++) {
+                    const s0 = rotr(W[i - 15], 7) ^ rotr(W[i - 15], 18) ^ (W[i - 15] >>> 3);
+                    const s1 = rotr(W[i - 2], 17) ^ rotr(W[i - 2], 19) ^ (W[i - 2] >>> 10);
+                    W[i] = (W[i - 16] + s0 + W[i - 7] + s1) >>> 0;
+                }
+
+                let a = h0, b = h1, c = h2, d = h3, e = h4, f = h5, g = h6, h = h7;
+
+                for (let i = 0; i < 64; i++) {
+                    const S1 = rotr(e, 6) ^ rotr(e, 11) ^ rotr(e, 25);
+                    const ch = (e & f) ^ ((~e) & g);
+                    const temp1 = (h + S1 + ch + K[i] + W[i]) >>> 0;
+                    const S0 = rotr(a, 2) ^ rotr(a, 13) ^ rotr(a, 22);
+                    const maj = (a & b) ^ (a & c) ^ (b & c);
+                    const temp2 = (S0 + maj) >>> 0;
+
+                    h = g;
+                    g = f;
+                    f = e;
+                    e = (d + temp1) >>> 0;
+                    d = c;
+                    c = b;
+                    b = a;
+                    a = (temp1 + temp2) >>> 0;
+                }
+
+                h0 = (h0 + a) >>> 0;
+                h1 = (h1 + b) >>> 0;
+                h2 = (h2 + c) >>> 0;
+                h3 = (h3 + d) >>> 0;
+                h4 = (h4 + e) >>> 0;
+                h5 = (h5 + f) >>> 0;
+                h6 = (h6 + g) >>> 0;
+                h7 = (h7 + h) >>> 0;
+            }
+
+            return [h0, h1, h2, h3, h4, h5, h6, h7]
+                .map((v) => (v >>> 0).toString(16).padStart(8, '0'))
+                .join('');
+        }
+
+        /**
+         * Resolves active admin credentials: checks localStorage security override first,
+         * then falls back to ADMIN_CONFIG (hashing defaultPassword when passwordHash is empty).
+         */
+        function getEffectiveAdminCredentials() {
+            try {
+                const rawOverride = localStorage.getItem(ADMIN_AUTH_OVERRIDE_KEY);
+                if (rawOverride) {
+                    const parsed = JSON.parse(rawOverride);
+                    if (parsed && parsed.username && parsed.passwordHash) {
+                        return {
+                            username: String(parsed.username),
+                            passwordHash: String(parsed.passwordHash).toLowerCase(),
+                        };
+                    }
+                }
+            } catch (err) {
+                console.error('Read admin auth override error:', err);
+            }
+
+            const configuredHash = (ADMIN_CONFIG.passwordHash || '').trim().toLowerCase();
+            return {
+                username: String(ADMIN_CONFIG.username || 'admin'),
+                passwordHash: configuredHash || sha256(ADMIN_CONFIG.defaultPassword || 'Cardio@2026'),
+            };
+        }
+
+        /**
+         * Reads the active session strictly from sessionStorage (never localStorage).
+         */
+        function getAdminSession() {
+            try {
+                const raw = sessionStorage.getItem(ADMIN_SESSION_KEY);
+                if (!raw) return null;
+                const session = JSON.parse(raw);
+                if (!session || !session.authenticated || typeof session.expiresAt !== 'number') {
+                    return null;
+                }
+                if (Date.now() >= session.expiresAt) {
+                    sessionStorage.removeItem(ADMIN_SESSION_KEY);
+                    return null;
+                }
+                return session;
+            } catch {
+                return null;
+            }
+        }
+
+        /**
+         * Returns true if an unexpired authenticated admin session exists in sessionStorage.
+         */
+        function isAdminAuthenticated() {
+            return Boolean(getAdminSession());
+        }
+
+        /**
+         * Extends the 20-minute inactivity timer on user interaction while signed in.
+         */
+        function touchAdminSession() {
+            const session = getAdminSession();
+            if (!session) return;
+            const now = Date.now();
+            if (now - APP_STATE.lastTouchTime < 4000) return;
+            APP_STATE.lastTouchTime = now;
+            session.expiresAt = now + ADMIN_INACTIVITY_MS;
+            try {
+                sessionStorage.setItem(ADMIN_SESSION_KEY, JSON.stringify(session));
+            } catch (err) {
+                console.error('Touch session error:', err);
+            }
+            updateAdminSessionCountdownUI();
+        }
+
+        /**
+         * Updates the visible auto-lock remaining minutes label inside the Admin Status Bar.
+         */
+        function updateAdminSessionCountdownUI() {
+            const badge = document.getElementById('admin-autolock-timer');
+            if (!badge) return;
+            const session = getAdminSession();
+            if (!session) return;
+            const minsLeft = Math.max(1, Math.ceil((session.expiresAt - Date.now()) / 60000));
+            badge.textContent = `Auto-locks in ${minsLeft}m of inactivity`;
+        }
+
+        /**
+         * Starts background monitoring for the 20-minute inactivity auto-lock.
+         */
+        function startAdminSessionMonitor() {
+            if (APP_STATE.adminInactivityInterval) {
+                clearInterval(APP_STATE.adminInactivityInterval);
+            }
+            APP_STATE.adminInactivityInterval = setInterval(() => {
+                const raw = sessionStorage.getItem(ADMIN_SESSION_KEY);
+                if (!raw) {
+                    clearInterval(APP_STATE.adminInactivityInterval);
+                    APP_STATE.adminInactivityInterval = null;
+                    return;
+                }
+                if (!isAdminAuthenticated()) {
+                    logoutAdminSession(true);
+                } else {
+                    updateAdminSessionCountdownUI();
+                }
+            }, 5000);
+        }
+
+        /**
+         * Strict guard invoked at the start of every gallery mutating / admin function.
+         */
+        function requireAdminAuth() {
+            if (isAdminAuthenticated()) {
+                touchAdminSession();
+                return true;
+            }
+            showToast('Admin authentication required to modify gallery content.', 'error');
+            openAdminLoginModal();
+            return false;
+        }
+
+        /**
+         * Signs out immediately, clears sessionStorage, closes all admin modals, and locks gallery.
+         */
+        function logoutAdminSession(isAutoLock = false) {
+            try {
+                sessionStorage.removeItem(ADMIN_SESSION_KEY);
+            } catch (err) {
+                console.error('Clear sessionStorage error:', err);
+            }
+
+            if (APP_STATE.adminInactivityInterval) {
+                clearInterval(APP_STATE.adminInactivityInterval);
+                APP_STATE.adminInactivityInterval = null;
+            }
+
+            APP_STATE.manageGalleryMode = false;
+            APP_STATE.pendingDeletePhotoId = null;
+
+            closeGalleryModal();
+            closeExportModal();
+            closeDeletePhotoModal();
+            closeSecurityModal();
+
+            if ((window.location.hash || '#home').replace(/^#\/?/, '') === 'gallery') {
+                document.getElementById('app-root').innerHTML = renderGalleryView();
+            }
+
+            showToast(
+                isAutoLock
+                    ? 'Admin session auto-locked due to 20 minutes of inactivity.'
+                    : 'Gallery locked. Signed out of Admin Mode.',
+                isAutoLock ? 'navy' : 'success'
+            );
+        }
+
+        function handleFooterStaffAdmin() {
+            if (isAdminAuthenticated()) {
+                navigate('gallery');
+                showToast('Admin Mode is already active.', 'success');
+            } else {
+                openAdminLoginModal();
+            }
+        }
+
+        function togglePasswordVisibility(inputId, btn) {
+            const input = document.getElementById(inputId);
+            if (!input) return;
+            const isHidden = input.type === 'password';
+            input.type = isHidden ? 'text' : 'password';
+            if (btn) {
+                btn.innerHTML = isHidden
+                    ? '<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>'
+                    : '<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>';
+            }
+        }
+
+        function openAdminLoginModal() {
+            const modal = document.getElementById('admin-login-modal');
+            const userInput = document.getElementById('admin-login-username');
+            const passInput = document.getElementById('admin-login-password');
+            const errBox = document.getElementById('admin-login-error');
+
+            passInput.value = '';
+            passInput.type = 'password';
+            if (!userInput.value) userInput.value = '';
+
+            if (Date.now() < APP_STATE.adminLockoutUntil) {
+                updateLockoutCountdownUI();
+            } else {
+                errBox.classList.add('hidden');
+                errBox.textContent = '';
+                document.getElementById('admin-login-submit').disabled = false;
+                document.getElementById('admin-login-submit').classList.remove('opacity-60', 'cursor-not-allowed');
+            }
+
+            modal.classList.remove('hidden');
+            document.body.classList.add('overflow-hidden');
+            setTimeout(() => userInput.focus(), 60);
+        }
+
+        function closeAdminLoginModal() {
+            document.getElementById('admin-login-modal').classList.add('hidden');
+            document.body.classList.remove('overflow-hidden');
+        }
+
+        function updateLockoutCountdownUI() {
+            const errBox = document.getElementById('admin-login-error');
+            const submitBtn = document.getElementById('admin-login-submit');
+            const remainingMs = APP_STATE.adminLockoutUntil - Date.now();
+
+            if (remainingMs <= 0) {
+                APP_STATE.adminLockoutUntil = 0;
+                if (APP_STATE.adminLockoutInterval) {
+                    clearInterval(APP_STATE.adminLockoutInterval);
+                    APP_STATE.adminLockoutInterval = null;
+                }
+                errBox.classList.add('hidden');
+                errBox.textContent = '';
+                submitBtn.disabled = false;
+                submitBtn.classList.remove('opacity-60', 'cursor-not-allowed');
+                return;
+            }
+
+            const secs = Math.ceil(remainingMs / 1000);
+            errBox.classList.remove('hidden');
+            errBox.textContent = `Too many failed login attempts. Login temporarily locked — please wait ${secs}s before trying again.`;
+            submitBtn.disabled = true;
+            submitBtn.classList.add('opacity-60', 'cursor-not-allowed');
+        }
+
+        function handleAdminLoginSubmit(event) {
+            event.preventDefault();
+            try {
+                const errBox = document.getElementById('admin-login-error');
+                if (Date.now() < APP_STATE.adminLockoutUntil) {
+                    updateLockoutCountdownUI();
+                    return;
+                }
+
+                const enteredUser = document.getElementById('admin-login-username').value.trim();
+                const enteredPass = document.getElementById('admin-login-password').value;
+                const effective = getEffectiveAdminCredentials();
+                const enteredHash = sha256(enteredPass);
+
+                const userMatch = enteredUser.toLowerCase() === effective.username.toLowerCase();
+                const passMatch = enteredHash === effective.passwordHash;
+
+                if (!userMatch || !passMatch) {
+                    APP_STATE.adminFailedAttempts += 1;
+                    document.getElementById('admin-login-password').value = '';
+
+                    if (APP_STATE.adminFailedAttempts >= ADMIN_MAX_FAILED_ATTEMPTS) {
+                        APP_STATE.adminFailedAttempts = 0;
+                        APP_STATE.adminLockoutUntil = Date.now() + ADMIN_LOCKOUT_MS;
+                        updateLockoutCountdownUI();
+                        if (APP_STATE.adminLockoutInterval) clearInterval(APP_STATE.adminLockoutInterval);
+                        APP_STATE.adminLockoutInterval = setInterval(updateLockoutCountdownUI, 1000);
+                        return;
+                    }
+
+                    const left = ADMIN_MAX_FAILED_ATTEMPTS - APP_STATE.adminFailedAttempts;
+                    errBox.classList.remove('hidden');
+                    errBox.textContent = `Invalid username or password. ${left} ${left === 1 ? 'attempt' : 'attempts'} remaining before 30-second lockout.`;
+                    return;
+                }
+
+                // Success: store session strictly in sessionStorage
+                APP_STATE.adminFailedAttempts = 0;
+                APP_STATE.adminLockoutUntil = 0;
+                const now = Date.now();
+                const sessionPayload = {
+                    authenticated: true,
+                    username: effective.username,
+                    loggedInAt: now,
+                    expiresAt: now + ADMIN_INACTIVITY_MS,
+                };
+                sessionStorage.setItem(ADMIN_SESSION_KEY, JSON.stringify(sessionPayload));
+                APP_STATE.lastTouchTime = now;
+
+                startAdminSessionMonitor();
+                closeAdminLoginModal();
+
+                if ((window.location.hash || '#home').replace(/^#\/?/, '') !== 'gallery') {
+                    navigate('gallery');
+                } else {
+                    document.getElementById('app-root').innerHTML = renderGalleryView();
+                }
+
+                showToast(`Welcome, ${effective.username}. Gallery Admin Mode unlocked.`, 'success');
+            } catch (err) {
+                console.error('Admin login error:', err);
+                showToast('Unable to verify credentials. Please try again.', 'error');
+            }
         }
 
         /* ===================================================================== */
@@ -2101,6 +2738,7 @@
 
         /* ===================================================================== */
         /* VIEW 8: DEDICATED CLINIC GALLERY (#gallery)                           */
+        /* Public Read-Only by Default | Full Admin Toolbar When Authenticated   */
         /* ===================================================================== */
         function getFilteredGalleryPhotos() {
             if (APP_STATE.galleryCategory === 'All') return APP_STATE.galleryPhotos;
@@ -2109,7 +2747,10 @@
 
         function renderGalleryView() {
             const photos = getFilteredGalleryPhotos();
-            const isManage = APP_STATE.manageGalleryMode;
+            const session = getAdminSession();
+            const isAdmin = Boolean(session);
+            const isManage = isAdmin && APP_STATE.manageGalleryMode;
+            const minsLeft = session ? Math.max(1, Math.ceil((session.expiresAt - Date.now()) / 60000)) : 20;
 
             return `
                 <section class="bg-white border-b border-slate-200">
@@ -2122,32 +2763,71 @@
                         <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
                             <div>
                                 <span class="inline-flex items-center px-3 py-1 rounded-full bg-medical-soft border border-blue-200 text-xs font-bold text-medical mb-3">
-                                    Photo Showcase & Media Manager
+                                    Photo Showcase
                                 </span>
                                 <h1 class="text-3xl sm:text-4xl font-extrabold text-navy tracking-tight">Clinic Gallery</h1>
                                 <p class="text-sm sm:text-base text-slate-600 mt-2 max-w-2xl">
-                                    Explore photos of our medical team, facilities, specialists, and clinic moments. Add new photos anytime with captions from your device or Google Drive links.
+                                    Explore uncropped full-frame photos of our medical team, welcoming facilities, diagnostic care, specialists, and clinic milestones. Click any photo to zoom fullscreen.
                                 </p>
                             </div>
 
-                            <!-- Gallery Action Toolbar -->
-                            <div class="flex flex-wrap items-center gap-2.5 shrink-0">
-                                <button onclick="openGalleryModal()" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-medical hover:bg-medical-hover text-white text-xs sm:text-sm font-bold shadow-sm transition-colors">
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-                                    Upload / Add Photo
-                                </button>
-                                <button onclick="toggleManageGalleryMode()" class="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl border text-xs sm:text-sm font-bold transition-colors ${isManage ? 'bg-navy text-white border-navy' : 'bg-white text-navy border-slate-200 hover:bg-slate-50'}">
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
-                                    ${isManage ? 'Done Managing' : 'Manage Gallery'}
-                                </button>
-                                ${isManage ? `
-                                    <button onclick="openExportModal()" class="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-clinical-teal hover:bg-clinical-tealHover text-white text-xs sm:text-sm font-bold transition-colors shadow-sm">
-                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                                        Publish / Export Data
+                            <!-- Public Visitor View: Subtle Admin Login Button ONLY -->
+                            ${!isAdmin ? `
+                                <div class="shrink-0">
+                                    <button onclick="openAdminLoginModal()" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50 hover:bg-white hover:border-navy text-slate-600 hover:text-navy text-xs font-bold transition-all shadow-sm">
+                                        <svg class="w-3.5 h-3.5 text-slate-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                                        <span>Admin Login</span>
                                     </button>
-                                ` : ''}
-                            </div>
+                                </div>
+                            ` : ''}
                         </div>
+
+                        <!-- Authenticated Admin Status & Management Toolbar (Hidden from Public Visitors) -->
+                        ${isAdmin ? `
+                            <div class="mt-7 rounded-2xl bg-navy text-white border border-emerald-500/30 p-4 sm:p-5 shadow-lg space-y-4">
+                                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3.5 border-b border-white/10">
+                                    <div class="flex flex-wrap items-center gap-2.5">
+                                        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/20 border border-emerald-400/40 text-emerald-300 text-xs font-extrabold">
+                                            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                                            Admin Mode Active
+                                        </span>
+                                        <span class="text-xs font-semibold text-slate-200">
+                                            Signed in as <strong class="text-white">${escapeHtml(session.username)}</strong>
+                                        </span>
+                                    </div>
+                                    <span id="admin-autolock-timer" class="text-[11px] font-medium text-teal-200">
+                                        Auto-locks in ${minsLeft}m of inactivity
+                                    </span>
+                                </div>
+
+                                <div class="flex flex-wrap items-center gap-2.5">
+                                    <button onclick="openUploadModal()" class="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold shadow-sm transition-colors">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                                        + Add / Upload Photo
+                                    </button>
+
+                                    <button onclick="toggleManageMode()" class="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-xs font-bold border transition-colors ${isManage ? 'bg-white text-navy border-white' : 'bg-white/10 hover:bg-white/15 text-white border-white/15'}">
+                                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                                        ${isManage ? 'Done Managing Photos' : 'Manage Photos'}
+                                    </button>
+
+                                    <button onclick="openExportModal()" class="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/15 text-white border border-white/15 text-xs font-bold transition-colors">
+                                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                                        Publish / Backup
+                                    </button>
+
+                                    <button onclick="openSecurityModal()" class="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/15 text-white border border-white/15 text-xs font-bold transition-colors">
+                                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                                        Change Password
+                                    </button>
+
+                                    <button onclick="logoutAdminSession(false)" class="sm:ml-auto inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-rose-500/20 hover:bg-rose-500/30 text-rose-200 border border-rose-400/30 text-xs font-bold transition-colors">
+                                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                                        Lock & Sign Out
+                                    </button>
+                                </div>
+                            </div>
+                        ` : ''}
 
                         <!-- Category Filter Pills with Live Counts -->
                         <div class="mt-8 flex flex-wrap items-center gap-2">
@@ -2167,20 +2847,6 @@
                     </div>
                 </section>
 
-                <!-- Manage Mode Helper Banner -->
-                ${isManage ? `
-                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
-                        <div class="p-4 rounded-2xl bg-medical-soft border border-blue-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                            <p class="text-xs sm:text-sm text-navy font-medium">
-                                <strong>Manage Mode Active:</strong> Edit captions, remove photos, or click <strong>Publish / Export Data</strong> to copy the updated gallery code for permanent hosting.
-                            </p>
-                            <button onclick="openExportModal()" class="px-4 py-2 rounded-xl bg-medical text-white text-xs font-bold hover:bg-medical-hover shrink-0">
-                                Publish / Backup Tools
-                            </button>
-                        </div>
-                    </div>
-                ` : ''}
-
                 <!-- Gallery Grid -->
                 <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
                     ${photos.length === 0 ? `
@@ -2189,21 +2855,26 @@
                                 <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
                             </div>
                             <h2 class="text-lg font-extrabold text-navy">No photos in "${escapeHtml(APP_STATE.galleryCategory)}" yet</h2>
-                            <p class="text-sm text-slate-600 max-w-md mx-auto">Upload photos from your device or paste a Google Drive link with a caption to showcase this category.</p>
-                            <button onclick="openGalleryModal(null, '${escapeHtml(APP_STATE.galleryCategory === 'All' ? 'Clinic Events' : APP_STATE.galleryCategory)}')" class="px-6 py-3 rounded-xl bg-medical hover:bg-medical-hover text-white text-sm font-bold transition-colors">
-                                + Add First Photo
-                            </button>
+                            <p class="text-sm text-slate-600 max-w-md mx-auto">
+                                ${isAdmin
+                                    ? 'Click below to upload a photo from your device or paste a Google Drive link for this category.'
+                                    : 'Check back soon for new photos in this category, or explore other clinic sections above.'}
+                            </p>
+                            ${isAdmin ? `
+                                <button onclick="openUploadModal('${escapeHtml(APP_STATE.galleryCategory === 'All' ? 'Clinic Events' : APP_STATE.galleryCategory)}')" class="px-6 py-3 rounded-xl bg-medical hover:bg-medical-hover text-white text-sm font-bold transition-colors">
+                                    + Add First Photo
+                                </button>
+                            ` : ''}
                         </div>
                     ` : `
                         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                            ${photos.map((photo, idx) => {
-                                const confirmingDelete = APP_STATE.pendingDeleteId === photo.id;
-                                return `
-                                    <article class="bg-white rounded-3xl border border-slate-200 overflow-hidden flex flex-col group hover:border-blue-300 hover:shadow-lg transition-all duration-300">
+                            ${photos.map((photo, idx) => `
+                                <article class="bg-white rounded-3xl border border-slate-200 overflow-hidden flex flex-col group hover:border-blue-300 hover:shadow-lg transition-all duration-300">
+                                    <div class="relative border-b border-slate-200">
                                         <button
                                             type="button"
                                             onclick="openGalleryLightbox(${idx})"
-                                            class="relative block w-full text-left border-b border-slate-200 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-medical"
+                                            class="relative block w-full text-left focus:outline-none focus:ring-2 focus:ring-inset focus:ring-medical"
                                             aria-label="Open ${escapeHtml(photo.title)} in fullscreen viewer"
                                         >
                                             ${renderFramedPhoto(photo)}
@@ -2216,39 +2887,39 @@
                                             </span>
                                         </button>
 
-                                        <div class="p-6 flex-1 flex flex-col">
-                                            <div class="flex items-start justify-between gap-2">
-                                                <h3 class="text-base font-extrabold text-navy leading-snug">${escapeHtml(photo.title)}</h3>
-                                                ${photo.date ? `<span class="text-[11px] font-semibold text-slate-400 shrink-0 mt-0.5">${escapeHtml(formatDisplayDate(photo.date))}</span>` : ''}
-                                            </div>
-                                            <p class="text-sm text-slate-600 leading-relaxed mt-2 flex-1">${escapeHtml(photo.caption)}</p>
-                                        </div>
-
+                                        <!-- Per-Card Quick Edit / Delete Overlay (ONLY when Admin + Manage Photos Active) -->
                                         ${isManage ? `
-                                            <div class="px-6 py-3.5 bg-slate-50 border-t border-slate-200">
-                                                ${confirmingDelete ? `
-                                                    <div class="flex items-center justify-between gap-2">
-                                                        <span class="text-xs font-bold text-rose-700">Delete photo?</span>
-                                                        <div class="flex items-center gap-1.5">
-                                                            <button type="button" onclick="cancelDeletePhoto()" class="px-3 py-1.5 rounded-lg bg-white border border-slate-200 text-xs font-bold text-slate-700 hover:bg-slate-100">Cancel</button>
-                                                            <button type="button" onclick="confirmDeletePhoto('${escapeHtml(photo.id)}')" class="px-3 py-1.5 rounded-lg bg-rose-600 text-white text-xs font-bold hover:bg-rose-700">Delete</button>
-                                                        </div>
-                                                    </div>
-                                                ` : `
-                                                    <div class="flex items-center gap-2">
-                                                        <button type="button" onclick="openGalleryModal('${escapeHtml(photo.id)}')" class="flex-1 py-2 px-3 rounded-xl bg-white border border-slate-200 hover:border-medical text-navy text-xs font-bold transition-colors">
-                                                            Edit Caption / Photo
-                                                        </button>
-                                                        <button type="button" onclick="requestDeletePhoto('${escapeHtml(photo.id)}')" class="py-2 px-3 rounded-xl bg-rose-50 border border-rose-200 hover:bg-rose-100 text-rose-700 text-xs font-bold transition-colors">
-                                                            Delete
-                                                        </button>
-                                                    </div>
-                                                `}
+                                            <div class="absolute top-3 right-3 z-30 flex items-center gap-1.5">
+                                                <button type="button" onclick="openEditPhotoModal('${escapeHtml(photo.id)}')" class="p-2 rounded-xl bg-white/95 hover:bg-medical hover:text-white text-navy border border-slate-200 shadow-md transition-colors" title="Edit Photo & Caption" aria-label="Edit ${escapeHtml(photo.title)}">
+                                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                                                </button>
+                                                <button type="button" onclick="requestDeletePhoto('${escapeHtml(photo.id)}')" class="p-2 rounded-xl bg-white/95 hover:bg-rose-600 hover:text-white text-rose-600 border border-rose-200 shadow-md transition-colors" title="Delete Photo" aria-label="Delete ${escapeHtml(photo.title)}">
+                                                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg>
+                                                </button>
                                             </div>
                                         ` : ''}
-                                    </article>
-                                `;
-                            }).join('')}
+                                    </div>
+
+                                    <div class="p-6 flex-1 flex flex-col">
+                                        <div class="flex items-start justify-between gap-2">
+                                            <h3 class="text-base font-extrabold text-navy leading-snug">${escapeHtml(photo.title)}</h3>
+                                            ${photo.date ? `<span class="text-[11px] font-semibold text-slate-400 shrink-0 mt-0.5">${escapeHtml(formatDisplayDate(photo.date))}</span>` : ''}
+                                        </div>
+                                        <p class="text-sm text-slate-600 leading-relaxed mt-2 flex-1">${escapeHtml(photo.caption)}</p>
+                                    </div>
+
+                                    ${isManage ? `
+                                        <div class="px-6 py-3.5 bg-slate-50 border-t border-slate-200 flex items-center gap-2">
+                                            <button type="button" onclick="openEditPhotoModal('${escapeHtml(photo.id)}')" class="flex-1 py-2 px-3 rounded-xl bg-white border border-slate-200 hover:border-medical text-navy text-xs font-bold transition-colors">
+                                                Edit Caption / Details
+                                            </button>
+                                            <button type="button" onclick="requestDeletePhoto('${escapeHtml(photo.id)}')" class="py-2 px-3.5 rounded-xl bg-rose-50 border border-rose-200 hover:bg-rose-100 text-rose-700 text-xs font-bold transition-colors">
+                                                Delete
+                                            </button>
+                                        </div>
+                                    ` : ''}
+                                </article>
+                            `).join('')}
                         </div>
                     `}
                 </section>
@@ -2259,25 +2930,9 @@
         /* VIEW 9: BOOK APPOINTMENT PAGE (#book)                                 */
         /* ===================================================================== */
         function renderBookAppointmentView() {
-            const selectedDocId = APP_STATE.selectedBookingDoctor;
+            const morningSlots = ['Morning — 9:30 AM', 'Morning — 11:00 AM'];
+            const afternoonSlots = ['Afternoon — 12:30 PM', 'Afternoon — 3:00 PM', 'Afternoon — 4:00 PM'];
             const today = getTodayISO();
-            const slotGroups = [
-                {
-                    period: 'Morning',
-                    items: [
-                        { label: '9:30 AM', value: 'Morning — 9:30 AM' },
-                        { label: '11:00 AM', value: 'Morning — 11:00 AM' },
-                    ],
-                },
-                {
-                    period: 'Afternoon',
-                    items: [
-                        { label: '12:30 PM', value: 'Afternoon — 12:30 PM' },
-                        { label: '3:00 PM', value: 'Afternoon — 3:00 PM' },
-                        { label: '4:00 PM', value: 'Afternoon — 4:00 PM' },
-                    ],
-                },
-            ];
 
             return `
                 <section class="bg-white border-b border-slate-200">
@@ -2286,257 +2941,335 @@
                             { label: 'Home', route: 'home' },
                             { label: 'Book Appointment' },
                         ])}
-
-                        <span class="inline-flex items-center px-3 py-1 rounded-full bg-clinical-tealSoft border border-teal-200 text-xs font-bold text-clinical-teal mb-3">
-                            Direct WhatsApp Confirmation
+                        <span class="inline-flex items-center px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-xs font-bold text-emerald-700 mb-3">
+                            WhatsApp Instant Confirmation
                         </span>
-                        <h1 class="text-3xl sm:text-4xl font-extrabold text-navy tracking-tight">Book Appointment</h1>
-                        <p class="text-sm sm:text-base text-slate-600 mt-1.5 max-w-2xl">
-                            Choose your specialist, preferred date, and time slot (Mon – Sat: 9:00 AM – 5:00 PM) to confirm your consultation directly via WhatsApp.
+                        <h1 class="text-3xl sm:text-4xl font-extrabold text-navy tracking-tight">Book an Appointment</h1>
+                        <p class="text-sm sm:text-base text-slate-600 mt-2 max-w-2xl">
+                            Choose your preferred specialist or diagnostic service, pick a convenient date and time slot, and confirm directly with our reception desk on WhatsApp.
                         </p>
                     </div>
                 </section>
 
                 <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
                     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-                        <!-- Booking Form -->
-                        <div class="lg:col-span-7 bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-sm">
-                            <form id="booking-page-form" onsubmit="handleBookingPageSubmit(event)" class="space-y-6">
-                                <!-- Step 1: Specialist Selector -->
-                                <div>
-                                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-3">1. Choose Specialist or Service</label>
-                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                                        ${CLINIC_DATA.doctors.map((doc) => {
-                                            const active = selectedDocId === doc.id;
-                                            return `
-                                                <button type="button" onclick="selectBookingDoctor('${doc.id}')" class="text-left p-3.5 rounded-2xl border transition-all flex items-center gap-3 ${active ? 'border-medical bg-medical-soft ring-2 ring-medical/20' : 'border-slate-200 bg-white hover:border-slate-300'}">
-                                                    ${renderDoctorAvatar(doc, 'w-12 h-12', 'rounded-xl', 'text-xs')}
-                                                    <div class="min-w-0">
-                                                        <p class="text-sm font-extrabold text-navy truncate">${escapeHtml(doc.name)}</p>
-                                                        <p class="text-xs text-slate-600 truncate">${escapeHtml(doc.role)}</p>
-                                                    </div>
-                                                </button>
-                                            `;
-                                        }).join('')}
-                                        <button type="button" onclick="selectBookingDoctor('diagnostics')" class="text-left p-3.5 rounded-2xl border transition-all flex items-center gap-3 ${selectedDocId === 'diagnostics' ? 'border-medical bg-medical-soft ring-2 ring-medical/20' : 'border-slate-200 bg-white hover:border-slate-300'}">
-                                            <div class="w-12 h-12 rounded-xl bg-clinical-tealSoft border border-teal-200 text-clinical-teal flex items-center justify-center shrink-0">
-                                                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-                                            </div>
-                                            <div class="min-w-0">
-                                                <p class="text-sm font-extrabold text-navy truncate">Diagnostics & Lab</p>
-                                                <p class="text-xs text-slate-600 truncate">2D Echo, TMT, Holter, Home Visit</p>
-                                            </div>
-                                        </button>
-                                    </div>
-                                </div>
-
-                                <!-- Step 2 & 3: Date & Slot Chips -->
-                                <div class="space-y-4">
-                                    <div>
-                                        <label for="booking-date" class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1.5">2. Preferred Date</label>
-                                        <input type="date" id="booking-date" value="${today}" min="${today}" required oninput="updateBookingSummary()" class="w-full sm:w-64 px-4 py-2.5 rounded-xl bg-white border border-slate-200 text-sm font-semibold text-navy focus:outline-none focus:ring-2 focus:ring-medical" />
-                                    </div>
-
-                                    <div>
-                                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">3. Preferred Time Slot</label>
-                                        <div class="space-y-3">
-                                            ${slotGroups.map((group) => `
-                                                <div>
-                                                    <p class="text-[11px] font-semibold text-slate-400 mb-1.5">${group.period}</p>
-                                                    <div class="flex flex-wrap gap-2">
-                                                        ${group.items.map((slot) => {
-                                                            const isSelected = APP_STATE.selectedTimeSlot === slot.value;
-                                                            return `
-                                                                <button type="button" onclick="selectBookingSlot('${slot.value}')" class="px-4 py-2 rounded-xl text-xs font-bold border transition-all ${isSelected ? 'bg-navy text-white border-navy shadow-sm' : 'bg-slate-50 text-slate-700 border-slate-200 hover:border-slate-400'}">
-                                                                    ${slot.label}
-                                                                </button>
-                                                            `;
-                                                        }).join('')}
-                                                    </div>
+                        <!-- Booking Form Column -->
+                        <form onsubmit="handleBookingPageSubmit(event)" class="lg:col-span-7 space-y-6 bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-sm">
+                            <!-- Step 1: Specialist / Service Selector -->
+                            <div class="space-y-3">
+                                <p class="text-xs font-extrabold uppercase tracking-wider text-clinical-teal">Step 1 • Select Specialist or Service</p>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                    ${CLINIC_DATA.doctors.map((doc) => {
+                                        const active = APP_STATE.selectedBookingDoctor === doc.id;
+                                        return `
+                                            <button type="button" onclick="selectBookingDoctor('${doc.id}')" class="p-3.5 rounded-2xl border text-left flex items-center gap-3 transition-all ${active ? 'border-medical bg-medical-soft/60 ring-2 ring-medical/20' : 'border-slate-200 bg-white hover:border-blue-300'}">
+                                                ${renderDoctorAvatar(doc, 'w-12 h-12', 'rounded-xl', 'text-xs')}
+                                                <div class="min-w-0">
+                                                    <p class="text-sm font-extrabold text-navy truncate">${escapeHtml(doc.name)}</p>
+                                                    <p class="text-xs font-semibold ${doc.department === 'ENT Care' ? 'text-clinical-teal' : 'text-medical'} truncate">${escapeHtml(doc.role)}</p>
                                                 </div>
-                                            `).join('')}
+                                            </button>
+                                        `;
+                                    }).join('')}
+
+                                    <button type="button" onclick="selectBookingDoctor('diagnostics')" class="p-3.5 rounded-2xl border text-left flex items-center gap-3 transition-all ${APP_STATE.selectedBookingDoctor === 'diagnostics' ? 'border-medical bg-medical-soft/60 ring-2 ring-medical/20' : 'border-slate-200 bg-white hover:border-blue-300'}">
+                                        <div class="w-12 h-12 rounded-xl bg-clinical-tealSoft border border-teal-200 text-clinical-teal flex items-center justify-center shrink-0">
+                                            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
                                         </div>
-                                    </div>
+                                        <div class="min-w-0">
+                                            <p class="text-sm font-extrabold text-navy truncate">Diagnostics &amp; Lab</p>
+                                            <p class="text-xs font-semibold text-clinical-teal truncate">2D Echo, TMT, Holter, Home Pickup</p>
+                                        </div>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Step 2: Date & Time Slots -->
+                            <div class="space-y-4 pt-4 border-t border-slate-100">
+                                <p class="text-xs font-extrabold uppercase tracking-wider text-clinical-teal">Step 2 • Choose Date &amp; Time Slot</p>
+
+                                <div>
+                                    <label for="booking-date" class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1.5">Preferred Date *</label>
+                                    <input type="date" id="booking-date" min="${today}" value="${today}" required onchange="updateBookingSummary()" class="w-full sm:w-64 px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-sm font-semibold text-navy focus:outline-none focus:ring-2 focus:ring-medical" />
                                 </div>
 
-                                <!-- Step 4: Patient Details -->
-                                <div class="space-y-4 pt-2 border-t border-slate-100">
-                                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-500">4. Patient Information</label>
-                                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                        <div>
-                                            <label for="booking-name" class="block text-xs font-semibold text-slate-600 mb-1">Patient Name *</label>
-                                            <input type="text" id="booking-name" required placeholder="Full name" oninput="updateBookingSummary()" class="w-full px-4 py-2.5 rounded-xl bg-white border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-medical" />
-                                        </div>
-                                        <div>
-                                            <label for="booking-phone" class="block text-xs font-semibold text-slate-600 mb-1">Phone Number *</label>
-                                            <input type="tel" id="booking-phone" required placeholder="+91 98XXX XXXXX" oninput="updateBookingSummary()" class="w-full px-4 py-2.5 rounded-xl bg-white border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-medical" />
+                                <div class="space-y-3">
+                                    <div>
+                                        <p class="text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-2">Morning Slots</p>
+                                        <div class="flex flex-wrap gap-2">
+                                            ${morningSlots.map((slot) => {
+                                                const active = APP_STATE.selectedTimeSlot === slot;
+                                                return `
+                                                    <button type="button" onclick="selectBookingSlot('${slot}')" class="px-4 py-2 rounded-xl text-xs font-bold border transition-all ${active ? 'bg-navy text-white border-navy shadow-sm' : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'}">
+                                                        ${slot}
+                                                    </button>
+                                                `;
+                                            }).join('')}
                                         </div>
                                     </div>
                                     <div>
-                                        <label for="booking-reason" class="block text-xs font-semibold text-slate-600 mb-1">Reason for Visit (Optional)</label>
-                                        <textarea id="booking-reason" rows="3" placeholder="e.g. Cardiac checkup, 2D Echo review, chronic sinusitis, blood panel..." class="w-full px-4 py-2.5 rounded-xl bg-white border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-medical"></textarea>
+                                        <p class="text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-2">Afternoon Slots</p>
+                                        <div class="flex flex-wrap gap-2">
+                                            ${afternoonSlots.map((slot) => {
+                                                const active = APP_STATE.selectedTimeSlot === slot;
+                                                return `
+                                                    <button type="button" onclick="selectBookingSlot('${slot}')" class="px-4 py-2 rounded-xl text-xs font-bold border transition-all ${active ? 'bg-navy text-white border-navy shadow-sm' : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'}">
+                                                        ${slot}
+                                                    </button>
+                                                `;
+                                            }).join('')}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Step 3: Patient Details -->
+                            <div class="space-y-4 pt-4 border-t border-slate-100">
+                                <p class="text-xs font-extrabold uppercase tracking-wider text-clinical-teal">Step 3 • Patient Information</p>
+
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                    <div>
+                                        <label for="booking-name" class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1.5">Patient Full Name *</label>
+                                        <input type="text" id="booking-name" required oninput="updateBookingSummary()" placeholder="Enter full name" class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-medical" />
+                                    </div>
+                                    <div>
+                                        <label for="booking-phone" class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1.5">Phone / WhatsApp Number *</label>
+                                        <input type="tel" id="booking-phone" required oninput="updateBookingSummary()" placeholder="+91 98XXX XXXXX" class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-medical" />
                                     </div>
                                 </div>
 
-                                <div id="booking-confirmation-card" class="hidden p-5 rounded-2xl bg-emerald-50 border border-emerald-200 space-y-3"></div>
+                                <div>
+                                    <label for="booking-reason" class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1.5">Reason for Visit / Symptoms (Optional)</label>
+                                    <textarea id="booking-reason" rows="3" placeholder="Briefly share your symptoms, follow-up details, or diagnostic test required..." class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-medical"></textarea>
+                                </div>
+                            </div>
 
-                                <button type="submit" class="w-full py-3.5 px-6 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm shadow-sm flex items-center justify-center gap-2 transition-colors">
-                                    <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
-                                    Confirm & Send via WhatsApp
-                                </button>
-                            </form>
-                        </div>
+                            <div id="booking-confirmation-card" class="hidden p-4 rounded-2xl bg-emerald-50 border border-emerald-200"></div>
 
-                        <!-- Live Summary Sidebar -->
-                        <div class="lg:col-span-5 space-y-6">
-                            <div id="booking-live-summary" class="bg-white rounded-3xl border border-slate-200 p-6 space-y-5 shadow-sm"></div>
+                            <button type="submit" class="w-full py-3.5 px-6 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm shadow-sm transition-colors">
+                                Confirm Appointment via WhatsApp
+                            </button>
+                        </form>
 
-                            <div class="bg-slate-100 rounded-3xl border border-slate-200 p-6 space-y-3">
-                                <h3 class="text-sm font-extrabold text-navy">Reception & Emergency Desk</h3>
-                                <p class="text-xs text-slate-600 leading-relaxed">
-                                    <strong>Hours:</strong> ${CLINIC_DATA.brand.hours}<br/>
-                                    <strong>Address:</strong> ${CLINIC_DATA.brand.address}
-                                </p>
-                                <a href="tel:+919002450077" class="inline-flex items-center gap-2 text-sm font-extrabold text-medical hover:underline">
-                                    Call ${CLINIC_DATA.brand.phone}
+                        <!-- Live Summary & Clinic Info Sidebar -->
+                        <aside class="lg:col-span-5 space-y-5 lg:sticky lg:top-24">
+                            <div id="booking-live-summary" class="bg-white rounded-3xl border border-slate-200 p-6 shadow-sm space-y-5"></div>
+
+                            <div class="bg-navy text-white rounded-3xl p-6 space-y-3">
+                                <p class="text-xs font-bold uppercase tracking-wider text-teal-300">Clinic Reception</p>
+                                <p class="text-sm text-slate-200 leading-relaxed">${CLINIC_DATA.brand.address}</p>
+                                <p class="text-xs text-slate-300">Hours: <strong class="text-white">${CLINIC_DATA.brand.hours}</strong></p>
+                                <a href="tel:+919002450077" class="inline-flex items-center gap-2 mt-1 px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-bold transition-colors">
+                                    Call Helpline: ${CLINIC_DATA.brand.phone}
                                 </a>
                             </div>
-                        </div>
+                        </aside>
                     </div>
                 </section>
             `;
         }
 
         /* ===================================================================== */
-        /* CLIENT-SIDE HASH ROUTER                                               */
+        /* CLIENT-SIDE SPA ROUTER & ACTIVE NAVIGATION HIGHLIGHTING               */
         /* ===================================================================== */
-        function resolveRouteMeta(cleanRoute) {
-            if (cleanRoute.startsWith('doctor/')) {
-                const doc = getDoctorById(cleanRoute.split('/')[1]);
-                return {
-                    navKey: 'specialists',
-                    title: `${doc.name} — ${doc.role} | Cardiosphere Multi-Speciality Clinic`,
-                };
-            }
+        function updateActiveNav(activeSection) {
+            document.querySelectorAll('.main-nav-link').forEach((btn) => {
+                const isActive = btn.getAttribute('data-nav') === activeSection;
+                btn.classList.toggle('bg-medical-soft', isActive);
+                btn.classList.toggle('text-medical', isActive);
+                btn.classList.toggle('text-slate-600', !isActive);
+            });
 
-            const map = {
-                home: { navKey: 'home', title: 'Cardiosphere Multi-Speciality Clinic | Cardiac, ENT & Diagnostics in Durgapur' },
-                specialists: { navKey: 'specialists', title: 'Specialists | Cardiosphere Multi-Speciality Clinic' },
-                cardiology: { navKey: 'cardiology', title: 'Cardiology | Cardiosphere Multi-Speciality Clinic' },
-                ent: { navKey: 'ent', title: 'ENT Care | Cardiosphere Multi-Speciality Clinic' },
-                diagnostics: { navKey: 'diagnostics', title: 'Diagnostics & Pharmacy | Cardiosphere Multi-Speciality Clinic' },
-                facilities: { navKey: 'facilities', title: 'Facilities & Visit Us | Cardiosphere Multi-Speciality Clinic' },
-                gallery: { navKey: 'gallery', title: 'Clinic Gallery | Cardiosphere Multi-Speciality Clinic' },
-                book: { navKey: 'book', title: 'Book Appointment | Cardiosphere Multi-Speciality Clinic' },
-            };
-
-            return map[cleanRoute] || map.home;
+            document.querySelectorAll('.mobile-nav-link').forEach((btn) => {
+                const isActive = btn.getAttribute('data-mobile-nav') === activeSection;
+                btn.classList.toggle('bg-medical-soft', isActive);
+                btn.classList.toggle('text-medical', isActive);
+                btn.classList.toggle('text-slate-700', !isActive);
+            });
         }
 
         function navigate(route) {
-            try {
-                const normalized = route.replace(/^#?\/?/, '').trim() || 'home';
-                const targetHash = `#${normalized}`;
-                if (window.location.hash !== targetHash) {
-                    window.location.hash = targetHash;
-                } else {
-                    renderCurrentRoute();
-                }
-            } catch (err) {
-                console.error('Navigation error:', err);
+            const cleanRoute = String(route || 'home').replace(/^#\/?/, '');
+            const targetHash = `#${cleanRoute}`;
+            if (window.location.hash === targetHash) {
+                renderCurrentRoute(false);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } else {
+                window.location.hash = targetHash;
             }
         }
 
-        function renderCurrentRoute(skipScroll = false) {
-            try {
-                const rawHash = window.location.hash.replace(/^#\/?/, '').trim();
-                const cleanRoute = rawHash || 'home';
-                const root = document.getElementById('app-root');
-                const meta = resolveRouteMeta(cleanRoute);
+        function renderCurrentRoute(instant = false) {
+            const root = document.getElementById('app-root');
+            if (!root) return;
 
-                root.classList.add('opacity-0');
+            const rawHash = (window.location.hash || '#home').replace(/^#\/?/, '') || 'home';
+            let html = '';
+            let activeNav = rawHash;
+            let pageTitle = 'Cardiosphere Multi-Speciality Clinic | Durgapur';
 
-                setTimeout(() => {
-                    if (cleanRoute === 'home') {
-                        root.innerHTML = renderHomeView();
-                    } else if (cleanRoute === 'specialists') {
-                        root.innerHTML = renderSpecialistsView();
-                    } else if (cleanRoute.startsWith('doctor/')) {
-                        root.innerHTML = renderDoctorProfileView(cleanRoute.split('/')[1]);
-                    } else if (cleanRoute === 'cardiology') {
-                        root.innerHTML = renderCardiologyView();
-                    } else if (cleanRoute === 'ent') {
-                        root.innerHTML = renderENTView();
-                    } else if (cleanRoute === 'diagnostics') {
-                        root.innerHTML = renderDiagnosticsView();
-                    } else if (cleanRoute === 'facilities') {
-                        root.innerHTML = renderFacilitiesView();
-                    } else if (cleanRoute === 'gallery') {
-                        root.innerHTML = renderGalleryView();
-                    } else if (cleanRoute === 'book') {
-                        root.innerHTML = renderBookAppointmentView();
-                        updateBookingSummary();
-                    } else {
-                        root.innerHTML = renderHomeView();
-                    }
-
-                    document.title = meta.title;
-
-                    document.querySelectorAll('.main-nav-link').forEach((btn) => {
-                        const isActive = btn.getAttribute('data-nav') === meta.navKey;
-                        btn.classList.toggle('bg-medical-soft', isActive);
-                        btn.classList.toggle('text-medical', isActive);
-                        btn.classList.toggle('text-slate-600', !isActive);
-                    });
-
-                    document.querySelectorAll('.mobile-nav-link').forEach((btn) => {
-                        const isActive = btn.getAttribute('data-mobile-nav') === meta.navKey;
-                        btn.classList.toggle('bg-medical-soft', isActive);
-                        btn.classList.toggle('text-medical', isActive);
-                        btn.classList.toggle('text-slate-700', !isActive);
-                    });
-
-                    root.classList.remove('opacity-0');
-                    if (!skipScroll) {
-                        window.scrollTo({ top: 0, behavior: 'smooth' });
-                    }
-                }, 100);
-            } catch (err) {
-                console.error('Render route error:', err);
+            if (rawHash.startsWith('doctor/')) {
+                const docId = rawHash.slice('doctor/'.length);
+                const doc = getDoctorById(docId);
+                html = renderDoctorProfileView(doc.id);
+                activeNav = 'specialists';
+                pageTitle = `${doc.name} | Cardiosphere Multi-Speciality Clinic`;
+            } else {
+                switch (rawHash) {
+                    case 'specialists':
+                        html = renderSpecialistsView();
+                        pageTitle = 'Our Specialists | Cardiosphere Multi-Speciality Clinic';
+                        break;
+                    case 'cardiology':
+                        html = renderCardiologyView();
+                        pageTitle = 'Cardiology Department | Cardiosphere Multi-Speciality Clinic';
+                        break;
+                    case 'ent':
+                        html = renderENTView();
+                        pageTitle = 'ENT & Head-Neck Care | Cardiosphere Multi-Speciality Clinic';
+                        break;
+                    case 'diagnostics':
+                        html = renderDiagnosticsView();
+                        pageTitle = 'Diagnostics & Pharmacy | Cardiosphere Multi-Speciality Clinic';
+                        break;
+                    case 'gallery':
+                        html = renderGalleryView();
+                        pageTitle = 'Clinic Gallery | Cardiosphere Multi-Speciality Clinic';
+                        break;
+                    case 'facilities':
+                        html = renderFacilitiesView();
+                        pageTitle = 'Facilities & Visit Us | Cardiosphere Multi-Speciality Clinic';
+                        break;
+                    case 'book':
+                        html = renderBookAppointmentView();
+                        pageTitle = 'Book Appointment | Cardiosphere Multi-Speciality Clinic';
+                        break;
+                    case 'home':
+                    default:
+                        html = renderHomeView();
+                        activeNav = 'home';
+                        pageTitle = 'Cardiosphere Multi-Speciality Clinic | Cardiac, ENT & Diagnostics in Durgapur';
+                        break;
+                }
             }
+
+            const commitRender = () => {
+                root.innerHTML = html;
+                document.title = pageTitle;
+                updateActiveNav(activeNav);
+                if (rawHash === 'book') {
+                    updateBookingSummary();
+                }
+                window.scrollTo({ top: 0, behavior: instant ? 'auto' : 'smooth' });
+            };
+
+            if (instant) {
+                commitRender();
+                root.classList.remove('opacity-0');
+                root.classList.add('opacity-100');
+                return;
+            }
+
+            root.classList.remove('opacity-100');
+            root.classList.add('opacity-0');
+            setTimeout(() => {
+                commitRender();
+                requestAnimationFrame(() => {
+                    root.classList.remove('opacity-0');
+                    root.classList.add('opacity-100');
+                });
+            }, 130);
         }
 
         /* ===================================================================== */
-        /* GALLERY INTERACTIONS: UPLOAD, COMPRESSION, EDIT, DELETE, EXPORT       */
+        /* GALLERY INTERACTIONS (All Mutating Functions Strictly Admin-Guarded)  */
         /* ===================================================================== */
         function setGalleryCategory(cat) {
             APP_STATE.galleryCategory = cat;
-            APP_STATE.pendingDeleteId = null;
             document.getElementById('app-root').innerHTML = renderGalleryView();
         }
 
-        function toggleManageGalleryMode() {
+        /**
+         * Guarded: Toggles Manage Photos overlay controls.
+         */
+        function toggleManageMode() {
+            if (!requireAdminAuth()) return;
             APP_STATE.manageGalleryMode = !APP_STATE.manageGalleryMode;
-            APP_STATE.pendingDeleteId = null;
             document.getElementById('app-root').innerHTML = renderGalleryView();
         }
 
-        function requestDeletePhoto(id) {
-            APP_STATE.pendingDeleteId = id;
-            document.getElementById('app-root').innerHTML = renderGalleryView();
+        /**
+         * Guarded: Opens Upload / Add Photo Modal.
+         */
+        function openUploadModal(defaultCategory = 'Clinic Events') {
+            if (!requireAdminAuth()) return;
+            const modal = document.getElementById('gallery-editor-modal');
+            document.getElementById('gallery-modal-heading').textContent = 'Add / Upload Photo';
+            document.getElementById('gallery-save-btn').textContent = 'Save Photo to Gallery';
+            document.getElementById('gallery-edit-id').value = '';
+            document.getElementById('gallery-title-input').value = '';
+            document.getElementById('gallery-caption-input').value = '';
+            document.getElementById('gallery-category-input').value = defaultCategory;
+            document.getElementById('gallery-date-input').value = getTodayISO();
+            document.getElementById('gallery-url-input').value = '';
+            document.getElementById('gallery-file-input').value = '';
+
+            const statusEl = document.getElementById('gallery-upload-status');
+            statusEl.classList.add('hidden');
+            statusEl.textContent = '';
+
+            APP_STATE.editorDraftSrc = '';
+            APP_STATE.editorDraftFallback = '';
+
+            const containRadio = document.querySelector('input[name="gallery-fit"][value="contain"]');
+            if (containRadio) containRadio.checked = true;
+
+            switchGalleryInputTab('device');
+            document.getElementById('gallery-preview-wrapper').classList.add('hidden');
+
+            modal.classList.remove('hidden');
+            document.body.classList.add('overflow-hidden');
         }
 
-        function cancelDeletePhoto() {
-            APP_STATE.pendingDeleteId = null;
-            document.getElementById('app-root').innerHTML = renderGalleryView();
+        /**
+         * Guarded: Opens Edit Photo / Caption Modal for an existing gallery item.
+         */
+        function openEditPhotoModal(photoId) {
+            if (!requireAdminAuth()) return;
+            const photo = APP_STATE.galleryPhotos.find((p) => p.id === photoId);
+            if (!photo) return;
+
+            const modal = document.getElementById('gallery-editor-modal');
+            document.getElementById('gallery-modal-heading').textContent = 'Edit Photo & Caption';
+            document.getElementById('gallery-save-btn').textContent = 'Update Photo';
+            document.getElementById('gallery-edit-id').value = photo.id;
+            document.getElementById('gallery-title-input').value = photo.title || '';
+            document.getElementById('gallery-caption-input').value = photo.caption || '';
+            document.getElementById('gallery-category-input').value = photo.category || 'Facilities';
+            document.getElementById('gallery-date-input').value = photo.date || getTodayISO();
+            document.getElementById('gallery-file-input').value = '';
+
+            const statusEl = document.getElementById('gallery-upload-status');
+            statusEl.classList.add('hidden');
+            statusEl.textContent = '';
+
+            APP_STATE.editorDraftSrc = photo.src || '';
+            APP_STATE.editorDraftFallback = photo.fallbackSrc || '';
+            document.getElementById('gallery-url-input').value = photo.src && !photo.src.startsWith('data:') ? photo.src : '';
+
+            const fitRadio = document.querySelector(`input[name="gallery-fit"][value="${photo.fit === 'cover' ? 'cover' : 'contain'}"]`);
+            if (fitRadio) fitRadio.checked = true;
+
+            switchGalleryInputTab(photo.src && photo.src.startsWith('data:') ? 'device' : 'link');
+            renderGalleryModalPreview();
+
+            modal.classList.remove('hidden');
+            document.body.classList.add('overflow-hidden');
         }
 
-        function confirmDeletePhoto(id) {
-            APP_STATE.galleryPhotos = APP_STATE.galleryPhotos.filter((p) => p.id !== id);
-            APP_STATE.pendingDeleteId = null;
-            saveGalleryPhotos();
-            document.getElementById('app-root').innerHTML = renderGalleryView();
-            showToast('Photo removed from gallery.', 'success');
+        function closeGalleryModal() {
+            document.getElementById('gallery-editor-modal').classList.add('hidden');
+            document.body.classList.remove('overflow-hidden');
         }
 
         function switchGalleryInputTab(tab) {
@@ -2552,70 +3285,6 @@
 
             deviceBtn.className = `flex-1 py-2.5 px-3 rounded-lg text-xs sm:text-sm font-bold transition-all ${isDevice ? 'bg-white text-navy shadow-sm' : 'text-slate-600 hover:text-navy'}`;
             linkBtn.className = `flex-1 py-2.5 px-3 rounded-lg text-xs sm:text-sm font-bold transition-all ${!isDevice ? 'bg-white text-navy shadow-sm' : 'text-slate-600 hover:text-navy'}`;
-        }
-
-        function openGalleryModal(editPhotoId = null, defaultCategory = 'Clinic Events') {
-            const modal = document.getElementById('gallery-editor-modal');
-            const heading = document.getElementById('gallery-modal-heading');
-            const saveBtn = document.getElementById('gallery-save-btn');
-            const editIdInput = document.getElementById('gallery-edit-id');
-            const titleInput = document.getElementById('gallery-title-input');
-            const captionInput = document.getElementById('gallery-caption-input');
-            const categoryInput = document.getElementById('gallery-category-input');
-            const dateInput = document.getElementById('gallery-date-input');
-            const urlInput = document.getElementById('gallery-url-input');
-            const fileInput = document.getElementById('gallery-file-input');
-            const statusEl = document.getElementById('gallery-upload-status');
-
-            fileInput.value = '';
-            statusEl.classList.add('hidden');
-            statusEl.textContent = '';
-
-            if (editPhotoId) {
-                const photo = APP_STATE.galleryPhotos.find((p) => p.id === editPhotoId);
-                if (!photo) return;
-                heading.textContent = 'Edit Photo & Caption';
-                saveBtn.textContent = 'Update Photo';
-                editIdInput.value = photo.id;
-                titleInput.value = photo.title || '';
-                captionInput.value = photo.caption || '';
-                categoryInput.value = photo.category || 'Facilities';
-                dateInput.value = photo.date || getTodayISO();
-                APP_STATE.editorDraftSrc = photo.src || '';
-                APP_STATE.editorDraftFallback = photo.fallbackSrc || '';
-                urlInput.value = photo.src && !photo.src.startsWith('data:') ? photo.src : '';
-
-                const fitRadio = document.querySelector(`input[name="gallery-fit"][value="${photo.fit === 'cover' ? 'cover' : 'contain'}"]`);
-                if (fitRadio) fitRadio.checked = true;
-
-                switchGalleryInputTab(photo.src && photo.src.startsWith('data:') ? 'device' : 'link');
-                renderGalleryModalPreview();
-            } else {
-                heading.textContent = 'Upload / Add Photo';
-                saveBtn.textContent = 'Save Photo to Gallery';
-                editIdInput.value = '';
-                titleInput.value = '';
-                captionInput.value = '';
-                categoryInput.value = defaultCategory;
-                dateInput.value = getTodayISO();
-                urlInput.value = '';
-                APP_STATE.editorDraftSrc = '';
-                APP_STATE.editorDraftFallback = '';
-
-                const containRadio = document.querySelector('input[name="gallery-fit"][value="contain"]');
-                if (containRadio) containRadio.checked = true;
-
-                switchGalleryInputTab('device');
-                document.getElementById('gallery-preview-wrapper').classList.add('hidden');
-            }
-
-            modal.classList.remove('hidden');
-            document.body.classList.add('overflow-hidden');
-        }
-
-        function closeGalleryModal() {
-            document.getElementById('gallery-editor-modal').classList.add('hidden');
-            document.body.classList.remove('overflow-hidden');
         }
 
         /**
@@ -2661,6 +3330,7 @@
         }
 
         async function processSelectedGalleryFile(file) {
+            if (!requireAdminAuth()) return;
             if (!file) return;
             if (!file.type.startsWith('image/')) {
                 showToast('Please select a valid JPG, PNG, WebP, or AVIF image.', 'error');
@@ -2761,62 +3431,60 @@
             wrapper.classList.remove('hidden');
         }
 
-        function handleGalleryFormSubmit(event) {
+        /**
+         * Routes the Gallery Editor modal form to either handleSaveNewPhoto or handleUpdatePhoto.
+         */
+        function handleGalleryEditorSubmit(event) {
             event.preventDefault();
-            try {
-                if (APP_STATE.editorTab === 'link') {
-                    const urlVal = document.getElementById('gallery-url-input').value.trim();
-                    if (urlVal) {
-                        const parsed = parseImageLinkInput(urlVal);
-                        APP_STATE.editorDraftSrc = parsed.src;
-                        APP_STATE.editorDraftFallback = parsed.fallbackSrc;
-                    }
-                }
+            const editId = document.getElementById('gallery-edit-id').value.trim();
+            if (editId) {
+                handleUpdatePhoto(event);
+            } else {
+                handleSaveNewPhoto(event);
+            }
+        }
 
-                if (!APP_STATE.editorDraftSrc) {
+        function collectGalleryFormPayload() {
+            if (APP_STATE.editorTab === 'link') {
+                const urlVal = document.getElementById('gallery-url-input').value.trim();
+                if (urlVal) {
+                    const parsed = parseImageLinkInput(urlVal);
+                    APP_STATE.editorDraftSrc = parsed.src;
+                    APP_STATE.editorDraftFallback = parsed.fallbackSrc;
+                }
+            }
+
+            return {
+                title: document.getElementById('gallery-title-input').value.trim(),
+                caption: document.getElementById('gallery-caption-input').value.trim(),
+                category: document.getElementById('gallery-category-input').value,
+                date: document.getElementById('gallery-date-input').value || getTodayISO(),
+                fit: document.querySelector('input[name="gallery-fit"]:checked')?.value || 'contain',
+                src: APP_STATE.editorDraftSrc,
+                fallbackSrc: APP_STATE.editorDraftFallback,
+            };
+        }
+
+        /**
+         * Guarded: Saves a newly uploaded / linked photo into the gallery.
+         */
+        function handleSaveNewPhoto(event) {
+            if (event) event.preventDefault();
+            if (!requireAdminAuth()) return;
+            try {
+                const payload = collectGalleryFormPayload();
+                if (!payload.src) {
                     showToast('Please upload a photo or paste a valid image / Google Drive link first.', 'error');
                     return;
                 }
 
-                const editId = document.getElementById('gallery-edit-id').value.trim();
-                const title = document.getElementById('gallery-title-input').value.trim();
-                const caption = document.getElementById('gallery-caption-input').value.trim();
-                const category = document.getElementById('gallery-category-input').value;
-                const date = document.getElementById('gallery-date-input').value || getTodayISO();
-                const fit = document.querySelector('input[name="gallery-fit"]:checked')?.value || 'contain';
+                APP_STATE.galleryPhotos.unshift({
+                    id: `gal-${Date.now()}`,
+                    ...payload,
+                });
 
-                if (editId) {
-                    const idx = APP_STATE.galleryPhotos.findIndex((p) => p.id === editId);
-                    if (idx !== -1) {
-                        APP_STATE.galleryPhotos[idx] = {
-                            ...APP_STATE.galleryPhotos[idx],
-                            title,
-                            caption,
-                            category,
-                            date,
-                            fit,
-                            src: APP_STATE.editorDraftSrc,
-                            fallbackSrc: APP_STATE.editorDraftFallback,
-                        };
-                    }
-                    if (saveGalleryPhotos()) {
-                        showToast('Gallery photo updated!', 'success');
-                    }
-                } else {
-                    const newPhoto = {
-                        id: `gal-${Date.now()}`,
-                        title,
-                        caption,
-                        category,
-                        date,
-                        fit,
-                        src: APP_STATE.editorDraftSrc,
-                        fallbackSrc: APP_STATE.editorDraftFallback,
-                    };
-                    APP_STATE.galleryPhotos.unshift(newPhoto);
-                    if (saveGalleryPhotos()) {
-                        showToast('New photo added to Clinic Gallery!', 'success');
-                    }
+                if (saveGalleryPhotos()) {
+                    showToast('New photo added to Clinic Gallery!', 'success');
                 }
 
                 closeGalleryModal();
@@ -2826,19 +3494,98 @@
                     navigate('gallery');
                 }
             } catch (err) {
-                console.error('Save gallery photo error:', err);
+                console.error('Save new photo error:', err);
                 showToast('Could not save photo. Please check your inputs.', 'error');
             }
         }
 
+        /**
+         * Guarded: Updates an existing gallery photo's caption, title, category, or image.
+         */
+        function handleUpdatePhoto(event) {
+            if (event) event.preventDefault();
+            if (!requireAdminAuth()) return;
+            try {
+                const editId = document.getElementById('gallery-edit-id').value.trim();
+                const payload = collectGalleryFormPayload();
+                if (!payload.src) {
+                    showToast('A valid photo image or link is required.', 'error');
+                    return;
+                }
+
+                const idx = APP_STATE.galleryPhotos.findIndex((p) => p.id === editId);
+                if (idx !== -1) {
+                    APP_STATE.galleryPhotos[idx] = {
+                        ...APP_STATE.galleryPhotos[idx],
+                        ...payload,
+                    };
+                    if (saveGalleryPhotos()) {
+                        showToast('Gallery photo updated!', 'success');
+                    }
+                }
+
+                closeGalleryModal();
+                document.getElementById('app-root').innerHTML = renderGalleryView();
+            } catch (err) {
+                console.error('Update photo error:', err);
+                showToast('Could not update photo.', 'error');
+            }
+        }
+
+        /**
+         * Guarded: Opens Delete Photo Confirmation Modal.
+         */
+        function requestDeletePhoto(photoId) {
+            if (!requireAdminAuth()) return;
+            const photo = APP_STATE.galleryPhotos.find((p) => p.id === photoId);
+            if (!photo) return;
+
+            APP_STATE.pendingDeletePhotoId = photoId;
+            const preview = document.getElementById('gallery-delete-preview');
+            preview.innerHTML = `
+                <img src="${escapeHtml(photo.src)}" alt="${escapeHtml(photo.title)}" referrerpolicy="no-referrer" class="w-16 h-12 rounded-xl object-contain bg-slate-200 shrink-0" />
+                <div class="min-w-0">
+                    <p class="text-sm font-extrabold text-navy truncate">${escapeHtml(photo.title)}</p>
+                    <p class="text-xs text-slate-500 truncate">${escapeHtml(photo.category)} • ${escapeHtml(formatDisplayDate(photo.date))}</p>
+                </div>
+            `;
+            document.getElementById('gallery-delete-modal').classList.remove('hidden');
+            document.body.classList.add('overflow-hidden');
+        }
+
+        function closeDeletePhotoModal() {
+            APP_STATE.pendingDeletePhotoId = null;
+            document.getElementById('gallery-delete-modal').classList.add('hidden');
+            document.body.classList.remove('overflow-hidden');
+        }
+
+        /**
+         * Guarded: Permanently removes the selected photo from the gallery.
+         */
+        function confirmDeletePhoto() {
+            if (!requireAdminAuth()) return;
+            const targetId = APP_STATE.pendingDeletePhotoId;
+            if (!targetId) return;
+
+            APP_STATE.galleryPhotos = APP_STATE.galleryPhotos.filter((p) => p.id !== targetId);
+            saveGalleryPhotos();
+            closeDeletePhotoModal();
+            document.getElementById('app-root').innerHTML = renderGalleryView();
+            showToast('Photo deleted from gallery.', 'success');
+        }
+
         /* ===================================================================== */
-        /* GALLERY EXPORT / BACKUP / RESTORE / RESET TOOLS                       */
+        /* GALLERY EXPORT / BACKUP / IMPORT / RESET & SECURITY MODALS            */
         /* ===================================================================== */
         function buildGalleryExportSnippet() {
             return `const INITIAL_GALLERY_PHOTOS = ${JSON.stringify(APP_STATE.galleryPhotos, null, 4)};`;
         }
 
+        /**
+         * Guarded: Opens Publish / Backup modal.
+         */
         function openExportModal() {
+            if (!requireAdminAuth()) return;
             const modal = document.getElementById('gallery-export-modal');
             document.getElementById('gallery-export-code').value = buildGalleryExportSnippet();
             document.getElementById('gallery-reset-confirm').classList.add('hidden');
@@ -2852,11 +3599,12 @@
         }
 
         function copyGalleryExportCode() {
-            const code = buildGalleryExportSnippet();
-            copyToClipboard(code, 'Updated INITIAL_GALLERY_PHOTOS code copied!');
+            if (!requireAdminAuth()) return;
+            copyToClipboard(buildGalleryExportSnippet(), 'Updated INITIAL_GALLERY_PHOTOS code copied!');
         }
 
         function downloadGalleryBackup() {
+            if (!requireAdminAuth()) return;
             try {
                 const payload = JSON.stringify(APP_STATE.galleryPhotos, null, 2);
                 const blob = new Blob([payload], { type: 'application/json' });
@@ -2875,7 +3623,14 @@
             }
         }
 
-        function handleRestoreGalleryBackup(event) {
+        /**
+         * Guarded: Imports gallery items from a .json backup file.
+         */
+        function importGalleryJson(event) {
+            if (!requireAdminAuth()) {
+                if (event && event.target) event.target.value = '';
+                return;
+            }
             const file = event.target.files && event.target.files[0];
             if (!file) return;
 
@@ -2909,9 +3664,9 @@
                     saveGalleryPhotos();
                     document.getElementById('gallery-export-code').value = buildGalleryExportSnippet();
                     document.getElementById('app-root').innerHTML = renderGalleryView();
-                    showToast(`Restored ${sanitized.length} gallery photos!`, 'success');
+                    showToast(`Imported ${sanitized.length} gallery photos!`, 'success');
                 } catch (err) {
-                    console.error('Restore backup error:', err);
+                    console.error('Import backup error:', err);
                     showToast('Invalid JSON backup file.', 'error');
                 } finally {
                     event.target.value = '';
@@ -2921,6 +3676,7 @@
         }
 
         function requestResetGallery() {
+            if (!requireAdminAuth()) return;
             document.getElementById('gallery-reset-confirm').classList.remove('hidden');
         }
 
@@ -2928,7 +3684,11 @@
             document.getElementById('gallery-reset-confirm').classList.add('hidden');
         }
 
-        function confirmResetGallery() {
+        /**
+         * Guarded: Resets gallery photos back to INITIAL_GALLERY_PHOTOS defaults.
+         */
+        function resetGalleryToDefaults() {
+            if (!requireAdminAuth()) return;
             APP_STATE.galleryPhotos = INITIAL_GALLERY_PHOTOS.map((p) => ({ ...p }));
             try {
                 localStorage.removeItem(GALLERY_STORAGE_KEY);
@@ -2939,6 +3699,117 @@
             document.getElementById('gallery-export-code').value = buildGalleryExportSnippet();
             document.getElementById('app-root').innerHTML = renderGalleryView();
             showToast('Gallery restored to default clinic photos.', 'success');
+        }
+
+        /**
+         * Guarded: Opens Admin Security Settings / Change Password modal.
+         */
+        function openSecurityModal() {
+            if (!requireAdminAuth()) return;
+            const effective = getEffectiveAdminCredentials();
+            document.getElementById('sec-current-password').value = '';
+            document.getElementById('sec-new-username').value = effective.username;
+            document.getElementById('sec-new-password').value = '';
+            document.getElementById('sec-confirm-password').value = '';
+
+            const feedback = document.getElementById('sec-feedback-msg');
+            feedback.classList.add('hidden');
+            feedback.textContent = '';
+
+            document.getElementById('admin-config-export-box').classList.add('hidden');
+            document.getElementById('admin-security-modal').classList.remove('hidden');
+            document.body.classList.add('overflow-hidden');
+        }
+
+        function closeSecurityModal() {
+            document.getElementById('admin-security-modal').classList.add('hidden');
+            document.body.classList.remove('overflow-hidden');
+        }
+
+        /**
+         * Guarded: Verifies current password, saves new SHA-256 hash to localStorage,
+         * and generates a permanent ADMIN_CONFIG snippet with empty defaultPassword.
+         */
+        function handleUpdateCredentials(event) {
+            event.preventDefault();
+            if (!requireAdminAuth()) return;
+
+            const currentPass = document.getElementById('sec-current-password').value;
+            const newUsername = document.getElementById('sec-new-username').value.trim();
+            const newPassword = document.getElementById('sec-new-password').value;
+            const confirmPassword = document.getElementById('sec-confirm-password').value;
+            const feedback = document.getElementById('sec-feedback-msg');
+
+            const showFeedback = (msg, isError) => {
+                feedback.classList.remove('hidden', 'bg-rose-50', 'border-rose-200', 'text-rose-800', 'bg-emerald-50', 'border-emerald-200', 'text-emerald-900');
+                feedback.classList.add('border', ...(isError
+                    ? ['bg-rose-50', 'border-rose-200', 'text-rose-800']
+                    : ['bg-emerald-50', 'border-emerald-200', 'text-emerald-900']));
+                feedback.textContent = msg;
+            };
+
+            const effective = getEffectiveAdminCredentials();
+            if (sha256(currentPass) !== effective.passwordHash) {
+                showFeedback('Current password is incorrect. Credentials were not changed.', true);
+                return;
+            }
+            if (newUsername.length < 3) {
+                showFeedback('Username must be at least 3 characters long.', true);
+                return;
+            }
+            if (newPassword.length < 6) {
+                showFeedback('New password must be at least 6 characters long.', true);
+                return;
+            }
+            if (newPassword !== confirmPassword) {
+                showFeedback('New password and confirmation do not match.', true);
+                return;
+            }
+
+            const newHash = sha256(newPassword);
+            try {
+                localStorage.setItem(
+                    ADMIN_AUTH_OVERRIDE_KEY,
+                    JSON.stringify({ username: newUsername, passwordHash: newHash })
+                );
+
+                // Update active sessionStorage username
+                const session = getAdminSession();
+                if (session) {
+                    session.username = newUsername;
+                    session.expiresAt = Date.now() + ADMIN_INACTIVITY_MS;
+                    sessionStorage.setItem(ADMIN_SESSION_KEY, JSON.stringify(session));
+                }
+
+                const permanentSnippet =
+`const ADMIN_CONFIG = {
+    username: ${JSON.stringify(newUsername)},
+    passwordHash: ${JSON.stringify(newHash)},
+    defaultPassword: '',
+};`;
+
+                document.getElementById('admin-config-code-output').value = permanentSnippet;
+                document.getElementById('admin-config-export-box').classList.remove('hidden');
+
+                document.getElementById('sec-current-password').value = '';
+                document.getElementById('sec-new-password').value = '';
+                document.getElementById('sec-confirm-password').value = '';
+
+                showFeedback('Credentials updated and saved securely as a SHA-256 hash on this browser. Copy the permanent ADMIN_CONFIG snippet below for live hosting.', false);
+                if ((window.location.hash || '#home').replace(/^#\/?/, '') === 'gallery') {
+                    document.getElementById('app-root').innerHTML = renderGalleryView();
+                }
+                showToast('Admin credentials updated!', 'success');
+            } catch (err) {
+                console.error('Update credentials error:', err);
+                showFeedback('Failed to save updated credentials.', true);
+            }
+        }
+
+        function copyPermanentAdminConfig() {
+            if (!requireAdminAuth()) return;
+            const snippet = document.getElementById('admin-config-code-output').value;
+            copyToClipboard(snippet, 'Permanent ADMIN_CONFIG code copied!');
         }
 
         /* ===================================================================== */
@@ -3308,8 +4179,24 @@
         document.getElementById('gallery-export-modal').addEventListener('click', (e) => {
             if (e.target.id === 'gallery-export-modal') closeExportModal();
         });
+        document.getElementById('gallery-delete-modal').addEventListener('click', (e) => {
+            if (e.target.id === 'gallery-delete-modal') closeDeletePhotoModal();
+        });
+        document.getElementById('admin-login-modal').addEventListener('click', (e) => {
+            if (e.target.id === 'admin-login-modal') closeAdminLoginModal();
+        });
+        document.getElementById('admin-security-modal').addEventListener('click', (e) => {
+            if (e.target.id === 'admin-security-modal') closeSecurityModal();
+        });
         document.getElementById('lightbox-modal').addEventListener('click', (e) => {
             if (e.target.id === 'lightbox-modal') closeLightbox();
+        });
+
+        // Reset inactivity timer on active interaction when signed in
+        ['click', 'keydown', 'touchstart'].forEach((evtName) => {
+            document.addEventListener(evtName, () => {
+                if (isAdminAuthenticated()) touchAdminSession();
+            }, { passive: true });
         });
 
         // Keyboard shortcuts for Lightbox & Modals
@@ -3320,6 +4207,9 @@
                 closeBookingModal();
                 closeGalleryModal();
                 closeExportModal();
+                closeDeletePhotoModal();
+                closeAdminLoginModal();
+                closeSecurityModal();
                 toggleMobileMenu(false);
             } else if (lightboxOpen && e.key === 'ArrowRight') {
                 stepLightbox(1);
@@ -3331,6 +4221,9 @@
         window.addEventListener('hashchange', () => renderCurrentRoute(false));
         window.addEventListener('DOMContentLoaded', () => {
             loadGalleryPhotos();
+            if (isAdminAuthenticated()) {
+                startAdminSessionMonitor();
+            }
             if (!window.location.hash) {
                 window.location.hash = '#home';
             }
