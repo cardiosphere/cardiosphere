@@ -178,7 +178,6 @@
                     <p class="text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-2 px-2">Our Specialists</p>
                     <div class="space-y-1">
                         <button onclick="navigate('doctor/dr-tutan-das'); toggleMobileMenu(false)" class="w-full text-left px-3.5 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:bg-blue-50 hover:text-medical transition-colors">Dr. Tutan Das — Cardiology</button>
-                        <button onclick="navigate('doctor/dr-manidipa-majumdar'); toggleMobileMenu(false)" class="w-full text-left px-3.5 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:bg-blue-50 hover:text-medical transition-colors">Dr. Manidipa Majumdar — Cardiology</button>
                         <button onclick="navigate('doctor/dr-swagata-chakraborty'); toggleMobileMenu(false)" class="w-full text-left px-3.5 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:bg-teal-50 hover:text-clinical-teal transition-colors">Dr. Swagata Chakraborty — ENT Care</button>
                     </div>
                 </div>
@@ -302,7 +301,6 @@
                     <label for="modal-doctor" class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-1.5">Select Specialist or Service</label>
                     <select id="modal-doctor" onchange="updateModalDoctorPreview()" class="w-full px-3.5 py-2.5 rounded-xl bg-white border border-slate-200 text-sm font-semibold text-navy focus:outline-none focus:ring-2 focus:ring-medical">
                         <option value="dr-tutan-das">Dr. Tutan Das — Interventional Cardiologist</option>
-                        <option value="dr-manidipa-majumdar">Dr. Manidipa Majumdar — Interventional Cardiologist</option>
                         <option value="dr-swagata-chakraborty">Dr. Swagata Chakraborty — ENT &amp; Head/Neck Surgeon</option>
                         <option value="diagnostics">Diagnostics, Pathology &amp; Home Sample Collection</option>
                     </select>
@@ -551,7 +549,7 @@
 
                 <!-- Inline Reset Confirmation -->
                 <div id="gallery-reset-confirm" class="hidden p-4 rounded-2xl bg-rose-50 border border-rose-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-                    <p class="text-xs font-semibold text-rose-900">Restore the original 6 clinic photos and remove custom uploads from this browser?</p>
+                    <p class="text-xs font-semibold text-rose-900">Restore the original 5 clinic photos and remove custom uploads from this browser?</p>
                     <div class="flex items-center gap-2 shrink-0">
                         <button type="button" onclick="cancelResetGallery()" class="px-3 py-1.5 rounded-lg bg-white border border-rose-200 text-xs font-bold text-slate-700 hover:bg-slate-50">Cancel</button>
                         <button type="button" onclick="resetGalleryToDefaults()" class="px-3 py-1.5 rounded-lg bg-rose-600 text-white text-xs font-bold hover:bg-rose-700">Yes, Reset</button>
@@ -793,7 +791,146 @@
     <!-- ===================================================================== -->
     <!-- TOAST NOTIFICATIONS CONTAINER                                         -->
     <!-- ===================================================================== -->
-    <div id="toast-container" class="fixed bottom-5 right-5 z-50 pointer-events-none flex flex-col gap-2"></div>
+    <div id="toast-container" class="fixed bottom-24 right-5 z-50 pointer-events-none flex flex-col gap-2"></div>
+
+    <!-- ===================================================================== -->
+    <!-- ADVANCED VISITOR CARE ASSISTANT BOT WIDGET                            -->
+    <!-- ===================================================================== -->
+    <div id="visitor-bot-root" class="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-40 flex flex-col items-end">
+        <!-- Proactive Greeting Bubble (Dismissible) -->
+        <div id="bot-teaser-bubble" class="hidden mb-3 max-w-[270px] bg-white rounded-2xl rounded-br-sm border border-slate-200 shadow-xl p-3.5 text-left transition-all duration-300">
+            <div class="flex items-start justify-between gap-2">
+                <div class="flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shrink-0"></span>
+                    <span class="text-[11px] font-extrabold uppercase tracking-wider text-clinical-teal">Care Assistant Online</span>
+                </div>
+                <button type="button" onclick="dismissBotTeaser()" class="text-slate-400 hover:text-navy p-0.5 rounded-lg" aria-label="Dismiss assistant greeting">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M18 6 6 18M6 6l12 12"/></svg>
+                </button>
+            </div>
+            <p class="text-xs text-slate-700 font-medium leading-relaxed mt-1.5">
+                Need help choosing a specialist, checking diagnostic prep, or booking an appointment?
+            </p>
+            <button type="button" onclick="toggleVisitorBot(true)" class="mt-2.5 w-full py-1.5 px-3 rounded-xl bg-medical-soft hover:bg-blue-100 text-medical text-xs font-bold transition-colors">
+                Start Chat →
+            </button>
+        </div>
+
+        <!-- Expandable Chat Window -->
+        <section
+            id="visitor-bot-panel"
+            aria-label="Cardiosphere Care Assistant Chat"
+            class="hidden fixed inset-x-3 bottom-3 sm:static w-auto sm:w-[400px] h-[82vh] sm:h-[600px] sm:max-h-[82vh] bg-white rounded-3xl border border-slate-200 shadow-2xl flex flex-col overflow-hidden"
+        >
+            <!-- Bot Header -->
+            <div class="bg-navy text-white px-4 py-3.5 shrink-0">
+                <div class="flex items-center justify-between gap-2">
+                    <div class="flex items-center gap-3 min-w-0">
+                        <div class="relative w-10 h-10 rounded-2xl bg-white/10 border border-white/15 flex items-center justify-center shrink-0">
+                            <svg class="w-5 h-5 text-teal-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 2a4 4 0 0 1 4 4v1h1a3 3 0 0 1 3 3v4a3 3 0 0 1-3 3h-1l-4 4-4-4H7a3 3 0 0 1-3-3v-4a3 3 0 0 1 3-3h1V6a4 4 0 0 1 4-4z"/>
+                                <circle cx="9.5" cy="12" r="1" fill="currentColor"/>
+                                <circle cx="14.5" cy="12" r="1" fill="currentColor"/>
+                            </svg>
+                            <span class="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-emerald-400 border-2 border-navy"></span>
+                        </div>
+                        <div class="min-w-0">
+                            <h2 class="text-sm font-extrabold leading-tight truncate">Cardiosphere Care Bot</h2>
+                            <p id="bot-live-status" class="text-[11px] text-teal-200 font-medium truncate">Checking clinic hours...</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-1 shrink-0">
+                        <button type="button" onclick="resetVisitorBotChat()" title="Restart Conversation" class="p-2 rounded-xl text-slate-300 hover:text-white hover:bg-white/10 transition-colors" aria-label="Restart Conversation">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><path stroke-linecap="round" stroke-linejoin="round" d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+                        </button>
+                        <button type="button" onclick="toggleVisitorBot(false)" title="Minimize Assistant" class="p-2 rounded-xl text-slate-300 hover:text-white hover:bg-white/10 transition-colors" aria-label="Close Chat">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M18 6 6 18M6 6l12 12"/></svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Language Switcher + Quick Emergency Link -->
+                <div class="mt-3 pt-2.5 border-t border-white/10 flex items-center justify-between gap-2">
+                    <div class="inline-flex items-center p-0.5 rounded-xl bg-white/10 border border-white/10 text-[11px] font-bold">
+                        <button type="button" data-bot-lang="en" onclick="setBotLanguage('en')" class="bot-lang-btn px-2.5 py-1 rounded-lg bg-white text-navy transition-colors">EN</button>
+                        <button type="button" data-bot-lang="bn" onclick="setBotLanguage('bn')" class="bot-lang-btn px-2.5 py-1 rounded-lg text-slate-200 hover:text-white transition-colors">বাংলা</button>
+                        <button type="button" data-bot-lang="hi" onclick="setBotLanguage('hi')" class="bot-lang-btn px-2.5 py-1 rounded-lg text-slate-200 hover:text-white transition-colors">हिन्दी</button>
+                    </div>
+
+                    <a href="tel:+919002450077" class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-rose-500/20 hover:bg-rose-500/30 border border-rose-400/30 text-rose-100 text-[11px] font-bold transition-colors">
+                        <span class="w-1.5 h-1.5 rounded-full bg-rose-400"></span>
+                        Emergency Call
+                    </a>
+                </div>
+            </div>
+
+            <!-- Active Multi-Step Booking Progress Banner (Shown Only During In-Chat Booking) -->
+            <div id="bot-flow-banner" class="hidden px-4 py-2 bg-emerald-50 border-b border-emerald-200 flex items-center justify-between gap-2 text-xs shrink-0">
+                <span id="bot-flow-step-text" class="font-bold text-emerald-900">Guided Appointment Booking</span>
+                <button type="button" onclick="cancelBotBookingFlow()" class="text-[11px] font-bold text-rose-700 hover:underline shrink-0">Cancel</button>
+            </div>
+
+            <!-- Scrollable Messages Stream -->
+            <div id="bot-messages" class="flex-1 overflow-y-auto p-4 space-y-3.5 bg-slate-50/90"></div>
+
+            <!-- Dynamic Quick-Reply Suggestion Chips -->
+            <div id="bot-quick-replies" class="px-3.5 py-2.5 bg-white border-t border-slate-200/80 flex items-center gap-1.5 overflow-x-auto shrink-0"></div>
+
+            <!-- Input Composer -->
+            <form id="bot-composer-form" onsubmit="handleBotFormSubmit(event)" class="p-3 bg-white border-t border-slate-200 shrink-0">
+                <div class="flex items-center gap-2">
+                    <button
+                        type="button"
+                        id="bot-voice-btn"
+                        onclick="toggleBotVoiceInput()"
+                        title="Speak your question"
+                        class="hidden p-2.5 rounded-xl border border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-600 hover:text-navy transition-colors shrink-0"
+                        aria-label="Voice Input"
+                    >
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path stroke-linecap="round" stroke-linejoin="round" d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v4M8 23h8"/></svg>
+                    </button>
+
+                    <input
+                        type="text"
+                        id="bot-input"
+                        autocomplete="off"
+                        placeholder="Ask about doctors, symptoms, tests, hours..."
+                        class="flex-1 min-w-0 px-3.5 py-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs sm:text-sm text-navy placeholder-slate-400 focus:outline-none focus:bg-white focus:ring-2 focus:ring-medical"
+                    />
+
+                    <button
+                        type="submit"
+                        class="p-2.5 sm:px-4 rounded-xl bg-medical hover:bg-medical-hover text-white text-xs font-bold shadow-sm transition-colors inline-flex items-center justify-center gap-1.5 shrink-0"
+                        aria-label="Send Message"
+                    >
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                    </button>
+                </div>
+                <p class="text-[10px] text-slate-400 text-center mt-2">
+                    Clinical guidance only — not a substitute for emergency medical care.
+                </p>
+            </form>
+        </section>
+
+        <!-- Floating Launcher Button -->
+        <button
+            type="button"
+            id="bot-launcher-btn"
+            onclick="toggleVisitorBot(true)"
+            class="group inline-flex items-center gap-2.5 pl-4 pr-5 py-3.5 rounded-full bg-navy hover:bg-navy-light text-white shadow-2xl border border-white/15 transition-all hover:-translate-y-0.5 focus:outline-none focus:ring-4 focus:ring-medical/30"
+            aria-label="Open Cardiosphere Care Assistant"
+        >
+            <span class="relative flex items-center justify-center w-8 h-8 rounded-full bg-medical text-white shrink-0">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                <span id="bot-unread-dot" class="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-emerald-400 ring-2 ring-navy"></span>
+            </span>
+            <span class="text-left leading-tight">
+                <span class="block text-xs sm:text-sm font-extrabold">Care Assistant</span>
+                <span class="hidden sm:block text-[10px] text-teal-200 font-semibold">Ask • Triage • Book</span>
+            </span>
+        </button>
+    </div>
 
     <!-- ===================================================================== -->
     <!-- APPLICATION DATA, GALLERY MANAGER, ROUTER & VIEW TEMPLATES            -->
@@ -859,16 +996,6 @@
                 fallbackSrc: 'https://lh3.googleusercontent.com/d/1p7tWJZABcg5rOq5Zj20ruOJHmsO_sMIL=w1000',
             },
             {
-                id: 'gal-dr-manidipa',
-                title: 'Dr. Manidipa Majumdar — Cardiac Diagnostics',
-                caption: 'Dr. Manidipa Majumdar — Specialist in Cardiac Diagnostics & Chronic Condition Management.',
-                category: 'Specialists',
-                date: '2026-03-12',
-                fit: 'contain',
-                src: 'https://hlghospital.com/wp-content/uploads/2025/04/dr.-manidipa.jpg',
-                fallbackSrc: '',
-            },
-            {
                 id: 'gal-dr-swagata',
                 title: 'Dr. Swagata Chakraborty — ENT & Head/Neck Surgery',
                 caption: 'Dr. Swagata Chakraborty, Ex-Senior Resident AIIMS — Expertise in complex ENT surgical procedures.',
@@ -926,36 +1053,6 @@
                     testimonial: {
                         quote: 'Dr. Tutan Das is phenomenal. The angioplasty was a success and his confident approach put us at ease.',
                         author: 'Subhash P.',
-                    },
-                },
-                {
-                    id: 'dr-manidipa-majumdar',
-                    name: 'Dr. Manidipa Majumdar',
-                    initials: 'MM',
-                    avatarBg: 'bg-medical',
-                    avatarText: 'text-white',
-                    role: 'Interventional Cardiologist',
-                    department: 'Cardiology',
-                    departmentRoute: 'cardiology',
-                    departmentLabel: 'Cardiology',
-                    credentials: 'Cardiac Diagnostics, 2D Echo & Chronic Condition Management',
-                    photo: 'https://hlghospital.com/wp-content/uploads/2025/04/dr.-manidipa.jpg',
-                    fallbackPhoto: '',
-                    shortBio: 'Specialist in Cardiac Diagnostics (2D Echo, TMT, Holter) and structured Chronic Condition Management for heart wellness.',
-                    fullBio: 'Dr. Manidipa Majumdar is an Interventional Cardiologist known for diagnostic precision and clear, reassuring patient consultations. She leads non-invasive cardiac evaluations—including 2D Echocardiography, TMT stress testing, and Holter monitoring—alongside long-term management of hypertension, diabetes, and heart failure.',
-                    schedule: 'Mon – Sat: 9:00 AM – 5:00 PM',
-                    languages: ['English', 'Bengali', 'Hindi'],
-                    expertise: [
-                        '2D Echocardiography Evaluation',
-                        'TMT / Stress Test & Holter Review',
-                        'Hypertension Management',
-                        'Diabetes & Cardio-Metabolic Care',
-                        'Heart Failure Management',
-                        'Preventive Heart Screening',
-                    ],
-                    testimonial: {
-                        quote: "Dr. Manidipa's diagnosis was spot on. She explained the 2D Echo results clearly. Truly personalized care.",
-                        author: 'Anjali S.',
                     },
                 },
                 {
@@ -1066,11 +1163,6 @@
                     quote: 'Dr. Tutan Das is phenomenal. The angioplasty was a success and his confident approach put us at ease.',
                     author: 'Subhash P.',
                     department: 'Cardiology',
-                },
-                {
-                    quote: "Dr. Manidipa's diagnosis was spot on. She explained the 2D Echo results clearly. Truly personalized care.",
-                    author: 'Anjali S.',
-                    department: 'Cardiac Diagnostics',
                 },
                 {
                     quote: 'Excellent consultation with Dr. Swagata for chronic sinusitis. Highly professional and effective.',
@@ -1817,7 +1909,15 @@
                 }
                 const parsed = JSON.parse(raw);
                 if (Array.isArray(parsed) && parsed.length > 0) {
-                    APP_STATE.galleryPhotos = parsed;
+                    // Remove any previously cached Dr. Manidipa entries from browser storage
+                    const cleaned = parsed.filter((p) => {
+                        const haystack = `${p?.id || ''} ${p?.title || ''} ${p?.src || ''}`.toLowerCase();
+                        return !haystack.includes('manidipa');
+                    });
+                    APP_STATE.galleryPhotos = cleaned.length > 0 ? cleaned : INITIAL_GALLERY_PHOTOS.map((p) => ({ ...p }));
+                    if (cleaned.length !== parsed.length) {
+                        saveGalleryPhotos();
+                    }
                 } else {
                     APP_STATE.galleryPhotos = INITIAL_GALLERY_PHOTOS.map((p) => ({ ...p }));
                 }
@@ -2065,7 +2165,7 @@
                             </button>
                         </div>
 
-                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             ${CLINIC_DATA.doctors.map(renderDoctorCard).join('')}
                         </div>
                     </div>
@@ -2105,7 +2205,7 @@
                             <p class="text-sm text-slate-600 mt-1.5">Words from families treated across our Cardiology, Diagnostics, and ENT departments.</p>
                         </div>
 
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
                             ${CLINIC_DATA.testimonials.map((t) => `
                                 <div class="bg-slate-50 rounded-3xl border border-slate-200 p-7 flex flex-col justify-between">
                                     <div>
@@ -2191,7 +2291,7 @@
                 </section>
 
                 <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         ${filteredDoctors.map(renderDoctorCard).join('')}
                     </div>
                 </section>
@@ -2364,7 +2464,7 @@
                                 Interventional & Non-Invasive <span class="text-medical">Cardiac Care</span>
                             </h1>
                             <p class="text-sm sm:text-base text-slate-600 leading-relaxed">
-                                Led by Dr. Tutan Das and Dr. Manidipa Majumdar, our Cardiology department combines advanced interventional expertise with on-site diagnostics and long-term preventive heart care.
+                                Led by Dr. Tutan Das, our Cardiology department combines advanced interventional expertise with on-site diagnostics and long-term preventive heart care.
                             </p>
                             <div class="pt-2 flex flex-wrap gap-3">
                                 <button onclick="startBookingForDoctor('dr-tutan-das')" class="px-6 py-3 rounded-xl bg-medical hover:bg-medical-hover text-white font-bold text-sm transition-colors shadow-sm">
@@ -2397,8 +2497,8 @@
 
                 <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-14">
                     <div class="mb-8">
-                        <span class="text-xs font-bold uppercase tracking-wider text-clinical-teal">Cardiology Consultants</span>
-                        <h2 class="text-2xl sm:text-3xl font-extrabold text-navy mt-1">Meet Our Cardiologists</h2>
+                        <span class="text-xs font-bold uppercase tracking-wider text-clinical-teal">Cardiology Specialist</span>
+                        <h2 class="text-2xl sm:text-3xl font-extrabold text-navy mt-1">Meet Our Cardiologist</h2>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         ${cardiologists.map(renderDoctorCard).join('')}
@@ -2972,7 +3072,7 @@
                                         `;
                                     }).join('')}
 
-                                    <button type="button" onclick="selectBookingDoctor('diagnostics')" class="p-3.5 rounded-2xl border text-left flex items-center gap-3 transition-all ${APP_STATE.selectedBookingDoctor === 'diagnostics' ? 'border-medical bg-medical-soft/60 ring-2 ring-medical/20' : 'border-slate-200 bg-white hover:border-blue-300'}">
+                                    <button type="button" onclick="selectBookingDoctor('diagnostics')" class="sm:col-span-2 p-3.5 rounded-2xl border text-left flex items-center gap-3 transition-all ${APP_STATE.selectedBookingDoctor === 'diagnostics' ? 'border-medical bg-medical-soft/60 ring-2 ring-medical/20' : 'border-slate-200 bg-white hover:border-blue-300'}">
                                         <div class="w-12 h-12 rounded-xl bg-clinical-tealSoft border border-teal-200 text-clinical-teal flex items-center justify-center shrink-0">
                                             <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
                                         </div>
@@ -3110,10 +3210,16 @@
 
             if (rawHash.startsWith('doctor/')) {
                 const docId = rawHash.slice('doctor/'.length);
-                const doc = getDoctorById(docId);
-                html = renderDoctorProfileView(doc.id);
-                activeNav = 'specialists';
-                pageTitle = `${doc.name} | Cardiosphere Multi-Speciality Clinic`;
+                const matchedDoc = CLINIC_DATA.doctors.find((d) => d.id === docId);
+                if (matchedDoc) {
+                    html = renderDoctorProfileView(matchedDoc.id);
+                    activeNav = 'specialists';
+                    pageTitle = `${matchedDoc.name} | Cardiosphere Multi-Speciality Clinic`;
+                } else {
+                    html = renderSpecialistsView();
+                    activeNav = 'specialists';
+                    pageTitle = 'Our Specialists | Cardiosphere Multi-Speciality Clinic';
+                }
             } else {
                 switch (rawHash) {
                     case 'specialists':
@@ -4199,6 +4305,1047 @@
             }, { passive: true });
         });
 
+        /* ===================================================================== */
+        /* ADVANCED VISITOR CARE ASSISTANT BOT ENGINE                            */
+        /* Multilingual (EN/BN/HI), Symptom Triage, In-Chat Booking & Prep Guide */
+        /* ===================================================================== */
+        const BOT_STORAGE_KEY = 'cardiosphere_visitor_bot_v1';
+
+        const BOT_COPY = {
+            en: {
+                placeholder: 'Ask about doctors, symptoms, tests, hours...',
+                welcome: 'Hello! I am the **Cardiosphere Care Assistant**. I can help you choose the right specialist, check diagnostic test preparation, verify clinic hours, or book an appointment directly here.',
+                fallback: 'I can help with **Cardiology**, **ENT Care**, **Diagnostic Tests & Prep**, **Clinic Timings & Location**, **Home Sample Collection**, or **Appointment Booking**. Choose a quick option below or tell me your symptoms.',
+                chips: [
+                    { label: '📅 Book Appointment', action: 'book_start' },
+                    { label: '🩺 Find Specialist by Symptom', action: 'symptom_menu' },
+                    { label: '🧪 Diagnostics & Prep', action: 'diagnostics_menu' },
+                    { label: '📍 Hours & Location', action: 'hours_location' },
+                    { label: '👨‍⚕️ Meet Specialists', action: 'doctors_list' },
+                ],
+            },
+            bn: {
+                placeholder: 'ডাক্তার, লক্ষণ, টেস্ট বা অ্যাপয়েন্টমেন্ট সম্পর্কে লিখুন...',
+                welcome: 'নমস্কার! আমি **Cardiosphere Care Assistant**। আমি আপনাকে সঠিক বিশেষজ্ঞ ডাক্তার বেছে নিতে, টেস্টের প্রস্তুতি জানতে, ক্লিনিকের সময় দেখতে এবং এখানেই অ্যাপয়েন্টমেন্ট বুক করতে সাহায্য করতে পারি।',
+                fallback: 'আমি **কার্ডিওলজি**, **ইএনটি (কান-নাক-গলা)**, **ডায়াগনস্টিক টেস্ট**, **ক্লিনিকের সময় ও ঠিকানা**, এবং **অ্যাপয়েন্টমেন্ট বুকিং** নিয়ে সাহায্য করতে পারি। নিচের যেকোনো অপশন বেছে নিন।',
+                chips: [
+                    { label: '📅 অ্যাপয়েন্টমেন্ট বুক করুন', action: 'book_start' },
+                    { label: '🩺 লক্ষণ অনুযায়ী ডাক্তার', action: 'symptom_menu' },
+                    { label: '🧪 টেস্ট ও প্রস্তুতি', action: 'diagnostics_menu' },
+                    { label: '📍 সময় ও ঠিকানা', action: 'hours_location' },
+                    { label: '👨‍⚕️ আমাদের ডাক্তাররা', action: 'doctors_list' },
+                ],
+            },
+            hi: {
+                placeholder: 'डॉक्टर, लक्षण, जांच या अपॉइंटमेंट के बारे में पूछें...',
+                welcome: 'नमस्ते! मैं **Cardiosphere Care Assistant** हूँ। मैं आपको सही विशेषज्ञ डॉक्टर चुनने, जांच की तैयारी जानने, क्लिनिक का समय देखने और यहीं से अपॉइंटमेंट बुक करने में मदद कर सकता हूँ।',
+                fallback: 'मैं **कार्डियोलॉजी**, **ईएनटी (कान-नाक-गला)**, **डायग्नोस्टिक टेस्ट**, **क्लिनिक समय व पता**, और **अपॉइंटमेंट बुकिंग** में मदद कर सकता हूँ। नीचे दिए विकल्प चुनें या अपने लक्षण लिखें।',
+                chips: [
+                    { label: '📅 अपॉइंटमेंट बुक करें', action: 'book_start' },
+                    { label: '🩺 लक्षण से डॉक्टर चुनें', action: 'symptom_menu' },
+                    { label: '🧪 जांच और तैयारी', action: 'diagnostics_menu' },
+                    { label: '📍 समय और पता', action: 'hours_location' },
+                    { label: '👨‍⚕️ हमारे विशेषज्ञ', action: 'doctors_list' },
+                ],
+            },
+        };
+
+        const VISITOR_BOT = {
+            isOpen: false,
+            lang: 'en',
+            messages: [],
+            quickReplies: [],
+            bookingFlow: null, // { step: 'doctor'|'date'|'slot'|'name'|'phone'|'reason', data: {} }
+            speechRecognition: null,
+            isListening: false,
+            teaserDismissed: false,
+            typingTimeout: null,
+        };
+
+        /**
+         * Returns current IST clinic status (Mon-Sat, 9:00 AM - 5:00 PM IST).
+         */
+        function getClinicLiveStatus() {
+            const now = new Date();
+            const utcMs = now.getTime() + now.getTimezoneOffset() * 60000;
+            const ist = new Date(utcMs + 5.5 * 3600000);
+            const day = ist.getDay(); // 0 = Sunday
+            const mins = ist.getHours() * 60 + ist.getMinutes();
+            const isOpen = day >= 1 && day <= 6 && mins >= 540 && mins < 1020;
+
+            return {
+                isOpen,
+                shortLabel: isOpen
+                    ? 'Open Now • Closes 5:00 PM IST'
+                    : day === 0
+                        ? 'Closed Today (Sunday) • Opens Mon 9 AM'
+                        : mins < 540
+                            ? 'Opens Today at 9:00 AM IST'
+                            : 'Closed Now • Opens Next Day 9 AM',
+            };
+        }
+
+        /**
+         * Formats simple **bold** markdown safely after HTML escaping.
+         */
+        function formatBotText(rawText) {
+            return escapeHtml(rawText)
+                .replace(/\*\*(.+?)\*\*/g, '<strong class="font-extrabold text-navy">$1</strong>')
+                .replace(/\n/g, '<br>');
+        }
+
+        /**
+         * Returns an offset ISO date string (0 = today, 1 = tomorrow, etc.).
+         */
+        function getOffsetISO(daysAhead) {
+            const d = new Date();
+            d.setDate(d.getDate() + daysAhead);
+            const yyyy = d.getFullYear();
+            const mm = String(d.getMonth() + 1).padStart(2, '0');
+            const dd = String(d.getDate()).padStart(2, '0');
+            return `${yyyy}-${mm}-${dd}`;
+        }
+
+        /**
+         * Persists recent chat messages and language inside sessionStorage.
+         */
+        function saveBotState() {
+            try {
+                sessionStorage.setItem(BOT_STORAGE_KEY, JSON.stringify({
+                    lang: VISITOR_BOT.lang,
+                    messages: VISITOR_BOT.messages.slice(-40),
+                    teaserDismissed: VISITOR_BOT.teaserDismissed,
+                }));
+            } catch (err) {
+                console.error('Bot sessionStorage save error:', err);
+            }
+        }
+
+        /**
+         * Initializes the visitor bot on page load, restoring session history and voice support.
+         */
+        function initVisitorBot() {
+            const status = getClinicLiveStatus();
+            const statusEl = document.getElementById('bot-live-status');
+            if (statusEl) statusEl.textContent = status.shortLabel;
+
+            // Detect Web Speech API support for optional voice input
+            const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+            if (SpeechRec) {
+                const voiceBtn = document.getElementById('bot-voice-btn');
+                if (voiceBtn) voiceBtn.classList.remove('hidden');
+            }
+
+            // Restore session history if present
+            try {
+                const raw = sessionStorage.getItem(BOT_STORAGE_KEY);
+                if (raw) {
+                    const parsed = JSON.parse(raw);
+                    if (parsed && Array.isArray(parsed.messages) && parsed.messages.length > 0) {
+                        VISITOR_BOT.lang = BOT_COPY[parsed.lang] ? parsed.lang : 'en';
+                        VISITOR_BOT.messages = parsed.messages;
+                        VISITOR_BOT.teaserDismissed = Boolean(parsed.teaserDismissed);
+                    }
+                }
+            } catch (err) {
+                console.error('Bot restore error:', err);
+            }
+
+            if (VISITOR_BOT.messages.length === 0) {
+                seedBotWelcome();
+            }
+
+            applyBotLanguageUI();
+            renderBotMessages();
+            setBotQuickReplies(BOT_COPY[VISITOR_BOT.lang].chips);
+
+            // Show subtle proactive teaser bubble after 5 seconds if not dismissed or opened
+            if (!VISITOR_BOT.teaserDismissed) {
+                setTimeout(() => {
+                    if (!VISITOR_BOT.isOpen && !VISITOR_BOT.teaserDismissed) {
+                        const teaser = document.getElementById('bot-teaser-bubble');
+                        if (teaser) teaser.classList.remove('hidden');
+                    }
+                }, 5000);
+            }
+        }
+
+        function seedBotWelcome() {
+            VISITOR_BOT.messages = [
+                {
+                    id: `m-${Date.now()}`,
+                    sender: 'bot',
+                    text: BOT_COPY[VISITOR_BOT.lang].welcome,
+                    cardType: null,
+                    time: getNowTimeLabel(),
+                },
+            ];
+            saveBotState();
+        }
+
+        function getNowTimeLabel() {
+            return new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        }
+
+        function dismissBotTeaser() {
+            VISITOR_BOT.teaserDismissed = true;
+            const teaser = document.getElementById('bot-teaser-bubble');
+            if (teaser) teaser.classList.add('hidden');
+            saveBotState();
+        }
+
+        function toggleVisitorBot(openState) {
+            VISITOR_BOT.isOpen = Boolean(openState);
+            const panel = document.getElementById('visitor-bot-panel');
+            const launcher = document.getElementById('bot-launcher-btn');
+            const teaser = document.getElementById('bot-teaser-bubble');
+            const unreadDot = document.getElementById('bot-unread-dot');
+
+            if (panel) panel.classList.toggle('hidden', !VISITOR_BOT.isOpen);
+            if (launcher) launcher.classList.toggle('hidden', VISITOR_BOT.isOpen);
+            if (teaser && VISITOR_BOT.isOpen) {
+                teaser.classList.add('hidden');
+                VISITOR_BOT.teaserDismissed = true;
+            }
+            if (unreadDot && VISITOR_BOT.isOpen) unreadDot.classList.add('hidden');
+
+            if (VISITOR_BOT.isOpen) {
+                const statusEl = document.getElementById('bot-live-status');
+                if (statusEl) statusEl.textContent = getClinicLiveStatus().shortLabel;
+                renderBotMessages();
+                setTimeout(() => {
+                    const input = document.getElementById('bot-input');
+                    if (input) input.focus();
+                }, 120);
+            }
+            saveBotState();
+        }
+
+        function applyBotLanguageUI() {
+            const copy = BOT_COPY[VISITOR_BOT.lang] || BOT_COPY.en;
+            const input = document.getElementById('bot-input');
+            if (input) input.placeholder = copy.placeholder;
+
+            document.querySelectorAll('.bot-lang-btn').forEach((btn) => {
+                const active = btn.getAttribute('data-bot-lang') === VISITOR_BOT.lang;
+                btn.classList.toggle('bg-white', active);
+                btn.classList.toggle('text-navy', active);
+                btn.classList.toggle('text-slate-200', !active);
+            });
+        }
+
+        function setBotLanguage(langCode) {
+            if (!BOT_COPY[langCode] || VISITOR_BOT.lang === langCode) return;
+            VISITOR_BOT.lang = langCode;
+            VISITOR_BOT.bookingFlow = null;
+            updateBotFlowBanner();
+            applyBotLanguageUI();
+            pushBotMessage(BOT_COPY[langCode].welcome, null, null, BOT_COPY[langCode].chips);
+        }
+
+        function resetVisitorBotChat() {
+            VISITOR_BOT.bookingFlow = null;
+            updateBotFlowBanner();
+            seedBotWelcome();
+            renderBotMessages();
+            setBotQuickReplies(BOT_COPY[VISITOR_BOT.lang].chips);
+            showToast('Care Assistant conversation reset.', 'navy');
+        }
+
+        function setBotQuickReplies(chips) {
+            VISITOR_BOT.quickReplies = Array.isArray(chips) ? chips : [];
+            const box = document.getElementById('bot-quick-replies');
+            if (!box) return;
+
+            if (VISITOR_BOT.quickReplies.length === 0) {
+                box.classList.add('hidden');
+                return;
+            }
+
+            box.classList.remove('hidden');
+            box.innerHTML = VISITOR_BOT.quickReplies.map((chip, idx) => `
+                <button
+                    type="button"
+                    onclick="triggerBotChip(${idx})"
+                    class="px-3 py-1.5 rounded-full bg-slate-100 hover:bg-medical-soft border border-slate-200 hover:border-blue-300 text-navy hover:text-medical text-xs font-bold whitespace-nowrap transition-colors shrink-0"
+                >
+                    ${escapeHtml(chip.label)}
+                </button>
+            `).join('');
+        }
+
+        function updateBotFlowBanner() {
+            const banner = document.getElementById('bot-flow-banner');
+            const label = document.getElementById('bot-flow-step-text');
+            if (!banner || !label) return;
+
+            if (!VISITOR_BOT.bookingFlow) {
+                banner.classList.add('hidden');
+                return;
+            }
+
+            const steps = {
+                doctor: 'Step 1 of 5 • Choose Specialist / Service',
+                date: 'Step 2 of 5 • Choose Preferred Date',
+                slot: 'Step 3 of 5 • Choose Time Slot',
+                name: 'Step 4 of 5 • Enter Patient Name',
+                phone: 'Step 5 of 5 • Enter Phone Number',
+                reason: 'Optional • Reason for Visit',
+            };
+            banner.classList.remove('hidden');
+            label.textContent = steps[VISITOR_BOT.bookingFlow.step] || 'Guided Appointment Booking';
+        }
+
+        function cancelBotBookingFlow() {
+            VISITOR_BOT.bookingFlow = null;
+            updateBotFlowBanner();
+            pushBotMessage('Appointment wizard cancelled. How else can I assist you today?', null, null, BOT_COPY[VISITOR_BOT.lang].chips);
+        }
+
+        function pushUserMessage(text) {
+            VISITOR_BOT.messages.push({
+                id: `u-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
+                sender: 'user',
+                text: String(text || '').trim(),
+                time: getNowTimeLabel(),
+            });
+            saveBotState();
+            renderBotMessages();
+        }
+
+        function showBotTypingIndicator() {
+            const box = document.getElementById('bot-messages');
+            if (!box) return;
+            const existing = document.getElementById('bot-typing-row');
+            if (existing) existing.remove();
+
+            const el = document.createElement('div');
+            el.id = 'bot-typing-row';
+            el.className = 'flex items-start gap-2';
+            el.innerHTML = `
+                <div class="w-7 h-7 rounded-xl bg-navy text-teal-300 flex items-center justify-center shrink-0 text-[11px] font-extrabold">AI</div>
+                <div class="px-3.5 py-2.5 rounded-2xl rounded-tl-sm bg-white border border-slate-200 shadow-sm flex items-center gap-1.5">
+                    <span class="w-1.5 h-1.5 rounded-full bg-slate-400 animate-bounce"></span>
+                    <span class="w-1.5 h-1.5 rounded-full bg-slate-400 animate-bounce" style="animation-delay: 120ms"></span>
+                    <span class="w-1.5 h-1.5 rounded-full bg-slate-400 animate-bounce" style="animation-delay: 240ms"></span>
+                </div>
+            `;
+            box.appendChild(el);
+            box.scrollTop = box.scrollHeight;
+        }
+
+        function pushBotMessage(text, cardType = null, cardData = null, nextChips = null) {
+            if (VISITOR_BOT.typingTimeout) clearTimeout(VISITOR_BOT.typingTimeout);
+            showBotTypingIndicator();
+
+            VISITOR_BOT.typingTimeout = setTimeout(() => {
+                const typingRow = document.getElementById('bot-typing-row');
+                if (typingRow) typingRow.remove();
+
+                VISITOR_BOT.messages.push({
+                    id: `b-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
+                    sender: 'bot',
+                    text,
+                    cardType,
+                    cardData,
+                    time: getNowTimeLabel(),
+                });
+                saveBotState();
+                renderBotMessages();
+                if (nextChips) setBotQuickReplies(nextChips);
+            }, 340);
+        }
+
+        /**
+         * Renders rich interactive clinical cards inside chat bubbles.
+         */
+        function renderBotCard(msg) {
+            if (!msg.cardType) return '';
+
+            if (msg.cardType === 'emergency') {
+                return `
+                    <div class="mt-2.5 p-3.5 rounded-2xl bg-rose-50 border border-rose-200 space-y-2.5">
+                        <div class="flex items-center gap-2 text-rose-800 font-extrabold text-xs">
+                            <span class="w-2 h-2 rounded-full bg-rose-600 animate-ping"></span>
+                            Urgent Medical Attention Recommended
+                        </div>
+                        <p class="text-[11px] text-rose-900 leading-relaxed">
+                            If you or someone nearby is experiencing severe chest pain, breathing difficulty, fainting, or acute distress, please seek immediate emergency medical care or call our helpline right away.
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <a href="tel:+919002450077" class="flex-1 text-center py-2 px-3 rounded-xl bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold transition-colors">
+                                Call +91 90024 50077
+                            </a>
+                            <a href="${CLINIC_DATA.brand.mapsLink}" target="_blank" rel="noopener noreferrer" class="py-2 px-3 rounded-xl bg-white border border-rose-200 text-rose-800 text-xs font-bold hover:bg-rose-100 transition-colors">
+                                Directions
+                            </a>
+                        </div>
+                    </div>
+                `;
+            }
+
+            if (msg.cardType === 'doctors') {
+                const ids = Array.isArray(msg.cardData)
+                    ? msg.cardData.filter((id) => CLINIC_DATA.doctors.some((d) => d.id === id))
+                    : CLINIC_DATA.doctors.map((d) => d.id);
+                const docs = (ids.length > 0 ? ids : CLINIC_DATA.doctors.map((d) => d.id)).map((id) => getDoctorById(id));
+                return `
+                    <div class="mt-2.5 space-y-2">
+                        ${docs.map((doc) => `
+                            <div class="p-3 rounded-2xl bg-slate-50 border border-slate-200 space-y-2.5">
+                                <div class="flex items-center gap-2.5">
+                                    ${renderDoctorAvatar(doc, 'w-11 h-11', 'rounded-xl', 'text-xs')}
+                                    <div class="min-w-0 flex-1">
+                                        <p class="text-xs font-extrabold text-navy truncate">${escapeHtml(doc.name)}</p>
+                                        <p class="text-[11px] font-semibold ${doc.department === 'ENT Care' ? 'text-clinical-teal' : 'text-medical'} truncate">${escapeHtml(doc.role)}</p>
+                                        <p class="text-[10px] text-slate-500 truncate">${escapeHtml(doc.credentials)}</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-1.5">
+                                    <button type="button" onclick="navigate('doctor/${doc.id}'); toggleVisitorBot(false)" class="flex-1 py-1.5 px-2.5 rounded-xl bg-white border border-slate-200 hover:border-navy text-navy text-[11px] font-bold transition-colors">
+                                        View Profile
+                                    </button>
+                                    <button type="button" onclick="startBotBookingFlow('${doc.id}')" class="flex-1 py-1.5 px-2.5 rounded-xl bg-medical hover:bg-medical-hover text-white text-[11px] font-bold transition-colors">
+                                        Book Here
+                                    </button>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            }
+
+            if (msg.cardType === 'diagnostics') {
+                const items = Array.isArray(msg.cardData) ? msg.cardData : CLINIC_DATA.diagnostics;
+                return `
+                    <div class="mt-2.5 space-y-2">
+                        ${items.map((test) => `
+                            <div class="p-3 rounded-2xl bg-slate-50 border border-slate-200 space-y-1">
+                                <div class="flex items-center justify-between gap-2">
+                                    <p class="text-xs font-extrabold text-navy">${escapeHtml(test.name)}</p>
+                                    <span class="text-[10px] font-bold text-clinical-teal bg-clinical-tealSoft px-2 py-0.5 rounded-full shrink-0">${escapeHtml(test.duration)}</span>
+                                </div>
+                                <p class="text-[11px] text-slate-600 leading-relaxed">${escapeHtml(test.description)}</p>
+                                <p class="text-[11px] text-navy bg-white border border-slate-200 rounded-xl px-2.5 py-1.5 mt-1">
+                                    <strong class="text-medical">Prep:</strong> ${escapeHtml(test.prep)}
+                                </p>
+                            </div>
+                        `).join('')}
+                        <button type="button" onclick="startBotBookingFlow('diagnostics')" class="w-full py-2 px-3 rounded-xl bg-medical hover:bg-medical-hover text-white text-xs font-bold transition-colors">
+                            Book Diagnostic Test / Home Collection
+                        </button>
+                    </div>
+                `;
+            }
+
+            if (msg.cardType === 'location') {
+                const status = getClinicLiveStatus();
+                return `
+                    <div class="mt-2.5 p-3.5 rounded-2xl bg-slate-50 border border-slate-200 space-y-2.5">
+                        <div class="flex items-center justify-between gap-2">
+                            <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-bold ${status.isOpen ? 'bg-emerald-50 text-emerald-700 border border-emerald-200' : 'bg-amber-50 text-amber-800 border border-amber-200'}">
+                                <span class="w-1.5 h-1.5 rounded-full ${status.isOpen ? 'bg-emerald-500' : 'bg-amber-500'}"></span>
+                                ${status.isOpen ? 'Open Now' : 'Currently Closed'}
+                            </span>
+                            <span class="text-[11px] font-semibold text-slate-500">Mon – Sat</span>
+                        </div>
+                        <p class="text-xs font-bold text-navy">${CLINIC_DATA.brand.hours}</p>
+                        <p class="text-[11px] text-slate-600 leading-relaxed">${CLINIC_DATA.brand.address}</p>
+                        <div class="flex flex-wrap gap-1.5 pt-1">
+                            <a href="${CLINIC_DATA.brand.mapsLink}" target="_blank" rel="noopener noreferrer" class="flex-1 text-center py-2 px-2.5 rounded-xl bg-medical hover:bg-medical-hover text-white text-[11px] font-bold transition-colors">
+                                Google Maps
+                            </a>
+                            <button type="button" onclick="copyToClipboard('${CLINIC_DATA.brand.address}', 'Clinic address copied!')" class="py-2 px-2.5 rounded-xl bg-white border border-slate-200 hover:border-navy text-navy text-[11px] font-bold transition-colors">
+                                Copy Address
+                            </button>
+                            <button type="button" onclick="navigate('facilities'); toggleVisitorBot(false)" class="py-2 px-2.5 rounded-xl bg-white border border-slate-200 hover:border-navy text-navy text-[11px] font-bold transition-colors">
+                                Facilities
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }
+
+            if (msg.cardType === 'booking_date_picker') {
+                const today = getTodayISO();
+                return `
+                    <div class="mt-2.5 p-3 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+                        <p class="text-[11px] font-bold text-slate-500 uppercase tracking-wider">Pick Any Date</p>
+                        <div class="flex items-center gap-2">
+                            <input type="date" id="bot-inline-date-${msg.id}" min="${today}" value="${today}" class="flex-1 px-2.5 py-1.5 rounded-xl bg-white border border-slate-200 text-xs font-semibold text-navy focus:outline-none focus:ring-2 focus:ring-medical" />
+                            <button type="button" onclick="submitBotInlineDate('bot-inline-date-${msg.id}')" class="px-3 py-1.5 rounded-xl bg-medical hover:bg-medical-hover text-white text-xs font-bold transition-colors">
+                                Select
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }
+
+            if (msg.cardType === 'booking_summary' && msg.cardData) {
+                const d = msg.cardData;
+                const { url, plainSummary } = buildWhatsAppBooking(d);
+                const encodedCopy = encodeURIComponent(plainSummary);
+                return `
+                    <div class="mt-2.5 p-3.5 rounded-2xl bg-emerald-50 border border-emerald-200 space-y-2.5">
+                        <div class="flex items-center justify-between gap-2 border-b border-emerald-200/70 pb-2">
+                            <span class="text-xs font-extrabold text-emerald-950">Appointment Ready</span>
+                            <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-600 text-white">WhatsApp</span>
+                        </div>
+                        <div class="space-y-1 text-[11px] text-emerald-950">
+                            <p><span class="text-emerald-700 font-semibold">Specialist:</span> <strong>${escapeHtml(d.specialistLabel)}</strong></p>
+                            <p><span class="text-emerald-700 font-semibold">Date &amp; Slot:</span> <strong>${escapeHtml(formatDisplayDate(d.date))} • ${escapeHtml(d.slot)}</strong></p>
+                            <p><span class="text-emerald-700 font-semibold">Patient:</span> <strong>${escapeHtml(d.name)} (${escapeHtml(d.phone)})</strong></p>
+                            <p><span class="text-emerald-700 font-semibold">Reason:</span> ${escapeHtml(d.reason || 'General Consultation')}</p>
+                        </div>
+                        <div class="flex flex-wrap gap-2 pt-1">
+                            <a href="${url}" target="_blank" rel="noopener noreferrer" class="flex-1 text-center py-2 px-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold shadow-sm transition-colors">
+                                Confirm on WhatsApp
+                            </a>
+                            <button type="button" onclick="copyToClipboard(decodeURIComponent('${encodedCopy}'), 'Booking summary copied!')" class="py-2 px-3 rounded-xl bg-white border border-emerald-300 text-emerald-900 text-xs font-bold hover:bg-emerald-100 transition-colors">
+                                Copy
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }
+
+            return '';
+        }
+
+        function renderBotMessages() {
+            const box = document.getElementById('bot-messages');
+            if (!box) return;
+
+            box.innerHTML = VISITOR_BOT.messages.map((msg) => {
+                if (msg.sender === 'user') {
+                    return `
+                        <div class="flex justify-end">
+                            <div class="max-w-[85%] bg-medical text-white px-3.5 py-2.5 rounded-2xl rounded-tr-sm shadow-sm">
+                                <p class="text-xs sm:text-[13px] leading-relaxed">${escapeHtml(msg.text)}</p>
+                                <span class="block text-[10px] text-blue-200 text-right mt-1">${escapeHtml(msg.time || '')}</span>
+                            </div>
+                        </div>
+                    `;
+                }
+
+                return `
+                    <div class="flex items-start gap-2">
+                        <div class="w-7 h-7 rounded-xl bg-navy text-teal-300 flex items-center justify-center shrink-0 text-[10px] font-extrabold mt-0.5">AI</div>
+                        <div class="max-w-[88%] bg-white border border-slate-200 px-3.5 py-2.5 rounded-2xl rounded-tl-sm shadow-sm">
+                            <p class="text-xs sm:text-[13px] text-slate-700 leading-relaxed">${formatBotText(msg.text)}</p>
+                            ${renderBotCard(msg)}
+                            <span class="block text-[10px] text-slate-400 mt-1.5">${escapeHtml(msg.time || '')}</span>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            box.scrollTop = box.scrollHeight;
+        }
+
+        /* ===================================================================== */
+        /* GUIDED IN-CHAT APPOINTMENT BOOKING WIZARD                             */
+        /* ===================================================================== */
+        function startBotBookingFlow(preselectId = null) {
+            VISITOR_BOT.bookingFlow = {
+                step: preselectId ? 'date' : 'doctor',
+                data: {
+                    doctorId: preselectId || '',
+                    specialistLabel: '',
+                    date: '',
+                    slot: '',
+                    name: '',
+                    phone: '',
+                    reason: '',
+                },
+            };
+
+            if (preselectId) {
+                VISITOR_BOT.bookingFlow.data.specialistLabel = resolveSpecialistLabel(preselectId);
+                updateBotFlowBanner();
+                askBotBookingDate();
+                return;
+            }
+
+            updateBotFlowBanner();
+            pushBotMessage(
+                'Let’s schedule your visit in a few quick taps. **Which specialist or service** would you like to book?',
+                null,
+                null,
+                [
+                    { label: 'Dr. Tutan Das (Cardiology)', action: 'book_doctor', value: 'dr-tutan-das' },
+                    { label: 'Dr. Swagata Chakraborty (ENT)', action: 'book_doctor', value: 'dr-swagata-chakraborty' },
+                    { label: 'Diagnostics / Home Collection', action: 'book_doctor', value: 'diagnostics' },
+                ]
+            );
+        }
+
+        function resolveSpecialistLabel(id) {
+            if (id === 'diagnostics') return 'Diagnostics / Lab & Home Sample Collection';
+            const doc = getDoctorById(id);
+            return `${doc.name} (${doc.role})`;
+        }
+
+        function askBotBookingDate() {
+            const today = getTodayISO();
+            const tomorrow = getOffsetISO(1);
+            const dayAfter = getOffsetISO(2);
+
+            pushBotMessage(
+                `Great — booking for **${VISITOR_BOT.bookingFlow.data.specialistLabel}**.\nSelect your **preferred date** below or pick a custom date:`,
+                'booking_date_picker',
+                null,
+                [
+                    { label: `Today (${formatDisplayDate(today)})`, action: 'book_date', value: today },
+                    { label: `Tomorrow (${formatDisplayDate(tomorrow)})`, action: 'book_date', value: tomorrow },
+                    { label: formatDisplayDate(dayAfter), action: 'book_date', value: dayAfter },
+                ]
+            );
+        }
+
+        function submitBotInlineDate(inputId) {
+            const input = document.getElementById(inputId);
+            if (!input || !input.value) return;
+            pushUserMessage(formatDisplayDate(input.value));
+            advanceBotBookingFlow(input.value);
+        }
+
+        function advanceBotBookingFlow(value) {
+            const flow = VISITOR_BOT.bookingFlow;
+            if (!flow) return;
+
+            if (flow.step === 'doctor') {
+                const lower = value.toLowerCase();
+                let pickedId = 'dr-tutan-das';
+                if (lower.includes('swagata') || lower.includes('ent')) pickedId = 'dr-swagata-chakraborty';
+                else if (lower.includes('diag') || lower.includes('test') || lower.includes('echo') || lower.includes('lab')) pickedId = 'diagnostics';
+                else if (lower === 'dr-tutan-das' || lower === 'dr-swagata-chakraborty' || lower === 'diagnostics') pickedId = lower;
+
+                flow.data.doctorId = pickedId;
+                flow.data.specialistLabel = resolveSpecialistLabel(pickedId);
+                flow.step = 'date';
+                updateBotFlowBanner();
+                askBotBookingDate();
+                return;
+            }
+
+            if (flow.step === 'date') {
+                flow.data.date = value;
+                flow.step = 'slot';
+                updateBotFlowBanner();
+                pushBotMessage(
+                    `Selected **${formatDisplayDate(value)}**. Which **time slot** works best? (Clinic hours: Mon – Sat, 9:00 AM – 5:00 PM)`,
+                    null,
+                    null,
+                    [
+                        { label: 'Morning — 9:30 AM', action: 'book_slot', value: 'Morning — 9:30 AM' },
+                        { label: 'Morning — 11:00 AM', action: 'book_slot', value: 'Morning — 11:00 AM' },
+                        { label: 'Afternoon — 12:30 PM', action: 'book_slot', value: 'Afternoon — 12:30 PM' },
+                        { label: 'Afternoon — 3:00 PM', action: 'book_slot', value: 'Afternoon — 3:00 PM' },
+                        { label: 'Afternoon — 4:00 PM', action: 'book_slot', value: 'Afternoon — 4:00 PM' },
+                    ]
+                );
+                return;
+            }
+
+            if (flow.step === 'slot') {
+                flow.data.slot = value;
+                flow.step = 'name';
+                updateBotFlowBanner();
+                pushBotMessage('Please type the **Patient’s Full Name** below:', null, null, []);
+                return;
+            }
+
+            if (flow.step === 'name') {
+                if (value.trim().length < 2) {
+                    pushBotMessage('Please enter a valid patient name (at least 2 characters).');
+                    return;
+                }
+                flow.data.name = value.trim();
+                flow.step = 'phone';
+                updateBotFlowBanner();
+                pushBotMessage(`Thank you, **${flow.data.name}**. Please enter a **10-digit Phone / WhatsApp number**:`, null, null, []);
+                return;
+            }
+
+            if (flow.step === 'phone') {
+                const digits = value.replace(/\D/g, '');
+                if (digits.length < 10) {
+                    pushBotMessage('Please enter a valid phone number with at least 10 digits (e.g. 9830012345).');
+                    return;
+                }
+                flow.data.phone = value.trim();
+                flow.step = 'reason';
+                updateBotFlowBanner();
+                pushBotMessage(
+                    'Briefly share your **reason for visit or symptoms** (or tap Skip):',
+                    null,
+                    null,
+                    [
+                        { label: 'Skip — General Consultation', action: 'book_reason', value: 'General Consultation' },
+                        { label: 'Follow-up Visit', action: 'book_reason', value: 'Follow-up Consultation' },
+                        { label: 'Heart / BP Checkup', action: 'book_reason', value: 'Heart & BP Checkup' },
+                        { label: 'Sinus / ENT Checkup', action: 'book_reason', value: 'Sinus / ENT Consultation' },
+                    ]
+                );
+                return;
+            }
+
+            if (flow.step === 'reason') {
+                flow.data.reason = value.trim() || 'General Consultation';
+                const finalized = { ...flow.data };
+                VISITOR_BOT.bookingFlow = null;
+                updateBotFlowBanner();
+
+                pushBotMessage(
+                    'Your appointment request is ready! Tap **Confirm on WhatsApp** below to send it directly to our reception desk.',
+                    'booking_summary',
+                    finalized,
+                    BOT_COPY[VISITOR_BOT.lang].chips
+                );
+            }
+        }
+
+        /* ===================================================================== */
+        /* NATURAL LANGUAGE INTENT ENGINE & SYMPTOM TRIAGE                       */
+        /* ===================================================================== */
+        function triggerBotChip(index) {
+            const chip = VISITOR_BOT.quickReplies[index];
+            if (!chip) return;
+            pushUserMessage(chip.label);
+
+            if (chip.action === 'book_start') {
+                startBotBookingFlow();
+            } else if (chip.action === 'book_doctor' || chip.action === 'book_date' || chip.action === 'book_slot' || chip.action === 'book_reason') {
+                advanceBotBookingFlow(chip.value);
+            } else if (chip.action === 'symptom_menu') {
+                pushBotMessage(
+                    'Tell me your symptoms in your own words, or choose a symptom group below so I can guide you to the right specialist:',
+                    null,
+                    null,
+                    [
+                        { label: '❤️ Palpitations / BP / Heart Check', action: 'query', value: 'heart checkup and high bp' },
+                        { label: '👃 Sinus / Ear Pain / Vertigo / Throat', action: 'query', value: 'sinus ear pain and vertigo' },
+                        { label: '🩸 Diabetes / Thyroid / Blood Test', action: 'query', value: 'blood test diabetes thyroid' },
+                        { label: '🚨 Severe Chest Pain / Emergency', action: 'query', value: 'severe chest pain emergency' },
+                    ]
+                );
+            } else if (chip.action === 'diagnostics_menu') {
+                pushBotMessage(
+                    'Here are our on-site **Diagnostic Services** along with preparation instructions:',
+                    'diagnostics',
+                    CLINIC_DATA.diagnostics,
+                    [
+                        { label: '🏠 Home Sample Collection', action: 'query', value: 'home sample collection' },
+                        { label: '💊 In-House Pharmacy', action: 'query', value: 'pharmacy' },
+                        { label: '📅 Book a Test', action: 'book_start' },
+                    ]
+                );
+            } else if (chip.action === 'hours_location') {
+                pushBotMessage(
+                    'Here are our live **Clinic Hours, Address & Directions**:',
+                    'location',
+                    null,
+                    [
+                        { label: '📅 Book Appointment', action: 'book_start' },
+                        { label: '👨‍⚕️ Meet Specialists', action: 'doctors_list' },
+                        { label: '🖼️ Clinic Gallery', action: 'query', value: 'gallery' },
+                    ]
+                );
+            } else if (chip.action === 'doctors_list') {
+                pushBotMessage(
+                    'Here is our **Specialist Team** at Cardiosphere Multi-Speciality Clinic:',
+                    'doctors',
+                    CLINIC_DATA.doctors.map((d) => d.id),
+                    [
+                        { label: '🩺 Match Symptom to Doctor', action: 'symptom_menu' },
+                        { label: '📅 Book Appointment', action: 'book_start' },
+                    ]
+                );
+            } else if (chip.action === 'query') {
+                processBotQuery(chip.value);
+            }
+        }
+
+        function handleBotFormSubmit(event) {
+            event.preventDefault();
+            const input = document.getElementById('bot-input');
+            if (!input) return;
+            const text = input.value.trim();
+            if (!text) return;
+
+            input.value = '';
+            pushUserMessage(text);
+
+            if (VISITOR_BOT.bookingFlow) {
+                if (/^(cancel|stop|exit|quit)$/i.test(text)) {
+                    cancelBotBookingFlow();
+                    return;
+                }
+                advanceBotBookingFlow(text);
+                return;
+            }
+
+            processBotQuery(text);
+        }
+
+        /**
+         * Classifies free-text visitor messages (English, Bengali, Hindi transliterations)
+         * and returns rich medical guidance cards.
+         */
+        function processBotQuery(rawText) {
+            const q = String(rawText || '').toLowerCase();
+
+            // 1. Emergency Red-Flag Safety Triage (Highest Priority)
+            if (/(severe chest pain|heart attack|can'?t breathe|cannot breathe|breathless|unconscious|fainting|stroke|heavy bleeding|emergency|urgent|critical|buk betha|sine me dard)/.test(q)) {
+                pushBotMessage(
+                    '⚠️ **Possible Emergency Detected.** Please do not wait for an online reply if symptoms are acute.',
+                    'emergency',
+                    null,
+                    [
+                        { label: '📍 Clinic Location & Map', action: 'hours_location' },
+                        { label: '📅 Book Regular Consultation', action: 'book_start' },
+                    ]
+                );
+                return;
+            }
+
+            // 2. Direct Booking Intent
+            if (/(book|appointment|schedule|slot|consult|booking|apointment)/.test(q) && !/(cancel|how)/.test(q)) {
+                if (/(swagata|ent|sinus|ear|nose|throat)/.test(q)) {
+                    startBotBookingFlow('dr-swagata-chakraborty');
+                } else if (/(tutan|angioplasty|pacemaker)/.test(q)) {
+                    startBotBookingFlow('dr-tutan-das');
+                } else if (/(test|lab|echo|holter|tmt|blood|home)/.test(q)) {
+                    startBotBookingFlow('diagnostics');
+                } else {
+                    startBotBookingFlow();
+                }
+                return;
+            }
+
+            // 3. Specific Specialist Mentions
+            if (/(swagata|chakraborty)/.test(q)) {
+                pushBotMessage(
+                    '**Dr. Swagata Chakraborty** is our **ENT & Head/Neck Surgeon** (Ex-Senior Resident, AIIMS), specializing in chronic sinusitis, nasal endoscopy, micro-ear surgery, throat/voice disorders, and head & neck care.',
+                    'doctors',
+                    ['dr-swagata-chakraborty'],
+                    [
+                        { label: '📅 Book Dr. Swagata', action: 'book_doctor', value: 'dr-swagata-chakraborty' },
+                        { label: '📍 Clinic Timings', action: 'hours_location' },
+                    ]
+                );
+                return;
+            }
+
+            if (/(tutan|das)/.test(q)) {
+                pushBotMessage(
+                    '**Dr. Tutan Das** (DM Cardiology, AIIMS) is our senior **Interventional Cardiologist**, specializing in complex angioplasty & stenting, pacemakers, CRT/ICD cardiac devices, and valvular heart disease.',
+                    'doctors',
+                    ['dr-tutan-das'],
+                    [
+                        { label: '📅 Book Dr. Tutan Das', action: 'book_doctor', value: 'dr-tutan-das' },
+                        { label: '🧪 Cardiac Diagnostics', action: 'diagnostics_menu' },
+                    ]
+                );
+                return;
+            }
+
+            // 4. Symptom Triage -> ENT Care
+            if (/(ent|sinus|sinusitis|ear|nose|throat|tonsil|vertigo|dizzy|hearing|voice|hoarse|allergy|nasal|polyp|neck|kan|nak|gala)/.test(q)) {
+                pushBotMessage(
+                    'Based on your ENT / sinus / ear-nose-throat symptoms, I recommend consulting our **Department of ENT & Head-Neck Surgery** led by **Dr. Swagata Chakraborty**:',
+                    'doctors',
+                    ['dr-swagata-chakraborty'],
+                    [
+                        { label: '📅 Book ENT Consultation', action: 'book_start' },
+                        { label: '📍 Clinic Hours', action: 'hours_location' },
+                    ]
+                );
+                return;
+            }
+
+            // 5. Symptom Triage -> Cardiology
+            if (/(cardio|heart|chest|palpitation|bp|blood pressure|hypertension|angioplasty|stent|pacemaker|valve|ecg|cholesterol|cardiac|hridoy|dil)/.test(q)) {
+                pushBotMessage(
+                    'For heart health, blood pressure, palpitations, or cardiac device evaluations, our **Cardiology Specialist**, **Dr. Tutan Das**, is available **Mon – Sat, 9:00 AM – 5:00 PM**:',
+                    'doctors',
+                    ['dr-tutan-das'],
+                    [
+                        { label: '🧪 2D Echo / TMT / Holter', action: 'diagnostics_menu' },
+                        { label: '📅 Book Cardiology', action: 'book_start' },
+                    ]
+                );
+                return;
+            }
+
+            // 6. Specific Diagnostic Test Lookup
+            if (/(echo|echocardiography|tmt|stress test|holter|ecg|blood|pathology|lipid|thyroid|diabetes|hba1c|test|lab|report|fasting|prep)/.test(q)) {
+                const matched = CLINIC_DATA.diagnostics.filter((t) => {
+                    const hay = `${t.name} ${t.category} ${t.description}`.toLowerCase();
+                    return q.split(/\s+/).some((w) => w.length > 2 && hay.includes(w));
+                });
+                const list = matched.length > 0 ? matched : CLINIC_DATA.diagnostics;
+                pushBotMessage(
+                    matched.length > 0
+                        ? 'Here are the matching **Diagnostic Test details & preparation guidelines**:'
+                        : 'Here are all **Diagnostic Tests & Preparation Guidelines** available at Cardiosphere:',
+                    'diagnostics',
+                    list,
+                    [
+                        { label: '🏠 Home Sample Collection', action: 'query', value: 'home sample collection' },
+                        { label: '📅 Book a Test', action: 'book_start' },
+                    ]
+                );
+                return;
+            }
+
+            // 7. Home Sample Collection, Pharmacy & Vaccinations
+            if (/(home collection|home sample|pickup|pharmacy|medicine|drug|meds|vaccin|injection)/.test(q)) {
+                pushBotMessage(
+                    'Cardiosphere offers convenient **Patient Support Services** under one roof:\n• **Home Sample Collection:** Doorstep hygienic blood pickup across Durgapur.\n• **In-House Pharmacy:** Genuine cardiac, diabetic & ENT medications available on-site.\n• **Vaccination Services:** Adult, senior & preventive vaccinations.',
+                    null,
+                    null,
+                    [
+                        { label: '📅 Request Home Collection', action: 'book_start' },
+                        { label: '🧪 View Diagnostic Tests', action: 'diagnostics_menu' },
+                        { label: '📍 Clinic Address', action: 'hours_location' },
+                    ]
+                );
+                return;
+            }
+
+            // 8. Hours, Location, Contact, Directions
+            if (/(hour|time|timing|open|close|address|location|where|map|direction|phone|call|number|contact|kothay|kakhon|kaha|samay|muchipara|durgapur)/.test(q)) {
+                pushBotMessage(
+                    'You can visit **Cardiosphere Multi-Speciality Clinic** at **Arushi Complex, Muchipara, Durgapur** or call **+91 90024 50077**.',
+                    'location',
+                    null,
+                    [
+                        { label: '📅 Book Appointment', action: 'book_start' },
+                        { label: '👨‍⚕️ Meet Specialists', action: 'doctors_list' },
+                    ]
+                );
+                return;
+            }
+
+            // 9. Doctors / Team Overview
+            if (/(doctor|specialist|dr|team|staff|who|consultants)/.test(q)) {
+                pushBotMessage(
+                    'Meet our **AIIMS-trained and senior specialists** at Cardiosphere:',
+                    'doctors',
+                    CLINIC_DATA.doctors.map((d) => d.id),
+                    [
+                        { label: '🩺 Match Symptom to Doctor', action: 'symptom_menu' },
+                        { label: '📅 Book Appointment', action: 'book_start' },
+                    ]
+                );
+                return;
+            }
+
+            // 10. Clinic Gallery / Photos / Facilities
+            if (/(gallery|photo|picture|facility|lounge|entrance|inside)/.test(q)) {
+                pushBotMessage(
+                    'You can explore uncropped photos of our **Dedicated Medical Team**, **Comfortable Patient Lounge**, **Accessible Entrance**, and specialists in our **Clinic Gallery**.',
+                    null,
+                    null,
+                    [
+                        { label: '📍 Facilities & Map', action: 'hours_location' },
+                        { label: '📅 Book Appointment', action: 'book_start' },
+                    ]
+                );
+                navigate('gallery');
+                return;
+            }
+
+            // 11. Fees / Cost Inquiry
+            if (/(fee|cost|price|charge|rate|kitna|koto)/.test(q)) {
+                pushBotMessage(
+                    'Consultation fees and diagnostic package charges vary by specialist and test type. Our reception desk can share exact current rates immediately on **+91 90024 50077** or via WhatsApp booking.',
+                    null,
+                    null,
+                    [
+                        { label: '📅 Inquire / Book via WhatsApp', action: 'book_start' },
+                        { label: '🧪 View Tests', action: 'diagnostics_menu' },
+                    ]
+                );
+                return;
+            }
+
+            // 12. Greetings & Thanks
+            if (/^(hi|hello|hey|namaste|nomoskar|good morning|good afternoon|good evening)\b/.test(q)) {
+                pushBotMessage(BOT_COPY[VISITOR_BOT.lang].welcome, null, null, BOT_COPY[VISITOR_BOT.lang].chips);
+                return;
+            }
+            if (/(thank|thanks|dhanyabad|dhanyawad)/.test(q)) {
+                pushBotMessage(
+                    'You’re very welcome! Wishing you and your family good health. Reach out anytime if you need help booking a visit.',
+                    null,
+                    null,
+                    BOT_COPY[VISITOR_BOT.lang].chips
+                );
+                return;
+            }
+
+            // Default Smart Fallback
+            pushBotMessage(BOT_COPY[VISITOR_BOT.lang].fallback, null, null, BOT_COPY[VISITOR_BOT.lang].chips);
+        }
+
+        /* ===================================================================== */
+        /* OPTIONAL VOICE INPUT (WEB SPEECH API)                                 */
+        /* ===================================================================== */
+        function toggleBotVoiceInput() {
+            const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+            if (!SpeechRec) {
+                showToast('Voice input is not supported in this browser.', 'error');
+                return;
+            }
+
+            const btn = document.getElementById('bot-voice-btn');
+            if (VISITOR_BOT.isListening && VISITOR_BOT.speechRecognition) {
+                VISITOR_BOT.speechRecognition.stop();
+                return;
+            }
+
+            try {
+                const rec = new SpeechRec();
+                const langMap = { en: 'en-IN', bn: 'bn-IN', hi: 'hi-IN' };
+                rec.lang = langMap[VISITOR_BOT.lang] || 'en-IN';
+                rec.interimResults = false;
+                rec.maxAlternatives = 1;
+
+                rec.onstart = () => {
+                    VISITOR_BOT.isListening = true;
+                    if (btn) btn.classList.add('bg-rose-50', 'border-rose-300', 'text-rose-600');
+                    showToast('Listening... speak your question.', 'navy');
+                };
+
+                rec.onresult = (ev) => {
+                    const transcript = ev.results?.[0]?.[0]?.transcript || '';
+                    const input = document.getElementById('bot-input');
+                    if (transcript && input) {
+                        input.value = transcript;
+                        handleBotFormSubmit(new Event('submit'));
+                    }
+                };
+
+                rec.onerror = () => {
+                    showToast('Could not capture voice. Please type your message.', 'error');
+                };
+
+                rec.onend = () => {
+                    VISITOR_BOT.isListening = false;
+                    if (btn) btn.classList.remove('bg-rose-50', 'border-rose-300', 'text-rose-600');
+                };
+
+                VISITOR_BOT.speechRecognition = rec;
+                rec.start();
+            } catch (err) {
+                console.error('Voice recognition error:', err);
+                showToast('Voice input unavailable right now.', 'error');
+            }
+        }
+
         // Keyboard shortcuts for Lightbox & Modals
         document.addEventListener('keydown', (e) => {
             const lightboxOpen = !document.getElementById('lightbox-modal').classList.contains('hidden');
@@ -4211,6 +5358,7 @@
                 closeAdminLoginModal();
                 closeSecurityModal();
                 toggleMobileMenu(false);
+                if (VISITOR_BOT.isOpen) toggleVisitorBot(false);
             } else if (lightboxOpen && e.key === 'ArrowRight') {
                 stepLightbox(1);
             } else if (lightboxOpen && e.key === 'ArrowLeft') {
@@ -4228,6 +5376,7 @@
                 window.location.hash = '#home';
             }
             renderCurrentRoute(true);
+            initVisitorBot();
         });
     </script>
 </body>
