@@ -38,18 +38,40 @@
                             tealHover: '#0F766E',
                             tealSoft: '#F0FDFA',
                         },
+                        cardio: {
+                            DEFAULT: '#E11D48',
+                            hover: '#BE123C',
+                            soft: '#FFF1F2',
+                        },
                     },
                 },
             },
         };
     </script>
 </head>
-<body class="bg-slate-50 text-slate-900 font-sans antialiased selection:bg-blue-100 selection:text-blue-900 overflow-x-hidden">
+<body class="bg-slate-50 text-slate-900 font-sans antialiased selection:bg-rose-100 selection:text-rose-900 overflow-x-hidden relative">
 
     <!-- ===================================================================== -->
-    <!-- TOP SLIM CLINICAL INFO BAR (Clean Clinic Info Only)                   -->
+    <!-- SUBTLE GLOBAL CARDIOLOGY HEART + ECG WATERMARK LAYER                  -->
     <!-- ===================================================================== -->
-    <div class="bg-navy text-slate-200 border-b border-white/10 text-xs">
+    <div aria-hidden="true" class="fixed inset-0 pointer-events-none select-none overflow-hidden z-0">
+        <!-- Soft Ambient Pastel Glows -->
+        <div class="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-rose-200/25 blur-3xl"></div>
+        <div class="absolute top-1/3 -right-24 w-96 h-96 rounded-full bg-sky-200/25 blur-3xl"></div>
+        <div class="absolute bottom-0 left-1/4 w-96 h-96 rounded-full bg-teal-200/20 blur-3xl"></div>
+
+        <!-- Delicate Fixed Cardiology Heart Watermark (Bottom-Left) -->
+        <svg class="absolute -bottom-16 -left-16 w-[340px] h-[340px] sm:w-[440px] sm:h-[440px] text-rose-500/[0.045] -rotate-12" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M100 172C100 172 26 124 26 68C26 42.5 46 24 70 24C84.5 24 95 31.5 100 41C105 31.5 115.5 24 130 24C154 24 174 42.5 174 68C174 124 100 172 100 172Z" fill="currentColor"/>
+            <path d="M18 96H62L75 72L92 124L109 62L122 106L132 96H182" stroke="white" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </div>
+
+    <!-- ===================================================================== -->
+    <!-- TOP SLIM CLINICAL INFO BAR (With Colorful Accent Ribbon)              -->
+    <!-- ===================================================================== -->
+    <div class="relative z-20 h-1 w-full bg-gradient-to-r from-rose-500 via-medical to-teal-500"></div>
+    <div class="relative z-20 bg-gradient-to-r from-navy via-navy-light to-slate-900 text-slate-200 border-b border-white/10 text-xs">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2.5 flex flex-col md:flex-row md:items-center md:justify-between gap-2">
             <!-- Location & Operating Hours -->
             <div class="flex flex-wrap items-center gap-x-4 gap-y-1">
@@ -81,23 +103,27 @@
     <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200/80 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="py-3 flex items-center justify-between gap-3">
-                <!-- Brand Identity -->
-                <button onclick="navigate('home')" class="flex items-center gap-2.5 text-left group focus:outline-none shrink-0">
-                    <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-white border border-slate-200 p-1.5 flex items-center justify-center shrink-0 shadow-sm">
+                <!-- Brand Identity (Crystal-Clear 4K Logo at Proper Normal Size) -->
+                <button onclick="navigate('home')" class="flex items-center gap-3 text-left group focus:outline-none shrink-0">
+                    <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-white border border-slate-200/90 p-1 flex items-center justify-center shrink-0 shadow-sm overflow-hidden">
                         <img
-                            src="https://lh3.googleusercontent.com/p/AF1QipMcFRLHMTS9rS1GLtgiVsKY8ufhIW1fbQf0zCTI=w284-h237-n-k-no-nu"
+                            src="https://lh3.googleusercontent.com/p/AF1QipMcFRLHMTS9rS1GLtgiVsKY8ufhIW1fbQf0zCTI=s3840"
                             alt="Cardiosphere Multi-Speciality Clinic Logo"
                             referrerpolicy="no-referrer"
+                            decoding="async"
+                            data-logo-step="0"
                             class="w-full h-full object-contain"
-                            onerror="this.classList.add('hidden'); this.nextElementSibling.classList.remove('hidden');"
+                            onerror="handleLogoImgError(this)"
                         />
-                        <svg class="hidden w-6 h-6 text-medical" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                        <svg class="hidden w-10 h-10" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <circle cx="32" cy="32" r="29" stroke="#1D4ED8" stroke-width="3" fill="#EFF6FF"/>
+                            <path d="M32 49C32 49 14 37.5 14 24.5C14 18.7 18.6 14 24.3 14C27.9 14 30.8 15.9 32 18.6C33.2 15.9 36.1 14 39.7 14C45.4 14 50 18.7 50 24.5C50 37.5 32 49 32 49Z" fill="#E11D48"/>
+                            <path d="M12 31H24L27.5 24L31.5 38L35.5 22L39 33.5L41.5 31H52" stroke="#FFFFFF" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                     </div>
                     <div>
-                        <span class="block text-base sm:text-lg font-extrabold tracking-tight text-navy leading-none group-hover:text-medical transition-colors">Cardiosphere</span>
-                        <span class="block text-[11px] font-semibold text-slate-500 mt-1">Multi-Speciality Clinic</span>
+                        <span class="block text-lg sm:text-xl font-extrabold tracking-tight text-navy leading-none group-hover:text-medical transition-colors">Cardiosphere</span>
+                        <span class="block text-[11px] sm:text-xs font-semibold text-slate-500 mt-1">Multi-Speciality Clinic</span>
                     </div>
                 </button>
 
@@ -142,14 +168,26 @@
         <div onclick="toggleMobileMenu(false)" class="fixed inset-0 bg-navy/50 backdrop-blur-sm"></div>
         <div class="fixed right-0 top-0 bottom-0 w-full max-w-xs bg-white shadow-2xl border-l border-slate-200 flex flex-col">
             <div class="p-5 border-b border-slate-200 flex items-center justify-between">
-                <div class="flex items-center gap-2.5">
-                    <div class="w-8 h-8 rounded-lg bg-slate-50 border border-slate-200 p-1 flex items-center justify-center shrink-0">
-                        <img src="https://lh3.googleusercontent.com/p/AF1QipMcFRLHMTS9rS1GLtgiVsKY8ufhIW1fbQf0zCTI=w284-h237-n-k-no-nu" alt="Cardiosphere" referrerpolicy="no-referrer" class="w-full h-full object-contain" onerror="this.classList.add('hidden'); this.nextElementSibling.classList.remove('hidden');" />
-                        <svg class="hidden w-5 h-5 text-medical" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                <div class="flex items-center gap-3">
+                    <div class="w-11 h-11 rounded-xl bg-white border border-slate-200 p-1 flex items-center justify-center shrink-0 shadow-sm overflow-hidden">
+                        <img
+                            src="https://lh3.googleusercontent.com/p/AF1QipMcFRLHMTS9rS1GLtgiVsKY8ufhIW1fbQf0zCTI=s3840"
+                            alt="Cardiosphere"
+                            referrerpolicy="no-referrer"
+                            decoding="async"
+                            data-logo-step="0"
+                            class="w-full h-full object-contain"
+                            onerror="handleLogoImgError(this)"
+                        />
+                        <svg class="hidden w-8 h-8" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <circle cx="32" cy="32" r="29" stroke="#1D4ED8" stroke-width="3" fill="#EFF6FF"/>
+                            <path d="M32 49C32 49 14 37.5 14 24.5C14 18.7 18.6 14 24.3 14C27.9 14 30.8 15.9 32 18.6C33.2 15.9 36.1 14 39.7 14C45.4 14 50 18.7 50 24.5C50 37.5 32 49 32 49Z" fill="#E11D48"/>
+                            <path d="M12 31H24L27.5 24L31.5 38L35.5 22L39 33.5L41.5 31H52" stroke="#FFFFFF" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
                     </div>
                     <div>
                         <span class="block font-extrabold text-navy text-base leading-none">Cardiosphere</span>
-                        <span class="block text-[10px] font-semibold text-slate-500 mt-0.5">Multi-Speciality Clinic</span>
+                        <span class="block text-[11px] font-semibold text-slate-500 mt-0.5">Multi-Speciality Clinic</span>
                     </div>
                 </div>
                 <button onclick="toggleMobileMenu(false)" class="p-2 rounded-xl text-slate-500 hover:bg-slate-100" aria-label="Close Menu">
@@ -197,24 +235,41 @@
     <!-- ===================================================================== -->
     <!-- MAIN SPA VIEWPORT ROOT WITH SMOOTH FADE TRANSITION                    -->
     <!-- ===================================================================== -->
-    <main id="app-root" class="min-h-[75vh] transition-opacity duration-200 opacity-100"></main>
+    <main id="app-root" class="relative z-10 min-h-[75vh] transition-opacity duration-200 opacity-100"></main>
 
     <!-- ===================================================================== -->
-    <!-- CLINICAL FOOTER (Clean Section Names Only)                            -->
+    <!-- CLINICAL FOOTER (Clean Section Names Only + Subtle Heart Watermark)   -->
     <!-- ===================================================================== -->
-    <footer class="bg-navy text-slate-300 border-t border-slate-800 mt-16">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+    <footer class="relative z-10 overflow-hidden bg-gradient-to-br from-navy via-navy-dark to-slate-950 text-slate-300 border-t border-slate-800 mt-16">
+        <div class="h-1 w-full bg-gradient-to-r from-rose-500 via-blue-500 to-teal-400"></div>
+        <svg aria-hidden="true" class="pointer-events-none select-none absolute -right-12 -bottom-14 w-80 h-80 text-rose-400/[0.06] rotate-12" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M100 172C100 172 26 124 26 68C26 42.5 46 24 70 24C84.5 24 95 31.5 100 41C105 31.5 115.5 24 130 24C154 24 174 42.5 174 68C174 124 100 172 100 172Z" stroke="currentColor" stroke-width="6" fill="currentColor" fill-opacity="0.35"/>
+            <path d="M22 96H64L76 72L92 122L108 62L121 106L131 96H178" stroke="currentColor" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-14 pb-10">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
                 <!-- Brand Overview -->
                 <div class="space-y-4">
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-xl bg-white p-1.5 flex items-center justify-center shrink-0">
-                            <img src="https://lh3.googleusercontent.com/p/AF1QipMcFRLHMTS9rS1GLtgiVsKY8ufhIW1fbQf0zCTI=w284-h237-n-k-no-nu" alt="Cardiosphere Logo" referrerpolicy="no-referrer" class="w-full h-full object-contain" onerror="this.classList.add('hidden'); this.nextElementSibling.classList.remove('hidden');" />
-                            <svg class="hidden w-6 h-6 text-medical" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                    <div class="flex items-center gap-3.5">
+                        <div class="w-14 h-14 rounded-2xl bg-white p-1 flex items-center justify-center shrink-0 shadow-md overflow-hidden">
+                            <img
+                                src="https://lh3.googleusercontent.com/p/AF1QipMcFRLHMTS9rS1GLtgiVsKY8ufhIW1fbQf0zCTI=s3840"
+                                alt="Cardiosphere Logo"
+                                referrerpolicy="no-referrer"
+                                decoding="async"
+                                data-logo-step="0"
+                                class="w-full h-full object-contain"
+                                onerror="handleLogoImgError(this)"
+                            />
+                            <svg class="hidden w-10 h-10" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <circle cx="32" cy="32" r="29" stroke="#1D4ED8" stroke-width="3" fill="#EFF6FF"/>
+                                <path d="M32 49C32 49 14 37.5 14 24.5C14 18.7 18.6 14 24.3 14C27.9 14 30.8 15.9 32 18.6C33.2 15.9 36.1 14 39.7 14C45.4 14 50 18.7 50 24.5C50 37.5 32 49 32 49Z" fill="#E11D48"/>
+                                <path d="M12 31H24L27.5 24L31.5 38L35.5 22L39 33.5L41.5 31H52" stroke="#FFFFFF" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
                         </div>
                         <div>
-                            <p class="text-white font-extrabold text-lg leading-none">Cardiosphere</p>
-                            <p class="text-xs text-slate-400 mt-0.5">Multi-Speciality Clinic • Durgapur</p>
+                            <p class="text-white font-extrabold text-xl leading-none">Cardiosphere</p>
+                            <p class="text-xs text-slate-400 mt-1">Multi-Speciality Clinic • Durgapur</p>
                         </div>
                     </div>
                     <p class="text-sm text-slate-400 leading-relaxed">
@@ -277,6 +332,20 @@
                         <span>Staff Admin</span>
                     </button>
                 </div>
+            </div>
+        </div>
+
+        <!-- Bottom-Most Web Designer Credit Bar -->
+        <div class="relative z-10 bg-navy-dark/90 border-t border-white/10">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col sm:flex-row items-center justify-center gap-1.5 sm:gap-3 text-center text-xs text-slate-300">
+                <span>Web Designed by <strong class="text-white font-bold">Shri. Atanu Das</strong></span>
+                <span class="hidden sm:inline text-white/25">|</span>
+                <span>
+                    For any website related matter :
+                    <a href="mailto:atanudas.tripura@gmail.com" class="text-teal-300 hover:text-teal-200 font-semibold underline decoration-teal-400/50 underline-offset-2 transition-colors">
+                        atanudas.tripura@gmail.com
+                    </a>
+                </span>
             </div>
         </div>
     </footer>
@@ -1331,6 +1400,29 @@
         }
 
         /**
+         * Chained 4K logo fallback handler:
+         * Step 0 (=s3840 4K) -> Step 1 (=s0 original full-res) -> Step 2 (=w1024) -> Crisp Vector SVG Emblem.
+         */
+        function handleLogoImgError(img) {
+            if (!img) return;
+            const step = Number(img.getAttribute('data-logo-step') || '0');
+            const base = 'https://lh3.googleusercontent.com/p/AF1QipMcFRLHMTS9rS1GLtgiVsKY8ufhIW1fbQf0zCTI';
+            const fallbacks = [`${base}=s0`, `${base}=w1024`];
+
+            if (step < fallbacks.length) {
+                img.setAttribute('data-logo-step', String(step + 1));
+                img.src = fallbacks[step];
+                return;
+            }
+
+            img.onerror = null;
+            img.classList.add('hidden');
+            if (img.nextElementSibling) {
+                img.nextElementSibling.classList.remove('hidden');
+            }
+        }
+
+        /**
          * Chained error fallback for specialist portraits:
          * Step 0 -> secondary fallback photo URL; Step 1 -> reveal clean clinical initials badge.
          */
@@ -1476,6 +1568,19 @@
                         }).join('')}
                     </ol>
                 </nav>
+            `;
+        }
+
+        /**
+         * Renders a clean, decorative Cardiology Heart + ECG pulse SVG watermark
+         * for subtle visual depth without interfering with text legibility.
+         */
+        function renderHeartWatermarkSvg(className = 'w-72 h-72 text-rose-500/[0.07]', pulseColor = 'currentColor') {
+            return `
+                <svg aria-hidden="true" class="pointer-events-none select-none ${className}" viewBox="0 0 220 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M110 176C110 176 30 126 30 68C30 41.5 51.5 22 77 22C92.5 22 104 30 110 40.5C116 30 127.5 22 143 22C168.5 22 190 41.5 190 68C190 126 110 176 110 176Z" fill="currentColor" fill-opacity="0.35" stroke="currentColor" stroke-width="5" stroke-linejoin="round"/>
+                    <path d="M16 96H68L82 70L100 128L119 56L134 108L146 96H204" stroke="${pulseColor}" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
             `;
         }
 
@@ -2008,94 +2113,105 @@
         /* ===================================================================== */
         function renderHomeView() {
             return `
-                <!-- Clinical Split Hero -->
-                <section class="bg-white border-b border-slate-200">
-                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-20">
+                <!-- Clinical Split Hero with Soft Colorful Gradient & Cardiology Heart Watermark -->
+                <section class="relative overflow-hidden bg-gradient-to-br from-rose-50/80 via-white to-sky-50/80 border-b border-slate-200">
+                    <!-- Decorative Cardiology Heart Watermarks -->
+                    <div class="absolute -right-12 -top-10 opacity-90">
+                        ${renderHeartWatermarkSvg('w-[340px] h-[310px] sm:w-[440px] sm:h-[400px] text-rose-500/[0.08] rotate-6')}
+                    </div>
+                    <div class="hidden lg:block absolute left-[42%] -bottom-16">
+                        ${renderHeartWatermarkSvg('w-64 h-60 text-medical/[0.06] -rotate-12')}
+                    </div>
+
+                    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-20">
                         <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
                             <!-- Left Column -->
                             <div class="lg:col-span-7 space-y-6">
-                                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-medical-soft border border-blue-200 text-medical text-xs font-bold tracking-wide">
-                                    <span class="w-2 h-2 rounded-full bg-clinical-teal"></span>
+                                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/90 border border-rose-200 text-rose-700 text-xs font-bold tracking-wide shadow-sm">
+                                    <svg class="w-3.5 h-3.5 text-rose-500 shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
                                     Cardiosphere Polyclinic • Muchipara, Durgapur
                                 </div>
 
                                 <h1 class="text-4xl sm:text-5xl lg:text-[3.3rem] font-extrabold text-navy tracking-tight leading-[1.12]">
-                                    Leading the Future of <span class="text-medical">Cardiac & Multi-Speciality Care</span>
+                                    Leading the Future of <span class="bg-gradient-to-r from-rose-600 via-medical to-clinical-teal bg-clip-text text-transparent">Cardiac &amp; Multi-Speciality Care</span>
                                 </h1>
 
                                 <p class="text-base sm:text-lg text-slate-600 leading-relaxed max-w-2xl">
-                                    Expert interventional cardiology, ENT & head-neck surgery, on-site cardiac diagnostics, and an in-house pharmacy delivered with calm, attentive medical care.
+                                    Expert interventional cardiology, ENT &amp; head-neck surgery, on-site cardiac diagnostics, and an in-house pharmacy delivered with calm, attentive medical care.
                                 </p>
 
                                 <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-1">
-                                    <button onclick="navigate('book')" class="inline-flex items-center justify-center gap-2 bg-medical hover:bg-medical-hover text-white px-7 py-3.5 rounded-xl font-bold text-sm shadow-sm transition-all">
+                                    <button onclick="navigate('book')" class="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-rose-600 to-medical hover:from-rose-700 hover:to-medical-hover text-white px-7 py-3.5 rounded-xl font-bold text-sm shadow-md shadow-blue-900/10 transition-all">
                                         <span>Book Appointment</span>
                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7"/></svg>
                                     </button>
-                                    <a href="tel:+919002450077" class="inline-flex items-center justify-center gap-2 bg-white hover:bg-slate-50 text-navy border border-slate-300 px-6 py-3.5 rounded-xl font-bold text-sm transition-all">
-                                        <svg class="w-4 h-4 text-clinical-teal" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                                    <a href="tel:+919002450077" class="inline-flex items-center justify-center gap-2 bg-white/95 hover:bg-rose-50/70 text-navy border border-slate-300 hover:border-rose-300 px-6 py-3.5 rounded-xl font-bold text-sm transition-all shadow-sm">
+                                        <svg class="w-4 h-4 text-rose-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
                                         <span>Emergency: +91 90024 50077</span>
                                     </a>
                                 </div>
 
-                                <!-- Quick Stats / Trust Strip -->
-                                <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-6 border-t border-slate-200">
-                                    <div>
-                                        <p class="text-lg font-extrabold text-navy">AIIMS Alumni</p>
-                                        <p class="text-xs font-medium text-slate-500">Cardiology & ENT</p>
+                                <!-- Quick Stats / Colorful Simple Trust Strip -->
+                                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-6 border-t border-slate-200/80">
+                                    <div class="p-3 rounded-2xl bg-rose-50/80 border border-rose-100">
+                                        <p class="text-base font-extrabold text-rose-700">AIIMS Alumni</p>
+                                        <p class="text-xs font-medium text-slate-600 mt-0.5">Cardiology &amp; ENT</p>
                                     </div>
-                                    <div>
-                                        <p class="text-lg font-extrabold text-navy">2D Echo & TMT</p>
-                                        <p class="text-xs font-medium text-slate-500">In-Clinic Diagnostics</p>
+                                    <div class="p-3 rounded-2xl bg-blue-50/80 border border-blue-100">
+                                        <p class="text-base font-extrabold text-medical">2D Echo &amp; TMT</p>
+                                        <p class="text-xs font-medium text-slate-600 mt-0.5">In-Clinic Diagnostics</p>
                                     </div>
-                                    <div>
-                                        <p class="text-lg font-extrabold text-navy">In-House</p>
-                                        <p class="text-xs font-medium text-slate-500">Lab & Pharmacy</p>
+                                    <div class="p-3 rounded-2xl bg-teal-50/80 border border-teal-100">
+                                        <p class="text-base font-extrabold text-clinical-teal">In-House</p>
+                                        <p class="text-xs font-medium text-slate-600 mt-0.5">Lab &amp; Pharmacy</p>
                                     </div>
-                                    <div>
-                                        <p class="text-lg font-extrabold text-navy">Mon – Sat</p>
-                                        <p class="text-xs font-medium text-slate-500">9:00 AM – 5:00 PM</p>
+                                    <div class="p-3 rounded-2xl bg-amber-50/80 border border-amber-100">
+                                        <p class="text-base font-extrabold text-amber-700">Mon – Sat</p>
+                                        <p class="text-xs font-medium text-slate-600 mt-0.5">9:00 AM – 5:00 PM</p>
                                     </div>
                                 </div>
                             </div>
 
                             <!-- Right Column: Specialist Preview Card Stack -->
                             <div class="lg:col-span-5">
-                                <div class="bg-slate-50 rounded-3xl border border-slate-200 p-6 sm:p-7 shadow-sm space-y-5">
-                                    <div class="flex items-center justify-between border-b border-slate-200 pb-4">
-                                        <div>
-                                            <p class="text-xs font-bold uppercase tracking-wider text-clinical-teal">Senior Consultants</p>
-                                            <h2 class="text-lg font-extrabold text-navy mt-0.5">Our Specialist Team</h2>
+                                <div class="relative overflow-hidden bg-white/90 backdrop-blur-md rounded-3xl border border-slate-200 shadow-lg space-y-5">
+                                    <div class="h-1.5 w-full bg-gradient-to-r from-rose-500 via-medical to-teal-500"></div>
+                                    <div class="px-6 pb-6 sm:px-7 sm:pb-7 space-y-5">
+                                        <div class="flex items-center justify-between border-b border-slate-200 pb-4">
+                                            <div>
+                                                <p class="text-xs font-bold uppercase tracking-wider text-rose-600">Senior Consultants</p>
+                                                <h2 class="text-lg font-extrabold text-navy mt-0.5">Our Specialist Team</h2>
+                                            </div>
+                                            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-bold">
+                                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                                                OPD Open
+                                            </span>
                                         </div>
-                                        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-bold">
-                                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-                                            OPD Open
-                                        </span>
-                                    </div>
 
-                                    <div class="space-y-3">
-                                        ${CLINIC_DATA.doctors.map((doc) => `
-                                            <button onclick="navigate('doctor/${doc.id}')" class="w-full flex items-center gap-3.5 p-3 rounded-2xl bg-white border border-slate-200 hover:border-blue-300 hover:shadow-sm transition-all text-left group">
-                                                ${renderDoctorAvatar(doc, 'w-14 h-14', 'rounded-xl', 'text-sm')}
-                                                <div class="min-w-0 flex-1">
-                                                    <p class="text-sm font-extrabold text-navy group-hover:text-medical transition-colors truncate">${escapeHtml(doc.name)}</p>
-                                                    <p class="text-xs font-semibold ${doc.department === 'ENT Care' ? 'text-clinical-teal' : 'text-medical'} truncate">${escapeHtml(doc.role)}</p>
-                                                    <p class="text-[11px] text-slate-500 truncate">${escapeHtml(doc.credentials)}</p>
-                                                </div>
-                                                <svg class="w-4 h-4 text-slate-400 group-hover:text-medical shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="m9 18 6-6-6-6"/></svg>
-                                            </button>
-                                        `).join('')}
-                                    </div>
+                                        <div class="space-y-3">
+                                            ${CLINIC_DATA.doctors.map((doc) => `
+                                                <button onclick="navigate('doctor/${doc.id}')" class="w-full flex items-center gap-3.5 p-3 rounded-2xl bg-slate-50/90 border border-slate-200 hover:bg-white hover:border-blue-300 hover:shadow-sm transition-all text-left group">
+                                                    ${renderDoctorAvatar(doc, 'w-14 h-14', 'rounded-xl', 'text-sm')}
+                                                    <div class="min-w-0 flex-1">
+                                                        <p class="text-sm font-extrabold text-navy group-hover:text-medical transition-colors truncate">${escapeHtml(doc.name)}</p>
+                                                        <p class="text-xs font-semibold ${doc.department === 'ENT Care' ? 'text-clinical-teal' : 'text-rose-600'} truncate">${escapeHtml(doc.role)}</p>
+                                                        <p class="text-[11px] text-slate-500 truncate">${escapeHtml(doc.credentials)}</p>
+                                                    </div>
+                                                    <svg class="w-4 h-4 text-slate-400 group-hover:text-medical shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="m9 18 6-6-6-6"/></svg>
+                                                </button>
+                                            `).join('')}
+                                        </div>
 
-                                    <!-- Quick Callback Bar -->
-                                    <div class="bg-navy rounded-2xl p-4 text-white">
-                                        <p class="text-xs font-semibold text-blue-200">Request an appointment or home sample collection via WhatsApp</p>
-                                        <form onsubmit="handleQuickCallback(event)" class="mt-2.5 flex flex-col sm:flex-row gap-2">
-                                            <input type="tel" id="hero-callback-phone" required placeholder="Your phone number" class="flex-1 px-3.5 py-2.5 rounded-xl bg-white/10 border border-white/15 text-sm text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-400" />
-                                            <button type="submit" class="px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold whitespace-nowrap transition-colors">
-                                                Request Callback
-                                            </button>
-                                        </form>
+                                        <!-- Quick Callback Bar -->
+                                        <div class="relative overflow-hidden bg-gradient-to-r from-navy via-blue-950 to-teal-950 rounded-2xl p-4 text-white">
+                                            <p class="text-xs font-semibold text-teal-200">Request an appointment or home sample collection via WhatsApp</p>
+                                            <form onsubmit="handleQuickCallback(event)" class="mt-2.5 flex flex-col sm:flex-row gap-2">
+                                                <input type="tel" id="hero-callback-phone" required placeholder="Your phone number" class="flex-1 px-3.5 py-2.5 rounded-xl bg-white/10 border border-white/15 text-sm text-white placeholder-slate-300 focus:outline-none focus:ring-2 focus:ring-teal-400" />
+                                                <button type="submit" class="px-4 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-white text-xs font-bold whitespace-nowrap transition-colors">
+                                                    Request Callback
+                                                </button>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -2103,57 +2219,66 @@
                     </div>
                 </section>
 
-                <!-- Core Clinical Departments -->
-                <section class="py-16 bg-slate-50">
+                <!-- Core Clinical Departments (Well-Combined Simple Colorful Cards) -->
+                <section class="py-16 bg-slate-50/70">
                     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                         <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
                             <div>
-                                <span class="text-xs font-bold uppercase tracking-wider text-clinical-teal">Core Clinical Departments</span>
+                                <span class="text-xs font-bold uppercase tracking-wider text-rose-600">Core Clinical Departments</span>
                                 <h2 class="text-2xl sm:text-3xl font-extrabold text-navy mt-1">Comprehensive Speciality Care</h2>
                                 <p class="text-sm text-slate-600 mt-1.5 max-w-xl">Coordinated heart care, ENT surgical excellence, and diagnostic testing under one roof.</p>
                             </div>
                         </div>
 
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                            <button onclick="navigate('cardiology')" class="text-left p-7 rounded-3xl bg-white border border-slate-200 hover:border-blue-300 hover:shadow-md hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group">
-                                <div>
-                                    <div class="w-12 h-12 rounded-2xl bg-medical-soft border border-blue-200 text-medical flex items-center justify-center mb-4">
+                            <!-- Cardiology Card (Warm Rose Tint + Mini Heart Watermark) -->
+                            <button onclick="navigate('cardiology')" class="relative overflow-hidden text-left p-7 rounded-3xl bg-gradient-to-br from-rose-50/90 via-white to-white border border-rose-200/80 hover:border-rose-400 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group">
+                                <div class="absolute -right-6 -bottom-6">
+                                    ${renderHeartWatermarkSvg('w-36 h-36 text-rose-500/[0.11] rotate-12')}
+                                </div>
+                                <div class="relative z-10">
+                                    <div class="w-12 h-12 rounded-2xl bg-rose-100 border border-rose-200 text-rose-600 flex items-center justify-center mb-4 shadow-sm">
                                         <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
                                     </div>
-                                    <h3 class="text-lg font-extrabold text-navy group-hover:text-medical transition-colors">Cardiology</h3>
-                                    <p class="text-sm text-slate-600 leading-relaxed mt-2">Complex angioplasty, pacemakers & cardiac devices, valvular care, and preventive heart consultations.</p>
+                                    <h3 class="text-lg font-extrabold text-navy group-hover:text-rose-700 transition-colors">Cardiology</h3>
+                                    <p class="text-sm text-slate-600 leading-relaxed mt-2">Complex angioplasty, pacemakers &amp; cardiac devices, valvular care, and preventive heart consultations.</p>
                                 </div>
-                                <span class="mt-5 text-xs font-bold text-medical">Explore Cardiology →</span>
+                                <span class="relative z-10 mt-5 text-xs font-bold text-rose-600">Explore Cardiology →</span>
                             </button>
 
-                            <button onclick="navigate('ent')" class="text-left p-7 rounded-3xl bg-white border border-slate-200 hover:border-teal-300 hover:shadow-md hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group">
-                                <div>
-                                    <div class="w-12 h-12 rounded-2xl bg-clinical-tealSoft border border-teal-200 text-clinical-teal flex items-center justify-center mb-4">
+                            <!-- ENT Care Card (Fresh Teal/Emerald Tint) -->
+                            <button onclick="navigate('ent')" class="relative overflow-hidden text-left p-7 rounded-3xl bg-gradient-to-br from-teal-50/90 via-white to-white border border-teal-200/80 hover:border-teal-400 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group">
+                                <div class="relative z-10">
+                                    <div class="w-12 h-12 rounded-2xl bg-teal-100 border border-teal-200 text-clinical-teal flex items-center justify-center mb-4 shadow-sm">
                                         <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 2a7 7 0 0 1 7 7c0 3.5-2 5.5-3 7.5-.7 1.4-1 2.5-1 3.5a2 2 0 0 1-4 0c0-1 .3-2.1 1-3.5"/><path stroke-linecap="round" stroke-linejoin="round" d="M9 9a3 3 0 0 1 6 0"/></svg>
                                     </div>
                                     <h3 class="text-lg font-extrabold text-navy group-hover:text-clinical-teal transition-colors">ENT Care</h3>
-                                    <p class="text-sm text-slate-600 leading-relaxed mt-2">Chronic sinus care, nasal endoscopy, micro-ear surgery, throat & voice disorders, and head-neck procedures.</p>
+                                    <p class="text-sm text-slate-600 leading-relaxed mt-2">Chronic sinus care, nasal endoscopy, micro-ear surgery, throat &amp; voice disorders, and head-neck procedures.</p>
                                 </div>
-                                <span class="mt-5 text-xs font-bold text-clinical-teal">Explore ENT Care →</span>
+                                <span class="relative z-10 mt-5 text-xs font-bold text-clinical-teal">Explore ENT Care →</span>
                             </button>
 
-                            <button onclick="navigate('diagnostics')" class="text-left p-7 rounded-3xl bg-white border border-slate-200 hover:border-blue-300 hover:shadow-md hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group">
-                                <div>
-                                    <div class="w-12 h-12 rounded-2xl bg-medical-soft border border-blue-200 text-medical flex items-center justify-center mb-4">
+                            <!-- Diagnostics & Pharmacy Card (Crisp Sky/Indigo Tint) -->
+                            <button onclick="navigate('diagnostics')" class="relative overflow-hidden text-left p-7 rounded-3xl bg-gradient-to-br from-sky-50/90 via-white to-white border border-blue-200/80 hover:border-blue-400 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group">
+                                <div class="relative z-10">
+                                    <div class="w-12 h-12 rounded-2xl bg-blue-100 border border-blue-200 text-medical flex items-center justify-center mb-4 shadow-sm">
                                         <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
                                     </div>
-                                    <h3 class="text-lg font-extrabold text-navy group-hover:text-medical transition-colors">Diagnostics & Pharmacy</h3>
+                                    <h3 class="text-lg font-extrabold text-navy group-hover:text-medical transition-colors">Diagnostics &amp; Pharmacy</h3>
                                     <p class="text-sm text-slate-600 leading-relaxed mt-2">2D Echo, TMT, Holter, ECG, pathology, home sample collection, vaccinations, and in-house pharmacy.</p>
                                 </div>
-                                <span class="mt-5 text-xs font-bold text-medical">Explore Diagnostics →</span>
+                                <span class="relative z-10 mt-5 text-xs font-bold text-medical">Explore Diagnostics →</span>
                             </button>
                         </div>
                     </div>
                 </section>
 
                 <!-- Featured Specialists -->
-                <section class="py-16 bg-white border-y border-slate-200">
-                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <section class="relative overflow-hidden py-16 bg-white border-y border-slate-200">
+                    <div class="hidden md:block absolute -left-12 top-1/2 -translate-y-1/2">
+                        ${renderHeartWatermarkSvg('w-64 h-60 text-rose-500/[0.045] -rotate-12')}
+                    </div>
+                    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                         <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
                             <div>
                                 <span class="text-xs font-bold uppercase tracking-wider text-medical">Medical Leadership</span>
@@ -2172,7 +2297,7 @@
                 </section>
 
                 <!-- State-of-the-Art Facilities Showcase (Uncropped Full-Frame Photos) -->
-                <section class="py-16 bg-slate-50">
+                <section class="py-16 bg-slate-50/70">
                     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                         <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
                             <div>
@@ -2185,7 +2310,7 @@
                                     View All in Gallery →
                                 </button>
                                 <button onclick="navigate('facilities')" class="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-navy hover:text-medical transition-colors">
-                                    Visit Info & Map →
+                                    Visit Info &amp; Map →
                                 </button>
                             </div>
                         </div>
@@ -2197,24 +2322,24 @@
                 </section>
 
                 <!-- Patient Experiences -->
-                <section class="py-16 bg-white border-y border-slate-200">
+                <section class="py-16 bg-gradient-to-b from-white to-rose-50/35 border-y border-slate-200">
                     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                         <div class="text-center max-w-2xl mx-auto mb-12">
-                            <span class="text-xs font-bold uppercase tracking-wider text-clinical-teal">Patient Trust</span>
+                            <span class="text-xs font-bold uppercase tracking-wider text-rose-600">Patient Trust</span>
                             <h2 class="text-2xl sm:text-3xl font-extrabold text-navy mt-1">Patient Experiences</h2>
                             <p class="text-sm text-slate-600 mt-1.5">Words from families treated across our Cardiology, Diagnostics, and ENT departments.</p>
                         </div>
 
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-                            ${CLINIC_DATA.testimonials.map((t) => `
-                                <div class="bg-slate-50 rounded-3xl border border-slate-200 p-7 flex flex-col justify-between">
+                            ${CLINIC_DATA.testimonials.map((t, idx) => `
+                                <div class="bg-white rounded-3xl border ${idx === 0 ? 'border-rose-200/80' : 'border-teal-200/80'} p-7 shadow-sm flex flex-col justify-between">
                                     <div>
                                         <div class="text-amber-400 text-base mb-3" aria-label="5 out of 5 stars">★★★★★</div>
                                         <p class="text-sm text-slate-700 italic leading-relaxed">"${escapeHtml(t.quote)}"</p>
                                     </div>
-                                    <div class="mt-6 pt-4 border-t border-slate-200 flex items-center justify-between">
+                                    <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
                                         <p class="text-sm font-extrabold text-navy">— ${escapeHtml(t.author)}</p>
-                                        <span class="text-xs font-semibold text-clinical-teal bg-clinical-tealSoft border border-teal-200 px-2.5 py-1 rounded-full">${escapeHtml(t.department)}</span>
+                                        <span class="text-xs font-semibold ${idx === 0 ? 'text-rose-700 bg-rose-50 border-rose-200' : 'text-clinical-teal bg-clinical-tealSoft border-teal-200'} border px-2.5 py-1 rounded-full">${escapeHtml(t.department)}</span>
                                     </div>
                                 </div>
                             `).join('')}
@@ -2222,23 +2347,26 @@
                     </div>
                 </section>
 
-                <!-- Clinic Location & Contact Block -->
+                <!-- Clinic Location & Contact Block with Cardiology Heart Watermark -->
                 <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16">
-                    <div class="bg-navy rounded-3xl p-8 sm:p-10 lg:p-12 text-white flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
-                        <div class="max-w-2xl space-y-2.5">
+                    <div class="relative overflow-hidden bg-gradient-to-r from-navy via-blue-950 to-teal-900 rounded-3xl p-8 sm:p-10 lg:p-12 text-white shadow-xl flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
+                        <div class="absolute -right-10 -top-10">
+                            ${renderHeartWatermarkSvg('w-72 h-64 text-rose-400/15 rotate-12', '#FDA4AF')}
+                        </div>
+                        <div class="relative z-10 max-w-2xl space-y-2.5">
                             <span class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-teal-300">
                                 Visit Cardiosphere Polyclinic
                             </span>
                             <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight">2nd Floor, Arushi Complex, Muchipara, Durgapur</h2>
-                            <p class="text-sm text-slate-300 leading-relaxed">
+                            <p class="text-sm text-slate-200 leading-relaxed">
                                 Open <strong>Mon – Sat: 9:00 AM – 5:00 PM</strong> • Emergency Helpline: <a href="tel:+919002450077" class="text-white underline font-semibold">+91 90024 50077</a>
                             </p>
                         </div>
-                        <div class="flex flex-col sm:flex-row gap-3 w-full lg:w-auto">
+                        <div class="relative z-10 flex flex-col sm:flex-row gap-3 w-full lg:w-auto">
                             <button onclick="navigate('facilities')" class="px-6 py-3.5 rounded-xl bg-white text-navy hover:bg-slate-100 font-bold text-sm transition-colors text-center">
-                                Facilities & Map
+                                Facilities &amp; Map
                             </button>
-                            <button onclick="navigate('book')" class="px-6 py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm transition-colors text-center">
+                            <button onclick="navigate('book')" class="px-6 py-3.5 rounded-xl bg-gradient-to-r from-rose-500 to-emerald-500 hover:from-rose-600 hover:to-emerald-600 text-white font-bold text-sm transition-colors text-center shadow-md">
                                 Book Appointment
                             </button>
                         </div>
@@ -2419,59 +2547,77 @@
                 {
                     title: 'Angioplasty & Stenting',
                     tag: 'Interventional',
+                    accent: 'border-t-rose-500 bg-rose-50/40',
+                    badge: 'bg-rose-100 text-rose-700',
                     desc: 'Expert evaluation and interventional management for complex coronary blockages with structured post-procedure recovery.',
                 },
                 {
                     title: 'Pacemaker & Cardiac Devices',
                     tag: 'Device Therapy',
+                    accent: 'border-t-blue-500 bg-blue-50/40',
+                    badge: 'bg-blue-100 text-medical',
                     desc: 'Comprehensive assessment, pacemaker and CRT/ICD device implantation, and routine device follow-up.',
                 },
                 {
                     title: 'Valvular Management',
                     tag: 'Structural Heart',
+                    accent: 'border-t-teal-500 bg-teal-50/40',
+                    badge: 'bg-teal-100 text-clinical-teal',
                     desc: 'Evidence-based clinical diagnosis, echocardiographic tracking, and long-term management of valve disorders.',
                 },
                 {
                     title: '2D Echocardiography',
                     tag: 'Non-Invasive',
+                    accent: 'border-t-indigo-500 bg-indigo-50/40',
+                    badge: 'bg-indigo-100 text-indigo-700',
                     desc: 'High-clarity ultrasound imaging of heart chambers, wall motion, and valve function conducted on-site.',
                 },
                 {
                     title: 'TMT / Stress Test',
                     tag: 'Non-Invasive',
+                    accent: 'border-t-amber-500 bg-amber-50/40',
+                    badge: 'bg-amber-100 text-amber-800',
                     desc: 'Supervised treadmill ECG testing to evaluate exercise tolerance and detect early coronary artery disease.',
                 },
                 {
                     title: 'Holter Monitoring',
                     tag: 'Rhythm Analysis',
+                    accent: 'border-t-emerald-500 bg-emerald-50/40',
+                    badge: 'bg-emerald-100 text-emerald-700',
                     desc: '24-hour continuous wearable ECG recording to diagnose palpitations, fainting spells, and arrhythmias.',
                 },
             ];
 
             return `
-                <section class="bg-white border-b border-slate-200">
-                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-14">
+                <section class="relative overflow-hidden bg-gradient-to-br from-rose-50/85 via-white to-blue-50/70 border-b border-slate-200">
+                    <!-- Signature Cardiology Heart + ECG Watermark -->
+                    <div class="absolute -right-8 -top-6 sm:right-6">
+                        ${renderHeartWatermarkSvg('w-[300px] h-[270px] sm:w-[400px] sm:h-[360px] text-rose-500/[0.10] rotate-6')}
+                    </div>
+
+                    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-14">
                         ${renderBreadcrumbs([
                             { label: 'Home', route: 'home' },
                             { label: 'Cardiology' },
                         ])}
 
                         <div class="max-w-3xl space-y-4">
-                            <span class="inline-flex items-center px-3 py-1 rounded-full bg-medical-soft border border-blue-200 text-xs font-bold text-medical">
+                            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-100/90 border border-rose-200 text-xs font-bold text-rose-700">
+                                <svg class="w-3.5 h-3.5 text-rose-600" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
                                 Department of Cardiology
                             </span>
                             <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-navy tracking-tight leading-tight">
-                                Interventional & Non-Invasive <span class="text-medical">Cardiac Care</span>
+                                Interventional &amp; Non-Invasive <span class="bg-gradient-to-r from-rose-600 to-medical bg-clip-text text-transparent">Cardiac Care</span>
                             </h1>
                             <p class="text-sm sm:text-base text-slate-600 leading-relaxed">
                                 Led by Dr. Tutan Das, our Cardiology department combines advanced interventional expertise with on-site diagnostics and long-term preventive heart care.
                             </p>
                             <div class="pt-2 flex flex-wrap gap-3">
-                                <button onclick="startBookingForDoctor('dr-tutan-das')" class="px-6 py-3 rounded-xl bg-medical hover:bg-medical-hover text-white font-bold text-sm transition-colors shadow-sm">
+                                <button onclick="startBookingForDoctor('dr-tutan-das')" class="px-6 py-3 rounded-xl bg-gradient-to-r from-rose-600 to-medical hover:from-rose-700 hover:to-medical-hover text-white font-bold text-sm transition-colors shadow-sm">
                                     Book Cardiology Consultation
                                 </button>
                                 <button onclick="navigate('diagnostics')" class="px-6 py-3 rounded-xl bg-white hover:bg-slate-50 border border-slate-300 text-navy font-bold text-sm transition-colors">
-                                    Diagnostics & Pharmacy
+                                    Diagnostics &amp; Pharmacy
                                 </button>
                             </div>
                         </div>
@@ -2480,14 +2626,14 @@
 
                 <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
                     <div class="mb-8">
-                        <span class="text-xs font-bold uppercase tracking-wider text-clinical-teal">Cardiac Services</span>
-                        <h2 class="text-2xl sm:text-3xl font-extrabold text-navy mt-1">Interventional & Diagnostic Procedures</h2>
+                        <span class="text-xs font-bold uppercase tracking-wider text-rose-600">Cardiac Services</span>
+                        <h2 class="text-2xl sm:text-3xl font-extrabold text-navy mt-1">Interventional &amp; Diagnostic Procedures</h2>
                     </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
                         ${cardiacServices.map((s) => `
-                            <div class="bg-white rounded-3xl border border-slate-200 p-6 hover:border-blue-300 hover:shadow-md transition-all">
-                                <span class="inline-flex px-2.5 py-0.5 rounded-full bg-medical-soft text-medical text-[11px] font-bold">${s.tag}</span>
+                            <div class="bg-white rounded-3xl border border-slate-200 border-t-4 ${s.accent} p-6 hover:shadow-md hover:-translate-y-0.5 transition-all">
+                                <span class="inline-flex px-2.5 py-0.5 rounded-full ${s.badge} text-[11px] font-bold">${s.tag}</span>
                                 <h3 class="text-base font-extrabold text-navy mt-3">${s.title}</h3>
                                 <p class="text-sm text-slate-600 leading-relaxed mt-2">${s.desc}</p>
                             </div>
@@ -2541,7 +2687,7 @@
             ];
 
             return `
-                <section class="bg-white border-b border-slate-200">
+                <section class="bg-gradient-to-br from-teal-50/85 via-white to-cyan-50/70 border-b border-slate-200">
                     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-14">
                         ${renderBreadcrumbs([
                             { label: 'Home', route: 'home' },
@@ -2551,17 +2697,17 @@
                         <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
                             <div class="lg:col-span-7 space-y-5">
                                 <span class="inline-flex items-center px-3 py-1 rounded-full bg-clinical-tealSoft border border-teal-200 text-xs font-bold text-clinical-teal">
-                                    Department of ENT & Head-Neck Surgery
+                                    Department of ENT &amp; Head-Neck Surgery
                                 </span>
                                 <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-navy tracking-tight leading-tight">
-                                    Specialized <span class="text-clinical-teal">ENT & Head-Neck</span> Care
+                                    Specialized <span class="text-clinical-teal">ENT &amp; Head-Neck</span> Care
                                 </h1>
                                 <p class="text-sm sm:text-base text-slate-600 leading-relaxed max-w-2xl">
-                                    Led by <strong>Dr. Swagata Chakraborty</strong> (Ex-Senior Resident, AIIMS), offering attentive outpatient diagnosis and complex surgical treatments for ear, nose, sinus, throat, and head & neck conditions.
+                                    Led by <strong>Dr. Swagata Chakraborty</strong> (Ex-Senior Resident, AIIMS), offering attentive outpatient diagnosis and complex surgical treatments for ear, nose, sinus, throat, and head &amp; neck conditions.
                                 </p>
 
                                 <div class="flex flex-wrap gap-2 text-xs font-semibold">
-                                    <span class="px-3 py-1.5 rounded-xl bg-slate-100 text-navy border border-slate-200">Ex-Senior Resident, AIIMS</span>
+                                    <span class="px-3 py-1.5 rounded-xl bg-white text-navy border border-slate-200">Ex-Senior Resident, AIIMS</span>
                                     <span class="px-3 py-1.5 rounded-xl bg-clinical-tealSoft text-clinical-teal border border-teal-200">Complex ENT Surgeries</span>
                                     <span class="px-3 py-1.5 rounded-xl bg-medical-soft text-medical border border-blue-200">Mon – Sat: 9:00 AM – 5:00 PM</span>
                                 </div>
@@ -2578,7 +2724,7 @@
 
                             <!-- Specialist Spotlight -->
                             <div class="lg:col-span-5">
-                                <div class="bg-slate-50 rounded-3xl border border-slate-200 p-5 sm:p-6 space-y-4 shadow-sm">
+                                <div class="bg-white/90 rounded-3xl border border-teal-200/80 p-5 sm:p-6 space-y-4 shadow-sm">
                                     ${renderDoctorAvatar(drSwagata, 'w-full aspect-square', 'rounded-2xl', 'text-5xl')}
                                     <div class="flex items-center justify-between gap-3">
                                         <div>
@@ -2599,7 +2745,7 @@
                 <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
                     <div class="mb-8">
                         <span class="text-xs font-bold uppercase tracking-wider text-clinical-teal">Scope of Care</span>
-                        <h2 class="text-2xl sm:text-3xl font-extrabold text-navy mt-1">ENT Clinical & Surgical Services</h2>
+                        <h2 class="text-2xl sm:text-3xl font-extrabold text-navy mt-1">ENT Clinical &amp; Surgical Services</h2>
                     </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -2620,8 +2766,11 @@
         /* ===================================================================== */
         function renderDiagnosticsView() {
             return `
-                <section class="bg-white border-b border-slate-200">
-                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-14">
+                <section class="relative overflow-hidden bg-gradient-to-br from-sky-50/85 via-white to-indigo-50/70 border-b border-slate-200">
+                    <div class="absolute -right-10 -bottom-10">
+                        ${renderHeartWatermarkSvg('w-72 h-64 text-medical/[0.06] -rotate-6')}
+                    </div>
+                    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-14">
                         ${renderBreadcrumbs([
                             { label: 'Home', route: 'home' },
                             { label: 'Diagnostics & Pharmacy' },
