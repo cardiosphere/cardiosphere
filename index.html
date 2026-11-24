@@ -904,12 +904,18 @@
                             <span class="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-emerald-400 border-2 border-navy"></span>
                         </div>
                         <div class="min-w-0">
-                            <h2 class="text-sm font-extrabold leading-tight truncate">Cardiosphere Care Bot</h2>
+                            <div class="flex items-center gap-1.5">
+                                <h2 class="text-sm font-extrabold leading-tight truncate">Cardiosphere Care Bot</h2>
+                                <span class="px-1.5 py-0.5 rounded-md bg-teal-500/20 border border-teal-400/30 text-[9px] font-bold uppercase tracking-wider text-teal-200 shrink-0">Open Source</span>
+                            </div>
                             <p id="bot-live-status" class="text-[11px] text-teal-200 font-medium truncate">Checking clinic hours...</p>
                         </div>
                     </div>
 
                     <div class="flex items-center gap-1 shrink-0">
+                        <button type="button" onclick="openBotSymptomDirectory()" title="Open-Source Symptom Guide" class="p-2 rounded-xl text-slate-300 hover:text-white hover:bg-white/10 transition-colors" aria-label="Browse Symptom Guide">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path stroke-linecap="round" stroke-linejoin="round" d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                        </button>
                         <button type="button" onclick="resetVisitorBotChat()" title="Restart Conversation" class="p-2 rounded-xl text-slate-300 hover:text-white hover:bg-white/10 transition-colors" aria-label="Restart Conversation">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><path stroke-linecap="round" stroke-linejoin="round" d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
                         </button>
@@ -977,7 +983,7 @@
                     </button>
                 </div>
                 <p class="text-[10px] text-slate-400 text-center mt-2">
-                    Clinical guidance only — not a substitute for emergency medical care.
+                    Open-Source Symptom &amp; Triage Guide (MIT) • For informational guidance only, not a medical diagnosis.
                 </p>
             </form>
         </section>
@@ -996,7 +1002,7 @@
             </span>
             <span class="text-left leading-tight">
                 <span class="block text-xs sm:text-sm font-extrabold">Care Assistant</span>
-                <span class="hidden sm:block text-[10px] text-teal-200 font-semibold">Ask • Triage • Book</span>
+                <span class="hidden sm:block text-[10px] text-teal-200 font-semibold">Open-Source Symptom &amp; Care Bot</span>
             </span>
         </button>
     </div>
@@ -1080,7 +1086,7 @@
         const GALLERY_CATEGORIES = ['All', 'Medical Team', 'Facilities', 'Diagnostics', 'Specialists', 'Clinic Events'];
 
         /**
-         * Core clinic dataset: brand info, specialists, diagnostics, facilities, and reviews.
+         * Core clinic dataset: brand info, active specialists, diagnostics, facilities, and reviews.
          */
         const CLINIC_DATA = {
             brand: {
@@ -1265,7 +1271,7 @@
         };
 
         /* ===================================================================== */
-        /* UTILITY HELPERS (Escaping, Toast, Clipboard, Drive Link Parser)       */
+        /* UTILITY HELPERS (Escaping, Toast, Clipboard, Logo & Drive Fallbacks)  */
         /* ===================================================================== */
 
         /**
@@ -1339,6 +1345,30 @@
         }
 
         /**
+         * Chained 4K logo fallback: =s3840 -> =s0 (original) -> =w1024 -> crisp inline vector SVG emblem.
+         */
+        function handleLogoImgError(img) {
+            if (!img) return;
+            const step = Number(img.getAttribute('data-logo-step') || '0');
+            const base = 'https://lh3.googleusercontent.com/p/AF1QipMcFRLHMTS9rS1GLtgiVsKY8ufhIW1fbQf0zCTI';
+            if (step === 0) {
+                img.setAttribute('data-logo-step', '1');
+                img.src = `${base}=s0`;
+                return;
+            }
+            if (step === 1) {
+                img.setAttribute('data-logo-step', '2');
+                img.src = `${base}=w1024`;
+                return;
+            }
+            img.onerror = null;
+            img.classList.add('hidden');
+            if (img.nextElementSibling) {
+                img.nextElementSibling.classList.remove('hidden');
+            }
+        }
+
+        /**
          * Returns today's local date in YYYY-MM-DD format.
          */
         function getTodayISO() {
@@ -1393,33 +1423,10 @@
         }
 
         /**
-         * Retrieves a specialist object by ID, defaulting to the first specialist.
+         * Retrieves a specialist object by ID, defaulting to the first active specialist.
          */
         function getDoctorById(doctorId) {
             return CLINIC_DATA.doctors.find((d) => d.id === doctorId) || CLINIC_DATA.doctors[0];
-        }
-
-        /**
-         * Chained 4K logo fallback handler:
-         * Step 0 (=s3840 4K) -> Step 1 (=s0 original full-res) -> Step 2 (=w1024) -> Crisp Vector SVG Emblem.
-         */
-        function handleLogoImgError(img) {
-            if (!img) return;
-            const step = Number(img.getAttribute('data-logo-step') || '0');
-            const base = 'https://lh3.googleusercontent.com/p/AF1QipMcFRLHMTS9rS1GLtgiVsKY8ufhIW1fbQf0zCTI';
-            const fallbacks = [`${base}=s0`, `${base}=w1024`];
-
-            if (step < fallbacks.length) {
-                img.setAttribute('data-logo-step', String(step + 1));
-                img.src = fallbacks[step];
-                return;
-            }
-
-            img.onerror = null;
-            img.classList.add('hidden');
-            if (img.nextElementSibling) {
-                img.nextElementSibling.classList.remove('hidden');
-            }
         }
 
         /**
@@ -1472,7 +1479,6 @@
          */
         function handleMediaImgError(img) {
             if (!img) return;
-            // Ignore unloaded placeholder tags that have no src set yet (e.g., closed lightbox)
             if (!img.getAttribute('src')) return;
 
             const step = Number(img.getAttribute('data-fallback-step') || '0');
@@ -1572,14 +1578,13 @@
         }
 
         /**
-         * Renders a clean, decorative Cardiology Heart + ECG pulse SVG watermark
-         * for subtle visual depth without interfering with text legibility.
+         * Renders a tasteful decorative Cardiology Heart + ECG Pulse watermark SVG.
          */
-        function renderHeartWatermarkSvg(className = 'w-72 h-72 text-rose-500/[0.07]', pulseColor = 'currentColor') {
+        function renderHeartWatermark(positionClass = '-right-10 -bottom-10 w-72 h-72', colorClass = 'text-rose-500/[0.06]') {
             return `
-                <svg aria-hidden="true" class="pointer-events-none select-none ${className}" viewBox="0 0 220 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M110 176C110 176 30 126 30 68C30 41.5 51.5 22 77 22C92.5 22 104 30 110 40.5C116 30 127.5 22 143 22C168.5 22 190 41.5 190 68C190 126 110 176 110 176Z" fill="currentColor" fill-opacity="0.35" stroke="currentColor" stroke-width="5" stroke-linejoin="round"/>
-                    <path d="M16 96H68L82 70L100 128L119 56L134 108L146 96H204" stroke="${pulseColor}" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <svg aria-hidden="true" class="pointer-events-none select-none absolute ${positionClass} ${colorClass}" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M100 172C100 172 26 124 26 68C26 42.5 46 24 70 24C84.5 24 95 31.5 100 41C105 31.5 115.5 24 130 24C154 24 174 42.5 174 68C174 124 100 172 100 172Z" stroke="currentColor" stroke-width="5" fill="currentColor" fill-opacity="0.35"/>
+                    <path d="M22 96H64L76 72L92 122L108 62L121 106L131 96H178" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
             `;
         }
@@ -1589,9 +1594,6 @@
         /* Works reliably across https://, localhost, and file:// protocols      */
         /* ===================================================================== */
 
-        /**
-         * Converts a UTF-8 string into an array of unsigned byte values (0–255).
-         */
         function utf8ToBytes(str) {
             const bytes = [];
             for (let i = 0; i < str.length; i++) {
@@ -1620,9 +1622,6 @@
             return bytes;
         }
 
-        /**
-         * FIPS 180-4 Pure-JavaScript SHA-256 implementation returning lowercase hex digest.
-         */
         function sha256(message) {
             const K = [
                 0x428a2f98, 0x71374491, 0xb5c0fbcf, 0xe9b5dba5, 0x3956c25b, 0x59f111f1, 0x923f82a4, 0xab1c5ed5,
@@ -1635,23 +1634,15 @@
                 0x748f82ee, 0x78a5636f, 0x84c87814, 0x8cc70208, 0x90befffa, 0xa4506ceb, 0xbef9a3f7, 0xc67178f2,
             ];
 
-            let h0 = 0x6a09e667;
-            let h1 = 0xbb67ae85;
-            let h2 = 0x3c6ef372;
-            let h3 = 0xa54ff53a;
-            let h4 = 0x510e527f;
-            let h5 = 0x9b05688c;
-            let h6 = 0x1f83d9ab;
-            let h7 = 0x5be0cd19;
+            let h0 = 0x6a09e667, h1 = 0xbb67ae85, h2 = 0x3c6ef372, h3 = 0xa54ff53a;
+            let h4 = 0x510e527f, h5 = 0x9b05688c, h6 = 0x1f83d9ab, h7 = 0x5be0cd19;
 
             const rotr = (x, n) => (x >>> n) | (x << (32 - n));
             const bytes = utf8ToBytes(String(message || ''));
             const bitLen = bytes.length * 8;
 
             bytes.push(0x80);
-            while (bytes.length % 64 !== 56) {
-                bytes.push(0x00);
-            }
+            while (bytes.length % 64 !== 56) bytes.push(0x00);
 
             const bitLenHi = Math.floor(bitLen / 0x100000000);
             const bitLenLo = bitLen >>> 0;
@@ -1682,24 +1673,12 @@
                     const maj = (a & b) ^ (a & c) ^ (b & c);
                     const temp2 = (S0 + maj) >>> 0;
 
-                    h = g;
-                    g = f;
-                    f = e;
-                    e = (d + temp1) >>> 0;
-                    d = c;
-                    c = b;
-                    b = a;
-                    a = (temp1 + temp2) >>> 0;
+                    h = g; g = f; f = e; e = (d + temp1) >>> 0;
+                    d = c; c = b; b = a; a = (temp1 + temp2) >>> 0;
                 }
 
-                h0 = (h0 + a) >>> 0;
-                h1 = (h1 + b) >>> 0;
-                h2 = (h2 + c) >>> 0;
-                h3 = (h3 + d) >>> 0;
-                h4 = (h4 + e) >>> 0;
-                h5 = (h5 + f) >>> 0;
-                h6 = (h6 + g) >>> 0;
-                h7 = (h7 + h) >>> 0;
+                h0 = (h0 + a) >>> 0; h1 = (h1 + b) >>> 0; h2 = (h2 + c) >>> 0; h3 = (h3 + d) >>> 0;
+                h4 = (h4 + e) >>> 0; h5 = (h5 + f) >>> 0; h6 = (h6 + g) >>> 0; h7 = (h7 + h) >>> 0;
             }
 
             return [h0, h1, h2, h3, h4, h5, h6, h7]
@@ -1707,10 +1686,6 @@
                 .join('');
         }
 
-        /**
-         * Resolves active admin credentials: checks localStorage security override first,
-         * then falls back to ADMIN_CONFIG (hashing defaultPassword when passwordHash is empty).
-         */
         function getEffectiveAdminCredentials() {
             try {
                 const rawOverride = localStorage.getItem(ADMIN_AUTH_OVERRIDE_KEY);
@@ -1734,9 +1709,6 @@
             };
         }
 
-        /**
-         * Reads the active session strictly from sessionStorage (never localStorage).
-         */
         function getAdminSession() {
             try {
                 const raw = sessionStorage.getItem(ADMIN_SESSION_KEY);
@@ -1755,16 +1727,10 @@
             }
         }
 
-        /**
-         * Returns true if an unexpired authenticated admin session exists in sessionStorage.
-         */
         function isAdminAuthenticated() {
             return Boolean(getAdminSession());
         }
 
-        /**
-         * Extends the 20-minute inactivity timer on user interaction while signed in.
-         */
         function touchAdminSession() {
             const session = getAdminSession();
             if (!session) return;
@@ -1780,9 +1746,6 @@
             updateAdminSessionCountdownUI();
         }
 
-        /**
-         * Updates the visible auto-lock remaining minutes label inside the Admin Status Bar.
-         */
         function updateAdminSessionCountdownUI() {
             const badge = document.getElementById('admin-autolock-timer');
             if (!badge) return;
@@ -1792,9 +1755,6 @@
             badge.textContent = `Auto-locks in ${minsLeft}m of inactivity`;
         }
 
-        /**
-         * Starts background monitoring for the 20-minute inactivity auto-lock.
-         */
         function startAdminSessionMonitor() {
             if (APP_STATE.adminInactivityInterval) {
                 clearInterval(APP_STATE.adminInactivityInterval);
@@ -1814,9 +1774,6 @@
             }, 5000);
         }
 
-        /**
-         * Strict guard invoked at the start of every gallery mutating / admin function.
-         */
         function requireAdminAuth() {
             if (isAdminAuthenticated()) {
                 touchAdminSession();
@@ -1827,9 +1784,6 @@
             return false;
         }
 
-        /**
-         * Signs out immediately, clears sessionStorage, closes all admin modals, and locks gallery.
-         */
         function logoutAdminSession(isAutoLock = false) {
             try {
                 sessionStorage.removeItem(ADMIN_SESSION_KEY);
@@ -1973,7 +1927,6 @@
                     return;
                 }
 
-                // Success: store session strictly in sessionStorage
                 APP_STATE.adminFailedAttempts = 0;
                 APP_STATE.adminLockoutUntil = 0;
                 const now = Date.now();
@@ -2003,7 +1956,7 @@
         }
 
         /* ===================================================================== */
-        /* GALLERY STORAGE & PERSISTENCE (localStorage)                          */
+        /* GALLERY STORAGE & PERSISTENCE (localStorage + Legacy Cleanup)         */
         /* ===================================================================== */
         function loadGalleryPhotos() {
             try {
@@ -2014,11 +1967,10 @@
                 }
                 const parsed = JSON.parse(raw);
                 if (Array.isArray(parsed) && parsed.length > 0) {
-                    // Remove any previously cached Dr. Manidipa entries from browser storage
-                    const cleaned = parsed.filter((p) => {
-                        const haystack = `${p?.id || ''} ${p?.title || ''} ${p?.src || ''}`.toLowerCase();
-                        return !haystack.includes('manidipa');
-                    });
+                    // Clean out any legacy removed specialist photos cached in localStorage
+                    const cleaned = parsed.filter(
+                        (p) => p && p.id !== 'gal-dr-manidipa' && !/manidipa/i.test(`${p.title || ''} ${p.caption || ''} ${p.src || ''}`)
+                    );
                     APP_STATE.galleryPhotos = cleaned.length > 0 ? cleaned : INITIAL_GALLERY_PHOTOS.map((p) => ({ ...p }));
                     if (cleaned.length !== parsed.length) {
                         saveGalleryPhotos();
@@ -2049,12 +2001,13 @@
         function renderDoctorCard(doc) {
             const isEnt = doc.department === 'ENT Care';
             return `
-                <article class="bg-white rounded-3xl border border-slate-200 overflow-hidden flex flex-col hover:border-blue-300 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+                <article class="bg-white rounded-3xl border border-slate-200 overflow-hidden flex flex-col hover:border-${isEnt ? 'teal' : 'rose'}-300 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+                    <div class="h-1.5 w-full ${isEnt ? 'bg-gradient-to-r from-teal-500 to-cyan-500' : 'bg-gradient-to-r from-rose-500 to-blue-600'}"></div>
                     <div class="p-6 flex-1 flex flex-col">
                         <div class="flex items-start gap-4">
                             ${renderDoctorAvatar(doc, 'w-20 h-20 sm:w-24 sm:h-24', 'rounded-2xl', 'text-xl')}
                             <div class="min-w-0 flex-1">
-                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-bold ${isEnt ? 'bg-clinical-tealSoft text-clinical-teal border border-teal-200' : 'bg-medical-soft text-medical border border-blue-200'}">
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-bold ${isEnt ? 'bg-clinical-tealSoft text-clinical-teal border border-teal-200' : 'bg-cardio-soft text-cardio border border-rose-200'}">
                                     ${escapeHtml(doc.departmentLabel)}
                                 </span>
                                 <h3 class="text-lg font-extrabold text-navy mt-1.5 leading-snug">${escapeHtml(doc.name)}</h3>
@@ -2076,7 +2029,7 @@
                         <button onclick="navigate('doctor/${doc.id}')" class="flex-1 py-2.5 px-3 rounded-xl bg-white border border-slate-200 hover:border-navy text-navy text-xs sm:text-sm font-semibold transition-colors">
                             View Profile
                         </button>
-                        <button onclick="openBookingModal('${doc.id}')" class="flex-1 py-2.5 px-3 rounded-xl bg-medical hover:bg-medical-hover text-white text-xs sm:text-sm font-semibold transition-colors">
+                        <button onclick="openBookingModal('${doc.id}')" class="flex-1 py-2.5 px-3 rounded-xl ${isEnt ? 'bg-clinical-teal hover:bg-clinical-tealHover' : 'bg-medical hover:bg-medical-hover'} text-white text-xs sm:text-sm font-semibold transition-colors">
                             Book Consultation
                         </button>
                     </div>
@@ -2113,27 +2066,20 @@
         /* ===================================================================== */
         function renderHomeView() {
             return `
-                <!-- Clinical Split Hero with Soft Colorful Gradient & Cardiology Heart Watermark -->
-                <section class="relative overflow-hidden bg-gradient-to-br from-rose-50/80 via-white to-sky-50/80 border-b border-slate-200">
-                    <!-- Decorative Cardiology Heart Watermarks -->
-                    <div class="absolute -right-12 -top-10 opacity-90">
-                        ${renderHeartWatermarkSvg('w-[340px] h-[310px] sm:w-[440px] sm:h-[400px] text-rose-500/[0.08] rotate-6')}
-                    </div>
-                    <div class="hidden lg:block absolute left-[42%] -bottom-16">
-                        ${renderHeartWatermarkSvg('w-64 h-60 text-medical/[0.06] -rotate-12')}
-                    </div>
-
+                <!-- Clinical Split Hero with Soft Colorful Gradient & Heart Watermark -->
+                <section class="relative overflow-hidden bg-gradient-to-br from-rose-50/75 via-white to-sky-50/85 border-b border-slate-200">
+                    ${renderHeartWatermark('right-4 sm:right-10 -bottom-14 w-72 h-72 sm:w-96 sm:h-96 rotate-12', 'text-rose-500/[0.075]')}
                     <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-20">
                         <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
                             <!-- Left Column -->
                             <div class="lg:col-span-7 space-y-6">
-                                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/90 border border-rose-200 text-rose-700 text-xs font-bold tracking-wide shadow-sm">
-                                    <svg class="w-3.5 h-3.5 text-rose-500 shrink-0" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/90 border border-rose-200 text-cardio text-xs font-bold tracking-wide shadow-sm">
+                                    <span class="w-2 h-2 rounded-full bg-rose-500 animate-pulse"></span>
                                     Cardiosphere Polyclinic • Muchipara, Durgapur
                                 </div>
 
                                 <h1 class="text-4xl sm:text-5xl lg:text-[3.3rem] font-extrabold text-navy tracking-tight leading-[1.12]">
-                                    Leading the Future of <span class="bg-gradient-to-r from-rose-600 via-medical to-clinical-teal bg-clip-text text-transparent">Cardiac &amp; Multi-Speciality Care</span>
+                                    Leading the Future of <span class="bg-gradient-to-r from-rose-600 via-medical to-teal-600 bg-clip-text text-transparent">Cardiac &amp; Multi-Speciality Care</span>
                                 </h1>
 
                                 <p class="text-base sm:text-lg text-slate-600 leading-relaxed max-w-2xl">
@@ -2141,77 +2087,74 @@
                                 </p>
 
                                 <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-1">
-                                    <button onclick="navigate('book')" class="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-rose-600 to-medical hover:from-rose-700 hover:to-medical-hover text-white px-7 py-3.5 rounded-xl font-bold text-sm shadow-md shadow-blue-900/10 transition-all">
+                                    <button onclick="navigate('book')" class="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-medical to-blue-700 hover:from-medical-hover hover:to-blue-800 text-white px-7 py-3.5 rounded-xl font-bold text-sm shadow-sm transition-all">
                                         <span>Book Appointment</span>
                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-7-7 7 7-7 7"/></svg>
                                     </button>
-                                    <a href="tel:+919002450077" class="inline-flex items-center justify-center gap-2 bg-white/95 hover:bg-rose-50/70 text-navy border border-slate-300 hover:border-rose-300 px-6 py-3.5 rounded-xl font-bold text-sm transition-all shadow-sm">
-                                        <svg class="w-4 h-4 text-rose-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                                    <a href="tel:+919002450077" class="inline-flex items-center justify-center gap-2 bg-white hover:bg-rose-50 text-navy border border-rose-200 px-6 py-3.5 rounded-xl font-bold text-sm transition-all shadow-sm">
+                                        <svg class="w-4 h-4 text-cardio" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
                                         <span>Emergency: +91 90024 50077</span>
                                     </a>
                                 </div>
 
-                                <!-- Quick Stats / Colorful Simple Trust Strip -->
-                                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-6 border-t border-slate-200/80">
-                                    <div class="p-3 rounded-2xl bg-rose-50/80 border border-rose-100">
-                                        <p class="text-base font-extrabold text-rose-700">AIIMS Alumni</p>
-                                        <p class="text-xs font-medium text-slate-600 mt-0.5">Cardiology &amp; ENT</p>
+                                <!-- Colorful Quick Stats / Trust Strip -->
+                                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-4">
+                                    <div class="p-3 rounded-2xl bg-white/90 border border-rose-100 shadow-sm">
+                                        <p class="text-base font-extrabold text-cardio">AIIMS Alumni</p>
+                                        <p class="text-[11px] font-medium text-slate-500">Cardiology &amp; ENT</p>
                                     </div>
-                                    <div class="p-3 rounded-2xl bg-blue-50/80 border border-blue-100">
+                                    <div class="p-3 rounded-2xl bg-white/90 border border-blue-100 shadow-sm">
                                         <p class="text-base font-extrabold text-medical">2D Echo &amp; TMT</p>
-                                        <p class="text-xs font-medium text-slate-600 mt-0.5">In-Clinic Diagnostics</p>
+                                        <p class="text-[11px] font-medium text-slate-500">In-Clinic Diagnostics</p>
                                     </div>
-                                    <div class="p-3 rounded-2xl bg-teal-50/80 border border-teal-100">
+                                    <div class="p-3 rounded-2xl bg-white/90 border border-teal-100 shadow-sm">
                                         <p class="text-base font-extrabold text-clinical-teal">In-House</p>
-                                        <p class="text-xs font-medium text-slate-600 mt-0.5">Lab &amp; Pharmacy</p>
+                                        <p class="text-[11px] font-medium text-slate-500">Lab &amp; Pharmacy</p>
                                     </div>
-                                    <div class="p-3 rounded-2xl bg-amber-50/80 border border-amber-100">
+                                    <div class="p-3 rounded-2xl bg-white/90 border border-amber-100 shadow-sm">
                                         <p class="text-base font-extrabold text-amber-700">Mon – Sat</p>
-                                        <p class="text-xs font-medium text-slate-600 mt-0.5">9:00 AM – 5:00 PM</p>
+                                        <p class="text-[11px] font-medium text-slate-500">9:00 AM – 5:00 PM</p>
                                     </div>
                                 </div>
                             </div>
 
                             <!-- Right Column: Specialist Preview Card Stack -->
                             <div class="lg:col-span-5">
-                                <div class="relative overflow-hidden bg-white/90 backdrop-blur-md rounded-3xl border border-slate-200 shadow-lg space-y-5">
-                                    <div class="h-1.5 w-full bg-gradient-to-r from-rose-500 via-medical to-teal-500"></div>
-                                    <div class="px-6 pb-6 sm:px-7 sm:pb-7 space-y-5">
-                                        <div class="flex items-center justify-between border-b border-slate-200 pb-4">
-                                            <div>
-                                                <p class="text-xs font-bold uppercase tracking-wider text-rose-600">Senior Consultants</p>
-                                                <h2 class="text-lg font-extrabold text-navy mt-0.5">Our Specialist Team</h2>
-                                            </div>
-                                            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-bold">
-                                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                                                OPD Open
-                                            </span>
+                                <div class="bg-white/90 backdrop-blur-sm rounded-3xl border border-slate-200 p-6 sm:p-7 shadow-md space-y-5">
+                                    <div class="flex items-center justify-between border-b border-slate-200 pb-4">
+                                        <div>
+                                            <p class="text-xs font-bold uppercase tracking-wider text-clinical-teal">Senior Consultants</p>
+                                            <h2 class="text-lg font-extrabold text-navy mt-0.5">Our Specialist Team</h2>
                                         </div>
+                                        <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-bold">
+                                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                                            OPD Open
+                                        </span>
+                                    </div>
 
-                                        <div class="space-y-3">
-                                            ${CLINIC_DATA.doctors.map((doc) => `
-                                                <button onclick="navigate('doctor/${doc.id}')" class="w-full flex items-center gap-3.5 p-3 rounded-2xl bg-slate-50/90 border border-slate-200 hover:bg-white hover:border-blue-300 hover:shadow-sm transition-all text-left group">
-                                                    ${renderDoctorAvatar(doc, 'w-14 h-14', 'rounded-xl', 'text-sm')}
-                                                    <div class="min-w-0 flex-1">
-                                                        <p class="text-sm font-extrabold text-navy group-hover:text-medical transition-colors truncate">${escapeHtml(doc.name)}</p>
-                                                        <p class="text-xs font-semibold ${doc.department === 'ENT Care' ? 'text-clinical-teal' : 'text-rose-600'} truncate">${escapeHtml(doc.role)}</p>
-                                                        <p class="text-[11px] text-slate-500 truncate">${escapeHtml(doc.credentials)}</p>
-                                                    </div>
-                                                    <svg class="w-4 h-4 text-slate-400 group-hover:text-medical shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="m9 18 6-6-6-6"/></svg>
-                                                </button>
-                                            `).join('')}
-                                        </div>
+                                    <div class="space-y-3">
+                                        ${CLINIC_DATA.doctors.map((doc) => `
+                                            <button onclick="navigate('doctor/${doc.id}')" class="w-full flex items-center gap-3.5 p-3 rounded-2xl bg-slate-50/70 hover:bg-white border border-slate-200 hover:border-blue-300 hover:shadow-sm transition-all text-left group">
+                                                ${renderDoctorAvatar(doc, 'w-14 h-14', 'rounded-xl', 'text-sm')}
+                                                <div class="min-w-0 flex-1">
+                                                    <p class="text-sm font-extrabold text-navy group-hover:text-medical transition-colors truncate">${escapeHtml(doc.name)}</p>
+                                                    <p class="text-xs font-semibold ${doc.department === 'ENT Care' ? 'text-clinical-teal' : 'text-cardio'} truncate">${escapeHtml(doc.role)}</p>
+                                                    <p class="text-[11px] text-slate-500 truncate">${escapeHtml(doc.credentials)}</p>
+                                                </div>
+                                                <svg class="w-4 h-4 text-slate-400 group-hover:text-medical shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="m9 18 6-6-6-6"/></svg>
+                                            </button>
+                                        `).join('')}
+                                    </div>
 
-                                        <!-- Quick Callback Bar -->
-                                        <div class="relative overflow-hidden bg-gradient-to-r from-navy via-blue-950 to-teal-950 rounded-2xl p-4 text-white">
-                                            <p class="text-xs font-semibold text-teal-200">Request an appointment or home sample collection via WhatsApp</p>
-                                            <form onsubmit="handleQuickCallback(event)" class="mt-2.5 flex flex-col sm:flex-row gap-2">
-                                                <input type="tel" id="hero-callback-phone" required placeholder="Your phone number" class="flex-1 px-3.5 py-2.5 rounded-xl bg-white/10 border border-white/15 text-sm text-white placeholder-slate-300 focus:outline-none focus:ring-2 focus:ring-teal-400" />
-                                                <button type="submit" class="px-4 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-white text-xs font-bold whitespace-nowrap transition-colors">
-                                                    Request Callback
-                                                </button>
-                                            </form>
-                                        </div>
+                                    <!-- Quick Callback Bar -->
+                                    <div class="bg-gradient-to-r from-navy to-navy-light rounded-2xl p-4 text-white">
+                                        <p class="text-xs font-semibold text-blue-200">Request an appointment or home sample collection via WhatsApp</p>
+                                        <form onsubmit="handleQuickCallback(event)" class="mt-2.5 flex flex-col sm:flex-row gap-2">
+                                            <input type="tel" id="hero-callback-phone" required placeholder="Your phone number" class="flex-1 px-3.5 py-2.5 rounded-xl bg-white/10 border border-white/15 text-sm text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-400" />
+                                            <button type="submit" class="px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold whitespace-nowrap transition-colors">
+                                                Request Callback
+                                            </button>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -2219,84 +2162,76 @@
                     </div>
                 </section>
 
-                <!-- Core Clinical Departments (Well-Combined Simple Colorful Cards) -->
+                <!-- Core Clinical Departments (Color-Coded + Cardiology Heart Watermark) -->
                 <section class="py-16 bg-slate-50/70">
                     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                         <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
                             <div>
-                                <span class="text-xs font-bold uppercase tracking-wider text-rose-600">Core Clinical Departments</span>
+                                <span class="text-xs font-bold uppercase tracking-wider text-clinical-teal">Core Clinical Departments</span>
                                 <h2 class="text-2xl sm:text-3xl font-extrabold text-navy mt-1">Comprehensive Speciality Care</h2>
                                 <p class="text-sm text-slate-600 mt-1.5 max-w-xl">Coordinated heart care, ENT surgical excellence, and diagnostic testing under one roof.</p>
                             </div>
                         </div>
 
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                            <!-- Cardiology Card (Warm Rose Tint + Mini Heart Watermark) -->
-                            <button onclick="navigate('cardiology')" class="relative overflow-hidden text-left p-7 rounded-3xl bg-gradient-to-br from-rose-50/90 via-white to-white border border-rose-200/80 hover:border-rose-400 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group">
-                                <div class="absolute -right-6 -bottom-6">
-                                    ${renderHeartWatermarkSvg('w-36 h-36 text-rose-500/[0.11] rotate-12')}
-                                </div>
+                            <button onclick="navigate('cardiology')" class="relative overflow-hidden text-left p-7 rounded-3xl bg-gradient-to-br from-rose-50/90 via-white to-white border border-rose-200/80 hover:border-rose-400 hover:shadow-md hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group">
+                                ${renderHeartWatermark('-right-6 -bottom-6 w-36 h-36 rotate-12', 'text-rose-500/[0.09]')}
                                 <div class="relative z-10">
-                                    <div class="w-12 h-12 rounded-2xl bg-rose-100 border border-rose-200 text-rose-600 flex items-center justify-center mb-4 shadow-sm">
+                                    <div class="w-12 h-12 rounded-2xl bg-rose-100 border border-rose-200 text-cardio flex items-center justify-center mb-4">
                                         <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
                                     </div>
-                                    <h3 class="text-lg font-extrabold text-navy group-hover:text-rose-700 transition-colors">Cardiology</h3>
+                                    <h3 class="text-lg font-extrabold text-navy group-hover:text-cardio transition-colors">Cardiology</h3>
                                     <p class="text-sm text-slate-600 leading-relaxed mt-2">Complex angioplasty, pacemakers &amp; cardiac devices, valvular care, and preventive heart consultations.</p>
                                 </div>
-                                <span class="relative z-10 mt-5 text-xs font-bold text-rose-600">Explore Cardiology →</span>
+                                <span class="relative z-10 mt-5 text-xs font-bold text-cardio">Explore Cardiology →</span>
                             </button>
 
-                            <!-- ENT Care Card (Fresh Teal/Emerald Tint) -->
-                            <button onclick="navigate('ent')" class="relative overflow-hidden text-left p-7 rounded-3xl bg-gradient-to-br from-teal-50/90 via-white to-white border border-teal-200/80 hover:border-teal-400 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group">
-                                <div class="relative z-10">
-                                    <div class="w-12 h-12 rounded-2xl bg-teal-100 border border-teal-200 text-clinical-teal flex items-center justify-center mb-4 shadow-sm">
+                            <button onclick="navigate('ent')" class="text-left p-7 rounded-3xl bg-gradient-to-br from-teal-50/90 via-white to-white border border-teal-200/80 hover:border-teal-400 hover:shadow-md hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group">
+                                <div>
+                                    <div class="w-12 h-12 rounded-2xl bg-teal-100 border border-teal-200 text-clinical-teal flex items-center justify-center mb-4">
                                         <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 2a7 7 0 0 1 7 7c0 3.5-2 5.5-3 7.5-.7 1.4-1 2.5-1 3.5a2 2 0 0 1-4 0c0-1 .3-2.1 1-3.5"/><path stroke-linecap="round" stroke-linejoin="round" d="M9 9a3 3 0 0 1 6 0"/></svg>
                                     </div>
                                     <h3 class="text-lg font-extrabold text-navy group-hover:text-clinical-teal transition-colors">ENT Care</h3>
                                     <p class="text-sm text-slate-600 leading-relaxed mt-2">Chronic sinus care, nasal endoscopy, micro-ear surgery, throat &amp; voice disorders, and head-neck procedures.</p>
                                 </div>
-                                <span class="relative z-10 mt-5 text-xs font-bold text-clinical-teal">Explore ENT Care →</span>
+                                <span class="mt-5 text-xs font-bold text-clinical-teal">Explore ENT Care →</span>
                             </button>
 
-                            <!-- Diagnostics & Pharmacy Card (Crisp Sky/Indigo Tint) -->
-                            <button onclick="navigate('diagnostics')" class="relative overflow-hidden text-left p-7 rounded-3xl bg-gradient-to-br from-sky-50/90 via-white to-white border border-blue-200/80 hover:border-blue-400 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group">
-                                <div class="relative z-10">
-                                    <div class="w-12 h-12 rounded-2xl bg-blue-100 border border-blue-200 text-medical flex items-center justify-center mb-4 shadow-sm">
+                            <button onclick="navigate('diagnostics')" class="text-left p-7 rounded-3xl bg-gradient-to-br from-sky-50/90 via-white to-white border border-blue-200/80 hover:border-blue-400 hover:shadow-md hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group">
+                                <div>
+                                    <div class="w-12 h-12 rounded-2xl bg-blue-100 border border-blue-200 text-medical flex items-center justify-center mb-4">
                                         <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
                                     </div>
                                     <h3 class="text-lg font-extrabold text-navy group-hover:text-medical transition-colors">Diagnostics &amp; Pharmacy</h3>
                                     <p class="text-sm text-slate-600 leading-relaxed mt-2">2D Echo, TMT, Holter, ECG, pathology, home sample collection, vaccinations, and in-house pharmacy.</p>
                                 </div>
-                                <span class="relative z-10 mt-5 text-xs font-bold text-medical">Explore Diagnostics →</span>
+                                <span class="mt-5 text-xs font-bold text-medical">Explore Diagnostics →</span>
                             </button>
                         </div>
                     </div>
                 </section>
 
-                <!-- Featured Specialists -->
-                <section class="relative overflow-hidden py-16 bg-white border-y border-slate-200">
-                    <div class="hidden md:block absolute -left-12 top-1/2 -translate-y-1/2">
-                        ${renderHeartWatermarkSvg('w-64 h-60 text-rose-500/[0.045] -rotate-12')}
-                    </div>
-                    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <!-- Featured Specialists (Balanced 2-Column Layout) -->
+                <section class="py-16 bg-white border-y border-slate-200">
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                         <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
                             <div>
                                 <span class="text-xs font-bold uppercase tracking-wider text-medical">Medical Leadership</span>
                                 <h2 class="text-2xl sm:text-3xl font-extrabold text-navy mt-1">Featured Specialists</h2>
-                                <p class="text-sm text-slate-600 mt-1.5 max-w-xl">Meet our consultants dedicated to personalized cardiology, diagnostics, and ENT surgical care.</p>
+                                <p class="text-sm text-slate-600 mt-1.5 max-w-xl">Meet our AIIMS-trained consultants dedicated to personalized cardiology and ENT surgical care.</p>
                             </div>
                             <button onclick="navigate('specialists')" class="self-start md:self-auto inline-flex items-center gap-1.5 text-sm font-bold text-medical hover:text-medical-hover">
                                 View All Specialists →
                             </button>
                         </div>
 
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
                             ${CLINIC_DATA.doctors.map(renderDoctorCard).join('')}
                         </div>
                     </div>
                 </section>
 
-                <!-- State-of-the-Art Facilities Showcase (Uncropped Full-Frame Photos) -->
+                <!-- State-of-the-Art Facilities Showcase -->
                 <section class="py-16 bg-slate-50/70">
                     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                         <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
@@ -2321,25 +2256,25 @@
                     </div>
                 </section>
 
-                <!-- Patient Experiences -->
-                <section class="py-16 bg-gradient-to-b from-white to-rose-50/35 border-y border-slate-200">
+                <!-- Patient Experiences (Balanced 2-Column Layout) -->
+                <section class="py-16 bg-white border-y border-slate-200">
                     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                         <div class="text-center max-w-2xl mx-auto mb-12">
-                            <span class="text-xs font-bold uppercase tracking-wider text-rose-600">Patient Trust</span>
+                            <span class="text-xs font-bold uppercase tracking-wider text-clinical-teal">Patient Trust</span>
                             <h2 class="text-2xl sm:text-3xl font-extrabold text-navy mt-1">Patient Experiences</h2>
-                            <p class="text-sm text-slate-600 mt-1.5">Words from families treated across our Cardiology, Diagnostics, and ENT departments.</p>
+                            <p class="text-sm text-slate-600 mt-1.5">Words from families treated across our Cardiology and ENT departments.</p>
                         </div>
 
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-                            ${CLINIC_DATA.testimonials.map((t, idx) => `
-                                <div class="bg-white rounded-3xl border ${idx === 0 ? 'border-rose-200/80' : 'border-teal-200/80'} p-7 shadow-sm flex flex-col justify-between">
+                            ${CLINIC_DATA.testimonials.map((t) => `
+                                <div class="bg-gradient-to-br from-slate-50 to-white rounded-3xl border border-slate-200 p-7 flex flex-col justify-between shadow-sm">
                                     <div>
                                         <div class="text-amber-400 text-base mb-3" aria-label="5 out of 5 stars">★★★★★</div>
                                         <p class="text-sm text-slate-700 italic leading-relaxed">"${escapeHtml(t.quote)}"</p>
                                     </div>
-                                    <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
+                                    <div class="mt-6 pt-4 border-t border-slate-200 flex items-center justify-between">
                                         <p class="text-sm font-extrabold text-navy">— ${escapeHtml(t.author)}</p>
-                                        <span class="text-xs font-semibold ${idx === 0 ? 'text-rose-700 bg-rose-50 border-rose-200' : 'text-clinical-teal bg-clinical-tealSoft border-teal-200'} border px-2.5 py-1 rounded-full">${escapeHtml(t.department)}</span>
+                                        <span class="text-xs font-semibold ${t.department === 'Cardiology' ? 'text-cardio bg-cardio-soft border-rose-200' : 'text-clinical-teal bg-clinical-tealSoft border-teal-200'} border px-2.5 py-1 rounded-full">${escapeHtml(t.department)}</span>
                                     </div>
                                 </div>
                             `).join('')}
@@ -2347,18 +2282,16 @@
                     </div>
                 </section>
 
-                <!-- Clinic Location & Contact Block with Cardiology Heart Watermark -->
+                <!-- Clinic Location & Contact Banner with Heart Watermark -->
                 <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16">
-                    <div class="relative overflow-hidden bg-gradient-to-r from-navy via-blue-950 to-teal-900 rounded-3xl p-8 sm:p-10 lg:p-12 text-white shadow-xl flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8">
-                        <div class="absolute -right-10 -top-10">
-                            ${renderHeartWatermarkSvg('w-72 h-64 text-rose-400/15 rotate-12', '#FDA4AF')}
-                        </div>
+                    <div class="relative overflow-hidden bg-gradient-to-r from-navy via-navy-light to-blue-950 rounded-3xl p-8 sm:p-10 lg:p-12 text-white flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8 shadow-lg">
+                        ${renderHeartWatermark('-right-10 -bottom-12 w-64 h-64 rotate-12', 'text-rose-400/[0.1]')}
                         <div class="relative z-10 max-w-2xl space-y-2.5">
                             <span class="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-teal-300">
                                 Visit Cardiosphere Polyclinic
                             </span>
                             <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight">2nd Floor, Arushi Complex, Muchipara, Durgapur</h2>
-                            <p class="text-sm text-slate-200 leading-relaxed">
+                            <p class="text-sm text-slate-300 leading-relaxed">
                                 Open <strong>Mon – Sat: 9:00 AM – 5:00 PM</strong> • Emergency Helpline: <a href="tel:+919002450077" class="text-white underline font-semibold">+91 90024 50077</a>
                             </p>
                         </div>
@@ -2366,7 +2299,7 @@
                             <button onclick="navigate('facilities')" class="px-6 py-3.5 rounded-xl bg-white text-navy hover:bg-slate-100 font-bold text-sm transition-colors text-center">
                                 Facilities &amp; Map
                             </button>
-                            <button onclick="navigate('book')" class="px-6 py-3.5 rounded-xl bg-gradient-to-r from-rose-500 to-emerald-500 hover:from-rose-600 hover:to-emerald-600 text-white font-bold text-sm transition-colors text-center shadow-md">
+                            <button onclick="navigate('book')" class="px-6 py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm transition-colors text-center">
                                 Book Appointment
                             </button>
                         </div>
@@ -2385,7 +2318,7 @@
                 : CLINIC_DATA.doctors.filter((d) => d.department === APP_STATE.doctorFilter);
 
             return `
-                <section class="bg-white border-b border-slate-200">
+                <section class="bg-gradient-to-br from-blue-50/70 via-white to-teal-50/60 border-b border-slate-200">
                     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-12">
                         ${renderBreadcrumbs([
                             { label: 'Home', route: 'home' },
@@ -2419,7 +2352,7 @@
                 </section>
 
                 <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
                         ${filteredDoctors.map(renderDoctorCard).join('')}
                     </div>
                 </section>
@@ -2473,7 +2406,7 @@
                             <div class="lg:col-span-8 space-y-8">
                                 <div>
                                     <div class="flex flex-wrap items-center gap-2 mb-3">
-                                        <span class="px-3 py-1 rounded-full text-xs font-bold ${isEnt ? 'bg-clinical-tealSoft text-clinical-teal border border-teal-200' : 'bg-medical-soft text-medical border border-blue-200'}">
+                                        <span class="px-3 py-1 rounded-full text-xs font-bold ${isEnt ? 'bg-clinical-tealSoft text-clinical-teal border border-teal-200' : 'bg-cardio-soft text-cardio border border-rose-200'}">
                                             ${escapeHtml(doc.departmentLabel)}
                                         </span>
                                         <span class="px-3 py-1 rounded-full text-xs font-semibold bg-slate-100 text-slate-700 border border-slate-200">
@@ -2511,7 +2444,7 @@
                                     <div class="flex flex-wrap gap-2">
                                         ${doc.expertise.map((skill) => `
                                             <span class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-white border border-slate-200 text-xs sm:text-sm font-semibold text-slate-700">
-                                                <span class="w-1.5 h-1.5 rounded-full ${isEnt ? 'bg-clinical-teal' : 'bg-medical'}"></span>
+                                                <span class="w-1.5 h-1.5 rounded-full ${isEnt ? 'bg-clinical-teal' : 'bg-cardio'}"></span>
                                                 ${escapeHtml(skill)}
                                             </span>
                                         `).join('')}
@@ -2530,8 +2463,8 @@
                 </section>
 
                 <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-                    <h2 class="text-xl font-extrabold text-navy mb-6">Other Specialists at Cardiosphere</h2>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <h2 class="text-xl font-extrabold text-navy mb-6">Other Specialist at Cardiosphere</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl">
                         ${otherDoctors.map(renderDoctorCard).join('')}
                     </div>
                 </section>
@@ -2547,54 +2480,44 @@
                 {
                     title: 'Angioplasty & Stenting',
                     tag: 'Interventional',
-                    accent: 'border-t-rose-500 bg-rose-50/40',
-                    badge: 'bg-rose-100 text-rose-700',
+                    accent: 'bg-cardio-soft text-cardio border-rose-200',
                     desc: 'Expert evaluation and interventional management for complex coronary blockages with structured post-procedure recovery.',
                 },
                 {
                     title: 'Pacemaker & Cardiac Devices',
                     tag: 'Device Therapy',
-                    accent: 'border-t-blue-500 bg-blue-50/40',
-                    badge: 'bg-blue-100 text-medical',
+                    accent: 'bg-medical-soft text-medical border-blue-200',
                     desc: 'Comprehensive assessment, pacemaker and CRT/ICD device implantation, and routine device follow-up.',
                 },
                 {
                     title: 'Valvular Management',
                     tag: 'Structural Heart',
-                    accent: 'border-t-teal-500 bg-teal-50/40',
-                    badge: 'bg-teal-100 text-clinical-teal',
+                    accent: 'bg-violet-50 text-violet-700 border-violet-200',
                     desc: 'Evidence-based clinical diagnosis, echocardiographic tracking, and long-term management of valve disorders.',
                 },
                 {
                     title: '2D Echocardiography',
                     tag: 'Non-Invasive',
-                    accent: 'border-t-indigo-500 bg-indigo-50/40',
-                    badge: 'bg-indigo-100 text-indigo-700',
+                    accent: 'bg-clinical-tealSoft text-clinical-teal border-teal-200',
                     desc: 'High-clarity ultrasound imaging of heart chambers, wall motion, and valve function conducted on-site.',
                 },
                 {
                     title: 'TMT / Stress Test',
                     tag: 'Non-Invasive',
-                    accent: 'border-t-amber-500 bg-amber-50/40',
-                    badge: 'bg-amber-100 text-amber-800',
+                    accent: 'bg-amber-50 text-amber-700 border-amber-200',
                     desc: 'Supervised treadmill ECG testing to evaluate exercise tolerance and detect early coronary artery disease.',
                 },
                 {
                     title: 'Holter Monitoring',
                     tag: 'Rhythm Analysis',
-                    accent: 'border-t-emerald-500 bg-emerald-50/40',
-                    badge: 'bg-emerald-100 text-emerald-700',
+                    accent: 'bg-sky-50 text-sky-700 border-sky-200',
                     desc: '24-hour continuous wearable ECG recording to diagnose palpitations, fainting spells, and arrhythmias.',
                 },
             ];
 
             return `
-                <section class="relative overflow-hidden bg-gradient-to-br from-rose-50/85 via-white to-blue-50/70 border-b border-slate-200">
-                    <!-- Signature Cardiology Heart + ECG Watermark -->
-                    <div class="absolute -right-8 -top-6 sm:right-6">
-                        ${renderHeartWatermarkSvg('w-[300px] h-[270px] sm:w-[400px] sm:h-[360px] text-rose-500/[0.10] rotate-6')}
-                    </div>
-
+                <section class="relative overflow-hidden bg-gradient-to-br from-rose-50/80 via-white to-sky-50/70 border-b border-slate-200">
+                    ${renderHeartWatermark('right-4 sm:right-12 -bottom-14 w-72 h-72 sm:w-96 sm:h-96 rotate-12', 'text-rose-500/[0.09]')}
                     <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-14">
                         ${renderBreadcrumbs([
                             { label: 'Home', route: 'home' },
@@ -2602,18 +2525,18 @@
                         ])}
 
                         <div class="max-w-3xl space-y-4">
-                            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-100/90 border border-rose-200 text-xs font-bold text-rose-700">
-                                <svg class="w-3.5 h-3.5 text-rose-600" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-cardio-soft border border-rose-200 text-xs font-bold text-cardio">
+                                <span class="w-1.5 h-1.5 rounded-full bg-rose-500"></span>
                                 Department of Cardiology
                             </span>
                             <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-navy tracking-tight leading-tight">
-                                Interventional &amp; Non-Invasive <span class="bg-gradient-to-r from-rose-600 to-medical bg-clip-text text-transparent">Cardiac Care</span>
+                                Interventional &amp; Non-Invasive <span class="text-cardio">Cardiac Care</span>
                             </h1>
                             <p class="text-sm sm:text-base text-slate-600 leading-relaxed">
-                                Led by Dr. Tutan Das, our Cardiology department combines advanced interventional expertise with on-site diagnostics and long-term preventive heart care.
+                                Led by <strong>Dr. Tutan Das (DM Cardiology, AIIMS)</strong>, our Cardiology department combines advanced interventional expertise with on-site diagnostics and long-term preventive heart care.
                             </p>
                             <div class="pt-2 flex flex-wrap gap-3">
-                                <button onclick="startBookingForDoctor('dr-tutan-das')" class="px-6 py-3 rounded-xl bg-gradient-to-r from-rose-600 to-medical hover:from-rose-700 hover:to-medical-hover text-white font-bold text-sm transition-colors shadow-sm">
+                                <button onclick="startBookingForDoctor('dr-tutan-das')" class="px-6 py-3 rounded-xl bg-cardio hover:bg-cardio-hover text-white font-bold text-sm transition-colors shadow-sm">
                                     Book Cardiology Consultation
                                 </button>
                                 <button onclick="navigate('diagnostics')" class="px-6 py-3 rounded-xl bg-white hover:bg-slate-50 border border-slate-300 text-navy font-bold text-sm transition-colors">
@@ -2626,14 +2549,14 @@
 
                 <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
                     <div class="mb-8">
-                        <span class="text-xs font-bold uppercase tracking-wider text-rose-600">Cardiac Services</span>
+                        <span class="text-xs font-bold uppercase tracking-wider text-cardio">Cardiac Services</span>
                         <h2 class="text-2xl sm:text-3xl font-extrabold text-navy mt-1">Interventional &amp; Diagnostic Procedures</h2>
                     </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
                         ${cardiacServices.map((s) => `
-                            <div class="bg-white rounded-3xl border border-slate-200 border-t-4 ${s.accent} p-6 hover:shadow-md hover:-translate-y-0.5 transition-all">
-                                <span class="inline-flex px-2.5 py-0.5 rounded-full ${s.badge} text-[11px] font-bold">${s.tag}</span>
+                            <div class="bg-white rounded-3xl border border-slate-200 p-6 hover:border-rose-300 hover:shadow-md transition-all">
+                                <span class="inline-flex px-2.5 py-0.5 rounded-full border ${s.accent} text-[11px] font-bold">${s.tag}</span>
                                 <h3 class="text-base font-extrabold text-navy mt-3">${s.title}</h3>
                                 <p class="text-sm text-slate-600 leading-relaxed mt-2">${s.desc}</p>
                             </div>
@@ -2643,10 +2566,10 @@
 
                 <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-14">
                     <div class="mb-8">
-                        <span class="text-xs font-bold uppercase tracking-wider text-clinical-teal">Cardiology Specialist</span>
+                        <span class="text-xs font-bold uppercase tracking-wider text-clinical-teal">Lead Cardiologist</span>
                         <h2 class="text-2xl sm:text-3xl font-extrabold text-navy mt-1">Meet Our Cardiologist</h2>
                     </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="grid grid-cols-1 max-w-2xl">
                         ${cardiologists.map(renderDoctorCard).join('')}
                     </div>
                 </section>
@@ -2687,7 +2610,7 @@
             ];
 
             return `
-                <section class="bg-gradient-to-br from-teal-50/85 via-white to-cyan-50/70 border-b border-slate-200">
+                <section class="bg-gradient-to-br from-teal-50/80 via-white to-cyan-50/60 border-b border-slate-200">
                     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-14">
                         ${renderBreadcrumbs([
                             { label: 'Home', route: 'home' },
@@ -2707,7 +2630,7 @@
                                 </p>
 
                                 <div class="flex flex-wrap gap-2 text-xs font-semibold">
-                                    <span class="px-3 py-1.5 rounded-xl bg-white text-navy border border-slate-200">Ex-Senior Resident, AIIMS</span>
+                                    <span class="px-3 py-1.5 rounded-xl bg-white text-navy border border-slate-200 shadow-sm">Ex-Senior Resident, AIIMS</span>
                                     <span class="px-3 py-1.5 rounded-xl bg-clinical-tealSoft text-clinical-teal border border-teal-200">Complex ENT Surgeries</span>
                                     <span class="px-3 py-1.5 rounded-xl bg-medical-soft text-medical border border-blue-200">Mon – Sat: 9:00 AM – 5:00 PM</span>
                                 </div>
@@ -2724,7 +2647,7 @@
 
                             <!-- Specialist Spotlight -->
                             <div class="lg:col-span-5">
-                                <div class="bg-white/90 rounded-3xl border border-teal-200/80 p-5 sm:p-6 space-y-4 shadow-sm">
+                                <div class="bg-white rounded-3xl border border-teal-200/80 p-5 sm:p-6 space-y-4 shadow-md">
                                     ${renderDoctorAvatar(drSwagata, 'w-full aspect-square', 'rounded-2xl', 'text-5xl')}
                                     <div class="flex items-center justify-between gap-3">
                                         <div>
@@ -2751,7 +2674,7 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         ${entServices.map((s) => `
                             <div class="bg-white rounded-3xl border border-slate-200 p-6 hover:border-teal-300 hover:shadow-md transition-all">
-                                <span class="inline-flex px-2.5 py-0.5 rounded-full bg-clinical-tealSoft text-clinical-teal text-[11px] font-bold">${s.tag}</span>
+                                <span class="inline-flex px-2.5 py-0.5 rounded-full bg-clinical-tealSoft text-clinical-teal border border-teal-200 text-[11px] font-bold">${s.tag}</span>
                                 <h3 class="text-base font-extrabold text-navy mt-3">${s.title}</h3>
                                 <p class="text-sm text-slate-600 leading-relaxed mt-2">${s.desc}</p>
                             </div>
@@ -2766,10 +2689,8 @@
         /* ===================================================================== */
         function renderDiagnosticsView() {
             return `
-                <section class="relative overflow-hidden bg-gradient-to-br from-sky-50/85 via-white to-indigo-50/70 border-b border-slate-200">
-                    <div class="absolute -right-10 -bottom-10">
-                        ${renderHeartWatermarkSvg('w-72 h-64 text-medical/[0.06] -rotate-6')}
-                    </div>
+                <section class="relative overflow-hidden bg-gradient-to-br from-sky-50/80 via-white to-indigo-50/60 border-b border-slate-200">
+                    ${renderHeartWatermark('right-4 sm:right-10 -bottom-14 w-64 h-64 sm:w-80 sm:h-80 rotate-6', 'text-blue-500/[0.06]')}
                     <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-14">
                         ${renderBreadcrumbs([
                             { label: 'Home', route: 'home' },
@@ -2779,10 +2700,10 @@
                         <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6">
                             <div class="max-w-3xl space-y-4">
                                 <span class="inline-flex items-center px-3 py-1 rounded-full bg-medical-soft border border-blue-200 text-xs font-bold text-medical">
-                                    Diagnostics, Pathology & Pharmacy
+                                    Diagnostics, Pathology &amp; Pharmacy
                                 </span>
                                 <h1 class="text-3xl sm:text-4xl font-extrabold text-navy tracking-tight">
-                                    Diagnostics & Pharmacy
+                                    Diagnostics &amp; Pharmacy
                                 </h1>
                                 <p class="text-sm sm:text-base text-slate-600 leading-relaxed">
                                     Accurate on-site cardiac testing, pathology panels, chronic condition management, doorstep home sample collection, vaccination services, and an in-house pharmacy under one roof.
@@ -2828,15 +2749,15 @@
                             <h2 class="text-2xl font-extrabold text-navy">Chronic Condition Care</h2>
                             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 <div class="p-4 rounded-2xl bg-white border border-slate-200">
-                                    <h3 class="text-sm font-extrabold text-navy">Diabetes & Hypertension</h3>
+                                    <h3 class="text-sm font-extrabold text-navy">Diabetes &amp; Hypertension</h3>
                                     <p class="text-xs text-slate-600 mt-1">Regular HbA1c, blood pressure tracking, and preventive heart plans.</p>
                                 </div>
                                 <div class="p-4 rounded-2xl bg-white border border-slate-200">
-                                    <h3 class="text-sm font-extrabold text-navy">Thyroid & Metabolic Care</h3>
+                                    <h3 class="text-sm font-extrabold text-navy">Thyroid &amp; Metabolic Care</h3>
                                     <p class="text-xs text-slate-600 mt-1">Accurate thyroid profiling and structured medication follow-ups.</p>
                                 </div>
                                 <div class="p-4 rounded-2xl bg-white border border-slate-200 sm:col-span-2">
-                                    <h3 class="text-sm font-extrabold text-navy">Preventive Health & Infectious Diseases</h3>
+                                    <h3 class="text-sm font-extrabold text-navy">Preventive Health &amp; Infectious Diseases</h3>
                                     <p class="text-xs text-slate-600 mt-1">Comprehensive health panels and evidence-based care for seasonal and acute illnesses.</p>
                                 </div>
                             </div>
@@ -2845,7 +2766,7 @@
                         <div class="rounded-3xl bg-navy text-white p-7 sm:p-8 flex flex-col justify-between space-y-6">
                             <div class="space-y-4">
                                 <span class="text-xs font-bold uppercase tracking-wider text-teal-300">Patient Support Services</span>
-                                <h2 class="text-2xl font-extrabold">Home Collection, In-House Pharmacy & Vaccinations</h2>
+                                <h2 class="text-2xl font-extrabold">Home Collection, In-House Pharmacy &amp; Vaccinations</h2>
                                 <div class="space-y-3">
                                     <div class="p-4 rounded-2xl bg-white/5 border border-white/10">
                                         <h3 class="text-sm font-bold text-white">Home Sample Collection</h3>
@@ -2885,10 +2806,10 @@
                         <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
                             <div>
                                 <span class="inline-flex items-center px-3 py-1 rounded-full bg-clinical-tealSoft border border-teal-200 text-xs font-bold text-clinical-teal mb-3">
-                                    Clinic Infrastructure & Directions
+                                    Clinic Infrastructure &amp; Directions
                                 </span>
                                 <h1 class="text-3xl sm:text-4xl font-extrabold text-navy tracking-tight">
-                                    Facilities & Visit Us
+                                    Facilities &amp; Visit Us
                                 </h1>
                                 <p class="text-sm sm:text-base text-slate-600 mt-2 max-w-2xl">
                                     Modern clinical facilities, our dedicated medical care team, and convenient access at Arushi Complex, Muchipara, Durgapur.
@@ -2901,7 +2822,7 @@
                     </div>
                 </section>
 
-                <!-- State-of-the-Art Facilities (Zero-Crop Full Frame Cards) -->
+                <!-- State-of-the-Art Facilities -->
                 <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
                     <div class="mb-8 flex flex-col sm:flex-row sm:items-end justify-between gap-3">
                         <div>
@@ -2922,7 +2843,7 @@
                         <div class="lg:col-span-5 space-y-5">
                             <div class="bg-slate-50 rounded-3xl border border-slate-200 p-6 sm:p-7 space-y-5">
                                 <div>
-                                    <span class="text-xs font-bold uppercase tracking-wider text-medical">Clinic Address & Hours</span>
+                                    <span class="text-xs font-bold uppercase tracking-wider text-medical">Clinic Address &amp; Hours</span>
                                     <h2 class="text-xl font-extrabold text-navy mt-1">Plan Your Visit</h2>
                                 </div>
 
@@ -3020,7 +2941,6 @@
                                 </p>
                             </div>
 
-                            <!-- Public Visitor View: Subtle Admin Login Button ONLY -->
                             ${!isAdmin ? `
                                 <div class="shrink-0">
                                     <button onclick="openAdminLoginModal()" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50 hover:bg-white hover:border-navy text-slate-600 hover:text-navy text-xs font-bold transition-all shadow-sm">
@@ -3031,7 +2951,6 @@
                             ` : ''}
                         </div>
 
-                        <!-- Authenticated Admin Status & Management Toolbar (Hidden from Public Visitors) -->
                         ${isAdmin ? `
                             <div class="mt-7 rounded-2xl bg-navy text-white border border-emerald-500/30 p-4 sm:p-5 shadow-lg space-y-4">
                                 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3.5 border-b border-white/10">
@@ -3072,7 +2991,7 @@
 
                                     <button onclick="logoutAdminSession(false)" class="sm:ml-auto inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-rose-500/20 hover:bg-rose-500/30 text-rose-200 border border-rose-400/30 text-xs font-bold transition-colors">
                                         <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-                                        Lock & Sign Out
+                                        Lock &amp; Sign Out
                                     </button>
                                 </div>
                             </div>
@@ -3136,7 +3055,6 @@
                                             </span>
                                         </button>
 
-                                        <!-- Per-Card Quick Edit / Delete Overlay (ONLY when Admin + Manage Photos Active) -->
                                         ${isManage ? `
                                             <div class="absolute top-3 right-3 z-30 flex items-center gap-1.5">
                                                 <button type="button" onclick="openEditPhotoModal('${escapeHtml(photo.id)}')" class="p-2 rounded-xl bg-white/95 hover:bg-medical hover:text-white text-navy border border-slate-200 shadow-md transition-colors" title="Edit Photo & Caption" aria-label="Edit ${escapeHtml(photo.title)}">
@@ -3204,7 +3122,6 @@
                     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
                         <!-- Booking Form Column -->
                         <form onsubmit="handleBookingPageSubmit(event)" class="lg:col-span-7 space-y-6 bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-sm">
-                            <!-- Step 1: Specialist / Service Selector -->
                             <div class="space-y-3">
                                 <p class="text-xs font-extrabold uppercase tracking-wider text-clinical-teal">Step 1 • Select Specialist or Service</p>
                                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -3215,7 +3132,7 @@
                                                 ${renderDoctorAvatar(doc, 'w-12 h-12', 'rounded-xl', 'text-xs')}
                                                 <div class="min-w-0">
                                                     <p class="text-sm font-extrabold text-navy truncate">${escapeHtml(doc.name)}</p>
-                                                    <p class="text-xs font-semibold ${doc.department === 'ENT Care' ? 'text-clinical-teal' : 'text-medical'} truncate">${escapeHtml(doc.role)}</p>
+                                                    <p class="text-xs font-semibold ${doc.department === 'ENT Care' ? 'text-clinical-teal' : 'text-cardio'} truncate">${escapeHtml(doc.role)}</p>
                                                 </div>
                                             </button>
                                         `;
@@ -3227,13 +3144,12 @@
                                         </div>
                                         <div class="min-w-0">
                                             <p class="text-sm font-extrabold text-navy truncate">Diagnostics &amp; Lab</p>
-                                            <p class="text-xs font-semibold text-clinical-teal truncate">2D Echo, TMT, Holter, Home Pickup</p>
+                                            <p class="text-xs font-semibold text-clinical-teal truncate">2D Echo, TMT, Holter, ECG &amp; Home Sample Pickup</p>
                                         </div>
                                     </button>
                                 </div>
                             </div>
 
-                            <!-- Step 2: Date & Time Slots -->
                             <div class="space-y-4 pt-4 border-t border-slate-100">
                                 <p class="text-xs font-extrabold uppercase tracking-wider text-clinical-teal">Step 2 • Choose Date &amp; Time Slot</p>
 
@@ -3272,7 +3188,6 @@
                                 </div>
                             </div>
 
-                            <!-- Step 3: Patient Details -->
                             <div class="space-y-4 pt-4 border-t border-slate-100">
                                 <p class="text-xs font-extrabold uppercase tracking-wider text-clinical-teal">Step 3 • Patient Information</p>
 
@@ -3359,15 +3274,16 @@
 
             if (rawHash.startsWith('doctor/')) {
                 const docId = rawHash.slice('doctor/'.length);
-                const matchedDoc = CLINIC_DATA.doctors.find((d) => d.id === docId);
-                if (matchedDoc) {
-                    html = renderDoctorProfileView(matchedDoc.id);
-                    activeNav = 'specialists';
-                    pageTitle = `${matchedDoc.name} | Cardiosphere Multi-Speciality Clinic`;
-                } else {
+                const exists = CLINIC_DATA.doctors.some((d) => d.id === docId);
+                if (!exists) {
                     html = renderSpecialistsView();
                     activeNav = 'specialists';
                     pageTitle = 'Our Specialists | Cardiosphere Multi-Speciality Clinic';
+                } else {
+                    const doc = getDoctorById(docId);
+                    html = renderDoctorProfileView(doc.id);
+                    activeNav = 'specialists';
+                    pageTitle = `${doc.name} | Cardiosphere Multi-Speciality Clinic`;
                 }
             } else {
                 switch (rawHash) {
@@ -3444,18 +3360,12 @@
             document.getElementById('app-root').innerHTML = renderGalleryView();
         }
 
-        /**
-         * Guarded: Toggles Manage Photos overlay controls.
-         */
         function toggleManageMode() {
             if (!requireAdminAuth()) return;
             APP_STATE.manageGalleryMode = !APP_STATE.manageGalleryMode;
             document.getElementById('app-root').innerHTML = renderGalleryView();
         }
 
-        /**
-         * Guarded: Opens Upload / Add Photo Modal.
-         */
         function openUploadModal(defaultCategory = 'Clinic Events') {
             if (!requireAdminAuth()) return;
             const modal = document.getElementById('gallery-editor-modal');
@@ -3486,9 +3396,6 @@
             document.body.classList.add('overflow-hidden');
         }
 
-        /**
-         * Guarded: Opens Edit Photo / Caption Modal for an existing gallery item.
-         */
         function openEditPhotoModal(photoId) {
             if (!requireAdminAuth()) return;
             const photo = APP_STATE.galleryPhotos.find((p) => p.id === photoId);
@@ -3542,10 +3449,6 @@
             linkBtn.className = `flex-1 py-2.5 px-3 rounded-lg text-xs sm:text-sm font-bold transition-all ${!isDevice ? 'bg-white text-navy shadow-sm' : 'text-slate-600 hover:text-navy'}`;
         }
 
-        /**
-         * Resizes and compresses a local image file on an offscreen HTML5 canvas
-         * (max width 1200px, JPEG quality 0.82) for reliable localStorage persistence.
-         */
         function compressImageFile(file) {
             return new Promise((resolve, reject) => {
                 const reader = new FileReader();
@@ -3624,20 +3527,17 @@
 
         function handleGalleryDragOver(event) {
             event.preventDefault();
-            const zone = document.getElementById('gallery-dropzone');
-            zone.classList.add('border-medical', 'bg-medical-soft');
+            document.getElementById('gallery-dropzone').classList.add('border-medical', 'bg-medical-soft');
         }
 
         function handleGalleryDragLeave(event) {
             event.preventDefault();
-            const zone = document.getElementById('gallery-dropzone');
-            zone.classList.remove('border-medical', 'bg-medical-soft');
+            document.getElementById('gallery-dropzone').classList.remove('border-medical', 'bg-medical-soft');
         }
 
         function handleGalleryDrop(event) {
             event.preventDefault();
-            const zone = document.getElementById('gallery-dropzone');
-            zone.classList.remove('border-medical', 'bg-medical-soft');
+            document.getElementById('gallery-dropzone').classList.remove('border-medical', 'bg-medical-soft');
             const file = event.dataTransfer && event.dataTransfer.files && event.dataTransfer.files[0];
             processSelectedGalleryFile(file);
         }
@@ -3686,9 +3586,6 @@
             wrapper.classList.remove('hidden');
         }
 
-        /**
-         * Routes the Gallery Editor modal form to either handleSaveNewPhoto or handleUpdatePhoto.
-         */
         function handleGalleryEditorSubmit(event) {
             event.preventDefault();
             const editId = document.getElementById('gallery-edit-id').value.trim();
@@ -3720,9 +3617,6 @@
             };
         }
 
-        /**
-         * Guarded: Saves a newly uploaded / linked photo into the gallery.
-         */
         function handleSaveNewPhoto(event) {
             if (event) event.preventDefault();
             if (!requireAdminAuth()) return;
@@ -3754,9 +3648,6 @@
             }
         }
 
-        /**
-         * Guarded: Updates an existing gallery photo's caption, title, category, or image.
-         */
         function handleUpdatePhoto(event) {
             if (event) event.preventDefault();
             if (!requireAdminAuth()) return;
@@ -3787,9 +3678,6 @@
             }
         }
 
-        /**
-         * Guarded: Opens Delete Photo Confirmation Modal.
-         */
         function requestDeletePhoto(photoId) {
             if (!requireAdminAuth()) return;
             const photo = APP_STATE.galleryPhotos.find((p) => p.id === photoId);
@@ -3814,9 +3702,6 @@
             document.body.classList.remove('overflow-hidden');
         }
 
-        /**
-         * Guarded: Permanently removes the selected photo from the gallery.
-         */
         function confirmDeletePhoto() {
             if (!requireAdminAuth()) return;
             const targetId = APP_STATE.pendingDeletePhotoId;
@@ -3836,9 +3721,6 @@
             return `const INITIAL_GALLERY_PHOTOS = ${JSON.stringify(APP_STATE.galleryPhotos, null, 4)};`;
         }
 
-        /**
-         * Guarded: Opens Publish / Backup modal.
-         */
         function openExportModal() {
             if (!requireAdminAuth()) return;
             const modal = document.getElementById('gallery-export-modal');
@@ -3878,9 +3760,6 @@
             }
         }
 
-        /**
-         * Guarded: Imports gallery items from a .json backup file.
-         */
         function importGalleryJson(event) {
             if (!requireAdminAuth()) {
                 if (event && event.target) event.target.value = '';
@@ -3939,9 +3818,6 @@
             document.getElementById('gallery-reset-confirm').classList.add('hidden');
         }
 
-        /**
-         * Guarded: Resets gallery photos back to INITIAL_GALLERY_PHOTOS defaults.
-         */
         function resetGalleryToDefaults() {
             if (!requireAdminAuth()) return;
             APP_STATE.galleryPhotos = INITIAL_GALLERY_PHOTOS.map((p) => ({ ...p }));
@@ -3956,9 +3832,6 @@
             showToast('Gallery restored to default clinic photos.', 'success');
         }
 
-        /**
-         * Guarded: Opens Admin Security Settings / Change Password modal.
-         */
         function openSecurityModal() {
             if (!requireAdminAuth()) return;
             const effective = getEffectiveAdminCredentials();
@@ -3981,10 +3854,6 @@
             document.body.classList.remove('overflow-hidden');
         }
 
-        /**
-         * Guarded: Verifies current password, saves new SHA-256 hash to localStorage,
-         * and generates a permanent ADMIN_CONFIG snippet with empty defaultPassword.
-         */
         function handleUpdateCredentials(event) {
             event.preventDefault();
             if (!requireAdminAuth()) return;
@@ -4028,7 +3897,6 @@
                     JSON.stringify({ username: newUsername, passwordHash: newHash })
                 );
 
-                // Update active sessionStorage username
                 const session = getAdminSession();
                 if (session) {
                     session.username = newUsername;
@@ -4193,7 +4061,7 @@
                         ${renderDoctorAvatar(doc, 'w-14 h-14', 'rounded-xl', 'text-sm')}
                         <div class="min-w-0">
                             <p class="text-sm font-extrabold text-navy">${escapeHtml(doc.name)}</p>
-                            <p class="text-xs font-semibold ${doc.department === 'ENT Care' ? 'text-clinical-teal' : 'text-medical'}">${escapeHtml(doc.role)}</p>
+                            <p class="text-xs font-semibold ${doc.department === 'ENT Care' ? 'text-clinical-teal' : 'text-cardio'}">${escapeHtml(doc.role)}</p>
                             <p class="text-[11px] text-slate-500 mt-0.5 truncate">${escapeHtml(doc.credentials)}</p>
                         </div>
                     </div>
@@ -4203,8 +4071,8 @@
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
                         </div>
                         <div>
-                            <p class="text-sm font-extrabold text-navy">Diagnostics & Home Collection</p>
-                            <p class="text-xs text-slate-600">2D Echo, TMT, Holter, ECG & Pathology</p>
+                            <p class="text-sm font-extrabold text-navy">Diagnostics &amp; Home Collection</p>
+                            <p class="text-xs text-slate-600">2D Echo, TMT, Holter, ECG &amp; Pathology</p>
                         </div>
                     </div>
                 `}
@@ -4373,8 +4241,8 @@
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
                     </div>
                     <div>
-                        <p class="text-sm font-extrabold text-navy">Diagnostics & Home Collection</p>
-                        <p class="text-xs text-slate-500">2D Echo, TMT, Holter, ECG & Pathology</p>
+                        <p class="text-sm font-extrabold text-navy">Diagnostics &amp; Home Collection</p>
+                        <p class="text-xs text-slate-500">2D Echo, TMT, Holter, ECG &amp; Pathology</p>
                     </div>
                 `;
                 return;
@@ -4385,14 +4253,14 @@
                 ${renderDoctorAvatar(doc, 'w-12 h-12', 'rounded-xl', 'text-xs')}
                 <div class="min-w-0 flex-1">
                     <p class="text-sm font-extrabold text-navy truncate">${escapeHtml(doc.name)}</p>
-                    <p class="text-xs font-semibold ${doc.department === 'ENT Care' ? 'text-clinical-teal' : 'text-medical'} truncate">${escapeHtml(doc.role)}</p>
+                    <p class="text-xs font-semibold ${doc.department === 'ENT Care' ? 'text-clinical-teal' : 'text-cardio'} truncate">${escapeHtml(doc.role)}</p>
                     <p class="text-[11px] text-slate-500 truncate">${escapeHtml(doc.credentials)}</p>
                 </div>
             `;
         }
 
         /* ===================================================================== */
-        /* GLOBAL EVENT LISTENERS & INITIALIZATION                               */
+        /* MODAL SUBMIT, BACKDROP CLICK & ADMIN INACTIVITY LISTENERS             */
         /* ===================================================================== */
         document.getElementById('modal-booking-form').addEventListener('submit', (e) => {
             e.preventDefault();
@@ -4455,46 +4323,289 @@
         });
 
         /* ===================================================================== */
-        /* ADVANCED VISITOR CARE ASSISTANT BOT ENGINE                            */
-        /* Multilingual (EN/BN/HI), Symptom Triage, In-Chat Booking & Prep Guide */
+        /* OPEN-SOURCE CLINICAL SYMPTOM & TRIAGE ASSISTANT ENGINE (MIT LICENSE)  */
+        /* 100% Client-Side, Transparent Knowledge Base, Word-Boundary NLP,      */
+        /* General + Cardiology + ENT Symptom Triage & Multilingual (EN/BN/HI)   */
         /* ===================================================================== */
-        const BOT_STORAGE_KEY = 'cardiosphere_visitor_bot_v1';
+        const BOT_STORAGE_KEY = 'cardiosphere_visitor_bot_v2';
+
+        /**
+         * Open-Source Clinical Symptom & Specialist Triage Knowledge Base (MIT License).
+         * Visitors and developers can inspect or export this JSON directly from the bot.
+         * Uses strict word-boundary matching so substrings (e.g., "ear" inside "heart")
+         * NEVER cause false doctor recommendations.
+         */
+        const OPEN_SOURCE_SYMPTOM_KB = {
+            meta: {
+                name: 'Cardiosphere Open-Source Symptom & Triage Knowledge Base',
+                version: '2.0.0',
+                license: 'MIT (Open Source — 100% Client-Side, No External Tracking)',
+                clinic: 'Cardiosphere Multi-Speciality Clinic, Muchipara, Durgapur',
+            },
+            emergencyRedFlags: {
+                id: 'emergency',
+                label: 'Emergency Red-Flag Symptoms',
+                keywords: [
+                    'severe chest pain', 'crushing chest pain', 'heart attack', 'cardiac arrest',
+                    'cannot breathe', "can't breathe", 'unable to breathe', 'gasping', 'choking',
+                    'unconscious', 'passed out', 'fainted', 'fainting', 'collapse', 'collapsed',
+                    'stroke', 'slurred speech', 'face drooping', 'one side paralysis', 'paralysis',
+                    'heavy bleeding', 'vomiting blood', 'coughing blood', 'seizure', 'fits',
+                    'chest pain with sweating', 'pain radiating to left arm', 'jaw pain and chest pain',
+                    'emergency', 'urgent help', 'critical condition',
+                    'buk betha', 'tibro buk betha', 'shwas kosto', 'oggayan', 'বুক ব্যথা', 'শ্বাসকষ্ট', 'অজ্ঞান',
+                    'sine me tez dard', 'saans nahi aa rahi', 'behosh', 'सीने में तेज दर्द', 'हार्ट अटैक', 'बेहोश'
+                ],
+                guidance: {
+                    en: '⚠️ **Possible Medical Emergency Detected.** Do not wait for an online reply. Call our emergency helpline **+91 90024 50077** or visit the nearest emergency department immediately.',
+                    bn: '⚠️ **জরুরি চিকিৎসা প্রয়োজন হতে পারে।** অনলাইন উত্তরের জন্য অপেক্ষা করবেন না। অনুগ্রহ করে অবিলম্বে **+91 90024 50077** নম্বরে কল করুন বা নিকটতম ইমার্জেন্সিতে যান।',
+                    hi: '⚠️ **तत्काल आपातकालीन स्थिति हो सकती है।** ऑनलाइन उत्तर का इंतजार न करें। कृपया तुरंत **+91 90024 50077** पर कॉल करें या नजदीकी इमरजेंसी में जाएं।',
+                },
+            },
+            conditions: [
+                {
+                    id: 'cardiac-chest-angina',
+                    category: 'Cardiology',
+                    title: 'Chest Discomfort, Tightness & Exertional Pain',
+                    doctors: ['dr-tutan-das'],
+                    suggestedTests: ['12-Lead Digital ECG', '2D Echocardiography', 'TMT / Stress Test'],
+                    safetyNote: 'If chest pain is sudden, crushing, spreads to the left arm/jaw/back, or comes with cold sweats or dizziness, treat it as an emergency and call +91 90024 50077 immediately.',
+                    keywords: [
+                        'chest pain', 'chest tightness', 'chest heaviness', 'chest pressure', 'chest discomfort',
+                        'angina', 'left chest', 'heart pain', 'heart blockage', 'blockage', 'coronary',
+                        'angioplasty', 'stent', 'bypass', 'heart checkup', 'heart check', 'cardiac checkup',
+                        'cardiology', 'cardiologist', 'heart doctor', 'heart specialist', 'heart problem',
+                        'buk chap', 'buk bhari', 'হৃদরোগ', 'হার্ট', 'বুক ভারী',
+                        'chhati me dard', 'sine me dard', 'dil ka doctor', 'सीने में दर्द', 'दिल का डॉक्टर'
+                    ],
+                    advice: 'Chest tightness, pressure, or exertional discomfort should be evaluated promptly by a cardiologist. **Dr. Tutan Das (Interventional Cardiologist, DM AIIMS)** provides complete clinical assessment along with on-site **ECG, 2D Echo, and TMT** testing.',
+                },
+                {
+                    id: 'cardiac-rhythm-palpitations',
+                    category: 'Cardiology',
+                    title: 'Palpitations, Fast/Irregular Heartbeat & Pacemaker Care',
+                    doctors: ['dr-tutan-das'],
+                    suggestedTests: ['12-Lead Digital ECG', 'Holter Monitoring'],
+                    safetyNote: 'Seek immediate care if rapid heartbeat causes fainting, severe dizziness, or chest pain.',
+                    keywords: [
+                        'palpitation', 'palpitations', 'fast heartbeat', 'rapid heartbeat', 'racing heart',
+                        'irregular heartbeat', 'skipped beat', 'arrhythmia', 'heart rate', 'high pulse',
+                        'low pulse', 'slow heart', 'bradycardia', 'tachycardia', 'pacemaker', 'icd', 'crt',
+                        'buk dhorphor', 'ধড়ফড়', 'বুক ধড়ফড়', 'dil ki dhadkan', 'धड़कन तेज'
+                    ],
+                    advice: 'A racing, fluttering, or irregular heartbeat (palpitations) is best evaluated with a resting **12-Lead ECG** and **24-hour Holter Monitoring**. Consult **Dr. Tutan Das** for accurate rhythm diagnosis and pacemaker/device care.',
+                },
+                {
+                    id: 'cardiac-breathlessness-swelling',
+                    category: 'Cardiology',
+                    title: 'Shortness of Breath, Leg Swelling & Valve Health',
+                    doctors: ['dr-tutan-das'],
+                    suggestedTests: ['2D Echocardiography', '12-Lead Digital ECG'],
+                    safetyNote: 'If breathing difficulty comes on suddenly at rest, seek urgent emergency care.',
+                    keywords: [
+                        'shortness of breath', 'breathless', 'breathlessness', 'breathing problem', 'difficulty breathing',
+                        'breathing trouble', 'out of breath', 'swollen legs', 'swollen feet', 'swollen ankles',
+                        'ankle swelling', 'leg swelling', 'edema', 'heart failure', 'valve', 'valvular', 'murmur',
+                        'pa fola', 'পা ফোলা', 'saans phoolna', 'pair sujan', 'सांस फूलना', 'पैर में सूजन'
+                    ],
+                    advice: 'Shortness of breath during walking or lying flat, swollen ankles/feet, or known heart valve concerns require cardiac evaluation. **Dr. Tutan Das** can assess heart pumping efficiency and valve function using on-site **2D Echocardiography**.',
+                },
+                {
+                    id: 'cardiac-bp-cholesterol',
+                    category: 'Cardiology & Metabolic',
+                    title: 'High/Low Blood Pressure (Hypertension) & High Cholesterol',
+                    doctors: ['dr-tutan-das'],
+                    suggestedTests: ['Blood & Pathology Panel', '12-Lead Digital ECG', '2D Echocardiography'],
+                    safetyNote: 'Very high blood pressure (>180/120) with headache, vision changes, or chest pain needs urgent medical attention.',
+                    keywords: [
+                        'high bp', 'low bp', 'blood pressure', 'bp', 'hypertension', 'hypotension',
+                        'cholesterol', 'high cholesterol', 'lipid', 'lipid profile', 'triglyceride', 'triglycerides',
+                        'রক্তচাপ', 'প্রেসার', 'কোলেস্টেরল', 'बीपी', 'ब्लड प्रेशर', 'कोलेस्ट्रॉल'
+                    ],
+                    advice: 'Uncontrolled blood pressure and elevated cholesterol directly impact heart health. Consult **Dr. Tutan Das** for tailored medication and preventive cardiology planning, supported by our **Lipid Profile Blood Panel** and **In-House Pharmacy**.',
+                },
+                {
+                    id: 'ent-sinus-nose-allergy',
+                    category: 'ENT Care',
+                    title: 'Sinusitis, Blocked Nose, Allergies & Nasal Polyps',
+                    doctors: ['dr-swagata-chakraborty'],
+                    suggestedTests: [],
+                    safetyNote: 'For recurrent nosebleeds or persistent one-sided nasal blockage, prompt ENT endoscopic examination is advised.',
+                    keywords: [
+                        'sinus', 'sinusitis', 'blocked nose', 'stuffy nose', 'runny nose', 'nasal',
+                        'nasal congestion', 'nasal polyp', 'polyps', 'deviated septum', 'dns',
+                        'sneezing', 'allergy', 'allergies', 'dust allergy', 'rhinitis', 'nosebleed',
+                        'nose bleeding', 'loss of smell', 'snoring', 'sleep apnea', 'ent', 'ent doctor',
+                        'ent specialist', 'nak bondho', 'সাইনাস', 'নাক বন্ধ', 'অ্যালার্জি',
+                        'naak band', 'chheenk', 'नाक बंद', 'साइनस', 'एलर्जी'
+                    ],
+                    advice: 'Chronic sinus pain, nasal blockage, repeated sneezing/allergies, snoring, or nosebleeds are treated by our **ENT & Head-Neck Surgeon, Dr. Swagata Chakraborty (Ex-Senior Resident, AIIMS)**, including painless **Nasal Endoscopy** and modern medical or surgical sinus relief.',
+                },
+                {
+                    id: 'ent-ear-hearing',
+                    category: 'ENT Care',
+                    title: 'Ear Pain, Ear Infection, Hearing Loss & Ringing (Tinnitus)',
+                    doctors: ['dr-swagata-chakraborty'],
+                    suggestedTests: [],
+                    safetyNote: 'Avoid inserting cotton buds, oil, or unprescribed drops into a painful or discharging ear.',
+                    keywords: [
+                        'ear pain', 'earache', 'ear ache', 'ear infection', 'ear discharge', 'pus from ear',
+                        'ear wax', 'earwax', 'blocked ear', 'ear blockage', 'hearing loss', 'hard of hearing',
+                        'deafness', 'ringing in ear', 'ringing in ears', 'tinnitus', 'eardrum', 'ear',
+                        'kan betha', 'kan paka', 'কান ব্যথা', 'কানে কম শোনা',
+                        'kaan dard', 'kaan me dard', 'कान दर्द', 'कान बहना', 'कम सुनाई देना'
+                    ],
+                    advice: 'Ear pain, discharge, blocked sensation, ringing (tinnitus), or reduced hearing should be examined microscopically by an ENT surgeon. **Dr. Swagata Chakraborty** specializes in outpatient ear care and **Micro-Ear Surgery**.',
+                },
+                {
+                    id: 'ent-throat-voice-neck',
+                    category: 'ENT Care',
+                    title: 'Sore Throat, Tonsils, Voice Hoarseness & Neck/Thyroid Swelling',
+                    doctors: ['dr-swagata-chakraborty'],
+                    suggestedTests: ['Blood & Pathology Panel'],
+                    safetyNote: 'Voice hoarseness lasting more than 2 weeks or a persistent neck lump should always be evaluated by an ENT specialist.',
+                    keywords: [
+                        'sore throat', 'throat pain', 'throat infection', 'tonsil', 'tonsils', 'tonsillitis',
+                        'hoarse voice', 'hoarseness', 'voice change', 'voice loss', 'vocal cord',
+                        'difficulty swallowing', 'pain swallowing', 'throat', 'neck lump', 'neck swelling',
+                        'lump in neck', 'thyroid nodule', 'salivary gland', 'adenoid', 'adenoids',
+                        'gala betha', 'gola betha', 'গলা ব্যথা', 'টনসিল',
+                        'gale me dard', 'gala kharab', 'गले में दर्द', 'टॉन्सिल', 'आवाज बैठना'
+                    ],
+                    advice: 'Persistent sore throat, recurrent tonsillitis, hoarse voice, difficulty swallowing, or neck/thyroid lumps are best evaluated by **Dr. Swagata Chakraborty (ENT & Head/Neck Surgeon)**.',
+                },
+                {
+                    id: 'overlap-dizziness-vertigo',
+                    category: 'ENT & Cardiology',
+                    title: 'Dizziness, Spinning Head (Vertigo) & Balance Issues',
+                    doctors: ['dr-swagata-chakraborty', 'dr-tutan-das'],
+                    suggestedTests: ['12-Lead Digital ECG', 'Holter Monitoring'],
+                    safetyNote: 'If dizziness occurs with slurred speech, limb weakness, or chest pain, seek emergency care immediately.',
+                    keywords: [
+                        'vertigo', 'dizzy', 'dizziness', 'spinning', 'head spinning', 'giddiness',
+                        'lightheaded', 'lightheadedness', 'balance problem', 'imbalance',
+                        'matha ghora', 'মাথা ঘোরা', 'chakkar', 'sir ghumna', 'चक्कर आना'
+                    ],
+                    advice: 'Dizziness can have two common causes:\n• **Spinning sensation / balance loss (Vertigo):** Caused by inner-ear conditions → Consult **Dr. Swagata Chakraborty (ENT)**.\n• **Lightheadedness / near-fainting:** Can be linked to Blood Pressure or Heart Rhythm → Consult **Dr. Tutan Das (Cardiology)** with a quick BP & ECG check.',
+                },
+                {
+                    id: 'overlap-headache-migraine',
+                    category: 'General, ENT & Cardiology',
+                    title: 'Headache, Sinus Headache & Migraine',
+                    doctors: ['dr-swagata-chakraborty', 'dr-tutan-das'],
+                    suggestedTests: ['Blood & Pathology Panel'],
+                    safetyNote: 'A sudden, severe "worst-ever" headache, or headache with fever/stiff neck/vision loss, needs urgent evaluation.',
+                    keywords: [
+                        'headache', 'headaches', 'migraine', 'head pain', 'forehead pain', 'sinus headache',
+                        'matha betha', 'মাথা ব্যথা', 'sir dard', 'sar dard', 'सिर दर्द', 'माइग्रेन'
+                    ],
+                    advice: 'Headaches commonly stem from:\n• **Forehead/cheek heaviness or blocked nose (Sinus Headache):** Consult **Dr. Swagata Chakraborty (ENT)**.\n• **Back-of-head throbbing or high BP headache:** Get a BP & cardiac screening with **Dr. Tutan Das**.\nStay hydrated and rest in a quiet room until your consultation.',
+                },
+                {
+                    id: 'general-fever-cold-cough',
+                    category: 'General & Upper Respiratory',
+                    title: 'Fever, Viral Flu, Cold & Cough',
+                    doctors: ['dr-swagata-chakraborty', 'dr-tutan-das'],
+                    suggestedTests: ['Blood & Pathology Panel'],
+                    safetyNote: 'Seek prompt evaluation for high fever (>102°F), fever lasting over 3 days, rash, or breathing trouble.',
+                    keywords: [
+                        'fever', 'high fever', 'viral', 'viral fever', 'flu', 'cold', 'common cold',
+                        'cough', 'dry cough', 'wet cough', 'phlegm', 'mucus', 'chills', 'body ache',
+                        'bodyache', 'body pain', 'shivering', 'infection', 'dengue', 'malaria', 'typhoid',
+                        'jwor', 'jor', 'sardi', 'kashi', 'জ্বর', 'সর্দি', 'কাশি',
+                        'bukhar', 'khansi', 'zukam', 'sardi khansi', 'बुखार', 'खांसी', 'जुकाम'
+                    ],
+                    advice: 'For **cold, cough, sinus congestion, or throat infection**, consult **Dr. Swagata Chakraborty (ENT)**. For **persistent fever, viral/infectious illness, or cough accompanied by breathlessness**, Cardiosphere provides **Infectious Disease Management** and **Pathology Blood Panels** (CBC, Dengue/Malaria/Typhoid) with **Home Sample Collection** and **In-House Pharmacy** support.',
+                },
+                {
+                    id: 'general-diabetes-thyroid-fatigue',
+                    category: 'Chronic Care & Diagnostics',
+                    title: 'Diabetes (Blood Sugar), Thyroid & General Weakness/Fatigue',
+                    doctors: ['dr-tutan-das'],
+                    suggestedTests: ['Blood & Pathology Panel'],
+                    safetyNote: 'Sudden extreme weakness, confusion, or very low sugar (<70 mg/dL) requires immediate glucose and medical care.',
+                    keywords: [
+                        'diabetes', 'diabetic', 'sugar', 'high sugar', 'blood sugar', 'hba1c', 'glucose',
+                        'thyroid', 'hypothyroid', 'hyperthyroid', 'tsh', 't3', 't4',
+                        'weakness', 'fatigue', 'tired', 'tiredness', 'low energy', 'weight gain', 'weight loss',
+                        'ডায়াবেটিস', 'সুগার', 'থাইরয়েড', 'দুর্বলতা',
+                        'madhumeh', 'kamzori', 'थकान', 'कमजोरी', 'डायबिटीज', 'थायराइड'
+                    ],
+                    advice: 'Cardiosphere offers structured **Chronic Condition Care** for **Diabetes, Thyroid disorders, and Metabolic Health**. Since diabetes and thyroid imbalances strongly affect heart function, **Dr. Tutan Das** manages cardio-metabolic health alongside our **HbA1c, Fasting Sugar & Thyroid Blood Panels** (with doorstep Home Sample Collection).',
+                },
+                {
+                    id: 'general-acidity-gastric',
+                    category: 'General & Cardiac Rule-Out',
+                    title: 'Acidity, Gas, Heartburn & Indigestion',
+                    doctors: ['dr-tutan-das'],
+                    suggestedTests: ['12-Lead Digital ECG', 'Blood & Pathology Panel'],
+                    safetyNote: 'Important: Upper stomach burning or "gas" felt in the chest—especially with sweating, nausea, or walking—can sometimes be a cardiac warning sign. An ECG quickly rules this out.',
+                    keywords: [
+                        'acidity', 'gas', 'gastric', 'heartburn', 'indigestion', 'stomach burn',
+                        'acid reflux', 'gerd', 'bloating', 'nausea', 'vomiting', 'stomach pain',
+                        'pet betha', 'অ্যাসিডিটি', 'গ্যাস', 'एसिडिटी', 'गैस', 'पेट दर्द'
+                    ],
+                    advice: 'Simple acidity and acid reflux often improve with timely meals and avoiding spicy/oily foods (and throat reflux can also irritate the voice/throat). However, because upper-chest heartburn can mimic heart symptoms, **Dr. Tutan Das** and our on-site **12-Lead ECG** can quickly confirm your heart is safe while guiding proper relief.',
+                },
+                {
+                    id: 'other-specialities-referral',
+                    category: 'Other Speciality Guidance',
+                    title: 'Dental, Eye, Skin, Bone/Joint & Pregnancy Queries',
+                    doctors: [],
+                    suggestedTests: ['Blood & Pathology Panel'],
+                    safetyNote: 'Always consult the dedicated specialist for injuries, fractures, pregnancy, or acute eye/dental emergencies.',
+                    keywords: [
+                        'toothache', 'tooth pain', 'dental', 'dentist', 'cavity', 'gum bleeding',
+                        'eye pain', 'blurred vision', 'cataract', 'glasses', 'ophthalmologist',
+                        'skin rash', 'itching', 'eczema', 'acne', 'pimple', 'hair fall', 'dermatologist',
+                        'bone fracture', 'fracture', 'broken bone', 'knee pain', 'joint pain', 'back pain', 'orthopedic',
+                        'pregnant', 'pregnancy', 'periods', 'gynecologist', 'gynaecology', 'piles', 'kidney stone',
+                        'daat betha', 'chokh', 'চোখ', 'দাঁত ব্যথা', 'কোমর ব্যথা',
+                        'daant dard', 'aankh', 'kamar dard', 'दांत दर्द', 'आंख', 'कमर दर्द', 'घुटने का दर्द'
+                    ],
+                    advice: 'Cardiosphere Multi-Speciality Clinic specializes specifically in **Cardiology (Dr. Tutan Das)**, **ENT & Head-Neck Surgery (Dr. Swagata Chakraborty)**, **Chronic Care (BP, Diabetes, Thyroid)**, **Diagnostics**, and **In-House Pharmacy**.\n\nFor **dental, eye, skin, orthopedic/bone, or maternity** issues, we recommend seeing a dedicated specialist in that field. However, if your doctor prescribes **blood/pathology tests, home sample collection, or pharmacy medicines**, we are happy to help right here!',
+                },
+            ],
+        };
 
         const BOT_COPY = {
             en: {
-                placeholder: 'Ask about doctors, symptoms, tests, hours...',
-                welcome: 'Hello! I am the **Cardiosphere Care Assistant**. I can help you choose the right specialist, check diagnostic test preparation, verify clinic hours, or book an appointment directly here.',
-                fallback: 'I can help with **Cardiology**, **ENT Care**, **Diagnostic Tests & Prep**, **Clinic Timings & Location**, **Home Sample Collection**, or **Appointment Booking**. Choose a quick option below or tell me your symptoms.',
+                placeholder: 'Describe your symptoms, ask about doctors, tests, hours...',
+                welcome: 'Hello! I am the **Cardiosphere Open-Source Care Assistant**. Tell me any general or specific symptoms (e.g., *chest tightness, high BP, sinus, ear pain, vertigo, fever, diabetes, acidity*), and I will guide you to the **right specialist** and diagnostic tests, or help you book an appointment.',
+                fallback: 'I want to make sure I give you the right guidance. Tell me your **symptoms** (for example: *palpitations, high BP, sinus, ear pain, sore throat, vertigo, fever, sugar/thyroid*), or choose a quick option below.',
                 chips: [
+                    { label: '🩺 Symptom Checker', action: 'symptom_menu' },
                     { label: '📅 Book Appointment', action: 'book_start' },
-                    { label: '🩺 Find Specialist by Symptom', action: 'symptom_menu' },
                     { label: '🧪 Diagnostics & Prep', action: 'diagnostics_menu' },
-                    { label: '📍 Hours & Location', action: 'hours_location' },
                     { label: '👨‍⚕️ Meet Specialists', action: 'doctors_list' },
+                    { label: '📍 Hours & Location', action: 'hours_location' },
+                    { label: '📖 Open-Source Guide', action: 'open_source_guide' },
                 ],
             },
             bn: {
-                placeholder: 'ডাক্তার, লক্ষণ, টেস্ট বা অ্যাপয়েন্টমেন্ট সম্পর্কে লিখুন...',
-                welcome: 'নমস্কার! আমি **Cardiosphere Care Assistant**। আমি আপনাকে সঠিক বিশেষজ্ঞ ডাক্তার বেছে নিতে, টেস্টের প্রস্তুতি জানতে, ক্লিনিকের সময় দেখতে এবং এখানেই অ্যাপয়েন্টমেন্ট বুক করতে সাহায্য করতে পারি।',
-                fallback: 'আমি **কার্ডিওলজি**, **ইএনটি (কান-নাক-গলা)**, **ডায়াগনস্টিক টেস্ট**, **ক্লিনিকের সময় ও ঠিকানা**, এবং **অ্যাপয়েন্টমেন্ট বুকিং** নিয়ে সাহায্য করতে পারি। নিচের যেকোনো অপশন বেছে নিন।',
+                placeholder: 'আপনার লক্ষণ, ডাক্তার, টেস্ট বা বুকিং সম্পর্কে লিখুন...',
+                welcome: 'নমস্কার! আমি **Cardiosphere Open-Source Care Assistant**। আপনার যেকোনো শারীরিক লক্ষণ লিখুন (যেমন: *বুক ধড়ফড়, হাই বিপি, সাইনাস, কান ব্যথা, মাথা ঘোরা, জ্বর, সুগার, অ্যাসিডিটি*) — আমি সঠিক **বিশেষজ্ঞ ডাক্তার**, প্রয়োজনীয় টেস্ট এবং অ্যাপয়েন্টমেন্ট বুকিংয়ে সাহায্য করব।',
+                fallback: 'সঠিক পরামর্শের জন্য অনুগ্রহ করে আপনার **লক্ষণ** লিখুন (যেমন: *হার্ট/বিপি, সাইনাস, কান-নাক-গলা, মাথা ঘোরা, জ্বর, সুগার/থাইরয়েড*), অথবা নিচের অপশন থেকে বেছে নিন।',
                 chips: [
-                    { label: '📅 অ্যাপয়েন্টমেন্ট বুক করুন', action: 'book_start' },
                     { label: '🩺 লক্ষণ অনুযায়ী ডাক্তার', action: 'symptom_menu' },
+                    { label: '📅 অ্যাপয়েন্টমেন্ট বুক করুন', action: 'book_start' },
                     { label: '🧪 টেস্ট ও প্রস্তুতি', action: 'diagnostics_menu' },
-                    { label: '📍 সময় ও ঠিকানা', action: 'hours_location' },
                     { label: '👨‍⚕️ আমাদের ডাক্তাররা', action: 'doctors_list' },
+                    { label: '📍 সময় ও ঠিকানা', action: 'hours_location' },
+                    { label: '📖 ওপেন-সোর্স গাইড', action: 'open_source_guide' },
                 ],
             },
             hi: {
-                placeholder: 'डॉक्टर, लक्षण, जांच या अपॉइंटमेंट के बारे में पूछें...',
-                welcome: 'नमस्ते! मैं **Cardiosphere Care Assistant** हूँ। मैं आपको सही विशेषज्ञ डॉक्टर चुनने, जांच की तैयारी जानने, क्लिनिक का समय देखने और यहीं से अपॉइंटमेंट बुक करने में मदद कर सकता हूँ।',
-                fallback: 'मैं **कार्डियोलॉजी**, **ईएनटी (कान-नाक-गला)**, **डायग्नोस्टिक टेस्ट**, **क्लिनिक समय व पता**, और **अपॉइंटमेंट बुकिंग** में मदद कर सकता हूँ। नीचे दिए विकल्प चुनें या अपने लक्षण लिखें।',
+                placeholder: 'अपने लक्षण, डॉक्टर, जांच या अपॉइंटमेंट के बारे में लिखें...',
+                welcome: 'नमस्ते! मैं **Cardiosphere Open-Source Care Assistant** हूँ। अपने कोई भी सामान्य या विशेष लक्षण लिखें (जैसे: *सीने में जकड़न, हाई बीपी, साइनस, कान दर्द, चक्कर, बुखार, शुगर, एसिडिटी*) — मैं आपको **सही विशेषज्ञ डॉक्टर**, जांच और बुकिंग में मदद करूँगा।',
+                fallback: 'सही सलाह के लिए कृपया अपने **लक्षण** लिखें (जैसे: *दिल/बीपी, साइनस, कान-नाक-गला, चक्कर, बुखार, शुगर/थायराइड*), या नीचे दिए गए विकल्प चुनें।',
                 chips: [
-                    { label: '📅 अपॉइंटमेंट बुक करें', action: 'book_start' },
                     { label: '🩺 लक्षण से डॉक्टर चुनें', action: 'symptom_menu' },
+                    { label: '📅 अपॉइंटमेंट बुक करें', action: 'book_start' },
                     { label: '🧪 जांच और तैयारी', action: 'diagnostics_menu' },
-                    { label: '📍 समय और पता', action: 'hours_location' },
                     { label: '👨‍⚕️ हमारे विशेषज्ञ', action: 'doctors_list' },
+                    { label: '📍 समय और पता', action: 'hours_location' },
+                    { label: '📖 ओपन-सोर्स गाइड', action: 'open_source_guide' },
                 ],
             },
         };
@@ -4510,6 +4621,66 @@
             teaserDismissed: false,
             typingTimeout: null,
         };
+
+        /**
+         * Word-boundary-safe keyword matcher for both ASCII and Unicode (Bengali/Hindi) scripts.
+         * Prevents false substring matches such as "ear" matching inside "heart" or "dr" inside "address".
+         */
+        function matchBotKeyword(normalizedText, keyword) {
+            const kw = String(keyword || '').trim().toLowerCase();
+            if (!kw) return false;
+            const isAscii = /^[\x00-\x7F]+$/.test(kw);
+            if (!isAscii) {
+                return normalizedText.includes(kw);
+            }
+            const escaped = kw.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+            const regex = new RegExp(`(?:^|[^a-z0-9])${escaped}(?:$|[^a-z0-9])`, 'i');
+            return regex.test(normalizedText);
+        }
+
+        /**
+         * Helper to test an array of keywords using word-boundary-safe matching.
+         */
+        function matchAnyKeyword(normalizedText, keywords) {
+            return keywords.some((kw) => matchBotKeyword(normalizedText, kw));
+        }
+
+        /**
+         * Exports the Open-Source Symptom & Triage Knowledge Base as a clean JSON file (MIT).
+         */
+        function downloadOpenSourceBotKB() {
+            try {
+                const jsonStr = JSON.stringify(OPEN_SOURCE_SYMPTOM_KB, null, 2);
+                const blob = new Blob([jsonStr], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'cardiosphere-open-source-symptom-kb.json';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                showToast('Open-Source Symptom KB (.json) downloaded!', 'success');
+            } catch (err) {
+                console.error('Export KB error:', err);
+                showToast('Could not download JSON knowledge base.', 'error');
+            }
+        }
+
+        /**
+         * Opens the interactive Open-Source Symptom Directory directly inside chat.
+         */
+        function openBotSymptomDirectory() {
+            if (!VISITOR_BOT.isOpen) toggleVisitorBot(true);
+            VISITOR_BOT.bookingFlow = null;
+            updateBotFlowBanner();
+            pushBotMessage(
+                'Browse our **Open-Source Clinical Symptom Directory** below. Tap any symptom to get immediate specialist guidance, or download the open-source JSON knowledge base:',
+                'open_source_directory',
+                null,
+                BOT_COPY[VISITOR_BOT.lang].chips
+            );
+        }
 
         /**
          * Returns current IST clinic status (Mon-Sat, 9:00 AM - 5:00 PM IST).
@@ -4535,11 +4706,12 @@
         }
 
         /**
-         * Formats simple **bold** markdown safely after HTML escaping.
+         * Formats simple **bold** and *italic* markdown safely after HTML escaping.
          */
         function formatBotText(rawText) {
             return escapeHtml(rawText)
                 .replace(/\*\*(.+?)\*\*/g, '<strong class="font-extrabold text-navy">$1</strong>')
+                .replace(/\*(.+?)\*/g, '<em class="italic text-slate-600">$1</em>')
                 .replace(/\n/g, '<br>');
         }
 
@@ -4772,7 +4944,7 @@
             el.id = 'bot-typing-row';
             el.className = 'flex items-start gap-2';
             el.innerHTML = `
-                <div class="w-7 h-7 rounded-xl bg-navy text-teal-300 flex items-center justify-center shrink-0 text-[11px] font-extrabold">AI</div>
+                <div class="w-7 h-7 rounded-xl bg-navy text-teal-300 flex items-center justify-center shrink-0 text-[10px] font-extrabold">OS</div>
                 <div class="px-3.5 py-2.5 rounded-2xl rounded-tl-sm bg-white border border-slate-200 shadow-sm flex items-center gap-1.5">
                     <span class="w-1.5 h-1.5 rounded-full bg-slate-400 animate-bounce"></span>
                     <span class="w-1.5 h-1.5 rounded-full bg-slate-400 animate-bounce" style="animation-delay: 120ms"></span>
@@ -4802,7 +4974,17 @@
                 saveBotState();
                 renderBotMessages();
                 if (nextChips) setBotQuickReplies(nextChips);
-            }, 340);
+            }, 300);
+        }
+
+        /**
+         * Helper called by interactive symptom pills inside the Open-Source Symptom Directory card.
+         */
+        function askBotSymptom(symptomQuery, displayLabel) {
+            VISITOR_BOT.bookingFlow = null;
+            updateBotFlowBanner();
+            pushUserMessage(displayLabel || symptomQuery);
+            processBotQuery(symptomQuery);
         }
 
         /**
@@ -4819,7 +5001,7 @@
                             Urgent Medical Attention Recommended
                         </div>
                         <p class="text-[11px] text-rose-900 leading-relaxed">
-                            If you or someone nearby is experiencing severe chest pain, breathing difficulty, fainting, or acute distress, please seek immediate emergency medical care or call our helpline right away.
+                            If you or someone nearby is experiencing severe chest pain, breathing difficulty, fainting, stroke signs, or acute distress, please call our emergency helpline or visit an emergency room immediately.
                         </p>
                         <div class="flex flex-wrap gap-2">
                             <a href="tel:+919002450077" class="flex-1 text-center py-2 px-3 rounded-xl bg-rose-600 hover:bg-rose-700 text-white text-xs font-bold transition-colors">
@@ -4828,6 +5010,135 @@
                             <a href="${CLINIC_DATA.brand.mapsLink}" target="_blank" rel="noopener noreferrer" class="py-2 px-3 rounded-xl bg-white border border-rose-200 text-rose-800 text-xs font-bold hover:bg-rose-100 transition-colors">
                                 Directions
                             </a>
+                        </div>
+                    </div>
+                `;
+            }
+
+            if (msg.cardType === 'triage_result' && msg.cardData) {
+                const { category, title, doctors = [], suggestedTests = [], safetyNote = '' } = msg.cardData;
+                const validDocs = doctors
+                    .filter((id) => CLINIC_DATA.doctors.some((d) => d.id === id))
+                    .map((id) => getDoctorById(id));
+
+                return `
+                    <div class="mt-2.5 space-y-2.5">
+                        <div class="p-3 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+                            <div class="flex flex-wrap items-center justify-between gap-1.5">
+                                <span class="px-2 py-0.5 rounded-full bg-medical-soft text-medical border border-blue-200 text-[10px] font-extrabold">${escapeHtml(category)}</span>
+                                <span class="text-[10px] font-bold text-slate-400">Triage Match</span>
+                            </div>
+                            <p class="text-xs font-extrabold text-navy">${escapeHtml(title)}</p>
+
+                            ${suggestedTests.length > 0 ? `
+                                <div class="pt-1.5 border-t border-slate-200/80">
+                                    <p class="text-[10px] font-bold uppercase tracking-wider text-clinical-teal mb-1">Recommended Tests / Support</p>
+                                    <div class="flex flex-wrap gap-1">
+                                        ${suggestedTests.map((t) => `<span class="px-2 py-0.5 rounded-lg bg-white border border-slate-200 text-[10px] font-semibold text-slate-700">${escapeHtml(t)}</span>`).join('')}
+                                    </div>
+                                </div>
+                            ` : ''}
+                        </div>
+
+                        ${validDocs.length > 0 ? `
+                            <div class="space-y-2">
+                                <p class="text-[10px] font-extrabold uppercase tracking-wider text-slate-500 px-1">Recommended Specialist${validDocs.length > 1 ? 's' : ''}</p>
+                                ${validDocs.map((doc) => `
+                                    <div class="p-3 rounded-2xl bg-slate-50 border border-slate-200 space-y-2.5">
+                                        <div class="flex items-center gap-2.5">
+                                            ${renderDoctorAvatar(doc, 'w-11 h-11', 'rounded-xl', 'text-xs')}
+                                            <div class="min-w-0 flex-1">
+                                                <p class="text-xs font-extrabold text-navy truncate">${escapeHtml(doc.name)}</p>
+                                                <p class="text-[11px] font-semibold ${doc.department === 'ENT Care' ? 'text-clinical-teal' : 'text-rose-600'} truncate">${escapeHtml(doc.role)}</p>
+                                                <p class="text-[10px] text-slate-500 truncate">${escapeHtml(doc.credentials)}</p>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center gap-1.5">
+                                            <button type="button" onclick="navigate('doctor/${doc.id}'); toggleVisitorBot(false)" class="flex-1 py-1.5 px-2.5 rounded-xl bg-white border border-slate-200 hover:border-navy text-navy text-[11px] font-bold transition-colors">
+                                                View Profile
+                                            </button>
+                                            <button type="button" onclick="startBotBookingFlow('${doc.id}')" class="flex-1 py-1.5 px-2.5 rounded-xl bg-medical hover:bg-medical-hover text-white text-[11px] font-bold transition-colors">
+                                                Book Here
+                                            </button>
+                                        </div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        ` : `
+                            <button type="button" onclick="startBotBookingFlow('diagnostics')" class="w-full py-2 px-3 rounded-xl bg-medical hover:bg-medical-hover text-white text-xs font-bold transition-colors">
+                                Book Diagnostic Lab / Home Collection
+                            </button>
+                        `}
+
+                        ${safetyNote ? `
+                            <div class="p-2.5 rounded-xl bg-amber-50 border border-amber-200 text-[11px] text-amber-900 leading-relaxed">
+                                <strong class="font-bold">Safety Note:</strong> ${escapeHtml(safetyNote)}
+                            </div>
+                        ` : ''}
+                    </div>
+                `;
+            }
+
+            if (msg.cardType === 'open_source_directory') {
+                const quickGroups = [
+                    {
+                        title: 'Cardiology (Dr. Tutan Das)',
+                        badge: 'bg-rose-50 text-rose-700 border-rose-200',
+                        items: [
+                            { label: 'Chest Tightness', query: 'chest tightness and discomfort' },
+                            { label: 'Palpitations / Fast Pulse', query: 'palpitations fast heartbeat' },
+                            { label: 'High BP / Cholesterol', query: 'high blood pressure and cholesterol' },
+                            { label: 'Breathlessness / Leg Swelling', query: 'shortness of breath and leg swelling' },
+                        ],
+                    },
+                    {
+                        title: 'ENT & Head-Neck (Dr. Swagata)',
+                        badge: 'bg-teal-50 text-clinical-teal border-teal-200',
+                        items: [
+                            { label: 'Sinus / Blocked Nose', query: 'sinusitis and blocked nose' },
+                            { label: 'Ear Pain / Tinnitus', query: 'ear pain and ringing in ear' },
+                            { label: 'Sore Throat / Tonsils / Voice', query: 'sore throat and hoarse voice' },
+                            { label: 'Vertigo / Spinning Head', query: 'vertigo and dizziness' },
+                        ],
+                    },
+                    {
+                        title: 'General & Metabolic Care',
+                        badge: 'bg-blue-50 text-medical border-blue-200',
+                        items: [
+                            { label: 'Fever / Cold / Cough', query: 'fever cold and cough' },
+                            { label: 'Headache / Migraine', query: 'headache and migraine' },
+                            { label: 'Diabetes / Thyroid / Fatigue', query: 'diabetes thyroid and weakness' },
+                            { label: 'Acidity / Gas / Heartburn', query: 'acidity gas and heartburn' },
+                        ],
+                    },
+                ];
+
+                return `
+                    <div class="mt-2.5 space-y-2.5">
+                        ${quickGroups.map((g) => `
+                            <div class="p-3 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+                                <span class="inline-block px-2 py-0.5 rounded-full border text-[10px] font-extrabold ${g.badge}">${escapeHtml(g.title)}</span>
+                                <div class="flex flex-wrap gap-1.5">
+                                    ${g.items.map((item) => `
+                                        <button type="button" onclick="askBotSymptom('${escapeHtml(item.query)}', '${escapeHtml(item.label)}')" class="px-2.5 py-1 rounded-xl bg-white hover:bg-medical-soft border border-slate-200 hover:border-blue-300 text-[11px] font-semibold text-navy transition-colors">
+                                            ${escapeHtml(item.label)}
+                                        </button>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        `).join('')}
+
+                        <div class="p-3 rounded-2xl bg-navy text-white space-y-2">
+                            <div class="flex items-center justify-between gap-2">
+                                <span class="text-[11px] font-extrabold text-teal-300">Open-Source MIT Engine</span>
+                                <span class="text-[10px] text-slate-300">v${escapeHtml(OPEN_SOURCE_SYMPTOM_KB.meta.version)}</span>
+                            </div>
+                            <p class="text-[11px] text-slate-300 leading-relaxed">
+                                Runs 100% locally in your browser with transparent rules &amp; zero data tracking.
+                            </p>
+                            <button type="button" onclick="downloadOpenSourceBotKB()" class="w-full py-1.5 px-3 rounded-xl bg-white/15 hover:bg-white/25 text-white text-[11px] font-bold transition-colors">
+                                Download Open-Source Symptom KB (.json)
+                            </button>
                         </div>
                     </div>
                 `;
@@ -4846,7 +5157,7 @@
                                     ${renderDoctorAvatar(doc, 'w-11 h-11', 'rounded-xl', 'text-xs')}
                                     <div class="min-w-0 flex-1">
                                         <p class="text-xs font-extrabold text-navy truncate">${escapeHtml(doc.name)}</p>
-                                        <p class="text-[11px] font-semibold ${doc.department === 'ENT Care' ? 'text-clinical-teal' : 'text-medical'} truncate">${escapeHtml(doc.role)}</p>
+                                        <p class="text-[11px] font-semibold ${doc.department === 'ENT Care' ? 'text-clinical-teal' : 'text-rose-600'} truncate">${escapeHtml(doc.role)}</p>
                                         <p class="text-[10px] text-slate-500 truncate">${escapeHtml(doc.credentials)}</p>
                                     </div>
                                 </div>
@@ -4979,7 +5290,7 @@
 
                 return `
                     <div class="flex items-start gap-2">
-                        <div class="w-7 h-7 rounded-xl bg-navy text-teal-300 flex items-center justify-center shrink-0 text-[10px] font-extrabold mt-0.5">AI</div>
+                        <div class="w-7 h-7 rounded-xl bg-navy text-teal-300 flex items-center justify-center shrink-0 text-[10px] font-extrabold mt-0.5">OS</div>
                         <div class="max-w-[88%] bg-white border border-slate-200 px-3.5 py-2.5 rounded-2xl rounded-tl-sm shadow-sm">
                             <p class="text-xs sm:text-[13px] text-slate-700 leading-relaxed">${formatBotText(msg.text)}</p>
                             ${renderBotCard(msg)}
@@ -5066,9 +5377,13 @@
             if (flow.step === 'doctor') {
                 const lower = value.toLowerCase();
                 let pickedId = 'dr-tutan-das';
-                if (lower.includes('swagata') || lower.includes('ent')) pickedId = 'dr-swagata-chakraborty';
-                else if (lower.includes('diag') || lower.includes('test') || lower.includes('echo') || lower.includes('lab')) pickedId = 'diagnostics';
-                else if (lower === 'dr-tutan-das' || lower === 'dr-swagata-chakraborty' || lower === 'diagnostics') pickedId = lower;
+                if (lower === 'dr-swagata-chakraborty' || matchAnyKeyword(lower, ['swagata', 'ent', 'sinus', 'ear', 'throat'])) {
+                    pickedId = 'dr-swagata-chakraborty';
+                } else if (lower === 'diagnostics' || matchAnyKeyword(lower, ['diagnostics', 'test', 'echo', 'holter', 'tmt', 'lab', 'home'])) {
+                    pickedId = 'diagnostics';
+                } else {
+                    pickedId = 'dr-tutan-das';
+                }
 
                 flow.data.doctorId = pickedId;
                 flow.data.specialistLabel = resolveSpecialistLabel(pickedId);
@@ -5156,8 +5471,34 @@
         }
 
         /* ===================================================================== */
-        /* NATURAL LANGUAGE INTENT ENGINE & SYMPTOM TRIAGE                       */
+        /* SCORED SYMPTOM TRIAGE & INTENT ENGINE (FIXED FALSE-MATCH BUGS)        */
         /* ===================================================================== */
+
+        /**
+         * Evaluates free-text symptoms against OPEN_SOURCE_SYMPTOM_KB using weighted
+         * multi-word + word-boundary scoring, supporting multi-symptom queries cleanly.
+         */
+        function scoreSymptomConditions(normalizedQuery) {
+            const matches = [];
+            for (const cond of OPEN_SOURCE_SYMPTOM_KB.conditions) {
+                let score = 0;
+                const matchedTerms = [];
+                for (const kw of cond.keywords) {
+                    if (matchBotKeyword(normalizedQuery, kw)) {
+                        // Longer multi-word phrases earn higher specificity weight
+                        const wordCount = kw.trim().split(/\s+/).length;
+                        score += wordCount >= 2 ? 3 : 1.5;
+                        matchedTerms.push(kw);
+                    }
+                }
+                if (score > 0) {
+                    matches.push({ cond, score, matchedTerms });
+                }
+            }
+            matches.sort((a, b) => b.score - a.score);
+            return matches;
+        }
+
         function triggerBotChip(index) {
             const chip = VISITOR_BOT.quickReplies[index];
             if (!chip) return;
@@ -5165,20 +5506,17 @@
 
             if (chip.action === 'book_start') {
                 startBotBookingFlow();
-            } else if (chip.action === 'book_doctor' || chip.action === 'book_date' || chip.action === 'book_slot' || chip.action === 'book_reason') {
+            } else if (chip.action === 'book_doctor') {
+                // Fixed: works cleanly whether booking flow is already active OR started from a doctor card chip
+                if (!VISITOR_BOT.bookingFlow) {
+                    startBotBookingFlow(chip.value);
+                } else {
+                    advanceBotBookingFlow(chip.value);
+                }
+            } else if (chip.action === 'book_date' || chip.action === 'book_slot' || chip.action === 'book_reason') {
                 advanceBotBookingFlow(chip.value);
-            } else if (chip.action === 'symptom_menu') {
-                pushBotMessage(
-                    'Tell me your symptoms in your own words, or choose a symptom group below so I can guide you to the right specialist:',
-                    null,
-                    null,
-                    [
-                        { label: '❤️ Palpitations / BP / Heart Check', action: 'query', value: 'heart checkup and high bp' },
-                        { label: '👃 Sinus / Ear Pain / Vertigo / Throat', action: 'query', value: 'sinus ear pain and vertigo' },
-                        { label: '🩸 Diabetes / Thyroid / Blood Test', action: 'query', value: 'blood test diabetes thyroid' },
-                        { label: '🚨 Severe Chest Pain / Emergency', action: 'query', value: 'severe chest pain emergency' },
-                    ]
-                );
+            } else if (chip.action === 'symptom_menu' || chip.action === 'open_source_guide') {
+                openBotSymptomDirectory();
             } else if (chip.action === 'diagnostics_menu') {
                 pushBotMessage(
                     'Here are our on-site **Diagnostic Services** along with preparation instructions:',
@@ -5187,7 +5525,7 @@
                     [
                         { label: '🏠 Home Sample Collection', action: 'query', value: 'home sample collection' },
                         { label: '💊 In-House Pharmacy', action: 'query', value: 'pharmacy' },
-                        { label: '📅 Book a Test', action: 'book_start' },
+                        { label: '📅 Book a Test', action: 'book_doctor', value: 'diagnostics' },
                     ]
                 );
             } else if (chip.action === 'hours_location') {
@@ -5198,7 +5536,7 @@
                     [
                         { label: '📅 Book Appointment', action: 'book_start' },
                         { label: '👨‍⚕️ Meet Specialists', action: 'doctors_list' },
-                        { label: '🖼️ Clinic Gallery', action: 'query', value: 'gallery' },
+                        { label: '🩺 Symptom Checker', action: 'symptom_menu' },
                     ]
                 );
             } else if (chip.action === 'doctors_list') {
@@ -5227,7 +5565,7 @@
             pushUserMessage(text);
 
             if (VISITOR_BOT.bookingFlow) {
-                if (/^(cancel|stop|exit|quit)$/i.test(text)) {
+                if (/^(cancel|stop|exit|quit|reset)$/i.test(text)) {
                     cancelBotBookingFlow();
                     return;
                 }
@@ -5239,16 +5577,23 @@
         }
 
         /**
-         * Classifies free-text visitor messages (English, Bengali, Hindi transliterations)
-         * and returns rich medical guidance cards.
+         * Accurately classifies visitor queries:
+         * 1. Emergency Red-Flag Detection (Highest Priority)
+         * 2. Explicit Named Doctor Lookup
+         * 3. Scored General & Speciality Symptom Triage (Cardiology, ENT, Metabolic, General, Outside-Speciality)
+         * 4. Diagnostic Test & Preparation Lookup
+         * 5. Direct Appointment Booking (only when no symptom question needs triage first)
+         * 6. Clinic Info (Pharmacy/Home Collection, Hours/Location, Team, Gallery, Fees, Open-Source Info)
          */
         function processBotQuery(rawText) {
-            const q = String(rawText || '').toLowerCase();
+            const q = String(rawText || '').trim().toLowerCase();
 
             // 1. Emergency Red-Flag Safety Triage (Highest Priority)
-            if (/(severe chest pain|heart attack|can'?t breathe|cannot breathe|breathless|unconscious|fainting|stroke|heavy bleeding|emergency|urgent|critical|buk betha|sine me dard)/.test(q)) {
+            if (matchAnyKeyword(q, OPEN_SOURCE_SYMPTOM_KB.emergencyRedFlags.keywords)) {
+                const msg = OPEN_SOURCE_SYMPTOM_KB.emergencyRedFlags.guidance[VISITOR_BOT.lang]
+                    || OPEN_SOURCE_SYMPTOM_KB.emergencyRedFlags.guidance.en;
                 pushBotMessage(
-                    '⚠️ **Possible Emergency Detected.** Please do not wait for an online reply if symptoms are acute.',
+                    msg,
                     'emergency',
                     null,
                     [
@@ -5259,24 +5604,20 @@
                 return;
             }
 
-            // 2. Direct Booking Intent
-            if (/(book|appointment|schedule|slot|consult|booking|apointment)/.test(q) && !/(cancel|how)/.test(q)) {
-                if (/(swagata|ent|sinus|ear|nose|throat)/.test(q)) {
-                    startBotBookingFlow('dr-swagata-chakraborty');
-                } else if (/(tutan|angioplasty|pacemaker)/.test(q)) {
-                    startBotBookingFlow('dr-tutan-das');
-                } else if (/(test|lab|echo|holter|tmt|blood|home)/.test(q)) {
-                    startBotBookingFlow('diagnostics');
-                } else {
-                    startBotBookingFlow();
-                }
+            // 2. Open-Source / Symptom Guide Request
+            if (matchAnyKeyword(q, ['open source', 'opensource', 'symptom list', 'symptom guide', 'all symptoms', 'general symptoms', 'symptoms'])) {
+                openBotSymptomDirectory();
                 return;
             }
 
-            // 3. Specific Specialist Mentions
-            if (/(swagata|chakraborty)/.test(q)) {
+            // 3. Explicit Named Doctor Inquiries
+            if (matchAnyKeyword(q, ['swagata', 'dr swagata', 'chakraborty'])) {
+                if (matchAnyKeyword(q, ['book', 'appointment', 'schedule', 'slot'])) {
+                    startBotBookingFlow('dr-swagata-chakraborty');
+                    return;
+                }
                 pushBotMessage(
-                    '**Dr. Swagata Chakraborty** is our **ENT & Head/Neck Surgeon** (Ex-Senior Resident, AIIMS), specializing in chronic sinusitis, nasal endoscopy, micro-ear surgery, throat/voice disorders, and head & neck care.',
+                    '**Dr. Swagata Chakraborty** is our **ENT & Head/Neck Surgeon** (Ex-Senior Resident, AIIMS), specializing in chronic sinusitis, nasal endoscopy, micro-ear surgery, throat/voice disorders, vertigo, and head & neck procedures.',
                     'doctors',
                     ['dr-swagata-chakraborty'],
                     [
@@ -5287,9 +5628,13 @@
                 return;
             }
 
-            if (/(tutan|das)/.test(q)) {
+            if (matchAnyKeyword(q, ['tutan', 'dr tutan', 'tutan das'])) {
+                if (matchAnyKeyword(q, ['book', 'appointment', 'schedule', 'slot'])) {
+                    startBotBookingFlow('dr-tutan-das');
+                    return;
+                }
                 pushBotMessage(
-                    '**Dr. Tutan Das** (DM Cardiology, AIIMS) is our senior **Interventional Cardiologist**, specializing in complex angioplasty & stenting, pacemakers, CRT/ICD cardiac devices, and valvular heart disease.',
+                    '**Dr. Tutan Das** (DM Cardiology, AIIMS) is our senior **Interventional Cardiologist**, specializing in complex angioplasty & stenting, pacemakers, CRT/ICD cardiac devices, valvular heart disease, and preventive cardiology.',
                     'doctors',
                     ['dr-tutan-das'],
                     [
@@ -5300,63 +5645,96 @@
                 return;
             }
 
-            // 4. Symptom Triage -> ENT Care
-            if (/(ent|sinus|sinusitis|ear|nose|throat|tonsil|vertigo|dizzy|hearing|voice|hoarse|allergy|nasal|polyp|neck|kan|nak|gala)/.test(q)) {
+            // 4. Scored General & Speciality Symptom Triage
+            const symptomMatches = scoreSymptomConditions(q);
+            if (symptomMatches.length > 0) {
+                const top = symptomMatches[0];
+                const secondary = symptomMatches.length > 1 && symptomMatches[1].score >= top.score * 0.65
+                    ? symptomMatches[1]
+                    : null;
+
+                // Combine doctors & suggested tests if multiple distinct symptom groups matched (e.g., "bp and ear pain")
+                const combinedDoctors = Array.from(new Set([
+                    ...top.cond.doctors,
+                    ...(secondary ? secondary.cond.doctors : []),
+                ]));
+                const combinedTests = Array.from(new Set([
+                    ...top.cond.suggestedTests,
+                    ...(secondary ? secondary.cond.suggestedTests : []),
+                ]));
+
+                let replyText = top.cond.advice;
+                if (secondary && secondary.cond.id !== top.cond.id) {
+                    replyText += `\n\n**Also noted (${secondary.cond.title}):** ${secondary.cond.advice}`;
+                }
+
+                const nextChips = [
+                    ...combinedDoctors.map((docId) => {
+                        const d = getDoctorById(docId);
+                        return { label: `📅 Book ${d.name}`, action: 'book_doctor', value: d.id };
+                    }),
+                    { label: '🧪 Diagnostics & Prep', action: 'diagnostics_menu' },
+                    { label: '🩺 Check Another Symptom', action: 'symptom_menu' },
+                ];
+
                 pushBotMessage(
-                    'Based on your ENT / sinus / ear-nose-throat symptoms, I recommend consulting our **Department of ENT & Head-Neck Surgery** led by **Dr. Swagata Chakraborty**:',
-                    'doctors',
-                    ['dr-swagata-chakraborty'],
-                    [
-                        { label: '📅 Book ENT Consultation', action: 'book_start' },
-                        { label: '📍 Clinic Hours', action: 'hours_location' },
-                    ]
+                    replyText,
+                    'triage_result',
+                    {
+                        category: secondary ? `${top.cond.category} + ${secondary.cond.category}` : top.cond.category,
+                        title: secondary ? `${top.cond.title} & ${secondary.cond.title}` : top.cond.title,
+                        doctors: combinedDoctors,
+                        suggestedTests: combinedTests,
+                        safetyNote: top.cond.safetyNote,
+                    },
+                    nextChips
                 );
                 return;
             }
 
-            // 5. Symptom Triage -> Cardiology
-            if (/(cardio|heart|chest|palpitation|bp|blood pressure|hypertension|angioplasty|stent|pacemaker|valve|ecg|cholesterol|cardiac|hridoy|dil)/.test(q)) {
-                pushBotMessage(
-                    'For heart health, blood pressure, palpitations, or cardiac device evaluations, our **Cardiology Specialist**, **Dr. Tutan Das**, is available **Mon – Sat, 9:00 AM – 5:00 PM**:',
-                    'doctors',
-                    ['dr-tutan-das'],
-                    [
-                        { label: '🧪 2D Echo / TMT / Holter', action: 'diagnostics_menu' },
-                        { label: '📅 Book Cardiology', action: 'book_start' },
-                    ]
-                );
-                return;
-            }
-
-            // 6. Specific Diagnostic Test Lookup
-            if (/(echo|echocardiography|tmt|stress test|holter|ecg|blood|pathology|lipid|thyroid|diabetes|hba1c|test|lab|report|fasting|prep)/.test(q)) {
-                const matched = CLINIC_DATA.diagnostics.filter((t) => {
+            // 5. Specific Diagnostic Test & Preparation Lookup
+            if (matchAnyKeyword(q, [
+                'echo', '2d echo', 'echocardiography', 'tmt', 'stress test', 'treadmill',
+                'holter', 'ecg', 'ekg', 'blood test', 'pathology', 'diagnostic', 'diagnostics',
+                'lab test', 'report', 'fasting', 'test prep', 'preparation'
+            ])) {
+                const matchedTests = CLINIC_DATA.diagnostics.filter((t) => {
                     const hay = `${t.name} ${t.category} ${t.description}`.toLowerCase();
-                    return q.split(/\s+/).some((w) => w.length > 2 && hay.includes(w));
+                    return q.split(/[^a-z0-9]+/).some((w) => w.length >= 3 && hay.includes(w));
                 });
-                const list = matched.length > 0 ? matched : CLINIC_DATA.diagnostics;
+                const list = matchedTests.length > 0 ? matchedTests : CLINIC_DATA.diagnostics;
                 pushBotMessage(
-                    matched.length > 0
+                    matchedTests.length > 0
                         ? 'Here are the matching **Diagnostic Test details & preparation guidelines**:'
                         : 'Here are all **Diagnostic Tests & Preparation Guidelines** available at Cardiosphere:',
                     'diagnostics',
                     list,
                     [
                         { label: '🏠 Home Sample Collection', action: 'query', value: 'home sample collection' },
-                        { label: '📅 Book a Test', action: 'book_start' },
+                        { label: '📅 Book a Test', action: 'book_doctor', value: 'diagnostics' },
                     ]
                 );
                 return;
             }
 
+            // 6. Direct Booking Intent (when user asks to book/schedule directly)
+            if (matchAnyKeyword(q, ['book', 'booking', 'appointment', 'apointment', 'schedule', 'slot'])) {
+                if (matchAnyKeyword(q, ['test', 'lab', 'home collection', 'sample'])) {
+                    startBotBookingFlow('diagnostics');
+                } else {
+                    startBotBookingFlow();
+                }
+                return;
+            }
+
             // 7. Home Sample Collection, Pharmacy & Vaccinations
-            if (/(home collection|home sample|pickup|pharmacy|medicine|drug|meds|vaccin|injection)/.test(q)) {
+            if (matchAnyKeyword(q, ['home collection', 'home sample', 'sample pickup', 'pharmacy', 'medicine', 'medicines', 'meds', 'vaccine', 'vaccination', 'vaccinations', 'injection'])) {
                 pushBotMessage(
-                    'Cardiosphere offers convenient **Patient Support Services** under one roof:\n• **Home Sample Collection:** Doorstep hygienic blood pickup across Durgapur.\n• **In-House Pharmacy:** Genuine cardiac, diabetic & ENT medications available on-site.\n• **Vaccination Services:** Adult, senior & preventive vaccinations.',
+                    'Cardiosphere offers convenient **Patient Support Services** under one roof:\n• **Home Sample Collection:** Safe doorstep blood sample pickup across Durgapur.\n• **In-House Pharmacy:** Genuine cardiac, diabetic & ENT medications available right at the clinic.\n• **Vaccination Services:** Adult, senior & preventive vaccinations by trained staff.',
                     null,
                     null,
                     [
-                        { label: '📅 Request Home Collection', action: 'book_start' },
+                        { label: '📅 Book Home Collection', action: 'book_doctor', value: 'diagnostics' },
                         { label: '🧪 View Diagnostic Tests', action: 'diagnostics_menu' },
                         { label: '📍 Clinic Address', action: 'hours_location' },
                     ]
@@ -5364,10 +5742,15 @@
                 return;
             }
 
-            // 8. Hours, Location, Contact, Directions
-            if (/(hour|time|timing|open|close|address|location|where|map|direction|phone|call|number|contact|kothay|kakhon|kaha|samay|muchipara|durgapur)/.test(q)) {
+            // 8. Hours, Location, Contact & Directions
+            if (matchAnyKeyword(q, [
+                'hour', 'hours', 'time', 'timing', 'timings', 'open', 'close', 'closed', 'sunday',
+                'address', 'location', 'where', 'map', 'direction', 'directions', 'phone', 'call',
+                'number', 'contact', 'muchipara', 'durgapur', 'arushi',
+                'kothay', 'kakhon', 'kaha', 'samay', 'ঠিকানা', 'সময়', 'पता', 'समय'
+            ])) {
                 pushBotMessage(
-                    'You can visit **Cardiosphere Multi-Speciality Clinic** at **Arushi Complex, Muchipara, Durgapur** or call **+91 90024 50077**.',
+                    'You can visit **Cardiosphere Multi-Speciality Clinic** at **2nd Floor, Arushi Complex, Yuri Gagrin Path, Muchipara, Durgapur - 713212** or call **+91 90024 50077**.',
                     'location',
                     null,
                     [
@@ -5378,14 +5761,14 @@
                 return;
             }
 
-            // 9. Doctors / Team Overview
-            if (/(doctor|specialist|dr|team|staff|who|consultants)/.test(q)) {
+            // 9. Doctors / Specialist Team Overview
+            if (matchAnyKeyword(q, ['doctor', 'doctors', 'specialist', 'specialists', 'team', 'staff', 'consultant', 'consultants', 'who'])) {
                 pushBotMessage(
-                    'Meet our **AIIMS-trained and senior specialists** at Cardiosphere:',
+                    'Meet our **AIIMS-trained Specialist Team** at Cardiosphere Multi-Speciality Clinic:',
                     'doctors',
                     CLINIC_DATA.doctors.map((d) => d.id),
                     [
-                        { label: '🩺 Match Symptom to Doctor', action: 'symptom_menu' },
+                        { label: '🩺 Symptom Checker', action: 'symptom_menu' },
                         { label: '📅 Book Appointment', action: 'book_start' },
                     ]
                 );
@@ -5393,7 +5776,7 @@
             }
 
             // 10. Clinic Gallery / Photos / Facilities
-            if (/(gallery|photo|picture|facility|lounge|entrance|inside)/.test(q)) {
+            if (matchAnyKeyword(q, ['gallery', 'photo', 'photos', 'picture', 'pictures', 'facility', 'facilities', 'lounge', 'entrance'])) {
                 pushBotMessage(
                     'You can explore uncropped photos of our **Dedicated Medical Team**, **Comfortable Patient Lounge**, **Accessible Entrance**, and specialists in our **Clinic Gallery**.',
                     null,
@@ -5407,28 +5790,28 @@
                 return;
             }
 
-            // 11. Fees / Cost Inquiry
-            if (/(fee|cost|price|charge|rate|kitna|koto)/.test(q)) {
+            // 11. Fees / Charges Inquiry (safe from matching "heart rate")
+            if (matchAnyKeyword(q, ['fee', 'fees', 'cost', 'price', 'charge', 'charges', 'consultation fee', 'kitna', 'koto', 'ফি', 'फीस'])) {
                 pushBotMessage(
-                    'Consultation fees and diagnostic package charges vary by specialist and test type. Our reception desk can share exact current rates immediately on **+91 90024 50077** or via WhatsApp booking.',
+                    'Consultation fees and diagnostic package charges vary by specialist and test type. Our reception desk can share exact current rates immediately on **+91 90024 50077** or via WhatsApp.',
                     null,
                     null,
                     [
-                        { label: '📅 Inquire / Book via WhatsApp', action: 'book_start' },
-                        { label: '🧪 View Tests', action: 'diagnostics_menu' },
+                        { label: '📅 Inquire / Book on WhatsApp', action: 'book_start' },
+                        { label: '🧪 View Diagnostic Tests', action: 'diagnostics_menu' },
                     ]
                 );
                 return;
             }
 
             // 12. Greetings & Thanks
-            if (/^(hi|hello|hey|namaste|nomoskar|good morning|good afternoon|good evening)\b/.test(q)) {
+            if (matchAnyKeyword(q, ['hi', 'hello', 'hey', 'namaste', 'nomoskar', 'good morning', 'good afternoon', 'good evening', 'নমস্কার', 'नमस्ते'])) {
                 pushBotMessage(BOT_COPY[VISITOR_BOT.lang].welcome, null, null, BOT_COPY[VISITOR_BOT.lang].chips);
                 return;
             }
-            if (/(thank|thanks|dhanyabad|dhanyawad)/.test(q)) {
+            if (matchAnyKeyword(q, ['thank', 'thanks', 'thank you', 'dhanyabad', 'dhanyawad', 'ধন্যবাদ', 'धन्यवाद'])) {
                 pushBotMessage(
-                    'You’re very welcome! Wishing you and your family good health. Reach out anytime if you need help booking a visit.',
+                    'You’re very welcome! Wishing you and your family good health. Reach out anytime if you need symptom guidance or help booking a visit.',
                     null,
                     null,
                     BOT_COPY[VISITOR_BOT.lang].chips
@@ -5436,7 +5819,7 @@
                 return;
             }
 
-            // Default Smart Fallback
+            // Default Smart Fallback with Symptom Directory prompt
             pushBotMessage(BOT_COPY[VISITOR_BOT.lang].fallback, null, null, BOT_COPY[VISITOR_BOT.lang].chips);
         }
 
